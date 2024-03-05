@@ -1,0 +1,18 @@
+# Ignore compiled output
+tests/ifcc-test-output
+compiler/build/
+compiler/generated/
+compiler/ifcc
+
+# Ignore antlr files
+antlr/
+
+# Ignore config files
+compiler/config.mk
+
+# Ignore TP Files
+compiler/TP_Tests/
+
+# Ignore IDE and editor files
+.vscode/
+

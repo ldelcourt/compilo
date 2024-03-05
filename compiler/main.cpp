@@ -48,7 +48,9 @@ int main(int argn, const char **argv)
       cerr << "error: syntax error during parsing" << endl;
       exit(1);
   }
+
   map<string, int> symbolTable;
+
   SymbolTableVisitor s(symbolTable);
   s.visit(tree);
   
