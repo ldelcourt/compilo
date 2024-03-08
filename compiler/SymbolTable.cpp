@@ -18,13 +18,18 @@ string SymbolTable::autoAddSymbol() {
 }
 
 int SymbolTable::isUsed(string name) {
-  if(symbolTable.find(name) == symbolTable.end()) {
-    cout << "Error: var " << name << " is used but not declared" << endl;
-    return -1;
-  }
+  if(checkDeclaration(name) == -1) return -1;
   if (symbolTable[name] == 0) {
     symbolTable[name] = currentIndex;
     currentIndex += -4;
+  }
+  return 0;
+}
+
+int SymbolTable::checkDeclaration(string name) {
+  if(symbolTable.find(name) == symbolTable.end()) {
+    cout << "Error: var " << name << " is used but not declared" << endl;
+    return -1;
   }
   return 0;
 }

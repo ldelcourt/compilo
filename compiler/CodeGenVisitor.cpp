@@ -22,8 +22,27 @@ antlrcpp::Any CodeGenVisitor::visitReturn_stmt(ifccParser::Return_stmtContext *c
     return 0;
 }
 
+antlrcpp::Any CodeGenVisitor::visitVar_affectation(ifccParser::Var_affectationContext *ctx)
+{
+    std::string declaredVarName = ctx->VARNAME(0)->getText();
+    int declaredVarIndex = symbolTable.getSymbolIndex(declaredVarName);
 
-antlrcpp::Any CodeGenVisitor::visitVar_declaration(ifccParser::Var_declarationContext *ctx)
+    if(ctx->CONST() != nullptr) {
+        std::string assignedConst = ctx->CONST()->getText();
+        std::cout << "    movl $" << assignedConst << ", " << declaredVarIndex << "(%rbp)\n";
+    }
+
+    if(ctx->VARNAME(1) != nullptr) {
+        std::string assignedVarName = ctx->VARNAME(1)->getText();
+        int assignedVarIndex = symbolTable.getSymbolIndex(assignedVarName);
+        std::cout << "    movl " << assignedVarName << "(%rbp), %eax\n";
+        std::cout << "    movl %eax, " << declaredVarIndex << "(%rbp)\n";
+    }
+
+    return 0;
+}
+
+antlrcpp::Any CodeGenVisitor::visitVar_initialisation(ifccParser::Var_initialisationContext *ctx)
 {
     std::string declaredVarName = ctx->VARNAME(0)->getText();
     int declaredVarIndex = symbolTable.getSymbolIndex(declaredVarName);

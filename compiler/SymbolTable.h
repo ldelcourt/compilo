@@ -14,6 +14,7 @@ public:
     int addSymbol(string name);
     string autoAddSymbol();
     int isUsed(string name);
+    int checkDeclaration(string name);
     int checkUsage();
     void printTable();
     int getSymbolIndex(string name) { return symbolTable[name]; }
