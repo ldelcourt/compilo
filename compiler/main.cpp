@@ -10,6 +10,7 @@
 
 #include "CodeGenVisitor.h"
 #include "SymbolTableVisitor.h"
+#include "SymbolTable.h"
 
 using namespace antlr4;
 using namespace std;
@@ -49,12 +50,15 @@ int main(int argn, const char **argv)
       exit(1);
   }
 
-  map<string, int> symbolTable;
+  SymbolTable symbolTable;
 
   SymbolTableVisitor s(symbolTable);
   s.visit(tree);
-  
-  CodeGenVisitor v;
+  // symbolTable.printTable();
+  if (s.error) {
+    return 1;
+  }
+  CodeGenVisitor v(symbolTable);
   v.visit(tree);
 
   return 0;

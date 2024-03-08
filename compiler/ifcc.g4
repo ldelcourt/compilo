@@ -8,7 +8,7 @@ var_declaration: 'int' VARNAME '=' (CONST | VARNAME) ';' ;
 return_stmt: RETURN CONST ';' ;
 
 RETURN : 'return' ;
-VARNAME: [a-zA-Z_][a-zA-Z_0-9]+ ;
+VARNAME: [a-zA-Z_][a-zA-Z_0-9]* ;
 CONST : [0-9]+ ;
 COMMENT : '/*' .*? '*/' -> skip ;
 DIRECTIVE : '#' .*? '\n' -> skip ;
