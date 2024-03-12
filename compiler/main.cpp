@@ -54,7 +54,7 @@ int main(int argn, const char **argv)
 
   SymbolTableVisitor s(symbolTable);
   s.visit(tree);
-  // symbolTable.printTable();
+  symbolTable.printTable();
   if (s.error) {
     return 1;
   }

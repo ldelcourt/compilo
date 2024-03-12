@@ -7,11 +7,18 @@ prog : 'int' 'main' '(' ')' '{' var_stmt* return_stmt '}'  ;
 var_stmt: var_declaration
     | var_affectation
     | var_initialisation ;
-return_stmt: RETURN CONST ';' ;
+return_stmt: RETURN expression ';' ;
 
 var_declaration: 'int' VARNAME ';' ;
-var_affectation: VARNAME '=' (CONST | VARNAME) ';' ;
-var_initialisation: 'int' VARNAME '=' (CONST | VARNAME) ';' ;
+var_affectation: VARNAME '=' expression ';' ;
+var_initialisation: 'int' VARNAME '=' expression ';' ;
+
+expression: '(' expression ')' #par
+        | expression OP=('*'|'/') expression #multdiv
+        | expression OP=('+'|'-') expression #addsub
+        | CONST #const
+        | VARNAME #var
+        ;
 
 RETURN : 'return' ;
 VARNAME: [a-zA-Z_][a-zA-Z_0-9]* ;

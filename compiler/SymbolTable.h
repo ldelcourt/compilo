@@ -12,7 +12,7 @@ public:
     map<string, int> symbolTable;
     SymbolTable() { symbolTable = map<string, int>(); }
     int addSymbol(string name);
-    string autoAddSymbol();
+    int autoAddSymbol();
     int isUsed(string name);
     int checkDeclaration(string name);
     int checkUsage();

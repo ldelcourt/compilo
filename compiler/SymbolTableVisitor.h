@@ -16,6 +16,6 @@ class  SymbolTableVisitor : public ifccBaseVisitor {
     virtual antlrcpp::Any visitVar_declaration(ifccParser::Var_declarationContext *ctx) override; // int a;
     virtual antlrcpp::Any visitVar_affectation(ifccParser::Var_affectationContext *ctx) override; //a = 5;
     virtual antlrcpp::Any visitVar_initialisation(ifccParser::Var_initialisationContext *ctx) override; // int a = 5;
-
+    virtual antlrcpp::Any visitVar(ifccParser::VarContext *ctx) override;
 };
 

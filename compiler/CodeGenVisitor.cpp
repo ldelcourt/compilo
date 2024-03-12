@@ -15,58 +15,92 @@ antlrcpp::Any CodeGenVisitor::visitProg(ifccParser::ProgContext *ctx)
 
 antlrcpp::Any CodeGenVisitor::visitReturn_stmt(ifccParser::Return_stmtContext *ctx)
 {
-    int retval = stoi(ctx->CONST()->getText());
-
-    std::cout << "    movl $"<<retval<<", %eax\n" ;
+    int index = static_cast<int>(this->visitChildren(ctx->expression()));
+    std::cout << "    movl " << index << "(%rbp), %eax\n";
 
     return 0;
 }
 
 antlrcpp::Any CodeGenVisitor::visitVar_affectation(ifccParser::Var_affectationContext *ctx)
 {
-    std::string declaredVarName = ctx->VARNAME(0)->getText();
+    std::string declaredVarName = ctx->VARNAME()->getText();
     int declaredVarIndex = symbolTable.getSymbolIndex(declaredVarName);
 
-    if(ctx->CONST() != nullptr) {
-        std::string assignedConst = ctx->CONST()->getText();
-        std::cout << "    movl $" << assignedConst << ", " << declaredVarIndex << "(%rbp)\n";
-    }
-
-    if(ctx->VARNAME(1) != nullptr) {
-        std::string assignedVarName = ctx->VARNAME(1)->getText();
-        int assignedVarIndex = symbolTable.getSymbolIndex(assignedVarName);
-        std::cout << "    movl " << assignedVarName << "(%rbp), %eax\n";
-        std::cout << "    movl %eax, " << declaredVarIndex << "(%rbp)\n";
-    }
+    int assignedVarIndex = static_cast<int>(this->visitChildren(ctx->expression()));
+    std::cout << "    movl " << assignedVarIndex << "(%rbp), %eax\n";
+    std::cout << "    movl %eax, " << declaredVarIndex << "(%rbp)\n";
 
     return 0;
 }
 
 antlrcpp::Any CodeGenVisitor::visitVar_initialisation(ifccParser::Var_initialisationContext *ctx)
 {
-    std::string declaredVarName = ctx->VARNAME(0)->getText();
+    cout << "ye buddy" << endl;
+    std::string declaredVarName = ctx->VARNAME()->getText();
     int declaredVarIndex = symbolTable.getSymbolIndex(declaredVarName);
 
-    // Cas VARNAME = VARNAME
-    if (ctx->VARNAME(1) != nullptr) {
-        std::string assignedVarName = ctx->VARNAME(1)->getText();
-        int assignedVarIndex = symbolTable.getSymbolIndex(assignedVarName);
-        std::cout << "    movl " << assignedVarName << "(%rbp), %eax\n";
-        std::cout << "    movl %eax, " << declaredVarIndex << "(%rbp)\n";
-    }
-
-    // Cas VARNAME = CONST
-    if(ctx->CONST() != nullptr) {
-        string tempVar = symbolTable.autoAddSymbol();
-        int tempVarIndex = symbolTable.getSymbolIndex(tempVar);
-
-        std::string assignedConst = ctx->CONST()->getText();
-
-        std::cout << "    movl $" << assignedConst << ", " << tempVarIndex << "(%rbp)\n";
-        std::cout << "    movl " << tempVarIndex << "(%rbp), %eax\n";
-        std::cout << "    movl %eax, " << declaredVarIndex << "(%rbp)\n";
-
-    }
+    int assignedVarIndex = static_cast<int>(this->visitChildren(ctx->expression()));
+    std::cout << "    movl " << assignedVarIndex << "(%rbp), %eax\n";
+    std::cout << "    movl %eax, " << declaredVarIndex << "(%rbp)\n";
 
     return 0;
+}
+
+antlrcpp::Any CodeGenVisitor::visitAddsub(ifccParser::AddsubContext *ctx) // expr '+/-' expr
+{
+    int leftHandSide = static_cast<int>(this->visitChildren(ctx->expression(0)));
+    int rightHandSide = static_cast<int>(this->visitChildren(ctx->expression(1)));
+
+    int tmpVarIndex = symbolTable.autoAddSymbol();
+    std::cout << "    movl " << leftHandSide << "(%rbp), %eax\n";
+    std::cout << "    movl " << rightHandSide << "(%rbp), %ecx\n";
+
+    if(ctx->OP->getText() == "+") {
+        std::cout << "    addl %ecx, %eax\n";
+    }
+    else if (ctx->OP->getText() == "-") {
+        std::cout << "    subl %ecx, %eax\n";
+    }
+    std::cout << "    movl %eax, " << tmpVarIndex << "(%rbp)\n";
+    return tmpVarIndex;
+}
+
+antlrcpp::Any CodeGenVisitor::visitMultdiv(ifccParser::MultdivContext *ctx) // expr '*/' expr
+{
+    int leftHandSide = static_cast<int>(this->visitChildren(ctx->expression(0)));
+    int rightHandSide = static_cast<int>(this->visitChildren(ctx->expression(1)));
+
+    int tmpVarIndex = symbolTable.autoAddSymbol();
+    std::cout << "    movl " << leftHandSide << "(%rbp), %eax\n";
+    std::cout << "    movl " << rightHandSide << "(%rbp), %ecx\n";
+
+    if(ctx->OP->getText() == "*") {
+        std::cout << "    imull %ecx, %eax\n";
+    }
+    else if (ctx->OP->getText() == "/") {
+        std::cout << "    cltd\n";
+        std::cout << "    idivl %ecx\n";
+    }
+    std::cout << "    movl %eax, " << tmpVarIndex << "(%rbp)\n";
+    return tmpVarIndex;
+}
+
+antlrcpp::Any CodeGenVisitor::visitPar(ifccParser::ParContext *ctx) // '(' expr ')'
+{
+    return static_cast<int>(this->visitChildren(ctx->expression()));
+}
+
+antlrcpp::Any CodeGenVisitor::visitVar(ifccParser::VarContext *ctx) // VARNAME
+{
+    std::string varName = ctx->VARNAME()->getText();
+    int varIndex = symbolTable.getSymbolIndex(varName);
+    return varIndex;
+}
+
+antlrcpp::Any CodeGenVisitor::visitConst(ifccParser::ConstContext *ctx) // CONST
+{
+    std::string constValue = ctx->CONST()->getText();
+    int tmpVarIndex = symbolTable.autoAddSymbol();
+    std::cout << "    movl $" << constValue << ", " << tmpVarIndex << "(%rbp)\n";
+    return tmpVarIndex;
 }

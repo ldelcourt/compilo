@@ -8,13 +8,14 @@ int SymbolTable::addSymbol(string name) {
   }
 
   symbolTable[name] = 0;
+  return 0;
 }
 
-string SymbolTable::autoAddSymbol() {
+int SymbolTable::autoAddSymbol() {
   string name = "#autoVar" + to_string(currentIndex);
   symbolTable[name] = currentIndex;
   currentIndex += -4;
-  return name;
+  return currentIndex + 4;
 }
 
 int SymbolTable::isUsed(string name) {
