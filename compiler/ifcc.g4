@@ -9,7 +9,7 @@ var_stmt: var_declaration
     | var_initialisation ;
 return_stmt: RETURN expression ';' ;
 
-var_declaration: 'int' VARNAME ';' ;
+var_declaration: 'int' VARNAME (',' VARNAME)* ';' ;
 var_affectation: VARNAME '=' expression ';' ;
 var_initialisation: 'int' VARNAME '=' expression ';' ;
 

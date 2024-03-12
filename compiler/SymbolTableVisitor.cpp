@@ -11,8 +11,12 @@ antlrcpp::Any SymbolTableVisitor::visitProg(ifccParser::ProgContext *ctx)
 // int a;
 antlrcpp::Any SymbolTableVisitor::visitVar_declaration(ifccParser::Var_declarationContext *ctx)
 {
-    string declaredVarName = ctx->VARNAME()->getText();
-    if(symbolTable.addSymbol(declaredVarName) == 1) error = true;
+    int size = ctx->VARNAME().size();
+    for(int i = 0; i < size; i++)
+    {
+        string declaredVarName = ctx->VARNAME(i)->getText();
+        if(symbolTable.addSymbol(declaredVarName) == 1) error = true;
+    }
 
     return 0;
 }
