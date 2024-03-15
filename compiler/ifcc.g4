@@ -2,20 +2,42 @@ grammar ifcc;
 
 axiom : prog EOF ;
 
-prog : 'int' 'main' '(' ')' '{' var_stmt* return_stmt '}'  ;
+prog : 'int' 'main' '(' ')' '{'(var_stmt)* return_stmt '}' ;
 
-var_stmt: var_declaration
-    | var_affectation
-    | var_initialisation ;
-return_stmt: RETURN CONST ';' ;
+return_stmt: RETURN CONST ';' #returnConst
+    | RETURN VAR ';' #returnVar
+    | RETURN expr ';' #returnExpr
+    ;
 
-var_declaration: 'int' VARNAME ';' ;
-var_affectation: VARNAME '=' (CONST | VARNAME) ';' ;
-var_initialisation: 'int' VARNAME '=' (CONST | VARNAME) ';' ;
+
+var_stmt: affectation_var
+    | declaration_var
+    | initialisation_var
+    ;
+
+affectation_var: VAR '=' VAR ('=' VAR)* ('=' CONST | '=' expr)? ';' #varToVar
+    | VAR '=' CONST  ';' #varToConst
+    | VAR '=' expr ';' #varToExpr
+    ;
+declaration_var: 'int' VAR (',' VAR)* ';' ;
+initialisation_var: 'int' VAR '=' VAR ( ',' VAR '=' VAR)* ';' #varInitVar
+    | 'int' VAR '=' CONST ( ',' VAR '=' CONST)* ';' #varInitConst
+    | 'int' VAR '=' expr (',' VAR '=' expr)* ';' #varInitExpr
+    ;
+
+
+expr: '(' expr ')' #par
+    | '-' expr #unaire
+    | expr OP=('*' | '/' | '%') expr #multdivmod
+    | expr OP=('+' | '-') expr #plusmoins
+    | VAR #var
+    | CONST #const
+    ;
+
 
 RETURN : 'return' ;
-VARNAME: [a-zA-Z_][a-zA-Z_0-9]* ;
 CONST : [0-9]+ ;
 COMMENT : '/*' .*? '*/' -> skip ;
 DIRECTIVE : '#' .*? '\n' -> skip ;
 WS    : [ \t\r\n] -> channel(HIDDEN);
+VAR : [a-zA-Z_][a-zA-Z0-9_]* ;

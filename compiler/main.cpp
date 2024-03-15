@@ -8,12 +8,16 @@
 #include "generated/ifccParser.h"
 #include "generated/ifccBaseVisitor.h"
 
-#include "CodeGenVisitor.h"
-#include "SymbolTableVisitor.h"
-#include "SymbolTable.h"
+
+#include "VarVisitor.h"
+#include "IRVisitor.h"
+#include "IR.h"
 
 using namespace antlr4;
 using namespace std;
+
+
+
 
 int main(int argn, const char **argv)
 {
@@ -50,16 +54,26 @@ int main(int argn, const char **argv)
       exit(1);
   }
 
-  SymbolTable symbolTable;
+  /*
+  SymbolTable table;
 
-  SymbolTableVisitor s(symbolTable);
-  s.visit(tree);
-  // symbolTable.printTable();
-  if (s.error) {
+  VarVisitor varVisitor(&table);
+  varVisitor.visit(tree);
+  varVisitor.checkUnusedDecla();
+  
+  if (varVisitor.hasError()) {
     return 1;
   }
-  CodeGenVisitor v(symbolTable);
-  v.visit(tree);
+  */
+
+  try {
+    
+    CFG cfg(tree);
+    cfg.gen_asm(cout);
+
+  } catch (int e) {
+    return 1;
+  }
 
   return 0;
 }

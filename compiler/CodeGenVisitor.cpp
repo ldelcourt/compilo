@@ -2,71 +2,254 @@
 
 antlrcpp::Any CodeGenVisitor::visitProg(ifccParser::ProgContext *ctx) 
 {
-    std::cout<< ".globl _main\n" ;
-    std::cout<< " _main: \n" ;
+  std::cout<< ".globl main\n" ;
+  std::cout<< " main: \n" ;
+  std::cout<< " \tpushq %rbp\n" << " \tmovq %rsp, %rbp\n"; //prologue
 
-    this->visitChildren(ctx);
+  for (ifccParser::Var_stmtContext* var_stmtContext : ctx->var_stmt()) {
+    this->visit( var_stmtContext );
+  }
+  this->visit( ctx->return_stmt() );
+    
+  std::cout << " \tpopq %rbp\n" << " \tret\n"; //epilogue
 
-    std::cout << "    ret\n";
-
-    return 0;
+  return 0;
 }
 
 
-antlrcpp::Any CodeGenVisitor::visitReturn_stmt(ifccParser::Return_stmtContext *ctx)
+antlrcpp::Any CodeGenVisitor::visitReturnConst(ifccParser::ReturnConstContext *ctx)
 {
-    int retval = stoi(ctx->CONST()->getText());
+  int retval = stoi(ctx->CONST()->getText());
 
-    std::cout << "    movl $"<<retval<<", %eax\n" ;
+  std::cout << " \tmovl $"<<retval<<", %eax\n" ;
 
-    return 0;
+  return 0;
 }
 
-antlrcpp::Any CodeGenVisitor::visitVar_affectation(ifccParser::Var_affectationContext *ctx)
-{
-    std::string declaredVarName = ctx->VARNAME(0)->getText();
-    int declaredVarIndex = symbolTable.getSymbolIndex(declaredVarName);
 
-    if(ctx->CONST() != nullptr) {
-        std::string assignedConst = ctx->CONST()->getText();
-        std::cout << "    movl $" << assignedConst << ", " << declaredVarIndex << "(%rbp)\n";
-    }
+antlrcpp::Any CodeGenVisitor::visitReturnVar(ifccParser::ReturnVarContext *ctx) {
 
-    if(ctx->VARNAME(1) != nullptr) {
-        std::string assignedVarName = ctx->VARNAME(1)->getText();
-        int assignedVarIndex = symbolTable.getSymbolIndex(assignedVarName);
-        std::cout << "    movl " << assignedVarName << "(%rbp), %eax\n";
-        std::cout << "    movl %eax, " << declaredVarIndex << "(%rbp)\n";
-    }
+  std::cout << " \tmovl " << table->getIndex(ctx->VAR()->getText()) << "(%rbp), %eax\n" ;
 
-    return 0;
+  return 0;
+
 }
 
-antlrcpp::Any CodeGenVisitor::visitVar_initialisation(ifccParser::Var_initialisationContext *ctx)
-{
-    std::string declaredVarName = ctx->VARNAME(0)->getText();
-    int declaredVarIndex = symbolTable.getSymbolIndex(declaredVarName);
 
-    // Cas VARNAME = VARNAME
-    if (ctx->VARNAME(1) != nullptr) {
-        std::string assignedVarName = ctx->VARNAME(1)->getText();
-        int assignedVarIndex = symbolTable.getSymbolIndex(assignedVarName);
-        std::cout << "    movl " << assignedVarName << "(%rbp), %eax\n";
-        std::cout << "    movl %eax, " << declaredVarIndex << "(%rbp)\n";
-    }
+antlrcpp::Any CodeGenVisitor::visitReturnExpr(ifccParser::ReturnExprContext *ctx) {
 
-    // Cas VARNAME = CONST
-    if(ctx->CONST() != nullptr) {
-        string tempVar = symbolTable.autoAddSymbol();
-        int tempVarIndex = symbolTable.getSymbolIndex(tempVar);
+  int index = (int)visit(ctx->expr());
 
-        std::string assignedConst = ctx->CONST()->getText();
+  if (index >= 0) {
+    return 1;
+  }
 
-        std::cout << "    movl $" << assignedConst << ", " << tempVarIndex << "(%rbp)\n";
-        std::cout << "    movl " << tempVarIndex << "(%rbp), %eax\n";
-        std::cout << "    movl %eax, " << declaredVarIndex << "(%rbp)\n";
+  std::cout << " \tmovl " << index << "(%rbp), %eax\n" ;
 
-    }
-
-    return 0;
+  return 0;
+  
 }
+
+
+antlrcpp::Any CodeGenVisitor::visitVarToVar(ifccParser::VarToVarContext *ctx) {
+
+  int var0 = table->getIndex(ctx->VAR(0)->getText());
+  int var1 = table->getIndex(ctx->VAR(1)->getText());
+  
+  std::cout << " \tmovl " << var1 << "(%rbp), %eax\n" << " \tmovl %eax, " << var0 << "(%rbp)\n";
+
+  return 0;
+  
+}
+  
+antlrcpp::Any CodeGenVisitor::visitVarToConst(ifccParser::VarToConstContext *ctx) {
+
+  int var = table->getIndex(ctx->VAR()->getText());
+  
+  std::cout << " \tmovl $" << ctx->CONST()->getText() << ", " << var << "(%rbp)\n";
+
+  return 0;
+
+}
+
+
+antlrcpp::Any CodeGenVisitor::visitVarToExpr(ifccParser::VarToExprContext *ctx) {
+
+  int indexExpr = (int)visit(ctx->expr());
+  int var0 = table->getIndex(ctx->VAR()->getText());
+
+  if (indexExpr >= 0) {
+    return 1;
+  }
+
+  std::cout << " \tmovl " << indexExpr << "(%rbp), %eax\n" << " \tmovl %eax, " << var0 << "(%rbp)\n";
+
+  return 0;
+  
+}
+
+antlrcpp::Any CodeGenVisitor::visitVarInitVar(ifccParser::VarInitVarContext *ctx) {
+
+  int var0 = table->getIndex(ctx->VAR(0)->getText());
+  int var1 = table->getIndex(ctx->VAR(1)->getText());
+  
+  std::cout << " \tmovl " << var1 << "(%rbp), %eax\n" << " \tmovl %eax, " << var0 << "(%rbp)\n";
+
+  return 0;
+
+}
+
+
+antlrcpp::Any CodeGenVisitor::visitVarInitConst(ifccParser::VarInitConstContext *ctx) {
+
+  int var = table->getIndex(ctx->VAR()->getText());
+  
+  std::cout << " \tmovl $" << ctx->CONST()->getText() << ", " << var << "(%rbp)\n";
+
+  return 0;
+
+}
+
+
+antlrcpp::Any CodeGenVisitor::visitVarInitExpr(ifccParser::VarInitExprContext *ctx) {
+
+  int var0 = table->getIndex(ctx->VAR()->getText());
+  int expr = (int)visit(ctx->expr());
+
+  if (expr >= 0 ) {
+    return 1;
+  }
+  
+  std::cout << " \tmovl " << expr << "(%rbp), %eax\n" << " \tmovl %eax, " << var0 << "(%rbp)\n";
+
+  return 0;
+
+  
+}
+
+  
+
+
+antlrcpp::Any CodeGenVisitor::visitPar(ifccParser::ParContext *ctx) {
+
+  return visit(ctx->expr());
+
+}
+
+
+
+antlrcpp::Any CodeGenVisitor::visitMultdivmod(ifccParser::MultdivmodContext *ctx) {
+
+  int indexSymbol1 = (int)visit(ctx->expr(0));
+  int indexSymbol2 = (int)visit(ctx->expr(1));
+
+  if (indexSymbol1 >= 0 || indexSymbol2 >= 0) {
+    return 1;
+  }
+
+  int indexRes = table->createTemp();
+
+  if (ctx->OP->getText() == "*") {
+
+    std::cout << " \tmovl " << indexSymbol1 << "(%rbp), %eax\n";
+    std::cout << " \timull " << indexSymbol2 << "(%rbp), %eax\n";
+    std::cout << " \tmovl %eax, " << indexRes << "(%rbp)\n";
+  }
+
+  else if (ctx->OP->getText() == "/") {
+    std::cout << " \tmovl " << indexSymbol1 << "(%rbp), %eax\n";
+    std::cout << " \tcltd\n";
+    std::cout << " \tidivl " << indexSymbol2 << "(%rbp)\n";
+
+    std::cout << " \tmovl %eax, " << indexRes << "(%rbp)\n";
+  }
+
+  else if (ctx->OP->getText() == "%") {
+    std::cout << " \tmovl " << indexSymbol1 << "(%rbp), %eax\n";
+    std::cout << " \tcltd\n";
+    std::cout << " \tidivl " << indexSymbol2 << "(%rbp)\n";
+
+    std::cout << " \tmovl %edx, " << indexRes << "(%rbp)\n";
+  }
+
+  else {
+    std::cerr << "error : unknown operator " << ctx->OP->getText() << "\n";
+    return 1;
+  }
+
+  return indexRes;
+
+}
+
+
+antlrcpp::Any CodeGenVisitor::visitUnaire(ifccParser::UnaireContext *ctx) {
+
+  int index = (int)visit(ctx->expr());
+  int indexRes = table->createTemp();
+
+  if (index >= 0) {
+    return 1;
+  }
+  
+  std::cout << " \tmovl " << index << "(%rbp), %eax\n";
+  std::cout << " \tnegl %eax\n";
+  std::cout << " \tmovl %eax, " << indexRes << "(%rbp)\n";
+
+  return indexRes;
+  
+}
+
+
+antlrcpp::Any CodeGenVisitor::visitPlusmoins(ifccParser::PlusmoinsContext *ctx) {
+
+  int indexSymbol1 = (int)visit(ctx->expr(0));
+  int indexSymbol2 = (int)visit(ctx->expr(1));
+
+  if (indexSymbol1 >= 0 || indexSymbol2 >= 0) {
+    return 1;
+  }
+
+  int indexRes = table->createTemp();
+
+  if (ctx->OP->getText() == "+") {
+
+    std::cout << " \tmovl " << indexSymbol1 << "(%rbp), %edx\n";
+    std::cout << " \tmovl " << indexSymbol2 << "(%rbp), %eax\n";
+    std::cout << " \taddl %edx, %eax\n";
+    std::cout << " \tmovl %eax, " << indexRes << "(%rbp)\n";
+  }
+
+  else if (ctx->OP->getText() == "-") {
+    std::cout << " \tmovl " << indexSymbol1 << "(%rbp), %eax\n";
+    std::cout << " \tsubl " << indexSymbol2 << "(%rbp), %eax\n";
+    std::cout << " \tmovl %eax, " << indexRes << "(%rbp)\n";
+  }
+
+  else {
+    std::cerr << "error : unknown operator " << ctx->OP->getText() << "\n";
+    return 1;
+  }
+
+  return indexRes;
+ 
+}
+
+
+antlrcpp::Any CodeGenVisitor::visitConst(ifccParser::ConstContext *ctx) {
+
+  int index = table->createTemp();
+
+  std::cout << " \tmovl $" << ctx->CONST()->getText() << ", " << index << "(%rbp)\n";
+
+  return index;
+  
+}
+
+
+antlrcpp::Any CodeGenVisitor::visitVar(ifccParser::VarContext *ctx) {
+
+  return table->getIndex(ctx->VAR()->getText());
+  
+}
+
+

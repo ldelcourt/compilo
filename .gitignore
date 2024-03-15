@@ -16,3 +16,5 @@ compiler/TP_Tests/
 # Ignore IDE and editor files
 .vscode/
 
+#ignore emacs files
+*~
