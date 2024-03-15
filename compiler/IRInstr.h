@@ -28,7 +28,10 @@ public:
     mul,
     div,
     mod,
-    neg, 
+    neg,
+    binary_and,
+    binary_xor,
+    binary_or,
     rmem, //Arret ici dans l'implementation
     wmem,
     call, 
@@ -183,6 +186,51 @@ public:
 private:
 
   std::string dest, var;
+
+  
+};
+
+class BinaryAndInstr : public IRInstr {
+
+public:
+
+  BinaryAndInstr (BasicBlock *bb, Type t, const std::string &dest, const std::string &x, const std::string &y);
+
+  virtual void gen_asm(std::ostream &o) const;
+
+private:
+
+  std::string dest, x, y;
+
+  
+};
+
+class BinaryXorInstr : public IRInstr {
+
+public:
+
+  BinaryXorInstr (BasicBlock *bb, Type t, const std::string &dest, const std::string &x, const std::string &y);
+
+  virtual void gen_asm(std::ostream &o) const;
+
+private:
+
+  std::string dest, x, y;
+
+  
+};
+
+class BinaryOrInstr : public IRInstr {
+
+public:
+
+  BinaryOrInstr (BasicBlock *bb, Type t, const std::string &dest, const std::string &x, const std::string &y);
+
+  virtual void gen_asm(std::ostream &o) const;
+
+private:
+
+  std::string dest, x, y;
 
   
 };

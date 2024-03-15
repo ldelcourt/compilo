@@ -40,6 +40,9 @@ public:
   virtual antlrcpp::Any visitMultdivmod(ifccParser::MultdivmodContext *ctx) override;
   virtual antlrcpp::Any visitUnaire(ifccParser::UnaireContext *ctx) override;
   virtual antlrcpp::Any visitPlusmoins(ifccParser::PlusmoinsContext *ctx) override;
+  virtual antlrcpp::Any visitBinaryAND(ifccParser::BinaryANDContext *ctx) override;
+  virtual antlrcpp::Any visitBinaryXOR(ifccParser::BinaryXORContext *ctx) override;
+  virtual antlrcpp::Any visitBinaryOR(ifccParser::BinaryORContext *ctx) override;
   virtual antlrcpp::Any visitConst(ifccParser::ConstContext *ctx) override;
   virtual antlrcpp::Any visitVar(ifccParser::VarContext *ctx) override;
 

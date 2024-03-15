@@ -36,6 +36,15 @@ IRInstr* IRInstr::createInstr(BasicBlock *bb, Operation op, Type t, std::string 
   case neg:
     return new NegInstr(bb, t, params[0], params[1]);
 
+  case binary_and:
+    return new BinaryAndInstr(bb, t, params[0], params[1], params[2]);
+
+  case binary_xor:
+    return new BinaryXorInstr(bb, t, params[0], params[1], params[2]);
+
+  case binary_or:
+    return new BinaryOrInstr(bb, t, params[0], params[1], params[2]);
+  
   }
 
   return nullptr;
@@ -192,6 +201,57 @@ void NegInstr::gen_asm(std::ostream &o) const {
 
   std::cout << " \tmovl " << bb->cfg->symbol_to_asm(var) << ", %eax\n";
   std::cout << " \tnegl %eax\n";
+  std::cout << " \tmovl %eax, " << bb->cfg->symbol_to_asm(dest) << "\n";
+  
+}
+
+BinaryAndInstr::BinaryAndInstr(BasicBlock *bb, Type t, const std::string &dest, const std::string &x, const std::string &y) :
+  IRInstr(bb, Operation::neg, t), dest(dest), x(x), y(y)
+{
+
+  //std::cout << "BinaryAnd : x=" << x << " y=" << y << " dest=" << dest << std::endl;
+
+}
+
+
+void BinaryAndInstr::gen_asm(std::ostream &o) const {
+
+  std::cout << " \tmovl " << bb->cfg->symbol_to_asm(x) << ", %eax\n";
+  std::cout << " \tandl " << bb->cfg->symbol_to_asm(y) << ", %eax\n";
+  std::cout << " \tmovl %eax, " << bb->cfg->symbol_to_asm(dest) << "\n";
+  
+}
+
+BinaryXorInstr::BinaryXorInstr(BasicBlock *bb, Type t, const std::string &dest, const std::string &x, const std::string &y) :
+  IRInstr(bb, Operation::neg, t), dest(dest), x(x), y(y)
+{
+
+  //std::cout << "BinaryXor : x=" << x << " y=" << y << " dest=" << dest << std::endl;
+
+}
+
+
+void BinaryXorInstr::gen_asm(std::ostream &o) const {
+
+  std::cout << " \tmovl " << bb->cfg->symbol_to_asm(x) << ", %eax\n";
+  std::cout << " \txorl " << bb->cfg->symbol_to_asm(y) << ", %eax\n";
+  std::cout << " \tmovl %eax, " << bb->cfg->symbol_to_asm(dest) << "\n";
+  
+}
+
+BinaryOrInstr::BinaryOrInstr(BasicBlock *bb, Type t, const std::string &dest, const std::string &x, const std::string &y) :
+  IRInstr(bb, Operation::neg, t), dest(dest), x(x), y(y)
+{
+
+  //std::cout << "BinaryOr : x=" << x << " y=" << y << " dest=" << dest << std::endl;
+
+}
+
+
+void BinaryOrInstr::gen_asm(std::ostream &o) const {
+
+  std::cout << " \tmovl " << bb->cfg->symbol_to_asm(x) << ", %eax\n";
+  std::cout << " \torl " << bb->cfg->symbol_to_asm(y) << ", %eax\n";
   std::cout << " \tmovl %eax, " << bb->cfg->symbol_to_asm(dest) << "\n";
   
 }

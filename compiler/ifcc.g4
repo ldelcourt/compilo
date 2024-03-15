@@ -30,6 +30,9 @@ expr: '(' expr ')' #par
     | '-' expr #unaire
     | expr OP=('*' | '/' | '%') expr #multdivmod
     | expr OP=('+' | '-') expr #plusmoins
+    | expr '&' expr #binaryAND
+    | expr '^' expr #binaryXOR
+    | expr '|' expr #binaryOR
     | VAR #var
     | CONST #const
     ;
