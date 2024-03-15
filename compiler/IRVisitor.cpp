@@ -354,6 +354,104 @@ antlrcpp::Any IRVisitor::visitPlusmoins(ifccParser::PlusmoinsContext *ctx) {
  
 }
 
+antlrcpp::Any IRVisitor::visitLessgreater(ifccParser::LessgreaterContext *ctx) {
+
+
+  std::string params[3];
+  
+  params[1] = (std::string)visit(ctx->expr(0));
+  params[2] = (std::string)visit(ctx->expr(1));
+
+
+  //Constantes ?
+  int a, b;
+  bool opConst = false;
+  if (cfg->symbolIsConst(params[1], &a) && cfg->symbolIsConst(params[2], &b)) {
+    opConst = true;
+  }
+
+  else {
+    params[0] = cfg->createTempVar();
+  }
+  
+
+  if (ctx->OP->getText() == "<") {
+
+    if (!opConst) {
+      cfg->current_bb->addIRInstr(IRInstr::Operation::cmp_lt, Type::INT, params);
+    }
+    else {
+      params[0] = cfg->createConstSymbol(a<b);
+    }
+  }
+
+  else if (ctx->OP->getText() == ">") {
+    if (!opConst) {
+      cfg->current_bb->addIRInstr(IRInstr::Operation::cmp_gt, Type::INT, params);
+    }
+    else {
+      params[0] = cfg->createConstSymbol(a>b);
+    }
+  }
+
+  else {
+    std::cerr << "error : unknown operator " << ctx->OP->getText() << "\n";
+    return 1;
+  }
+
+  return (std::string)params[0];
+
+}
+
+antlrcpp::Any IRVisitor::visitEqualnotequal(ifccParser::EqualnotequalContext *ctx) {
+
+
+  std::string params[3];
+  
+  params[1] = (std::string)visit(ctx->expr(0));
+  params[2] = (std::string)visit(ctx->expr(1));
+
+
+  //Constantes ?
+  int a, b;
+  bool opConst = false;
+  if (cfg->symbolIsConst(params[1], &a) && cfg->symbolIsConst(params[2], &b)) {
+    opConst = true;
+  }
+
+  else {
+    params[0] = cfg->createTempVar();
+  }
+  
+
+  if (ctx->OP->getText() == "==") {
+
+    if (!opConst) {
+      cfg->current_bb->addIRInstr(IRInstr::Operation::cmp_eq, Type::INT, params);
+    }
+    else {
+      params[0] = cfg->createConstSymbol(a==b);
+    }
+  }
+
+  else if (ctx->OP->getText() == "!=") {
+    if (!opConst) {
+      cfg->current_bb->addIRInstr(IRInstr::Operation::cmp_neq, Type::INT, params);
+    }
+    else {
+      params[0] = cfg->createConstSymbol(a!=b);
+    }
+  }
+
+  else {
+    std::cerr << "error : unknown operator " << ctx->OP->getText() << "\n";
+    return 1;
+  }
+
+  return (std::string)params[0];
+
+}
+
 
 antlrcpp::Any IRVisitor::visitConst(ifccParser::ConstContext *ctx) {
 

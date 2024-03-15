@@ -30,6 +30,8 @@ expr: '(' expr ')' #par
     | '-' expr #unaire
     | expr OP=('*' | '/' | '%') expr #multdivmod
     | expr OP=('+' | '-') expr #plusmoins
+    | expr OP=('<' | '>') expr #lessgreater
+    | expr OP=('==' | '!=') expr #equalnotequal
     | VAR #var
     | CONST #const
     ;
