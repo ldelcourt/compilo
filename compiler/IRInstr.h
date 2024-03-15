@@ -33,8 +33,9 @@ public:
     wmem,
     call, 
     cmp_eq,
+    cmp_neq,
     cmp_lt,
-    cmp_le
+    cmp_gt,
   } Operation;
 
 
@@ -184,6 +185,62 @@ private:
 
   std::string dest, var;
 
+  
+};
+
+class CmpEqInstr : public IRInstr {
+
+public:
+
+  CmpEqInstr (BasicBlock *bb, Type t, const std::string &dest, const std::string &x, const std::string &y);
+
+  virtual void gen_asm(std::ostream &o) const;
+
+
+private:
+  std::string dest, x, y;
+  
+};
+
+class CmpNeqInstr : public IRInstr {
+
+public:
+
+  CmpNeqInstr (BasicBlock *bb, Type t, const std::string &dest, const std::string &x, const std::string &y);
+
+  virtual void gen_asm(std::ostream &o) const;
+
+
+private:
+  std::string dest, x, y;
+  
+};
+
+class CmpLtInstr : public IRInstr {
+
+public:
+
+  CmpLtInstr (BasicBlock *bb, Type t, const std::string &dest, const std::string &x, const std::string &y);
+
+  virtual void gen_asm(std::ostream &o) const;
+
+
+private:
+  std::string dest, x, y;
+  
+};
+
+class CmpGtInstr : public IRInstr {
+
+public:
+
+  CmpGtInstr (BasicBlock *bb, Type t, const std::string &dest, const std::string &x, const std::string &y);
+
+  virtual void gen_asm(std::ostream &o) const;
+
+
+private:
+  std::string dest, x, y;
   
 };
 
