@@ -42,6 +42,9 @@ public:
   virtual antlrcpp::Any visitPlusmoins(ifccParser::PlusmoinsContext *ctx) override;
   virtual antlrcpp::Any visitLessgreater(ifccParser::LessgreaterContext *ctx) override;
   virtual antlrcpp::Any visitEqualnotequal(ifccParser::EqualnotequalContext *ctx) override;
+  virtual antlrcpp::Any visitBinaryAND(ifccParser::BinaryANDContext *ctx) override;
+  virtual antlrcpp::Any visitBinaryXOR(ifccParser::BinaryXORContext *ctx) override;
+  virtual antlrcpp::Any visitBinaryOR(ifccParser::BinaryORContext *ctx) override;
   virtual antlrcpp::Any visitConst(ifccParser::ConstContext *ctx) override;
   virtual antlrcpp::Any visitVar(ifccParser::VarContext *ctx) override;
 

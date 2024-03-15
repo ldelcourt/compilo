@@ -32,6 +32,9 @@ expr: '(' expr ')' #par
     | expr OP=('+' | '-') expr #plusmoins
     | expr OP=('<' | '>') expr #lessgreater
     | expr OP=('==' | '!=') expr #equalnotequal
+    | expr '&' expr #binaryAND
+    | expr '^' expr #binaryXOR
+    | expr '|' expr #binaryOR
     | VAR #var
     | CONST #const
     ;

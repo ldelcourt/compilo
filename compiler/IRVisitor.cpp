@@ -452,6 +452,114 @@ antlrcpp::Any IRVisitor::visitEqualnotequal(ifccParser::EqualnotequalContext *ct
 
 }
 
+antlrcpp::Any IRVisitor::visitBinaryAND(ifccParser::BinaryANDContext *ctx) {
+
+    std::string params[3];
+  
+  params[1] = (std::string)visit(ctx->expr(0));
+  params[2] = (std::string)visit(ctx->expr(1));
+
+
+  //Constantes ?
+  int a, b;
+  bool opConst = false;
+  if (cfg->symbolIsConst(params[1], &a) && cfg->symbolIsConst(params[2], &b)) {
+    opConst = true;
+  }
+  else {
+    params[0] = cfg->createTempVar();
+  }
+  
+  if (!opConst) {
+    cfg->current_bb->addIRInstr(IRInstr::Operation::binary_and, Type::INT, params);
+  }
+  else {
+    params[0] = cfg->createConstSymbol(a&b);
+  }
+  
+  return (std::string)params[0];
+
+ 
+}
+
+antlrcpp::Any IRVisitor::visitBinaryXOR(ifccParser::BinaryXORContext *ctx) {
+
+    std::string params[3];
+  
+  params[1] = (std::string)visit(ctx->expr(0));
+  params[2] = (std::string)visit(ctx->expr(1));
+
+
+  //Constantes ?
+  int a, b;
+  bool opConst = false;
+  if (cfg->symbolIsConst(params[1], &a) && cfg->symbolIsConst(params[2], &b)) {
+    opConst = true;
+  }
+
+  //element neutre ?
+  else if (cfg->symbolIsConst(params[1], &a) && a == 0) {
+    return (std::string)params[2];
+  }
+  else if (cfg->symbolIsConst(params[2], &b) && b == 0) {
+    return (std::string)params[1];
+  }
+
+  else {
+    params[0] = cfg->createTempVar();
+  }
+  
+  if (!opConst) {
+    cfg->current_bb->addIRInstr(IRInstr::Operation::binary_xor, Type::INT, params);
+  }
+  else {
+    params[0] = cfg->createConstSymbol(a^b);
+  }
+  
+  return (std::string)params[0];
+
+ 
+}
+
+antlrcpp::Any IRVisitor::visitBinaryOR(ifccParser::BinaryORContext *ctx) {
+
+    std::string params[3];
+  
+  params[1] = (std::string)visit(ctx->expr(0));
+  params[2] = (std::string)visit(ctx->expr(1));
+
+
+  //Constantes ?
+  int a, b;
+  bool opConst = false;
+  if (cfg->symbolIsConst(params[1], &a) && cfg->symbolIsConst(params[2], &b)) {
+    opConst = true;
+  }
+
+  //element neutre ?
+  else if (cfg->symbolIsConst(params[1], &a) && a == 0) {
+    return (std::string)params[2];
+  }
+  else if (cfg->symbolIsConst(params[2], &b) && b == 0) {
+    return (std::string)params[1];
+  }
+
+  else {
+    params[0] = cfg->createTempVar();
+  }
+  
+  if (!opConst) {
+    cfg->current_bb->addIRInstr(IRInstr::Operation::binary_or, Type::INT, params);
+  }
+  else {
+    params[0] = cfg->createConstSymbol(a|b);
+  }
+  
+  return (std::string)params[0];
+
+ 
+}
+
 
 antlrcpp::Any IRVisitor::visitConst(ifccParser::ConstContext *ctx) {
 
