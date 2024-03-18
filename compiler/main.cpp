@@ -17,12 +17,12 @@ using namespace antlr4;
 using namespace std;
 
 
-
+static bool debug = false;
 
 int main(int argn, const char **argv)
 {
   stringstream in;
-  if (argn==2)
+  if (argn >= 2)
   {
      ifstream lecture(argv[1]);
      if( !lecture.good() )
@@ -31,6 +31,9 @@ int main(int argn, const char **argv)
          exit(1);
      }
      in << lecture.rdbuf();
+     if (argv[2] && string(argv[2]) == "--debug") {
+       debug = true;
+     }
   }
   else
   {
@@ -68,7 +71,7 @@ int main(int argn, const char **argv)
 
   try {
     
-    CFG cfg(tree);
+    CFG cfg(tree, debug);
     cfg.gen_asm(cout);
 
   } catch (int e) {

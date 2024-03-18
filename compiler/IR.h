@@ -91,7 +91,7 @@ private:
 class CFG {
 public:
   
-  CFG(DefFunction *ast);
+  CFG(DefFunction *ast, bool debug = false);
   ~CFG();
 	
   BasicBlock* addBasicBlock(const std::string &name);
@@ -116,6 +116,7 @@ public:
   // basic block management
   std::string newBBName();
   BasicBlock* current_bb;
+  bool debug;
 
 
   
