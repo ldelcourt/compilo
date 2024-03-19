@@ -219,8 +219,8 @@ void CmpEqInstr::gen_asm(std::ostream &o) const {
 
   o << " \tmovl " << bb->cfg->symbol_to_asm(x) << ", %eax\n";
   o << " \tcmpl " << bb->cfg->symbol_to_asm(y) << ", %eax\n";
-  o << " \tsete	  %al";
-  o << " \tmovzbl	%al, %eax";
+  o << " \tsete	  %al\n";
+  o << " \tmovzbl	%al, %eax\n";
   o << " \tmovl %eax, " << bb->cfg->symbol_to_asm(dest) << "\n";
 
 }
@@ -236,13 +236,13 @@ void CmpNeqInstr::gen_asm(std::ostream &o) const {
 
   o << " \tmovl " << bb->cfg->symbol_to_asm(x) << ", %eax\n";
   o << " \tcmpl " << bb->cfg->symbol_to_asm(y) << ", %eax\n";
-  o << " \tsetne	  %al";
-  o << " \tmovzbl	%al, %eax";
+  o << " \tsetne	  %al\n";
+  o << " \tmovzbl	%al, %eax\n";
   o << " \tmovl %eax, " << bb->cfg->symbol_to_asm(dest) << "\n";
 
 }
 
-CmpLtInstr::CmpEqInstr(BasicBlock *bb, Type t, const std::string &dest, const std::string &x, const std::string &y) :
+CmpLtInstr::CmpLtInstr(BasicBlock *bb, Type t, const std::string &dest, const std::string &x, const std::string &y) :
   IRInstr(bb, Operation::cmp_lt, t), dest(dest), x(x), y(y)
 {
   //std::cout << "sub : x=" << x << " y=" << y << " dest=" << dest << std::endl;
@@ -253,8 +253,8 @@ void CmpLtInstr::gen_asm(std::ostream &o) const {
 
   o << " \tmovl " << bb->cfg->symbol_to_asm(x) << ", %eax\n";
   o << " \tcmpl " << bb->cfg->symbol_to_asm(y) << ", %eax\n";
-  o << " \tsetl	  %al";
-  o << " \tmovzbl	%al, %eax";
+  o << " \tsetl	  %al\n";
+  o << " \tmovzbl	%al, %eax\n";
   o << " \tmovl %eax, " << bb->cfg->symbol_to_asm(dest) << "\n";
 
 }
@@ -270,8 +270,8 @@ void CmpGtInstr::gen_asm(std::ostream &o) const {
 
   o << " \tmovl " << bb->cfg->symbol_to_asm(x) << ", %eax\n";
   o << " \tcmpl " << bb->cfg->symbol_to_asm(y) << ", %eax\n";
-  o << " \tsetg	  %al";
-  o << " \tmovzbl	%al, %eax";
+  o << " \tsetg	  %al\n";
+  o << " \tmovzbl	%al, %eax\n";
   o << " \tmovl %eax, " << bb->cfg->symbol_to_asm(dest) << "\n";
 
 }
