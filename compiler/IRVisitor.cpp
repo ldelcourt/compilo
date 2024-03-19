@@ -3,13 +3,9 @@
 
 antlrcpp::Any IRVisitor::visitProg(ifccParser::ProgContext *ctx) 
 {
-  
-  for (ifccParser::Var_stmtContext* var_stmtContext : ctx->var_stmt()) {
-    this->visit( var_stmtContext );
-  }
 
+  this->visitChildren(ctx);
   cfg->current_bb = cfg->current_bb->exit_true;
-  this->visit( ctx->return_stmt() );
 
   return 0;
 }
@@ -575,3 +571,41 @@ antlrcpp::Any IRVisitor::visitVar(ifccParser::VarContext *ctx) {
 }
 
 
+antlrcpp::Any IRVisitor::visitIf_else_stmt(ifccParser::If_else_stmtContext *ctx) {
+
+  BasicBlock* thenBB = cfg->addBasicBlock(cfg->newBBName());
+  BasicBlock* elseBB = nullptr;
+  if(ctx->else_stmt() != nullptr) {
+    elseBB = cfg->addBasicBlock(cfg->newBBName());
+    cfg->current_bb->exit_false = elseBB;
+  }
+  BasicBlock* endBB = cfg->addBasicBlock(cfg->newBBName());
+
+  endBB->exit_true = cfg->current_bb->exit_true;
+  cfg->current_bb->exit_true = thenBB;
+  thenBB->exit_true = endBB;
+
+  if(ctx->else_stmt() != nullptr) {
+    elseBB->exit_true = endBB;
+  }
+  else {
+    cfg->current_bb->exit_false = endBB;
+  }
+
+  std::string param[1];
+  param[0] = (std::string)visit(ctx->expr());
+  cfg->current_bb->addIRInstr(IRInstr::Operation::ifelse, Type::INT, param);
+
+  cfg->current_bb = thenBB;
+  for(auto stmt : ctx->statement()) {
+    visit(stmt);
+  }
+  if(elseBB != nullptr) {
+    cfg->current_bb = elseBB;
+    visit(ctx->else_stmt());
+  }
+  cfg->current_bb = endBB;
+
+  return 0;
+  
+}

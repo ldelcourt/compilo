@@ -23,6 +23,7 @@ BasicBlock::~BasicBlock() {
 
 void BasicBlock::gen_asm(std::ostream &o) const {
 
+  o << label << ":\n";
 
   for (auto it = instrs.cbegin(); it != instrs.cend(); it++) {
 
@@ -37,7 +38,7 @@ void BasicBlock::gen_asm(std::ostream &o) const {
   }
 
   else if (exit_false == nullptr) {
-    //A faire
+    o << " \tjmp " << exit_true->label << "\n";
   }
   else {
 

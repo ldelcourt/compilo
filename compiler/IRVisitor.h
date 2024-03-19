@@ -48,6 +48,9 @@ public:
   virtual antlrcpp::Any visitConst(ifccParser::ConstContext *ctx) override;
   virtual antlrcpp::Any visitVar(ifccParser::VarContext *ctx) override;
 
+  //If Statement
+  virtual antlrcpp::Any visitIf_else_stmt(ifccParser::If_else_stmtContext *ctx) override;
+
   
 private:
 

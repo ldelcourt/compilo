@@ -55,7 +55,9 @@ IRInstr* IRInstr::createInstr(BasicBlock *bb, Operation op, Type t, std::string 
     return new CmpLtInstr(bb, t, params[0], params[1], params[2]);
 
   case cmp_gt:
-    return new CmpGtInstr(bb, t, params[0], params[1], params[2]);      
+    return new CmpGtInstr(bb, t, params[0], params[1], params[2]);    
+  case ifelse:
+    return new IfElseInstr(bb, t, params[0]);  
 
   }
 
@@ -245,8 +247,8 @@ void CmpEqInstr::gen_asm(std::ostream &o) const {
 
   o << " \tmovl " << bb->cfg->symbol_to_asm(x) << ", %eax\n";
   o << " \tcmpl " << bb->cfg->symbol_to_asm(y) << ", %eax\n";
-  o << " \tsete	  %al";
-  o << " \tmovzbl	%al, %eax";
+  o << " \tsete	  %al\n";
+  o << " \tmovzbl	%al, %eax\n";
   o << " \tmovl %eax, " << bb->cfg->symbol_to_asm(dest) << "\n";
 
 }
@@ -264,8 +266,8 @@ void CmpNeqInstr::gen_asm(std::ostream &o) const {
 
   o << " \tmovl " << bb->cfg->symbol_to_asm(x) << ", %eax\n";
   o << " \tcmpl " << bb->cfg->symbol_to_asm(y) << ", %eax\n";
-  o << " \tsetne	  %al";
-  o << " \tmovzbl	%al, %eax";
+  o << " \tsetne	  %al\n";
+  o << " \tmovzbl	%al, %eax\n";
   o << " \tmovl %eax, " << bb->cfg->symbol_to_asm(dest) << "\n";
 
 }
@@ -283,8 +285,8 @@ void CmpLtInstr::gen_asm(std::ostream &o) const {
 
   o << " \tmovl " << bb->cfg->symbol_to_asm(x) << ", %eax\n";
   o << " \tcmpl " << bb->cfg->symbol_to_asm(y) << ", %eax\n";
-  o << " \tsetl	  %al";
-  o << " \tmovzbl	%al, %eax";
+  o << " \tsetl	  %al\n";
+  o << " \tmovzbl	%al, %eax\n";
   o << " \tmovl %eax, " << bb->cfg->symbol_to_asm(dest) << "\n";
 
 }
@@ -302,8 +304,8 @@ void CmpGtInstr::gen_asm(std::ostream &o) const {
 
   o << " \tmovl " << bb->cfg->symbol_to_asm(x) << ", %eax\n";
   o << " \tcmpl " << bb->cfg->symbol_to_asm(y) << ", %eax\n";
-  o << " \tsetg	  %al";
-  o << " \tmovzbl	%al, %eax";
+  o << " \tsetg	  %al\n";
+  o << " \tmovzbl	%al, %eax\n";
   o << " \tmovl %eax, " << bb->cfg->symbol_to_asm(dest) << "\n";
 
 }
@@ -320,9 +322,9 @@ BinaryAndInstr::BinaryAndInstr(BasicBlock *bb, Type t, const std::string &dest, 
 
 void BinaryAndInstr::gen_asm(std::ostream &o) const {
 
-  std::cout << " \tmovl " << bb->cfg->symbol_to_asm(x) << ", %eax\n";
-  std::cout << " \tandl " << bb->cfg->symbol_to_asm(y) << ", %eax\n";
-  std::cout << " \tmovl %eax, " << bb->cfg->symbol_to_asm(dest) << "\n";
+  o << " \tmovl " << bb->cfg->symbol_to_asm(x) << ", %eax\n";
+  o << " \tandl " << bb->cfg->symbol_to_asm(y) << ", %eax\n";
+  o << " \tmovl %eax, " << bb->cfg->symbol_to_asm(dest) << "\n";
   
 }
 
@@ -339,9 +341,9 @@ BinaryXorInstr::BinaryXorInstr(BasicBlock *bb, Type t, const std::string &dest, 
 
 void BinaryXorInstr::gen_asm(std::ostream &o) const {
 
-  std::cout << " \tmovl " << bb->cfg->symbol_to_asm(x) << ", %eax\n";
-  std::cout << " \txorl " << bb->cfg->symbol_to_asm(y) << ", %eax\n";
-  std::cout << " \tmovl %eax, " << bb->cfg->symbol_to_asm(dest) << "\n";
+  o << " \tmovl " << bb->cfg->symbol_to_asm(x) << ", %eax\n";
+  o << " \txorl " << bb->cfg->symbol_to_asm(y) << ", %eax\n";
+  o << " \tmovl %eax, " << bb->cfg->symbol_to_asm(dest) << "\n";
   
 }
 
@@ -358,11 +360,27 @@ BinaryOrInstr::BinaryOrInstr(BasicBlock *bb, Type t, const std::string &dest, co
 
 void BinaryOrInstr::gen_asm(std::ostream &o) const {
 
-  std::cout << " \tmovl " << bb->cfg->symbol_to_asm(x) << ", %eax\n";
-  std::cout << " \torl " << bb->cfg->symbol_to_asm(y) << ", %eax\n";
-  std::cout << " \tmovl %eax, " << bb->cfg->symbol_to_asm(dest) << "\n";
+  o << " \tmovl " << bb->cfg->symbol_to_asm(x) << ", %eax\n";
+  o << " \torl " << bb->cfg->symbol_to_asm(y) << ", %eax\n";
+  o << " \tmovl %eax, " << bb->cfg->symbol_to_asm(dest) << "\n";
   
 }
 
+IfElseInstr::IfElseInstr(BasicBlock *bb, Type t, const std::string &cond) :
+  IRInstr(bb, Operation::neg, t), cond(cond)
+{
+  if(bb->cfg->debug){
+    std::cout << "IfElse : cond=" << cond << " ifTrue=" << bb->exit_true->label << " ifFalse=" << bb->exit_false->label << std::endl;
+  }
+
+}
+
+void IfElseInstr::gen_asm(std::ostream &o) const {
+
+  o << " \tcmpl $0, " << bb->cfg->symbol_to_asm(cond) << "\n";
+  o << " \tje " << bb->exit_false->label << "\n";
+  o << " \tjmp " << bb->exit_true->label << "\n";
+  
+}
 
 

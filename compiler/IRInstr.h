@@ -29,16 +29,17 @@ public:
     div,
     mod,
     neg,
-    binary_and,
-    binary_xor,
-    binary_or,
-    rmem, //Arret ici dans l'implementation
-    wmem,
-    call, 
     cmp_eq,
     cmp_neq,
     cmp_lt,
     cmp_gt,
+    binary_and,
+    binary_xor,
+    binary_or,
+    ifelse,
+    rmem, //Arret ici dans l'implementation
+    wmem,
+    call, 
   } Operation;
 
 
@@ -290,6 +291,17 @@ private:
   std::string dest, x, y;
 
   
+};
+
+class IfElseInstr : public IRInstr {
+
+  public :
+    IfElseInstr (BasicBlock *bb, Type t, const std::string &cond);
+
+    virtual void gen_asm(std::ostream &o) const;
+
+  private: 
+    std::string cond;
 };
 
 
