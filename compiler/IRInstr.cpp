@@ -61,7 +61,10 @@ IRInstr* IRInstr::createInstr(BasicBlock *bb, Operation op, Type t, std::string 
     return new IfElseInstr(bb, t, params[0]);
 
   case while_:
-    return new WhileInstr(bb, t, params[0]);    
+    return new WhileInstr(bb, t, params[0]);
+
+  case jmp:
+    return new JmpInstr(bb, t, params[0]);   
 
   }
 
@@ -401,6 +404,21 @@ void WhileInstr::gen_asm(std::ostream &o) const {
   o << " \tcmpl $0, " << bb->cfg->symbol_to_asm(cond) << "\n";
   o << " \tje " << bb->exit_false->label << "\n";
   o << " \tjmp " << bb->exit_true->label << "\n";
+  
+}
+
+JmpInstr::JmpInstr(BasicBlock *bb, Type t, const std::string &dest) :
+  IRInstr(bb, Operation::jmp, t), dest(dest)
+{
+  if(bb->cfg->debug){
+    std::cout << "Jmp : dest=" << dest << std::endl;
+  }
+
+}
+
+void JmpInstr::gen_asm(std::ostream &o) const {
+
+  o << " \tjmp " << dest << "\n";
   
 }
 

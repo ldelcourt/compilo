@@ -20,6 +20,11 @@ antlrcpp::Any IRVisitor::visitReturnConst(ifccParser::ReturnConstContext *ctx)
   
   cfg->current_bb->addIRInstr(IRInstr::Operation::ldconst, Type::INT, params);
 
+
+  params[0] = "output";
+  cfg->current_bb->addIRInstr(IRInstr::Operation::jmp, Type::INT, params);
+
+
   return 0;
 }
 
@@ -31,6 +36,10 @@ antlrcpp::Any IRVisitor::visitReturnVar(ifccParser::ReturnVarContext *ctx) {
   params[1] = ctx->VAR()->getText();
   
   cfg->current_bb->addIRInstr(IRInstr::Operation::copy, Type::INT, params);
+
+  params[0] = "output";
+  cfg->current_bb->addIRInstr(IRInstr::Operation::jmp, Type::INT, params);
+
 
   return 0;
 
@@ -44,6 +53,10 @@ antlrcpp::Any IRVisitor::visitReturnExpr(ifccParser::ReturnExprContext *ctx) {
   params[1] = (std::string)visit(ctx->expr());
   
   cfg->current_bb->addIRInstr(IRInstr::Operation::copy, Type::INT, params);
+
+  params[0] = "output";
+  cfg->current_bb->addIRInstr(IRInstr::Operation::jmp, Type::INT, params);
+
 
   
   return 0;

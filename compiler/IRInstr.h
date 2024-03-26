@@ -38,6 +38,7 @@ public:
     binary_or,
     ifelse,
     while_,
+    jmp,
     rmem, //Arret ici dans l'implementation
     wmem,
     call, 
@@ -314,6 +315,17 @@ class WhileInstr : public IRInstr {
 
   private: 
     std::string cond;
+};
+
+class JmpInstr : public IRInstr {
+
+  public :
+    JmpInstr (BasicBlock *bb, Type t, const std::string &dest);
+
+    virtual void gen_asm(std::ostream &o) const;
+
+  private: 
+    std::string dest;
 };
 
 
