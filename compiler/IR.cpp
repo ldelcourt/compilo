@@ -47,7 +47,7 @@ void BasicBlock::gen_asm(std::ostream &o) const {
 
 }
 
-void BasicBlock::addIRInstr(IRInstr::Operation o, Type t, const std::string *params, int nb = 0) {
+void BasicBlock::addIRInstr(IRInstr::Operation o, Type t, const std::string *params, int nb) {
 
   instrs.push_back( IRInstr::createInstr(this, o, t, params, nb) );
 

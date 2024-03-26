@@ -233,17 +233,12 @@ antlrcpp::Any VarVisitor::visitVarInitConst(ifccParser::VarInitConstContext *ctx
 
 
     //verif var1 pas existante
-    if (i == 0 && res.first) {
+    if (res.first) {
 
       std::cerr << "error : " << printPosSymbol(ctx->VAR(i)) << res.second << " already declared" << std::endl;
       error = true;
 
     }
-    else if (! res.first && i != 0) {
-      std::cerr << "error : " << printPosSymbol(ctx->VAR(i)) << res.second << " was never declared" << std::endl;
-      error = true;
-    }
-
 
     table->giveIndex(res.second);
     used[res.second] = false;

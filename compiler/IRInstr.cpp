@@ -438,9 +438,9 @@ CallInstr::CallInstr(BasicBlock *bb, Type t, const std::string *params, int nb) 
   for (int i = 0; i < nb; i++) {
     this->params[i] = params[i];
   }
-  
-  //std::cout << "copy : var=" << var << " dest=" << dest << std::endl;
-
+  if(bb->cfg->debug){
+    std::cout << "call : func=" << params[0] << std::endl;
+  }
 }
 
 
