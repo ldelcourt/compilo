@@ -38,6 +38,27 @@ IRInstr* IRInstr::createInstr(BasicBlock *bb, Operation op, Type t, const std::s
 
   case call:
     return new CallInstr(bb, t, params, nb);
+    
+  case binary_and:
+    return new BinaryAndInstr(bb, t, params[0], params[1], params[2]);
+
+  case binary_xor:
+    return new BinaryXorInstr(bb, t, params[0], params[1], params[2]);
+
+  case binary_or:
+    return new BinaryOrInstr(bb, t, params[0], params[1], params[2]);
+  
+  case cmp_eq:
+    return new CmpEqInstr(bb, t, params[0], params[1], params[2]);
+
+  case cmp_neq:
+    return new CmpNeqInstr(bb, t, params[0], params[1], params[2]);
+
+  case cmp_lt:
+    return new CmpLtInstr(bb, t, params[0], params[1], params[2]);
+
+  case cmp_gt:
+    return new CmpGtInstr(bb, t, params[0], params[1], params[2]);      
 
   }
 
@@ -49,8 +70,9 @@ IRInstr* IRInstr::createInstr(BasicBlock *bb, Operation op, Type t, const std::s
 AddInstr::AddInstr(BasicBlock *bb, Type t, const std::string &dest, const std::string &x, const std::string &y) :
   IRInstr(bb, Operation::add, t), dest(dest), x(x), y(y)
 {
-
-  //std::cout << "add : x=" << x << " y=" << y << " dest=" << dest << std::endl;
+  if(bb->cfg->debug){
+    std::cout << "add : x=" << x << " y=" << y << " dest=" << dest << std::endl;
+  }
 }
 
 
@@ -67,7 +89,9 @@ void AddInstr::gen_asm(std::ostream &o) const {
 SubInstr::SubInstr(BasicBlock *bb, Type t, const std::string &dest, const std::string &x, const std::string &y) :
   IRInstr(bb, Operation::sub, t), dest(dest), x(x), y(y)
 {
-  //std::cout << "sub : x=" << x << " y=" << y << " dest=" << dest << std::endl;
+  if(bb->cfg->debug){
+    std::cout << "sub : x=" << x << " y=" << y << " dest=" << dest << std::endl;
+  }
 }
 
 
@@ -82,7 +106,9 @@ void SubInstr::gen_asm(std::ostream &o) const {
 MulInstr::MulInstr(BasicBlock *bb, Type t, const std::string &dest, const std::string &x, const std::string &y) :
   IRInstr(bb, Operation::mul, t), dest(dest), x(x), y(y)
 {
-  //std::cout << "mul : x=" << x << " y=" << y << " dest=" << dest << std::endl;
+  if(bb->cfg->debug){
+    std::cout << "mul : x=" << x << " y=" << y << " dest=" << dest << std::endl;
+  }
 }
 
 
@@ -98,7 +124,9 @@ void MulInstr::gen_asm(std::ostream &o) const {
 DivInstr::DivInstr(BasicBlock *bb, Type t, const std::string &dest, const std::string &x, const std::string &y) :
   IRInstr(bb, Operation::div, t), dest(dest), x(x), y(y)
 {
-  //std::cout << "div : x=" << x << " y=" << y << " dest=" << dest << std::endl;
+  if(bb->cfg->debug){
+    std::cout << "div : x=" << x << " y=" << y << " dest=" << dest << std::endl;
+  }
 }
 
 
@@ -122,7 +150,9 @@ void DivInstr::gen_asm(std::ostream &o) const {
 ModInstr::ModInstr(BasicBlock *bb, Type t, const std::string &dest, const std::string &x, const std::string &y) :
   IRInstr(bb, Operation::mod, t), dest(dest), x(x), y(y)
 {
-  //std::cout << "mod : x=" << x << " y=" << y << " dest=" << dest << std::endl;
+  if(bb->cfg->debug){
+    std::cout << "mod : x=" << x << " y=" << y << " dest=" << dest << std::endl;
+  }
 }
 
 
@@ -150,7 +180,9 @@ LdconstInstr::LdconstInstr(BasicBlock *bb, Type t, const std::string &dest, cons
   IRInstr(bb, Operation::ldconst, t), dest(dest), val(val)
 {
 
-  //std::cout << "ldconst : val=" << val << " dest=" << dest << std::endl;
+  if(bb->cfg->debug){
+    std::cout << "ldconst : val=" << val << " dest=" << dest << std::endl;
+  }
   
 }
 
@@ -166,7 +198,9 @@ CopyInstr::CopyInstr(BasicBlock *bb, Type t, const std::string &dest, const std:
   IRInstr(bb, Operation::copy, t), dest(dest), var(var)
 {
 
-  //std::cout << "copy : var=" << var << " dest=" << dest << std::endl;
+  if(bb->cfg->debug){
+    std::cout << "copy : var=" << var << " dest=" << dest << std::endl;
+  }
 
 }
 
@@ -186,7 +220,9 @@ NegInstr::NegInstr(BasicBlock *bb, Type t, const std::string &dest, const std::s
   IRInstr(bb, Operation::neg, t), dest(dest), var(var)
 {
 
-  //std::cout << "copy : var=" << var << " dest=" << dest << std::endl;
+  if(bb->cfg->debug){
+    std::cout << "copy : var=" << var << " dest=" << dest << std::endl;
+  }
 
 }
 
@@ -196,6 +232,138 @@ void NegInstr::gen_asm(std::ostream &o) const {
   o << " \tmovl " << bb->cfg->symbol_to_asm(var) << ", %eax\n";
   o << " \tnegl %eax\n";
   o << " \tmovl %eax, " << bb->cfg->symbol_to_asm(dest) << "\n";
+  
+}
+
+CmpEqInstr::CmpEqInstr(BasicBlock *bb, Type t, const std::string &dest, const std::string &x, const std::string &y) :
+  IRInstr(bb, Operation::cmp_eq, t), dest(dest), x(x), y(y)
+{
+  if(bb->cfg->debug){
+    std::cout << "CmpEq : x=" << x << " y=" << y << " dest=" << dest << std::endl;
+  }
+}
+
+
+void CmpEqInstr::gen_asm(std::ostream &o) const {
+
+  o << " \tmovl " << bb->cfg->symbol_to_asm(x) << ", %eax\n";
+  o << " \tcmpl " << bb->cfg->symbol_to_asm(y) << ", %eax\n";
+  o << " \tsete	  %al";
+  o << " \tmovzbl	%al, %eax";
+  o << " \tmovl %eax, " << bb->cfg->symbol_to_asm(dest) << "\n";
+
+}
+
+CmpNeqInstr::CmpNeqInstr(BasicBlock *bb, Type t, const std::string &dest, const std::string &x, const std::string &y) :
+  IRInstr(bb, Operation::cmp_neq, t), dest(dest), x(x), y(y)
+{
+  if(bb->cfg->debug){
+    std::cout << "CmpNeq : x=" << x << " y=" << y << " dest=" << dest << std::endl;
+  }
+}
+
+
+void CmpNeqInstr::gen_asm(std::ostream &o) const {
+
+  o << " \tmovl " << bb->cfg->symbol_to_asm(x) << ", %eax\n";
+  o << " \tcmpl " << bb->cfg->symbol_to_asm(y) << ", %eax\n";
+  o << " \tsetne	  %al";
+  o << " \tmovzbl	%al, %eax";
+  o << " \tmovl %eax, " << bb->cfg->symbol_to_asm(dest) << "\n";
+
+}
+
+CmpLtInstr::CmpLtInstr(BasicBlock *bb, Type t, const std::string &dest, const std::string &x, const std::string &y) :
+  IRInstr(bb, Operation::cmp_lt, t), dest(dest), x(x), y(y)
+{
+  if(bb->cfg->debug){
+    std::cout << "CmpLt : x=" << x << " y=" << y << " dest=" << dest << std::endl;
+  }
+}
+
+
+void CmpLtInstr::gen_asm(std::ostream &o) const {
+
+  o << " \tmovl " << bb->cfg->symbol_to_asm(x) << ", %eax\n";
+  o << " \tcmpl " << bb->cfg->symbol_to_asm(y) << ", %eax\n";
+  o << " \tsetl	  %al";
+  o << " \tmovzbl	%al, %eax";
+  o << " \tmovl %eax, " << bb->cfg->symbol_to_asm(dest) << "\n";
+
+}
+
+CmpGtInstr::CmpGtInstr(BasicBlock *bb, Type t, const std::string &dest, const std::string &x, const std::string &y) :
+  IRInstr(bb, Operation::cmp_gt, t), dest(dest), x(x), y(y)
+{
+  if(bb->cfg->debug){
+    std::cout << "CmpGt : x=" << x << " y=" << y << " dest=" << dest << std::endl;
+  }
+}
+
+
+void CmpGtInstr::gen_asm(std::ostream &o) const {
+
+  o << " \tmovl " << bb->cfg->symbol_to_asm(x) << ", %eax\n";
+  o << " \tcmpl " << bb->cfg->symbol_to_asm(y) << ", %eax\n";
+  o << " \tsetg	  %al";
+  o << " \tmovzbl	%al, %eax";
+  o << " \tmovl %eax, " << bb->cfg->symbol_to_asm(dest) << "\n";
+
+}
+BinaryAndInstr::BinaryAndInstr(BasicBlock *bb, Type t, const std::string &dest, const std::string &x, const std::string &y) :
+  IRInstr(bb, Operation::neg, t), dest(dest), x(x), y(y)
+{
+
+  if(bb->cfg->debug){
+    std::cout << "BinaryAnd : x=" << x << " y=" << y << " dest=" << dest << std::endl;
+  }
+
+}
+
+
+void BinaryAndInstr::gen_asm(std::ostream &o) const {
+
+  std::cout << " \tmovl " << bb->cfg->symbol_to_asm(x) << ", %eax\n";
+  std::cout << " \tandl " << bb->cfg->symbol_to_asm(y) << ", %eax\n";
+  std::cout << " \tmovl %eax, " << bb->cfg->symbol_to_asm(dest) << "\n";
+  
+}
+
+BinaryXorInstr::BinaryXorInstr(BasicBlock *bb, Type t, const std::string &dest, const std::string &x, const std::string &y) :
+  IRInstr(bb, Operation::neg, t), dest(dest), x(x), y(y)
+{
+
+  if(bb->cfg->debug){
+    std::cout << "BinaryXor : x=" << x << " y=" << y << " dest=" << dest << std::endl;
+  }
+
+}
+
+
+void BinaryXorInstr::gen_asm(std::ostream &o) const {
+
+  std::cout << " \tmovl " << bb->cfg->symbol_to_asm(x) << ", %eax\n";
+  std::cout << " \txorl " << bb->cfg->symbol_to_asm(y) << ", %eax\n";
+  std::cout << " \tmovl %eax, " << bb->cfg->symbol_to_asm(dest) << "\n";
+  
+}
+
+BinaryOrInstr::BinaryOrInstr(BasicBlock *bb, Type t, const std::string &dest, const std::string &x, const std::string &y) :
+  IRInstr(bb, Operation::neg, t), dest(dest), x(x), y(y)
+{
+
+  if(bb->cfg->debug){
+    std::cout << "BinaryOr : x=" << x << " y=" << y << " dest=" << dest << std::endl;
+  }
+
+}
+
+
+void BinaryOrInstr::gen_asm(std::ostream &o) const {
+
+  std::cout << " \tmovl " << bb->cfg->symbol_to_asm(x) << ", %eax\n";
+  std::cout << " \torl " << bb->cfg->symbol_to_asm(y) << ", %eax\n";
+  std::cout << " \tmovl %eax, " << bb->cfg->symbol_to_asm(dest) << "\n";
   
 }
 

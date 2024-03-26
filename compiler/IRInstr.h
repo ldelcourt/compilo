@@ -30,11 +30,15 @@ public:
     mod,
     neg,
     call,
+    binary_and,
+    binary_xor,
+    binary_or,
     rmem, //Arret ici dans l'implementation
     wmem,
     cmp_eq,
+    cmp_neq,
     cmp_lt,
-    cmp_le
+    cmp_gt,
   } Operation;
 
 
@@ -208,6 +212,107 @@ private:
   
   static const std::string regParams[6];
 
+};
+
+class CmpEqInstr : public IRInstr {
+
+public:
+
+  CmpEqInstr (BasicBlock *bb, Type t, const std::string &dest, const std::string &x, const std::string &y);
+
+  virtual void gen_asm(std::ostream &o) const;
+
+
+private:
+  std::string dest, x, y;
+  
+};
+
+class CmpNeqInstr : public IRInstr {
+
+public:
+
+  CmpNeqInstr (BasicBlock *bb, Type t, const std::string &dest, const std::string &x, const std::string &y);
+
+  virtual void gen_asm(std::ostream &o) const;
+
+
+private:
+  std::string dest, x, y;
+  
+};
+
+class CmpLtInstr : public IRInstr {
+
+public:
+
+  CmpLtInstr (BasicBlock *bb, Type t, const std::string &dest, const std::string &x, const std::string &y);
+
+  virtual void gen_asm(std::ostream &o) const;
+
+
+private:
+  std::string dest, x, y;
+  
+};
+
+class CmpGtInstr : public IRInstr {
+
+public:
+
+  CmpGtInstr (BasicBlock *bb, Type t, const std::string &dest, const std::string &x, const std::string &y);
+
+  virtual void gen_asm(std::ostream &o) const;
+
+
+private:
+  std::string dest, x, y;
+  
+};
+
+class BinaryAndInstr : public IRInstr {
+
+public:
+
+  BinaryAndInstr (BasicBlock *bb, Type t, const std::string &dest, const std::string &x, const std::string &y);
+
+  virtual void gen_asm(std::ostream &o) const;
+
+private:
+
+  std::string dest, x, y;
+
+  
+};
+
+class BinaryXorInstr : public IRInstr {
+
+public:
+
+  BinaryXorInstr (BasicBlock *bb, Type t, const std::string &dest, const std::string &x, const std::string &y);
+
+  virtual void gen_asm(std::ostream &o) const;
+
+private:
+
+  std::string dest, x, y;
+
+  
+};
+
+class BinaryOrInstr : public IRInstr {
+
+public:
+
+  BinaryOrInstr (BasicBlock *bb, Type t, const std::string &dest, const std::string &x, const std::string &y);
+
+  virtual void gen_asm(std::ostream &o) const;
+
+private:
+
+  std::string dest, x, y;
+
+  
 };
 
 

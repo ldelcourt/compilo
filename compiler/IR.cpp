@@ -56,7 +56,7 @@ void BasicBlock::addIRInstr(IRInstr::Operation o, Type t, const std::string *par
       
 
 
-CFG::CFG(DefFunction *ast) : ast(ast),  nextBBnumber(0)
+CFG::CFG(DefFunction *ast, bool debug) : ast(ast),  nextBBnumber(0), debug(debug)
 {
 
 

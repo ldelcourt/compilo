@@ -21,7 +21,7 @@ OBJECTS=build/ifccBaseVisitor.o \
 	build/VarVisitor.o \
 	build/IR.o \
 	build/IRInstr.o \
-	build/IRVisitor.o
+	build/IRVisitor.o \
 
 ifcc: $(OBJECTS)
 	@mkdir -p build
