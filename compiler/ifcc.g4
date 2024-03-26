@@ -6,6 +6,7 @@ prog : 'int' 'main' '(' ')' '{' (statement)* '}' ;
 
 statement: var_stmt
     | if_else_stmt
+    | while_stmt
     | return_stmt
     ;
 
@@ -22,6 +23,8 @@ var_stmt: affectation_var
 
 if_else_stmt: 'if' '(' expr ')' '{' (statement)* '}' (else_stmt)? ;
 else_stmt: 'else' '{' (statement)* '}' ;
+
+while_stmt: 'while' '(' expr ')' '{' (statement)* '}' ;
 
 
 affectation_var: VAR '=' VAR ('=' VAR)* ('=' CONST | '=' expr)? ';' #varToVar

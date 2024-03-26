@@ -575,10 +575,13 @@ antlrcpp::Any IRVisitor::visitIf_else_stmt(ifccParser::If_else_stmtContext *ctx)
 
   BasicBlock* thenBB = cfg->addBasicBlock(cfg->newBBName());
   BasicBlock* elseBB = nullptr;
+
   if(ctx->else_stmt() != nullptr) {
     elseBB = cfg->addBasicBlock(cfg->newBBName());
     cfg->current_bb->exit_false = elseBB;
-  }
+  } 
+
+  
   BasicBlock* endBB = cfg->addBasicBlock(cfg->newBBName());
 
   endBB->exit_true = cfg->current_bb->exit_true;
@@ -587,10 +590,10 @@ antlrcpp::Any IRVisitor::visitIf_else_stmt(ifccParser::If_else_stmtContext *ctx)
 
   if(ctx->else_stmt() != nullptr) {
     elseBB->exit_true = endBB;
-  }
-  else {
+  }else {
     cfg->current_bb->exit_false = endBB;
   }
+
 
   std::string param[1];
   param[0] = (std::string)visit(ctx->expr());
@@ -604,6 +607,34 @@ antlrcpp::Any IRVisitor::visitIf_else_stmt(ifccParser::If_else_stmtContext *ctx)
     cfg->current_bb = elseBB;
     visit(ctx->else_stmt());
   }
+  cfg->current_bb = endBB;
+
+  return 0;
+  
+}
+
+antlrcpp::Any IRVisitor::visitWhile_stmt(ifccParser::While_stmtContext *ctx) {
+
+  BasicBlock* testBB = cfg->addBasicBlock(cfg->newBBName());
+  BasicBlock* whileBB = cfg->addBasicBlock(cfg->newBBName());
+  BasicBlock* endBB = cfg->addBasicBlock(cfg->newBBName());
+  endBB->exit_true = cfg->current_bb->exit_true;
+  cfg->current_bb->exit_true = testBB;
+  testBB->exit_false = endBB;
+  
+  testBB->exit_true = whileBB;
+  whileBB->exit_true = testBB;
+
+  cfg->current_bb = testBB;
+  std::string param[1];
+  param[0] = (std::string)visit(ctx->expr());
+  cfg->current_bb->addIRInstr(IRInstr::Operation::while_, Type::INT, param);
+
+  cfg->current_bb = whileBB;
+  for(auto stmt : ctx->statement()) {
+    visit(stmt);
+  }
+
   cfg->current_bb = endBB;
 
   return 0;

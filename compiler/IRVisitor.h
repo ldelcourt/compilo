@@ -51,6 +51,9 @@ public:
   //If Statement
   virtual antlrcpp::Any visitIf_else_stmt(ifccParser::If_else_stmtContext *ctx) override;
 
+  //While Statement
+  virtual antlrcpp::Any visitWhile_stmt(ifccParser::While_stmtContext *ctx) override;
+
   
 private:
 

@@ -72,7 +72,7 @@ CFG::CFG(DefFunction *ast, bool debug) : ast(ast),  nextBBnumber(0), debug(debug
   
 
   //creation du squelette de block
-  current_bb  = addBasicBlock("main");
+  current_bb  = addBasicBlock("principal");
 
   current_bb->exit_true = addBasicBlock(newBBName());
   current_bb = current_bb->exit_true;
@@ -108,7 +108,7 @@ BasicBlock* CFG::addBasicBlock(const std::string &name) {
 void CFG::gen_asm(std::ostream &o) const {
 
   o<< ".globl main\n" ;
-  o<< " main: \n" ;
+  o<< "main: \n" ;
 
   gen_asm_prologue(o);
   

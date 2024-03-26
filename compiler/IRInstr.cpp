@@ -55,9 +55,13 @@ IRInstr* IRInstr::createInstr(BasicBlock *bb, Operation op, Type t, std::string 
     return new CmpLtInstr(bb, t, params[0], params[1], params[2]);
 
   case cmp_gt:
-    return new CmpGtInstr(bb, t, params[0], params[1], params[2]);    
+    return new CmpGtInstr(bb, t, params[0], params[1], params[2]); 
+
   case ifelse:
-    return new IfElseInstr(bb, t, params[0]);  
+    return new IfElseInstr(bb, t, params[0]);
+
+  case while_:
+    return new WhileInstr(bb, t, params[0]);    
 
   }
 
@@ -310,7 +314,7 @@ void CmpGtInstr::gen_asm(std::ostream &o) const {
 
 }
 BinaryAndInstr::BinaryAndInstr(BasicBlock *bb, Type t, const std::string &dest, const std::string &x, const std::string &y) :
-  IRInstr(bb, Operation::neg, t), dest(dest), x(x), y(y)
+  IRInstr(bb, Operation::binary_and, t), dest(dest), x(x), y(y)
 {
 
   if(bb->cfg->debug){
@@ -329,7 +333,7 @@ void BinaryAndInstr::gen_asm(std::ostream &o) const {
 }
 
 BinaryXorInstr::BinaryXorInstr(BasicBlock *bb, Type t, const std::string &dest, const std::string &x, const std::string &y) :
-  IRInstr(bb, Operation::neg, t), dest(dest), x(x), y(y)
+  IRInstr(bb, Operation::binary_xor, t), dest(dest), x(x), y(y)
 {
 
   if(bb->cfg->debug){
@@ -348,7 +352,7 @@ void BinaryXorInstr::gen_asm(std::ostream &o) const {
 }
 
 BinaryOrInstr::BinaryOrInstr(BasicBlock *bb, Type t, const std::string &dest, const std::string &x, const std::string &y) :
-  IRInstr(bb, Operation::neg, t), dest(dest), x(x), y(y)
+  IRInstr(bb, Operation::binary_or, t), dest(dest), x(x), y(y)
 {
 
   if(bb->cfg->debug){
@@ -367,7 +371,7 @@ void BinaryOrInstr::gen_asm(std::ostream &o) const {
 }
 
 IfElseInstr::IfElseInstr(BasicBlock *bb, Type t, const std::string &cond) :
-  IRInstr(bb, Operation::neg, t), cond(cond)
+  IRInstr(bb, Operation::ifelse, t), cond(cond)
 {
   if(bb->cfg->debug){
     std::cout << "IfElse : cond=" << cond << " ifTrue=" << bb->exit_true->label << " ifFalse=" << bb->exit_false->label << std::endl;
@@ -376,6 +380,23 @@ IfElseInstr::IfElseInstr(BasicBlock *bb, Type t, const std::string &cond) :
 }
 
 void IfElseInstr::gen_asm(std::ostream &o) const {
+
+  o << " \tcmpl $0, " << bb->cfg->symbol_to_asm(cond) << "\n";
+  o << " \tje " << bb->exit_false->label << "\n";
+  o << " \tjmp " << bb->exit_true->label << "\n";
+  
+}
+
+WhileInstr::WhileInstr(BasicBlock *bb, Type t, const std::string &cond) :
+  IRInstr(bb, Operation::while_, t), cond(cond)
+{
+  if(bb->cfg->debug){
+    std::cout << "While : cond=" << cond << " whileTrue=" << bb->exit_true->label << " whileFalse=" << bb->exit_false->label << std::endl;
+  }
+
+}
+
+void WhileInstr::gen_asm(std::ostream &o) const {
 
   o << " \tcmpl $0, " << bb->cfg->symbol_to_asm(cond) << "\n";
   o << " \tje " << bb->exit_false->label << "\n";

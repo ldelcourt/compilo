@@ -37,6 +37,7 @@ public:
     binary_xor,
     binary_or,
     ifelse,
+    while_,
     rmem, //Arret ici dans l'implementation
     wmem,
     call, 
@@ -297,6 +298,17 @@ class IfElseInstr : public IRInstr {
 
   public :
     IfElseInstr (BasicBlock *bb, Type t, const std::string &cond);
+
+    virtual void gen_asm(std::ostream &o) const;
+
+  private: 
+    std::string cond;
+};
+
+class WhileInstr : public IRInstr {
+
+  public :
+    WhileInstr (BasicBlock *bb, Type t, const std::string &cond);
 
     virtual void gen_asm(std::ostream &o) const;
 
