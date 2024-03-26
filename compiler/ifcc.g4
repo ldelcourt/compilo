@@ -2,13 +2,17 @@ grammar ifcc;
 
 axiom : prog EOF ;
 
-prog : 'int' 'main' '(' ')' '{' instr_stmt* return_stmt '}' ;
+prog : 'int' 'main' '(' ')' block ;
 
+block: '{' (statement)* '}' ;
 
-instr_stmt: var_stmt
+statement: var_stmt
+    | if_else_stmt
+    | while_stmt
     | call_function
+    | return_stmt
+    | block
     ;
-
 
 return_stmt: RETURN CONST ';' #returnConst
     | RETURN VAR ';' #returnVar
@@ -20,6 +24,12 @@ var_stmt: affectation_var
     | declaration_var
     | initialisation_var
     ;
+
+if_else_stmt: 'if' '(' expr ')' block (else_stmt)? ;
+else_stmt: 'else' block ;
+
+while_stmt: 'while' '(' expr ')' '{' (statement)* '}' ;
+
 
 affectation_var: VAR '=' VAR ('=' VAR)* ('=' CONST | '=' expr)? ';' #varToVar
     | VAR '=' CONST  ';' #varToConst

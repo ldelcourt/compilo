@@ -30,15 +30,18 @@ public:
     mod,
     neg,
     call,
-    binary_and,
-    binary_xor,
-    binary_or,
-    rmem, //Arret ici dans l'implementation
-    wmem,
     cmp_eq,
     cmp_neq,
     cmp_lt,
     cmp_gt,
+    binary_and,
+    binary_xor,
+    binary_or,
+    ifelse,
+    while_,
+    jmp,
+    rmem, //Arret ici dans l'implementation
+    wmem,
   } Operation;
 
 
@@ -313,6 +316,39 @@ private:
   std::string dest, x, y;
 
   
+};
+
+class IfElseInstr : public IRInstr {
+
+  public :
+    IfElseInstr (BasicBlock *bb, Type t, const std::string &cond);
+
+    virtual void gen_asm(std::ostream &o) const;
+
+  private: 
+    std::string cond;
+};
+
+class WhileInstr : public IRInstr {
+
+  public :
+    WhileInstr (BasicBlock *bb, Type t, const std::string &cond);
+
+    virtual void gen_asm(std::ostream &o) const;
+
+  private: 
+    std::string cond;
+};
+
+class JmpInstr : public IRInstr {
+
+  public :
+    JmpInstr (BasicBlock *bb, Type t, const std::string &dest);
+
+    virtual void gen_asm(std::ostream &o) const;
+
+  private: 
+    std::string dest;
 };
 
 

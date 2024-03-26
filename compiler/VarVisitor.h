@@ -30,12 +30,14 @@ public:
   virtual antlrcpp::Any visitVarInitExpr(ifccParser::VarInitExprContext *ctx) override;
 
   virtual antlrcpp::Any visitVar(ifccParser::VarContext *ctx) override;
+  virtual antlrcpp::Any visitBlock(ifccParser::BlockContext *ctx) override;
 
   virtual antlrcpp::Any visitCall_function(ifccParser::Call_functionContext *ctx) override;
 
   bool hasError() const;
 
   void checkUnusedDecla();
+  std::pair<bool, std::string> checkVarInAllBlocks(std::string name);
   
 
 private:
@@ -43,6 +45,10 @@ private:
   SymbolTable *table;
   std::unordered_map<std::string, bool> used;
   bool error;
+  std::string currentBlock;
+  int blockCount = 0;
+  
+  
   
 };
 
