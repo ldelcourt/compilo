@@ -57,7 +57,7 @@ void BasicBlock::addIRInstr(IRInstr::Operation o, Type t, std::string *params ) 
       
 
 
-CFG::CFG(DefFunction *ast, bool debug) : ast(ast),  nextBBnumber(0), debug(debug)
+CFG::CFG(DefFunction *ast, bool debug, bool symbol) : ast(ast),  nextBBnumber(0), debug(debug), symbol(symbol)
 {
 
 
@@ -65,6 +65,9 @@ CFG::CFG(DefFunction *ast, bool debug) : ast(ast),  nextBBnumber(0), debug(debug
   VarVisitor varVisitor(&table);
   varVisitor.visit(ast);
   varVisitor.checkUnusedDecla();
+  if(symbol) {
+    table.printTable();
+  }
   
   if (varVisitor.hasError()) {
     throw 1;
@@ -181,6 +184,22 @@ bool CFG::symbolIsConst(const std::string &symbol, int *value) const {
     return false;
   }
   
+
+}
+
+std::string CFG::getRealVarname(const std::string &symbol) {
+
+  std::string varname = symbol;
+  size_t pos = 0;
+  while(pos != std::string::npos) {
+    if (table.contains(varname)) {
+      return varname;
+    }
+    pos = varname.find_last_of(":");
+    varname = varname.substr(0, pos);
+  }
+
+  return "err";
 
 }
 

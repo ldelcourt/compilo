@@ -18,6 +18,7 @@ public:
   IRVisitor(CFG *cfg) : ifccBaseVisitor(), cfg(cfg) {}
 
   virtual antlrcpp::Any visitProg(ifccParser::ProgContext *ctx) override ;
+  virtual antlrcpp::Any visitBlock(ifccParser::BlockContext *ctx) override;
 
   //Return 
   virtual antlrcpp::Any visitReturnConst(ifccParser::ReturnConstContext *ctx) override;
@@ -54,10 +55,13 @@ public:
   //While Statement
   virtual antlrcpp::Any visitWhile_stmt(ifccParser::While_stmtContext *ctx) override;
 
-  
+  //To get the name of the variable in SymbolTable 
+  std::string getVarName(std::string varname);
 private:
 
   CFG *cfg;
+  std::string currentBlock = "";
+  int numBlock = 0;
   
 };
 

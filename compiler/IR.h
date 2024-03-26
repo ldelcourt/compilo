@@ -91,7 +91,7 @@ private:
 class CFG {
 public:
   
-  CFG(DefFunction *ast, bool debug = false);
+  CFG(DefFunction *ast, bool debug = false, bool symbol = false);
   ~CFG();
 	
   BasicBlock* addBasicBlock(const std::string &name);
@@ -110,6 +110,7 @@ public:
   std::string createTempVar();
   std::string createConstSymbol(int v);
   bool symbolIsConst(const std::string &symbol, int *value = nullptr) const;
+  std::string getRealVarname(const std::string &symbol);
   
 
 
@@ -117,6 +118,7 @@ public:
   std::string newBBName();
   BasicBlock* current_bb;
   bool debug;
+  bool symbol;
 
 
   

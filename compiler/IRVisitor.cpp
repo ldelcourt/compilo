@@ -10,6 +10,19 @@ antlrcpp::Any IRVisitor::visitProg(ifccParser::ProgContext *ctx)
   return 0;
 }
 
+antlrcpp::Any IRVisitor::visitBlock(ifccParser::BlockContext *ctx) 
+{
+
+  numBlock++;
+  currentBlock = currentBlock + ":" + std::to_string(numBlock);
+  this->visitChildren(ctx);
+
+  size_t pos = currentBlock.find_last_of(":");
+  currentBlock = currentBlock.substr(0, pos);
+
+  return 0;
+}
+
 
 antlrcpp::Any IRVisitor::visitReturnConst(ifccParser::ReturnConstContext *ctx)
 {
@@ -33,7 +46,7 @@ antlrcpp::Any IRVisitor::visitReturnVar(ifccParser::ReturnVarContext *ctx) {
 
   std::string params[2];
   params[0] = "#reg_ret";
-  params[1] = ctx->VAR()->getText();
+  params[1] = cfg->getRealVarname(ctx->VAR()->getText() + currentBlock);
   
   cfg->current_bb->addIRInstr(IRInstr::Operation::copy, Type::INT, params);
 
@@ -72,7 +85,7 @@ antlrcpp::Any IRVisitor::visitVarToVar(ifccParser::VarToVarContext *ctx) {
   if (ctx->expr() != nullptr) {
 
     params[1]  = (std::string)visit(ctx->expr());
-    params[0] = ctx->VAR(ctx->VAR().size() - 1)->getText();
+    params[0] = cfg->getRealVarname(ctx->VAR(ctx->VAR().size() - 1)->getText() + currentBlock);
 
     cfg->current_bb->addIRInstr(IRInstr::Operation::copy, Type::INT, params);
 
@@ -81,7 +94,7 @@ antlrcpp::Any IRVisitor::visitVarToVar(ifccParser::VarToVarContext *ctx) {
   }
 
   else if (ctx->CONST() != nullptr) {
-    params[0] = ctx->VAR(ctx->VAR().size() - 1)->getText();
+    params[0] = cfg->getRealVarname(ctx->VAR(ctx->VAR().size() - 1)->getText() + currentBlock);
     params[1] = cfg->createConstSymbol(stoi(ctx->CONST()->getText()));
   
 
@@ -96,8 +109,8 @@ antlrcpp::Any IRVisitor::visitVarToVar(ifccParser::VarToVarContext *ctx) {
   for (int i = ctx->VAR().size()-1; i-1 >= 0; i--) {
 
 
-    params[0] = ctx->VAR(i-1)->getText();
-    params[1] = ctx->VAR(i)->getText();
+    params[0] = cfg->getRealVarname(ctx->VAR(i-1)->getText() + currentBlock);
+    params[1] = cfg->getRealVarname(ctx->VAR(i)->getText() + currentBlock);
   
   
     cfg->current_bb->addIRInstr(IRInstr::Operation::copy, Type::INT, params);
@@ -111,7 +124,7 @@ antlrcpp::Any IRVisitor::visitVarToVar(ifccParser::VarToVarContext *ctx) {
 antlrcpp::Any IRVisitor::visitVarToConst(ifccParser::VarToConstContext *ctx) {
 
   std::string params[2];
-  params[0] = ctx->VAR()->getText();
+  params[0] = cfg->getRealVarname(ctx->VAR()->getText() + currentBlock);
   params[1] = cfg->createConstSymbol(stoi(ctx->CONST()->getText()));
   
   
@@ -125,7 +138,7 @@ antlrcpp::Any IRVisitor::visitVarToConst(ifccParser::VarToConstContext *ctx) {
 antlrcpp::Any IRVisitor::visitVarToExpr(ifccParser::VarToExprContext *ctx) {
 
   std::string params[2];
-  params[0] = ctx->VAR()->getText();
+  params[0] = cfg->getRealVarname(ctx->VAR()->getText() + currentBlock);
   params[1] = (std::string)visit(ctx->expr());
 
   if (cfg->symbolIsConst(params[1])) {
@@ -147,8 +160,8 @@ antlrcpp::Any IRVisitor::visitVarInitVar(ifccParser::VarInitVarContext *ctx) {
 
     
     std::string params[2];
-    params[0] = ctx->VAR(i)->getText();
-    params[1] = ctx->VAR(i+1)->getText();
+    params[0] = ctx->VAR(i)->getText() + currentBlock;
+    params[1] = ctx->VAR(i+1)->getText()+ currentBlock;
   
   
     cfg->current_bb->addIRInstr(IRInstr::Operation::copy, Type::INT, params);
@@ -164,7 +177,7 @@ antlrcpp::Any IRVisitor::visitVarInitConst(ifccParser::VarInitConstContext *ctx)
   for (int i = 0; i < ctx->VAR().size(); i++) {
     
     std::string params[2];
-    params[0] = ctx->VAR(i)->getText();
+    params[0] = ctx->VAR(i)->getText() + currentBlock;
     params[1] = cfg->createConstSymbol(stoi(ctx->CONST(i)->getText()));
   
   
@@ -182,7 +195,7 @@ antlrcpp::Any IRVisitor::visitVarInitExpr(ifccParser::VarInitExprContext *ctx) {
   for (int i = 0; i < ctx->VAR().size(); i++) {
     
     std::string params[2];
-    params[0] = ctx->VAR(i)->getText();
+    params[0] = cfg->getRealVarname(ctx->VAR(i)->getText() + currentBlock);
     params[1] = (std::string)visit(ctx->expr(i));
   
   
@@ -579,7 +592,7 @@ antlrcpp::Any IRVisitor::visitConst(ifccParser::ConstContext *ctx) {
 
 antlrcpp::Any IRVisitor::visitVar(ifccParser::VarContext *ctx) {
 
-  return ctx->VAR()->getText();
+  return cfg->getRealVarname(ctx->VAR()->getText() + currentBlock);
   
 }
 
@@ -613,9 +626,7 @@ antlrcpp::Any IRVisitor::visitIf_else_stmt(ifccParser::If_else_stmtContext *ctx)
   cfg->current_bb->addIRInstr(IRInstr::Operation::ifelse, Type::INT, param);
 
   cfg->current_bb = thenBB;
-  for(auto stmt : ctx->statement()) {
-    visit(stmt);
-  }
+  visit(ctx->block());
   if(elseBB != nullptr) {
     cfg->current_bb = elseBB;
     visit(ctx->else_stmt());

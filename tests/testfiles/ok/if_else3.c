@@ -6,6 +6,7 @@ int main() {
     if(a < b) {
       v = 0;
     }
+    v = 2;
   }
   else {
     v = 3;

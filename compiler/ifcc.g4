@@ -2,12 +2,15 @@ grammar ifcc;
 
 axiom : prog EOF ;
 
-prog : 'int' 'main' '(' ')' '{' (statement)* '}' ;
+prog : 'int' 'main' '(' ')' block ;
+
+block: '{' (statement)* '}' ;
 
 statement: var_stmt
     | if_else_stmt
     | while_stmt
     | return_stmt
+    | block
     ;
 
 return_stmt: RETURN CONST ';' #returnConst
@@ -21,8 +24,8 @@ var_stmt: affectation_var
     | initialisation_var
     ;
 
-if_else_stmt: 'if' '(' expr ')' '{' (statement)* '}' (else_stmt)? ;
-else_stmt: 'else' '{' (statement)* '}' ;
+if_else_stmt: 'if' '(' expr ')' block (else_stmt)? ;
+else_stmt: 'else' block ;
 
 while_stmt: 'while' '(' expr ')' '{' (statement)* '}' ;
 
