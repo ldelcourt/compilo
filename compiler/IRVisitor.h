@@ -42,6 +42,10 @@ public:
   virtual antlrcpp::Any visitPlusmoins(ifccParser::PlusmoinsContext *ctx) override;
   virtual antlrcpp::Any visitConst(ifccParser::ConstContext *ctx) override;
   virtual antlrcpp::Any visitVar(ifccParser::VarContext *ctx) override;
+  virtual antlrcpp::Any visitFunction(ifccParser::FunctionContext *ctx) override;
+
+  //Appel à des fonctions
+  virtual antlrcpp::Any visitCall_function(ifccParser::Call_functionContext *ctx) override;
 
   
 private:

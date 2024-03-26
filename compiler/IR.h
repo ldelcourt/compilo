@@ -53,7 +53,7 @@ public:
   
   void gen_asm(std::ostream &o) const; /**< x86 assembly code generation for this basic block (very simple) */
 
-  void addIRInstr(IRInstr::Operation op, Type t, std::string *params);
+  void addIRInstr(IRInstr::Operation op, Type t, const std::string *params, int nb);
 
 
   // No encapsulation whatsoever here. Feel free to do better.

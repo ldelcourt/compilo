@@ -31,6 +31,8 @@ public:
 
   virtual antlrcpp::Any visitVar(ifccParser::VarContext *ctx) override;
 
+  virtual antlrcpp::Any visitCall_function(ifccParser::Call_functionContext *ctx) override;
+
   bool hasError() const;
 
   void checkUnusedDecla();

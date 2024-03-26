@@ -2,7 +2,13 @@ grammar ifcc;
 
 axiom : prog EOF ;
 
-prog : 'int' 'main' '(' ')' '{'(var_stmt)* return_stmt '}' ;
+prog : 'int' 'main' '(' ')' '{' instr_stmt* return_stmt '}' ;
+
+
+instr_stmt: var_stmt
+    | call_function
+    ;
+
 
 return_stmt: RETURN CONST ';' #returnConst
     | RETURN VAR ';' #returnVar
@@ -27,6 +33,7 @@ initialisation_var: 'int' VAR '=' VAR ( ',' VAR '=' VAR)* ';' #varInitVar
 
 
 expr: '(' expr ')' #par
+    | call_function #function
     | '-' expr #unaire
     | expr OP=('*' | '/' | '%') expr #multdivmod
     | expr OP=('+' | '-') expr #plusmoins
@@ -35,9 +42,15 @@ expr: '(' expr ')' #par
     ;
 
 
+call_function : FUNCTION_NAME '(' expr? (',' expr)* ')' (';')? ;
+
+
 RETURN : 'return' ;
-CONST : [0-9]+ ;
+FUNCTION_NAME :  'putchar'| 'getchar' ;
+CONST : [0-9]+ | '\'' (.? | '\\'.) '\'';
 COMMENT : '/*' .*? '*/' -> skip ;
 DIRECTIVE : '#' .*? '\n' -> skip ;
 WS    : [ \t\r\n] -> channel(HIDDEN);
-VAR : [a-zA-Z_][a-zA-Z0-9_]* ;
+KEYWORD : 'auto'|'break'|'case'|'char'|'const'|'continue'|'default'|'do'|'double'|'else'|'enum'|'extern'|'float'|'for'|'goto'|'if'|'int'|'long'|'register'|'return'|'short'|'signed'|'sizeof'|'static'|'struct'|'switch'|'typedef'|'union'|'unsigned'|'void'|'volatile'|'while' ;
+VAR : [a-zA-Z_][a-zA-Z0-9_]*;
+

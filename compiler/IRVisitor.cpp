@@ -1,11 +1,33 @@
 #include "IRVisitor.h"
 
 
+int constToInt(std::string chaine)	{
+  size_t debut_quote = chaine.find_first_of("'");	
+  size_t fin_quote = chaine.find_last_of("'");		
+   						
+  if (debut_quote != std::string::npos && fin_quote != std::string::npos) { 
+						
+    char caractere = chaine[debut_quote + 1];
+    if (caractere == '\\') {
+      caractere = chaine[debut_quote+2];
+    }
+    return static_cast<int>(caractere);		
+						
+  }						
+  else {						
+
+    return stoi(chaine);
+    
+  }
+
+}
+
+
 antlrcpp::Any IRVisitor::visitProg(ifccParser::ProgContext *ctx) 
 {
   
-  for (ifccParser::Var_stmtContext* var_stmtContext : ctx->var_stmt()) {
-    this->visit( var_stmtContext );
+  for (ifccParser::Instr_stmtContext* instr_stmtContext : ctx->instr_stmt()) {
+    this->visit( instr_stmtContext );
   }
 
   cfg->current_bb = cfg->current_bb->exit_true;
@@ -20,9 +42,11 @@ antlrcpp::Any IRVisitor::visitReturnConst(ifccParser::ReturnConstContext *ctx)
 
   std::string params[2];
   params[0] = "#reg_ret";
-  params[1] = cfg->createConstSymbol(stoi(ctx->CONST()->getText()));
+
+  params[1] = cfg->createConstSymbol(constToInt(ctx->CONST()->getText()));
+
   
-  cfg->current_bb->addIRInstr(IRInstr::Operation::ldconst, Type::INT, params);
+  cfg->current_bb->addIRInstr(IRInstr::Operation::ldconst, Type::INT, params, 3);
 
   return 0;
 }
@@ -34,7 +58,7 @@ antlrcpp::Any IRVisitor::visitReturnVar(ifccParser::ReturnVarContext *ctx) {
   params[0] = "#reg_ret";
   params[1] = ctx->VAR()->getText();
   
-  cfg->current_bb->addIRInstr(IRInstr::Operation::copy, Type::INT, params);
+  cfg->current_bb->addIRInstr(IRInstr::Operation::copy, Type::INT, params, 3);
 
   return 0;
 
@@ -47,7 +71,7 @@ antlrcpp::Any IRVisitor::visitReturnExpr(ifccParser::ReturnExprContext *ctx) {
   params[0] = "#reg_ret";
   params[1] = (std::string)visit(ctx->expr());
   
-  cfg->current_bb->addIRInstr(IRInstr::Operation::copy, Type::INT, params);
+  cfg->current_bb->addIRInstr(IRInstr::Operation::copy, Type::INT, params, 3);
 
   
   return 0;
@@ -65,7 +89,7 @@ antlrcpp::Any IRVisitor::visitVarToVar(ifccParser::VarToVarContext *ctx) {
     params[1]  = (std::string)visit(ctx->expr());
     params[0] = ctx->VAR(ctx->VAR().size() - 1)->getText();
 
-    cfg->current_bb->addIRInstr(IRInstr::Operation::copy, Type::INT, params);
+    cfg->current_bb->addIRInstr(IRInstr::Operation::copy, Type::INT, params, 3);
 
     delta++;
 
@@ -73,11 +97,11 @@ antlrcpp::Any IRVisitor::visitVarToVar(ifccParser::VarToVarContext *ctx) {
 
   else if (ctx->CONST() != nullptr) {
     params[0] = ctx->VAR(ctx->VAR().size() - 1)->getText();
-    params[1] = cfg->createConstSymbol(stoi(ctx->CONST()->getText()));
+    params[1] = cfg->createConstSymbol(constToInt(ctx->CONST()->getText()));
   
 
     
-    cfg->current_bb->addIRInstr(IRInstr::Operation::ldconst, Type::INT, params);
+    cfg->current_bb->addIRInstr(IRInstr::Operation::ldconst, Type::INT, params, 3);
 
     delta++;
 
@@ -91,7 +115,7 @@ antlrcpp::Any IRVisitor::visitVarToVar(ifccParser::VarToVarContext *ctx) {
     params[1] = ctx->VAR(i)->getText();
   
   
-    cfg->current_bb->addIRInstr(IRInstr::Operation::copy, Type::INT, params);
+    cfg->current_bb->addIRInstr(IRInstr::Operation::copy, Type::INT, params, 3);
 
   }
 
@@ -103,10 +127,10 @@ antlrcpp::Any IRVisitor::visitVarToConst(ifccParser::VarToConstContext *ctx) {
 
   std::string params[2];
   params[0] = ctx->VAR()->getText();
-  params[1] = cfg->createConstSymbol(stoi(ctx->CONST()->getText()));
+  params[1] = cfg->createConstSymbol(constToInt(ctx->CONST()->getText()));
   
   
-  cfg->current_bb->addIRInstr(IRInstr::Operation::ldconst, Type::INT, params);
+  cfg->current_bb->addIRInstr(IRInstr::Operation::ldconst, Type::INT, params, 3);
 
   return 0;
 
@@ -120,11 +144,11 @@ antlrcpp::Any IRVisitor::visitVarToExpr(ifccParser::VarToExprContext *ctx) {
   params[1] = (std::string)visit(ctx->expr());
 
   if (cfg->symbolIsConst(params[1])) {
-    cfg->current_bb->addIRInstr(IRInstr::Operation::ldconst, Type::INT, params);
+    cfg->current_bb->addIRInstr(IRInstr::Operation::ldconst, Type::INT, params, 2);
   }
 
   else {
-    cfg->current_bb->addIRInstr(IRInstr::Operation::copy, Type::INT, params);
+    cfg->current_bb->addIRInstr(IRInstr::Operation::copy, Type::INT, params, 2);
   }
   
 
@@ -142,7 +166,7 @@ antlrcpp::Any IRVisitor::visitVarInitVar(ifccParser::VarInitVarContext *ctx) {
     params[1] = ctx->VAR(i+1)->getText();
   
   
-    cfg->current_bb->addIRInstr(IRInstr::Operation::copy, Type::INT, params);
+    cfg->current_bb->addIRInstr(IRInstr::Operation::copy, Type::INT, params, 3);
   }
 
   return 0;
@@ -156,10 +180,10 @@ antlrcpp::Any IRVisitor::visitVarInitConst(ifccParser::VarInitConstContext *ctx)
     
     std::string params[2];
     params[0] = ctx->VAR(i)->getText();
-    params[1] = cfg->createConstSymbol(stoi(ctx->CONST(i)->getText()));
+    params[1] = cfg->createConstSymbol(constToInt(ctx->CONST(i)->getText()));
   
   
-    cfg->current_bb->addIRInstr(IRInstr::Operation::ldconst, Type::INT, params);
+    cfg->current_bb->addIRInstr(IRInstr::Operation::ldconst, Type::INT, params, 3);
 
   }
 
@@ -178,11 +202,11 @@ antlrcpp::Any IRVisitor::visitVarInitExpr(ifccParser::VarInitExprContext *ctx) {
   
   
     if (cfg->symbolIsConst(params[1])) {
-      cfg->current_bb->addIRInstr(IRInstr::Operation::ldconst, Type::INT, params);
+      cfg->current_bb->addIRInstr(IRInstr::Operation::ldconst, Type::INT, params, 2);
     }
 
     else {
-      cfg->current_bb->addIRInstr(IRInstr::Operation::copy, Type::INT, params);
+      cfg->current_bb->addIRInstr(IRInstr::Operation::copy, Type::INT, params, 2);
     }
 
   }
@@ -241,7 +265,7 @@ antlrcpp::Any IRVisitor::visitMultdivmod(ifccParser::MultdivmodContext *ctx) {
   if (ctx->OP->getText() == "*") {
 
     if (!opConst) {
-      cfg->current_bb->addIRInstr(IRInstr::Operation::mul, Type::INT, params);
+      cfg->current_bb->addIRInstr(IRInstr::Operation::mul, Type::INT, params, 3);
     }
     else {
       params[0] = cfg->createConstSymbol(a*b);
@@ -250,7 +274,7 @@ antlrcpp::Any IRVisitor::visitMultdivmod(ifccParser::MultdivmodContext *ctx) {
 
   else if (ctx->OP->getText() == "/") {
     if (!opConst) {
-      cfg->current_bb->addIRInstr(IRInstr::Operation::div, Type::INT, params);
+      cfg->current_bb->addIRInstr(IRInstr::Operation::div, Type::INT, params, 3);
     }
     else {
       params[0] = cfg->createConstSymbol(a/b);
@@ -259,7 +283,7 @@ antlrcpp::Any IRVisitor::visitMultdivmod(ifccParser::MultdivmodContext *ctx) {
 
   else if (ctx->OP->getText() == "%") {
     if (!opConst) {
-      cfg->current_bb->addIRInstr(IRInstr::Operation::mod, Type::INT, params);
+      cfg->current_bb->addIRInstr(IRInstr::Operation::mod, Type::INT, params, 3);
     }
     else {
       params[0] = cfg->createConstSymbol(a%b);
@@ -289,7 +313,7 @@ antlrcpp::Any IRVisitor::visitUnaire(ifccParser::UnaireContext *ctx) {
 
   else {
     params[0] = cfg->createTempVar();
-    cfg->current_bb->addIRInstr(IRInstr::Operation::neg, Type::INT, params);
+    cfg->current_bb->addIRInstr(IRInstr::Operation::neg, Type::INT, params, 3);
   }
   
   return (std::string)params[0];
@@ -299,7 +323,7 @@ antlrcpp::Any IRVisitor::visitUnaire(ifccParser::UnaireContext *ctx) {
 
 antlrcpp::Any IRVisitor::visitPlusmoins(ifccParser::PlusmoinsContext *ctx) {
 
-    std::string params[3];
+  std::string params[3];
   
   params[1] = (std::string)visit(ctx->expr(0));
   params[2] = (std::string)visit(ctx->expr(1));
@@ -328,7 +352,7 @@ antlrcpp::Any IRVisitor::visitPlusmoins(ifccParser::PlusmoinsContext *ctx) {
   if (ctx->OP->getText() == "+") {
 
     if (!opConst) {
-      cfg->current_bb->addIRInstr(IRInstr::Operation::add, Type::INT, params);
+      cfg->current_bb->addIRInstr(IRInstr::Operation::add, Type::INT, params, 3);
     }
     else {
       params[0] = cfg->createConstSymbol(a+b);
@@ -337,7 +361,7 @@ antlrcpp::Any IRVisitor::visitPlusmoins(ifccParser::PlusmoinsContext *ctx) {
 
   else if (ctx->OP->getText() == "-") {
     if (!opConst) {
-      cfg->current_bb->addIRInstr(IRInstr::Operation::sub, Type::INT, params);
+      cfg->current_bb->addIRInstr(IRInstr::Operation::sub, Type::INT, params, 3);
     }
     else {
       params[0] = cfg->createConstSymbol(a-b);
@@ -357,7 +381,7 @@ antlrcpp::Any IRVisitor::visitPlusmoins(ifccParser::PlusmoinsContext *ctx) {
 
 antlrcpp::Any IRVisitor::visitConst(ifccParser::ConstContext *ctx) {
 
-  return (std::string)cfg->createConstSymbol(stoi(ctx->CONST()->getText()));
+  return (std::string)cfg->createConstSymbol(constToInt(ctx->CONST()->getText()));
   
 }
 
@@ -368,4 +392,37 @@ antlrcpp::Any IRVisitor::visitVar(ifccParser::VarContext *ctx) {
   
 }
 
+antlrcpp::Any IRVisitor::visitFunction(ifccParser::FunctionContext *ctx) {
 
+  visit(ctx->call_function());
+
+  std::string params[2];
+  params[0] = cfg->createTempVar();
+  params[1] = "#reg_ret";
+  
+  
+  cfg->current_bb->addIRInstr(IRInstr::Operation::ldconst, Type::INT, params, 2);
+
+  return (std::string)params[0];
+  
+}
+
+
+antlrcpp::Any IRVisitor::visitCall_function(ifccParser::Call_functionContext *ctx) {
+
+  std::string params[ctx->expr().size()+1];
+  
+  for (int i = ctx->expr().size() - 1; i >= 0; i--) {
+
+    params[i+1] = (std::string)visit(ctx->expr(i));
+
+      
+  }
+
+  params[0] = ctx->FUNCTION_NAME()->getText();
+
+  cfg->current_bb->addIRInstr(IRInstr::Operation::call, Type::INT, params, ctx->expr().size()+1);
+
+  return 0;
+  
+}

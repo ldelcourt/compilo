@@ -291,6 +291,18 @@ antlrcpp::Any VarVisitor::visitVar(ifccParser::VarContext *ctx) {
 }
   
 
+antlrcpp::Any VarVisitor::visitCall_function(ifccParser::Call_functionContext *ctx) {
+
+  for (int i = 0 ; i < ctx->expr().size(); i++) {
+
+    checkExpr(ctx->expr(i));
+
+  }
+
+  return 0;
+  
+}
+
 
 void VarVisitor::checkUnusedDecla() {
 

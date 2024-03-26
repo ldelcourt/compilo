@@ -28,10 +28,10 @@ public:
     mul,
     div,
     mod,
-    neg, 
+    neg,
+    call,
     rmem, //Arret ici dans l'implementation
     wmem,
-    call, 
     cmp_eq,
     cmp_lt,
     cmp_le
@@ -40,13 +40,14 @@ public:
 
   /**  constructor */
   IRInstr(BasicBlock* bb_, Operation op, Type t);
+  virtual ~IRInstr() {}
 	
   /** Actual code generation */
   virtual void gen_asm(std::ostream &o) const = 0; /**< x86 assembly code generation for this IR instruction */
   
 
   /** Create instance of good IRInstr subclass according to op **/
-  static IRInstr* createInstr(BasicBlock *bb, Operation op, Type t, std::string *params);
+  static IRInstr* createInstr(BasicBlock *bb, Operation op, Type t, const std::string *params, int nb);
 
   
 protected:
@@ -185,6 +186,28 @@ private:
   std::string dest, var;
 
   
+};
+
+class CallInstr : public IRInstr {
+
+
+public:
+
+  CallInstr (BasicBlock *bb, Type t, const std::string *params, int nb);
+  virtual ~CallInstr() {
+    delete [] params;
+  }
+
+  virtual void gen_asm(std::ostream &o) const;
+
+private:
+
+  std::string *params;
+  int nbParams;
+
+  
+  static const std::string regParams[6];
+
 };
 
 

@@ -46,9 +46,9 @@ void BasicBlock::gen_asm(std::ostream &o) const {
 
 }
 
-void BasicBlock::addIRInstr(IRInstr::Operation o, Type t, std::string *params ) {
+void BasicBlock::addIRInstr(IRInstr::Operation o, Type t, const std::string *params, int nb) {
 
-  instrs.push_back( IRInstr::createInstr(this, o, t, params) );
+  instrs.push_back( IRInstr::createInstr(this, o, t, params, nb) );
 
 }
 
@@ -147,12 +147,15 @@ std::string CFG::symbol_to_asm(const std::string &reg) {
 void CFG::gen_asm_prologue(std::ostream &o) const {
 
   o << " \tpushq %rbp\n" << " \tmovq %rsp, %rbp\n"; //x86
+
+  //Reservation de la zone mémoire pour la fonction
+  o << " \tsubq $" << table.getSizeMemory() << ", %rsp\n";
   
 }
 
 void CFG::gen_asm_epilogue(std::ostream& o) const {
 
-  o << " \tpopq %rbp\n" << " \tret\n"; //x86
+  o << " \tmovq %rbp, %rsp\n" <<  " \tpopq %rbp\n" << " \tret\n"; //x86
   
 }
 

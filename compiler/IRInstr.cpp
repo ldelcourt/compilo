@@ -8,7 +8,7 @@ IRInstr::IRInstr( BasicBlock *bb_, Operation op, Type t) :
 
 }
 
-IRInstr* IRInstr::createInstr(BasicBlock *bb, Operation op, Type t, std::string *params) {
+IRInstr* IRInstr::createInstr(BasicBlock *bb, Operation op, Type t, const std::string *params, int nb) {
 
   switch(op) {
 
@@ -35,6 +35,9 @@ IRInstr* IRInstr::createInstr(BasicBlock *bb, Operation op, Type t, std::string 
 
   case neg:
     return new NegInstr(bb, t, params[0], params[1]);
+
+  case call:
+    return new CallInstr(bb, t, params, nb);
 
   }
 
@@ -190,11 +193,41 @@ NegInstr::NegInstr(BasicBlock *bb, Type t, const std::string &dest, const std::s
 
 void NegInstr::gen_asm(std::ostream &o) const {
 
-  std::cout << " \tmovl " << bb->cfg->symbol_to_asm(var) << ", %eax\n";
-  std::cout << " \tnegl %eax\n";
-  std::cout << " \tmovl %eax, " << bb->cfg->symbol_to_asm(dest) << "\n";
+  o << " \tmovl " << bb->cfg->symbol_to_asm(var) << ", %eax\n";
+  o << " \tnegl %eax\n";
+  o << " \tmovl %eax, " << bb->cfg->symbol_to_asm(dest) << "\n";
   
 }
 
 
 
+CallInstr::CallInstr(BasicBlock *bb, Type t, const std::string *params, int nb) :
+  IRInstr(bb, Operation::call, t)
+{
+
+
+  this->params = new std::string[nb];
+  nbParams = nb;
+
+  for (int i = 0; i < nb; i++) {
+    this->params[i] = params[i];
+  }
+  
+  //std::cout << "copy : var=" << var << " dest=" << dest << std::endl;
+
+}
+
+
+void CallInstr::gen_asm(std::ostream &o) const {
+
+  const std::string regParams[] = {"%rdi", "%rsi", "%rdx", "%rcx", "%r8", "%r9"};
+
+  for (int i = nbParams-1; i >= 1; i--) {
+    
+    o << " \tmov " << bb->cfg->symbol_to_asm(params[i]) << ", " << regParams[i-1] << "\n";
+
+  }
+
+  o << " \tcall " << params[0] << "\n";
+  
+}

@@ -10,13 +10,34 @@ main:
 	.cfi_offset 6, -16
 	movq	%rsp, %rbp
 	.cfi_def_cfa_register 6
-	movl	$1, -4(%rbp)
-	movl	$2, -8(%rbp)
-	movl	$3, -12(%rbp)
-	movl	$4, -8(%rbp)
-	movl	$7, -16(%rbp)
+	subq	$96, %rsp
+	movl	$3, -4(%rbp)
+	movl	$5, -8(%rbp)
+	movl	$5, -12(%rbp)
+	movl	$5, -16(%rbp)
+	movl	$5, -20(%rbp)
+	movl	$5, -24(%rbp)
+	movl	$5, -28(%rbp)
+	movl	$5, -32(%rbp)
+	movl	$5, -36(%rbp)
+	movl	$5, -40(%rbp)
+	movl	$5, -44(%rbp)
+	movl	$5, -48(%rbp)
+	movl	$5, -52(%rbp)
+	movl	$5, -56(%rbp)
+	movl	$5, -60(%rbp)
+	movl	$5, -64(%rbp)
+	movl	$5, -68(%rbp)
+	movl	$5, -72(%rbp)
+	movl	$5, -76(%rbp)
+	movl	$5, -80(%rbp)
+	movl	$5, -84(%rbp)
+	movl	$5, -88(%rbp)
+	movl	-4(%rbp), %eax
+	movl	%eax, %edi
+	call	putchar@PLT
 	movl	-8(%rbp), %eax
-	popq	%rbp
+	leave
 	.cfi_def_cfa 7, 8
 	ret
 	.cfi_endproc

@@ -28,6 +28,8 @@ public:
   std::string createTemp();
   std::string createConst(int value);
 
+  int getSizeMemory() const;
+
 private:
 
   std::unordered_map<std::string, int> table;
@@ -90,6 +92,22 @@ inline std::string SymbolTable::createConst(int value) {
 
   return name;
 
+}
+
+inline int SymbolTable::getSizeMemory() const {
+
+  int size = -currentIndex;
+  if (size % 16 == 0) {
+    return size;
+  }
+
+  else {
+    size = size/16;
+    size = 16*(size+1);
+    return size;
+  }
+    
+  
 }
 
   
