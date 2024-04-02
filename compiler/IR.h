@@ -53,13 +53,14 @@ public:
   
   void gen_asm(std::ostream &o) const; /**< x86 assembly code generation for this basic block (very simple) */
 
-  void addIRInstr(IRInstr::Operation op, Type t, const std::string *params, int nb);
+  void addIRInstr(IRInstr::Operation op, Type t, const std::string *params, int nb = 0);
 
 
   // No encapsulation whatsoever here. Feel free to do better.
-  BasicBlock* exit_true;  /**< pointer to the next basic block, true branch. If nullptr, return from procedure */ 
-  BasicBlock* exit_false; /**< pointer to the next basic block, false branch. If null_ptr, the basic block ends with an unconditional jump */
+  BasicBlock* exit_true = nullptr;  /**< pointer to the next basic block, true branch. If nullptr, return from procedure */ 
+  BasicBlock* exit_false = nullptr; /**< pointer to the next basic block, false branch. If null_ptr, the basic block ends with an unconditional jump */
   
+  std::string label; /**< label of the BB, also will be the label in the generated code */
   
   std::string test_var_name;  /** < when generating IR code for an if(expr) or while(expr) etc,
 		     store here the name of the variable that holds the value of expr */
@@ -68,7 +69,6 @@ public:
   CFG* cfg; /** < the CFG where this block belongs */
   
 private:
-  std::string label; /**< label of the BB, also will be the label in the generated code */
   
   std::vector<IRInstr*> instrs; /** < the instructions themselves. */
   
@@ -91,7 +91,7 @@ private:
 class CFG {
 public:
   
-  CFG(DefFunction *ast, bool debug = false);
+  CFG(DefFunction *ast, bool debug = false, bool symbol = false);
   ~CFG();
 	
   BasicBlock* addBasicBlock(const std::string &name);
@@ -110,6 +110,7 @@ public:
   std::string createTempVar();
   std::string createConstSymbol(int v);
   bool symbolIsConst(const std::string &symbol, int *value = nullptr) const;
+  std::string getRealVarname(const std::string &symbol);
   
 
 
@@ -117,6 +118,7 @@ public:
   std::string newBBName();
   BasicBlock* current_bb;
   bool debug;
+  bool symbol;
 
 
   

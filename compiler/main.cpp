@@ -18,6 +18,7 @@ using namespace std;
 
 
 static bool debug = false;
+static bool symbol = false;
 
 int main(int argn, const char **argv)
 {
@@ -34,6 +35,10 @@ int main(int argn, const char **argv)
      if (argv[2] && string(argv[2]) == "--debug") {
        debug = true;
      }
+     if (argv[2] && string(argv[2]) == "--symbol") {
+       symbol = true;
+     }
+
   }
   else
   {
@@ -71,7 +76,7 @@ int main(int argn, const char **argv)
 
   try {
     
-    CFG cfg(tree, debug);
+    CFG cfg(tree, debug, symbol);
     cfg.gen_asm(cout);
 
   } catch (int e) {

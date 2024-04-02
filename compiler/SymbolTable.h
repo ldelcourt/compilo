@@ -2,6 +2,7 @@
 
 #include <unordered_map>
 #include <string>
+#include <iostream>
 
 typedef enum {
 
@@ -24,6 +25,8 @@ public:
   bool contains (const std::string &symbol) const;
 
   int getValue (const std::string &symbol) const;
+
+  void printTable() const;
 
   std::string createTemp();
   std::string createConst(int value);
@@ -108,6 +111,15 @@ inline int SymbolTable::getSizeMemory() const {
   }
     
   
+}
+
+inline void SymbolTable::printTable() const {
+
+  std::cout << "Symbol table:" << table.size() << std::endl;
+  for (auto const& x : table) {
+    std::cout << x.first << " : " << x.second << std::endl;
+  }
+
 }
 
   
