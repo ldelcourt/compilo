@@ -402,7 +402,7 @@ antlrcpp::Any IRVisitor::visitLessgreater(ifccParser::LessgreaterContext *ctx) {
   if (ctx->OP->getText() == "<") {
 
     if (!opConst) {
-      cfg->current_bb->addIRInstr(IRInstr::Operation::cmp_lt, Type::INT, params);
+      cfg->current_bb->addIRInstr(IRInstr::Operation::cmp_lt, Type::INT, params, 3);
     }
     else {
       params[0] = cfg->createConstSymbol(a<b);
@@ -411,7 +411,7 @@ antlrcpp::Any IRVisitor::visitLessgreater(ifccParser::LessgreaterContext *ctx) {
 
   else if (ctx->OP->getText() == ">") {
     if (!opConst) {
-      cfg->current_bb->addIRInstr(IRInstr::Operation::cmp_gt, Type::INT, params);
+      cfg->current_bb->addIRInstr(IRInstr::Operation::cmp_gt, Type::INT, params, 3);
     }
     else {
       params[0] = cfg->createConstSymbol(a>b);
@@ -451,7 +451,7 @@ antlrcpp::Any IRVisitor::visitEqualnotequal(ifccParser::EqualnotequalContext *ct
   if (ctx->OP->getText() == "==") {
 
     if (!opConst) {
-      cfg->current_bb->addIRInstr(IRInstr::Operation::cmp_eq, Type::INT, params);
+      cfg->current_bb->addIRInstr(IRInstr::Operation::cmp_eq, Type::INT, params, 3);
     }
     else {
       params[0] = cfg->createConstSymbol(a==b);
@@ -460,7 +460,7 @@ antlrcpp::Any IRVisitor::visitEqualnotequal(ifccParser::EqualnotequalContext *ct
 
   else if (ctx->OP->getText() == "!=") {
     if (!opConst) {
-      cfg->current_bb->addIRInstr(IRInstr::Operation::cmp_neq, Type::INT, params);
+      cfg->current_bb->addIRInstr(IRInstr::Operation::cmp_neq, Type::INT, params, 3);
     }
     else {
       params[0] = cfg->createConstSymbol(a!=b);
@@ -495,7 +495,7 @@ antlrcpp::Any IRVisitor::visitBinaryAND(ifccParser::BinaryANDContext *ctx) {
   }
   
   if (!opConst) {
-    cfg->current_bb->addIRInstr(IRInstr::Operation::binary_and, Type::INT, params);
+    cfg->current_bb->addIRInstr(IRInstr::Operation::binary_and, Type::INT, params, 3);
   }
   else {
     params[0] = cfg->createConstSymbol(a&b);
@@ -534,7 +534,7 @@ antlrcpp::Any IRVisitor::visitBinaryXOR(ifccParser::BinaryXORContext *ctx) {
   }
   
   if (!opConst) {
-    cfg->current_bb->addIRInstr(IRInstr::Operation::binary_xor, Type::INT, params);
+    cfg->current_bb->addIRInstr(IRInstr::Operation::binary_xor, Type::INT, params,3);
   }
   else {
     params[0] = cfg->createConstSymbol(a^b);
@@ -573,7 +573,7 @@ antlrcpp::Any IRVisitor::visitBinaryOR(ifccParser::BinaryORContext *ctx) {
   }
   
   if (!opConst) {
-    cfg->current_bb->addIRInstr(IRInstr::Operation::binary_or, Type::INT, params);
+    cfg->current_bb->addIRInstr(IRInstr::Operation::binary_or, Type::INT, params, 3);
   }
   else {
     params[0] = cfg->createConstSymbol(a|b);
