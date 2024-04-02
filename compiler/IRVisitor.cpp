@@ -104,7 +104,6 @@ antlrcpp::Any IRVisitor::visitReturnExpr(ifccParser::ReturnExprContext *ctx) {
 antlrcpp::Any IRVisitor::visitVarToVar(ifccParser::VarToVarContext *ctx) {
 
   std::string params[2];
-  int delta = 0;
   
   if (ctx->expr() != nullptr) {
 
@@ -112,8 +111,6 @@ antlrcpp::Any IRVisitor::visitVarToVar(ifccParser::VarToVarContext *ctx) {
     params[0] = cfg->getRealVarname(ctx->VAR(ctx->VAR().size() - 1)->getText() + currentBlock);
 
     cfg->current_bb->addIRInstr(IRInstr::Operation::copy, Type::INT, params, 3);
-
-    delta++;
 
   }
 
@@ -124,8 +121,6 @@ antlrcpp::Any IRVisitor::visitVarToVar(ifccParser::VarToVarContext *ctx) {
 
     
     cfg->current_bb->addIRInstr(IRInstr::Operation::ldconst, Type::INT, params, 3);
-
-    delta++;
 
   }
 
