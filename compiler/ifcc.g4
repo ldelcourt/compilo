@@ -53,6 +53,7 @@ expr: '(' expr ')' #par
     | expr '&' expr #binaryAND
     | expr '^' expr #binaryXOR
     | expr '|' expr #binaryOR
+    | '!' expr #logiNot
     | VAR #var
     | CONST #const
     ;

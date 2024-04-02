@@ -36,6 +36,9 @@ IRInstr* IRInstr::createInstr(BasicBlock *bb, Operation op, Type t, const std::s
   case neg:
     return new NegInstr(bb, t, params[0], params[1]);
 
+  case logiNot:
+    return new LogiNotInstr(bb, t, params[0], params[1]);
+
   case call:
     return new CallInstr(bb, t, params, nb);
     
@@ -241,6 +244,27 @@ void NegInstr::gen_asm(std::ostream &o) const {
   o << " \tmovl " << bb->cfg->symbol_to_asm(var) << ", %eax\n";
   o << " \tnegl %eax\n";
   o << " \tmovl %eax, " << bb->cfg->symbol_to_asm(dest) << "\n";
+  
+}
+
+LogiNotInstr::LogiNotInstr(BasicBlock *bb, Type t, const std::string &dest, const std::string &var) :
+  IRInstr(bb, Operation::logiNot, t), dest(dest), var(var)
+{
+
+  if(bb->cfg->debug){
+    std::cout << "copy : var=" << var << " dest=" << dest << std::endl;
+  }
+
+}
+
+
+void LogiNotInstr::gen_asm(std::ostream &o) const {
+
+  o << " \tcmpl $0, "<< bb->cfg->symbol_to_asm(var)<< "\n";
+  o << " \tsete %al\n";
+  o << " \tmovzbl %al, %eax\n";
+  o << " \tmovl %eax, " << bb->cfg->symbol_to_asm(dest) << "\n";
+
   
 }
 

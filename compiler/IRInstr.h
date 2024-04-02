@@ -29,6 +29,7 @@ public:
     div,
     mod,
     neg,
+    logiNot,
     call,
     cmp_eq,
     cmp_neq,
@@ -185,6 +186,21 @@ class NegInstr : public IRInstr {
 public:
 
   NegInstr (BasicBlock *bb, Type t, const std::string &dest, const std::string &var);
+
+  virtual void gen_asm(std::ostream &o) const;
+
+private:
+
+  std::string dest, var;
+
+  
+};
+
+class LogiNotInstr : public IRInstr {
+
+public:
+
+  LogiNotInstr (BasicBlock *bb, Type t, const std::string &dest, const std::string &var);
 
   virtual void gen_asm(std::ostream &o) const;
 

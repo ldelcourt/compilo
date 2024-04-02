@@ -41,6 +41,7 @@ public:
   virtual antlrcpp::Any visitPar(ifccParser::ParContext *ctx) override;
   virtual antlrcpp::Any visitMultdivmod(ifccParser::MultdivmodContext *ctx) override;
   virtual antlrcpp::Any visitUnaire(ifccParser::UnaireContext *ctx) override;
+  virtual antlrcpp::Any visitLogiNot(ifccParser::LogiNotContext *ctx) override;
   virtual antlrcpp::Any visitPlusmoins(ifccParser::PlusmoinsContext *ctx) override;
   virtual antlrcpp::Any visitLessgreater(ifccParser::LessgreaterContext *ctx) override;
   virtual antlrcpp::Any visitEqualnotequal(ifccParser::EqualnotequalContext *ctx) override;

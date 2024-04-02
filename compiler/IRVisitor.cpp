@@ -360,6 +360,26 @@ antlrcpp::Any IRVisitor::visitUnaire(ifccParser::UnaireContext *ctx) {
   
 }
 
+antlrcpp::Any IRVisitor::visitLogiNot(ifccParser::LogiNotContext *ctx) {
+
+  std::string params[2];
+  
+  params[1] = (std::string)visit(ctx->expr());
+
+  int a;
+  if (cfg->symbolIsConst(params[1], &a)) {
+    params[0] = cfg->createConstSymbol(!a);
+  }
+
+  else {
+    params[0] = cfg->createTempVar();
+    cfg->current_bb->addIRInstr(IRInstr::Operation::logiNot, Type::INT, params, 3);
+  }
+  
+  return (std::string)params[0];
+  
+}
+
 
 antlrcpp::Any IRVisitor::visitPlusmoins(ifccParser::PlusmoinsContext *ctx) {
 
