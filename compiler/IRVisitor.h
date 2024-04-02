@@ -33,6 +33,7 @@ public:
   virtual antlrcpp::Any visitVarInitVar(ifccParser::VarInitVarContext *ctx) override;
   virtual antlrcpp::Any visitVarInitConst(ifccParser::VarInitConstContext *ctx) override;
   virtual antlrcpp::Any visitVarInitExpr(ifccParser::VarInitExprContext *ctx) override;
+  virtual antlrcpp::Any visitVarInitAffect(ifccParser::VarInitAffectContext *ctx) override;
   
   
 

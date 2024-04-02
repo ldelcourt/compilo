@@ -141,7 +141,7 @@ antlrcpp::Any IRVisitor::visitVarToVar(ifccParser::VarToVarContext *ctx) {
 
   }
 
-  return 0;
+  return (std::string)params[0];
   
 }
   
@@ -154,7 +154,7 @@ antlrcpp::Any IRVisitor::visitVarToConst(ifccParser::VarToConstContext *ctx) {
   
   cfg->current_bb->addIRInstr(IRInstr::Operation::ldconst, Type::INT, params, 3);
 
-  return 0;
+  return (std::string)params[0];
 
 }
 
@@ -174,7 +174,7 @@ antlrcpp::Any IRVisitor::visitVarToExpr(ifccParser::VarToExprContext *ctx) {
   }
   
 
-  return 0;
+  return (std::string)params[0];
   
 }
 
@@ -191,7 +191,7 @@ antlrcpp::Any IRVisitor::visitVarInitVar(ifccParser::VarInitVarContext *ctx) {
     cfg->current_bb->addIRInstr(IRInstr::Operation::copy, Type::INT, params, 3);
   }
 
-  return 0;
+  return (std::string)(ctx->VAR(0)->getText() + currentBlock);
 
 }
 
@@ -209,7 +209,7 @@ antlrcpp::Any IRVisitor::visitVarInitConst(ifccParser::VarInitConstContext *ctx)
 
   }
 
-  return 0;
+  return (std::string)(ctx->VAR(0)->getText() + currentBlock);
 
 }
 
@@ -233,12 +233,30 @@ antlrcpp::Any IRVisitor::visitVarInitExpr(ifccParser::VarInitExprContext *ctx) {
 
   }
 
-  return 0;
+  return cfg->getRealVarname(ctx->VAR(0)->getText() + currentBlock);
 
   
 }
 
+
+antlrcpp::Any IRVisitor::visitVarInitAffect(ifccParser::VarInitAffectContext *ctx) {
+
+  std::string params[2];
+  params[0] = cfg->getRealVarname(ctx->VAR()->getText() + currentBlock);
+  params[1] = (std::string)visit(ctx->affectation_var());
   
+  
+  if (cfg->symbolIsConst(params[1])) {
+    cfg->current_bb->addIRInstr(IRInstr::Operation::ldconst, Type::INT, params, 2);
+  }
+
+  else {
+    cfg->current_bb->addIRInstr(IRInstr::Operation::copy, Type::INT, params, 2);
+  }
+
+  return cfg->getRealVarname(ctx->VAR()->getText() + currentBlock);
+  
+}
 
 
 antlrcpp::Any IRVisitor::visitPar(ifccParser::ParContext *ctx) {

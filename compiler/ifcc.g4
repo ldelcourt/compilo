@@ -39,6 +39,7 @@ declaration_var: 'int' VAR (',' VAR)* ';' ;
 initialisation_var: 'int' VAR '=' VAR ( ',' VAR '=' VAR)* ';' #varInitVar
     | 'int' VAR '=' CONST ( ',' VAR '=' CONST)* ';' #varInitConst
     | 'int' VAR '=' expr (',' VAR '=' expr)* ';' #varInitExpr
+    | 'int' VAR '=' affectation_var #varInitAffect
     ;
 
 

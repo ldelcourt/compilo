@@ -279,6 +279,30 @@ antlrcpp::Any VarVisitor::visitVarInitExpr(ifccParser::VarInitExprContext *ctx) 
   
 }
 
+antlrcpp::Any VarVisitor::visitVarInitAffect(ifccParser::VarInitAffectContext *ctx) {
+    
+  std::string var1 (ctx->VAR()->getText() + currentBlock);
+
+  //verif var1 pas existante
+  if (table->contains(var1)) {
+
+    std::cerr << "error : " << printPosSymbol(ctx->VAR()) << var1 << " already declared" << std::endl;
+    error = true;
+    
+  }
+
+  //verif affectation
+  visit(ctx->affectation_var());
+
+  table->giveIndex(var1);
+  
+  used[var1] = false;
+
+  return (error ? 1 : 0);
+  
+  
+}
+
 
 antlrcpp::Any VarVisitor::visitVar(ifccParser::VarContext *ctx) {
 
