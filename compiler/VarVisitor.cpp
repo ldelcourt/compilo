@@ -21,12 +21,10 @@
 
 antlrcpp::Any VarVisitor::visitVarToVar(ifccParser::VarToVarContext *ctx) {
 
-  for (int i = 0; i+1 < ctx->VAR().size(); i++) {
+  for (int i = 0; i < ctx->VAR().size(); i++) {
     
     std::string var1 (ctx->VAR(i)->getText());
-    std::string var2 (ctx->VAR(i+1)->getText());
     std::pair<bool, std::string> res1 = checkVarInAllBlocks(var1 + currentBlock);
-    std::pair<bool, std::string> res2 = checkVarInAllBlocks(var2 + currentBlock);
 
     //Verif variables déclarés
     if (! res1.first) {
@@ -35,31 +33,18 @@ antlrcpp::Any VarVisitor::visitVarToVar(ifccParser::VarToVarContext *ctx) {
       
     }
 
-    if (! res2.first) {
-      std::cerr << "error : " << printPosSymbol(ctx->VAR(i+1)) << var2 + currentBlock << " was never declared" << std::endl;
-      error = true;
-
-    }
-
   
     //creation d'un index pour var1 si pas encore
     table->giveIndex(res1.second);
-  
-
-    //creation d'un index pour var 2 si pas encore
-    table->giveIndex(res2.second);
 
     used[res1.second] = true;
-    used[res2.second] = true;
 
-
-    //fin par expr
-    if (ctx->expr() != nullptr) {
-      checkExpr(ctx->expr());
-    }
     
   }
-
+  //fin par expr
+  if (ctx->expr() != nullptr) {
+    checkExpr(ctx->expr());
+  }
 
   return (error ? 1 : 0);
     
@@ -182,24 +167,19 @@ antlrcpp::Any VarVisitor::visitReturnExpr(ifccParser::ReturnExprContext *ctx) {
 
 antlrcpp::Any VarVisitor::visitVarInitVar(ifccParser::VarInitVarContext *ctx) {
 
-  for (int i = 0; i+1 < ctx->VAR().size(); i++) {
+  for (int i = 0; i+1 < ctx->VAR().size(); i+=2) {
 
     
     std::string var1 (ctx->VAR(i)->getText() + currentBlock);
     std::string var2 (ctx->VAR(i+1)->getText() + currentBlock);
-    std::pair<bool, std::string> res1 = checkVarInAllBlocks(var1);
     std::pair<bool, std::string> res2 = checkVarInAllBlocks(var2);
 
     //verif var1 pas existante
-    if (res1.first && i == 0) {
+    if (table->contains(var1)) {
 
-      std::cerr << "error : " << printPosSymbol(ctx->VAR(i)) << res1.second << " already declared" << std::endl;
+      std::cerr << "error : " << printPosSymbol(ctx->VAR(i)) << var1 << " already declared" << std::endl;
       error = true;
 
-    }
-    else if (! res1.first && i != 0) {
-      std::cerr << "error : " << printPosSymbol(ctx->VAR(i)) << res1.second << " was never declared" << std::endl;
-      error = true;
     }
 
     //verif var2 existe
@@ -211,10 +191,10 @@ antlrcpp::Any VarVisitor::visitVarInitVar(ifccParser::VarInitVarContext *ctx) {
 
     //creation d'un index pour var2 si besoin
     table->giveIndex(res2.second);
-    table->giveIndex(res1.second);
+    table->giveIndex(var1);
 
     used[res2.second] = true;
-    used[res1.second] = false;
+    used[var1] = false;
 
   }
 
@@ -229,19 +209,18 @@ antlrcpp::Any VarVisitor::visitVarInitConst(ifccParser::VarInitConstContext *ctx
   for (int i = 0; i < ctx->VAR().size(); i++) {    
   
     std::string var1 (ctx->VAR(i)->getText() + currentBlock);
-    std::pair<bool, std::string> res = checkVarInAllBlocks(var1);
 
 
     //verif var1 pas existante
-    if (res.first) {
+    if (table->contains(var1)) {
 
-      std::cerr << "error : " << printPosSymbol(ctx->VAR(i)) << res.second << " already declared" << std::endl;
+      std::cerr << "error : " << printPosSymbol(ctx->VAR(i)) << var1 << " already declared" << std::endl;
       error = true;
 
     }
 
-    table->giveIndex(res.second);
-    used[res.second] = false;
+    table->giveIndex(var1);
+    used[var1] = false;
 
   }
 

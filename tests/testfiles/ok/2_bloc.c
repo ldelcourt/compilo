@@ -8,15 +8,19 @@ int main() {
     {
       int c = 3;
       int a;
+      a = 3 * c;
+      c = a + c;
     }
     {
       int c = 3;
       int a;
+      c = a;
+      a = 3 * c;
     }
     b = a;
     c = b;
   }
-  c = c +b;
+  c = c +b + a;
   return c;
 
 }
