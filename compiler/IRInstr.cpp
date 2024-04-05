@@ -67,7 +67,10 @@ IRInstr* IRInstr::createInstr(BasicBlock *bb, Operation op, Type t, const std::s
     return new WhileInstr(bb, t, params[0]);
 
   case jmp:
-    return new JmpInstr(bb, t, params[0]);   
+    return new JmpInstr(bb, t, params[0]);
+
+  case getparams:
+    return new GetParamsInstr(bb, t, params, nb);
 
   }
 
@@ -446,14 +449,50 @@ CallInstr::CallInstr(BasicBlock *bb, Type t, const std::string *params, int nb) 
 
 void CallInstr::gen_asm(std::ostream &o) const {
 
-  const std::string regParams[] = {"%rdi", "%rsi", "%rdx", "%rcx", "%r8", "%r9"};
+  const std::string regParams[] = {"%edi", "%esi", "%edx", "%ecx", "%r8d", "%r9d"};
 
   for (int i = nbParams-1; i >= 1; i--) {
     
-    o << " \tmov " << bb->cfg->symbol_to_asm(params[i]) << ", " << regParams[i-1] << "\n";
+    o << " \tmovl " << bb->cfg->symbol_to_asm(params[i]) << ", " << regParams[i-1] << "\n";
 
   }
 
   o << " \tcall " << params[0] << "\n";
   
+}
+
+
+GetParamsInstr::GetParamsInstr(BasicBlock *bb, Type t, const std::string *params, int nb) :
+  IRInstr(bb, Operation::getparams, t)
+{
+
+
+  this->params = new std::string[nb];
+  nbParams = nb;
+
+  if(bb->cfg->debug){
+    std::cout << "getparams : ";
+  }
+  
+  for (int i = 0; i < nb; i++) {
+    this->params[i] = params[i];
+
+    if(bb->cfg->debug){
+      std::cout << i << "=" << params[i] <<  std::endl;
+    }
+  }
+  
+}
+
+
+void GetParamsInstr::gen_asm(std::ostream &o) const {
+
+  const std::string regParams[] = {"%edi", "%esi", "%edx", "%ecx", "%r8d", "%r9d"};
+
+  for (int i = 0; i < nbParams; i++) {
+    
+    o << " \tmovl " << regParams[i] << ", " <<  bb->cfg->symbol_to_asm(params[i]) << "\n";
+
+  }
+
 }

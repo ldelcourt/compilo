@@ -121,6 +121,11 @@ public:
   bool symbol;
 
 
+  //Function name
+  std::string nameFunction;
+  void setFunctionName(const std::string &name) {
+    nameFunction = name;
+  }
   
 private:
   
@@ -131,6 +136,8 @@ private:
   DefFunction *ast;
 
   SymbolTable table;
+
+  
 
 };
 

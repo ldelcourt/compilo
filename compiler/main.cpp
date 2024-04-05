@@ -42,7 +42,7 @@ int main(int argn, const char **argv)
   }
   else
   {
-      cerr << "usage: ifcc path/to/file.c" << endl ;
+      cerr << "usage: ifcc path/to/file.c [--debug] [--symbol]" << endl ;
       exit(1);
   }
   
@@ -62,26 +62,33 @@ int main(int argn, const char **argv)
       exit(1);
   }
 
-  /*
-  SymbolTable table;
+ 
+  int nbFonctions = tree->children.size() - 2;
 
-  VarVisitor varVisitor(&table);
-  varVisitor.visit(tree);
-  varVisitor.checkUnusedDecla();
+  CFG* *cfg = new CFG* [nbFonctions+1];
+
   
-  if (varVisitor.hasError()) {
-    return 1;
-  }
-  */
-
   try {
-    
-    CFG cfg(tree, debug, symbol);
-    cfg.gen_asm(cout);
+
+    int i;
+    for (i = 0; i < nbFonctions; i++) {
+      cfg[i] = new CFG(tree->children[i], debug, symbol);
+      cfg[i]->gen_asm(cout);
+    }
+
+    cfg[nbFonctions] = new CFG(tree->children[i], debug, symbol);
+    cfg[nbFonctions]->gen_asm(cout);
 
   } catch (int e) {
     return 1;
   }
+
+  for (int i = 0; i < nbFonctions+1; i++) {
+    delete cfg[i];
+  }
+  delete [] cfg;
+  
+  
 
   return 0;
 }

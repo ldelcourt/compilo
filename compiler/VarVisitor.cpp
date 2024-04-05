@@ -18,6 +18,50 @@
 
 
 
+antlrcpp::Any VarVisitor::visitDefinition_function(ifccParser::Definition_functionContext *ctx) {
+
+  std::string var (ctx->VAR()->getText() + currentBlock);
+
+  //verif var pas existante
+  if (table->contains(var)) {
+    std::cerr << "erreur : " << printPosSymbol(ctx->VAR()) << var << " already declared" << std::endl;
+    error = true;
+    
+  }
+
+  table->add(var);
+  used[var] = true;
+
+  this->visitChildren(ctx);
+  return (error ? 1 : 0);
+  
+}
+
+antlrcpp::Any VarVisitor::visitParametre(ifccParser::ParametreContext *ctx) {
+
+
+  for (int i = 0; i < ctx->VAR().size(); i++) {
+    
+    std::string var (ctx->VAR(i)->getText() + currentBlock);
+
+    //verif var pas existante
+    if (table->contains(var)) {
+      std::cerr << "erreur : " << printPosSymbol(ctx->VAR(i)) << var << " already declared" << std::endl;
+      error = true;
+    
+    }
+
+    table->giveIndex(var);
+    used[var] = false;
+
+
+  }
+
+  return (error ? 1 : 0);
+}
+
+
+
 
 antlrcpp::Any VarVisitor::visitVarToVar(ifccParser::VarToVarContext *ctx) {
 
@@ -239,9 +283,10 @@ antlrcpp::Any VarVisitor::visitVarInitConst(ifccParser::VarInitConstContext *ctx
       error = true;
 
     }
-
-    table->giveIndex(res.second);
-    used[res.second] = false;
+    else {
+      table->giveIndex(res.second);
+      used[res.second] = false;
+    }
 
   }
 

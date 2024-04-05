@@ -15,6 +15,11 @@ public:
 
   VarVisitor(SymbolTable *table) : ifccBaseVisitor(), table(table), error(false) {}
   ~VarVisitor() {}
+
+  
+  virtual antlrcpp::Any visitDefinition_function(ifccParser::Definition_functionContext *ctx) override;
+
+  virtual antlrcpp::Any visitParametre(ifccParser::ParametreContext *ctx) override;
   
   virtual antlrcpp::Any visitVarToVar(ifccParser::VarToVarContext *ctx) override;
   virtual antlrcpp::Any visitVarToConst(ifccParser::VarToConstContext *ctx) override;

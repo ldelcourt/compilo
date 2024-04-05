@@ -40,6 +40,7 @@ public:
     ifelse,
     while_,
     jmp,
+    getparams,
     rmem, //Arret ici dans l'implementation
     wmem,
   } Operation;
@@ -351,5 +352,27 @@ class JmpInstr : public IRInstr {
     std::string dest;
 };
 
+
+class GetParamsInstr : public IRInstr {
+
+
+public:
+
+  GetParamsInstr (BasicBlock *bb, Type t, const std::string *params, int nb);
+  virtual ~GetParamsInstr() {
+    delete [] params;
+  }
+
+  virtual void gen_asm(std::ostream &o) const;
+
+private:
+
+  std::string *params;
+  int nbParams;
+
+  
+  static const std::string regParams[6];
+
+};
 
 #endif

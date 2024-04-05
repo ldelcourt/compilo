@@ -17,7 +17,16 @@ public:
 
   IRVisitor(CFG *cfg) : ifccBaseVisitor(), cfg(cfg) {}
 
+  //Fonction personnelle
+  //virtual antlrcpp::Any visitDeclaration_function(ifccParser::Declaration_functionContext *ctx) override;
+  virtual antlrcpp::Any visitDefinition_function(ifccParser::Definition_functionContext *ctx) override;
+  virtual antlrcpp::Any visitParametre(ifccParser::ParametreContext *ctx) override;
+
+  
+  //Fonction main
   virtual antlrcpp::Any visitProg(ifccParser::ProgContext *ctx) override ;
+
+  //Block
   virtual antlrcpp::Any visitBlock(ifccParser::BlockContext *ctx) override;
 
   //Return 

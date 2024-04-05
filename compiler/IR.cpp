@@ -86,6 +86,11 @@ CFG::CFG(DefFunction *ast, bool debug, bool symbol) : ast(ast),  nextBBnumber(0)
   //buildIR()
   IRVisitor visitor(this);
   visitor.visit(ast);
+
+  //change label
+  for (BasicBlock *bb : bbs) {
+    bb->label = nameFunction + "_" + bb->label;
+  }
   
 }
 
@@ -110,8 +115,9 @@ BasicBlock* CFG::addBasicBlock(const std::string &name) {
 
 void CFG::gen_asm(std::ostream &o) const {
 
-  o<< ".globl main\n" ;
-  o<< "main: \n" ;
+  o << ".globl " << nameFunction << "\n" ;
+  o << ".type " << nameFunction << ", @function\n";
+  o << nameFunction << ": \n" ;
 
   gen_asm_prologue(o);
   
