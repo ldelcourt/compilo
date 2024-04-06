@@ -1,9 +1,3 @@
-int test_decla(int a, int b);
-
-void fonction_void () {
-  putchar('t');
-}
-
 
 int toto(int a, int b, int c) {
 
@@ -20,11 +14,6 @@ int toto(int a, int b, int c) {
 
 int main() {
 
-  test_decla(4, 3);
-
-
-  toto(1,2,3);
-  
   int a = toto(6, 4, 3);
   int d = a;
 

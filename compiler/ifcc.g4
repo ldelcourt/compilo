@@ -8,10 +8,12 @@ personal_function: declaration_function
     | definition_function
     ;
 
-declaration_function: TYPE_RETURN=('int' | 'void') VAR '(' (parametre)? ')' ';';
-definition_function: TYPE_RETURN=('int' | 'void') VAR '(' (parametre)? ')' block ;
+declaration_function: TYPE_RETURN=('int' | 'void') VAR '(' (parametres)? ')' ';';
+definition_function: TYPE_RETURN=('int' | 'void') VAR '(' (parametres)? ')' block ;
 
-parametre : 'int' VAR (',' 'int' VAR)*;
+
+parametres : parametre (',' parametre)*;
+parametre : TYPE=('int'|'char') VAR;
 
 
 block: '{' (statement)* '}' ;
@@ -19,7 +21,7 @@ block: '{' (statement)* '}' ;
 statement: var_stmt
     | if_else_stmt
     | while_stmt
-    | call_function
+    | call_function ';'
     | return_stmt
     | block
     ;
@@ -68,7 +70,7 @@ expr: '(' expr ')' #par
     ;
 
 
-call_function : VAR  '(' expr? (',' expr)* ')' (';')? ;
+call_function : VAR  '(' (expr (',' expr)*)? ')' ;
 
 
 RETURN : 'return' ;

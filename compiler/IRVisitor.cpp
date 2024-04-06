@@ -33,20 +33,24 @@ antlrcpp::Any IRVisitor::visitDefinition_function(ifccParser::Definition_functio
   
 }
 
-antlrcpp::Any IRVisitor::visitParametre(ifccParser::ParametreContext *ctx) {
+antlrcpp::Any IRVisitor::visitParametres(ifccParser::ParametresContext *ctx) {
 
-  std::string params[ctx->VAR().size()];
-  
-  for (int i = 0; i < ctx->VAR().size(); i++) {
+  std::string params[ctx->parametre().size()];
 
-    params[i] = cfg->getRealVarname(ctx->VAR(i)->getText() + currentBlock);
+  for (int i = 0; i < ctx->parametre().size(); i++) {
+    params[i] = (std::string)this->visit(ctx->parametre(i));
       
   }
 
-  cfg->current_bb->addIRInstr(IRInstr::Operation::getparams, Type::INT, params, ctx->VAR().size());
+  cfg->current_bb->addIRInstr(IRInstr::Operation::getparams, Type::INT, params, ctx->parametre().size());
 
-  
+
   return 0;
+}
+
+antlrcpp::Any IRVisitor::visitParametre(ifccParser::ParametreContext *ctx) {
+  
+  return cfg->getRealVarname(ctx->VAR()->getText() + currentBlock);
   
 }
 

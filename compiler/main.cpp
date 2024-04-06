@@ -11,6 +11,7 @@
 
 #include "VarVisitor.h"
 #include "IRVisitor.h"
+#include "FunctionVisitor.h"
 #include "IR.h"
 
 using namespace antlr4;
@@ -62,7 +63,7 @@ int main(int argn, const char **argv)
       exit(1);
   }
 
- 
+  /*
   int nbFonctions = tree->children.size() - 2;
 
   CFG* *cfg = new CFG* [nbFonctions+1];
@@ -87,6 +88,17 @@ int main(int argn, const char **argv)
     delete cfg[i];
   }
   delete [] cfg;
+  */
+
+
+  FunctionVisitor fv (debug, symbol);
+  fv.visit(tree);
+
+  if (fv.hasError()) {
+    return 1;
+  }
+
+  fv.gen_asm(cout);
   
   
 

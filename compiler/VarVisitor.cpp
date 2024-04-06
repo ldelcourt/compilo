@@ -38,24 +38,20 @@ antlrcpp::Any VarVisitor::visitDefinition_function(ifccParser::Definition_functi
 }
 
 antlrcpp::Any VarVisitor::visitParametre(ifccParser::ParametreContext *ctx) {
-
-
-  for (int i = 0; i < ctx->VAR().size(); i++) {
     
-    std::string var (ctx->VAR(i)->getText() + currentBlock);
+  std::string var (ctx->VAR()->getText() + currentBlock);
 
-    //verif var pas existante
-    if (table->contains(var)) {
-      std::cerr << "erreur : " << printPosSymbol(ctx->VAR(i)) << var << " already declared" << std::endl;
-      error = true;
+  //verif var pas existante
+  if (table->contains(var)) {
+    std::cerr << "erreur : " << printPosSymbol(ctx->VAR()) << var << " already declared" << std::endl;
+    error = true;
     
-    }
-
-    table->giveIndex(var);
-    used[var] = false;
-
-
   }
+
+  table->giveIndex(var);
+  used[var] = false;
+
+
 
   return (error ? 1 : 0);
 }

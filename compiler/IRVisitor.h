@@ -21,6 +21,7 @@ public:
   //virtual antlrcpp::Any visitDeclaration_function(ifccParser::Declaration_functionContext *ctx) override;
   virtual antlrcpp::Any visitDefinition_function(ifccParser::Definition_functionContext *ctx) override;
   virtual antlrcpp::Any visitParametre(ifccParser::ParametreContext *ctx) override;
+  virtual antlrcpp::Any visitParametres(ifccParser::ParametresContext *ctx) override;
 
   
   //Fonction main
