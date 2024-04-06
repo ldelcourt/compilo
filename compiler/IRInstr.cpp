@@ -75,6 +75,9 @@ IRInstr* IRInstr::createInstr(BasicBlock *bb, Operation op, Type t, const std::s
   case getparams:
     return new GetParamsInstr(bb, t, params, nb);
 
+  case ret:
+    return new RetInstr(bb, t, params[0]);
+
   }
 
   return nullptr;
@@ -518,5 +521,25 @@ void GetParamsInstr::gen_asm(std::ostream &o) const {
     o << " \tmovl " << regParams[i] << ", " <<  bb->cfg->symbol_to_asm(params[i]) << "\n";
 
   }
+
+}
+
+
+RetInstr::RetInstr(BasicBlock *bb, Type t, const std::string &var) :
+  IRInstr(bb, Operation::ret, t), var(var)
+{
+
+  if(bb->cfg->debug){
+    std::cout << "ret : var=" << var << std::endl;
+  }
+
+}
+
+
+void RetInstr::gen_asm(std::ostream &o) const {
+
+  o << " \tmovl " << bb->cfg->symbol_to_asm(var) << ", %eax\n";
+
+  o << " \tjmp " << bb->cfg->nameFunction << "_output\n";
 
 }

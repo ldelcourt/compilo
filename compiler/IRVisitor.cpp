@@ -83,18 +83,10 @@ antlrcpp::Any IRVisitor::visitBlock(ifccParser::BlockContext *ctx)
 antlrcpp::Any IRVisitor::visitReturnConst(ifccParser::ReturnConstContext *ctx)
 {
 
-  std::string params[2];
-  params[0] = "#reg_ret";
+  std::string params[1];
+  params[0] = cfg->createConstSymbol(constToInt(ctx->CONST()->getText()));
 
-  params[1] = cfg->createConstSymbol(constToInt(ctx->CONST()->getText()));
-
-  
-  cfg->current_bb->addIRInstr(IRInstr::Operation::ldconst, Type::INT, params, 3);
-
-
-  //params[0] = "output";
-  //cfg->current_bb->addIRInstr(IRInstr::Operation::jmp, Type::INT, params);
-
+  cfg->current_bb->addIRInstr(IRInstr::Operation::ret, Type::INT, params);
 
   return 0;
 }
@@ -102,15 +94,10 @@ antlrcpp::Any IRVisitor::visitReturnConst(ifccParser::ReturnConstContext *ctx)
 
 antlrcpp::Any IRVisitor::visitReturnVar(ifccParser::ReturnVarContext *ctx) {
 
-  std::string params[2];
-  params[0] = "#reg_ret";
-  params[1] = cfg->getRealVarname(ctx->VAR()->getText() + currentBlock);
-  
-  cfg->current_bb->addIRInstr(IRInstr::Operation::copy, Type::INT, params, 3);
+  std::string params[1];
+  params[0] = cfg->getRealVarname(ctx->VAR()->getText() + currentBlock);
 
-  //params[0] = "output";
-  //cfg->current_bb->addIRInstr(IRInstr::Operation::jmp, Type::INT, params);
-
+  cfg->current_bb->addIRInstr(IRInstr::Operation::ret, Type::INT, params);
 
   return 0;
 
@@ -119,17 +106,12 @@ antlrcpp::Any IRVisitor::visitReturnVar(ifccParser::ReturnVarContext *ctx) {
 
 antlrcpp::Any IRVisitor::visitReturnExpr(ifccParser::ReturnExprContext *ctx) {
 
-  std::string params[2];
-  params[0] = "#reg_ret";
-  params[1] = (std::string)visit(ctx->expr());
+  std::string params[1];
+  params[0] = (std::string)visit(ctx->expr());
   
-  cfg->current_bb->addIRInstr(IRInstr::Operation::copy, Type::INT, params, 3);
-
-  //params[0] = "output";
-  //cfg->current_bb->addIRInstr(IRInstr::Operation::jmp, Type::INT, params);
+  cfg->current_bb->addIRInstr(IRInstr::Operation::ret, Type::INT, params);
 
 
-  
   return 0;
   
 }

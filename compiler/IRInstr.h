@@ -42,6 +42,7 @@ public:
     while_,
     jmp,
     getparams,
+    ret,
     rmem, //Arret ici dans l'implementation
     wmem,
   } Operation;
@@ -389,6 +390,18 @@ private:
   
   static const std::string regParams[6];
 
+};
+
+
+class RetInstr : public IRInstr {
+
+  public :
+    RetInstr (BasicBlock *bb, Type t, const std::string &var);
+
+    virtual void gen_asm(std::ostream &o) const;
+
+  private: 
+    std::string var;
 };
 
 #endif
