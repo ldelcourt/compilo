@@ -7,7 +7,8 @@
 typedef enum {
 
   INT,
-  FLOAT
+  FLOAT,
+  VOID
 } Type;
 
 

@@ -1,15 +1,27 @@
 grammar ifcc;
 
-axiom : prog EOF ;
+axiom : personal_function* prog EOF ;
 
 prog : 'int' 'main' '(' ')' block ;
+
+personal_function: declaration_function
+    | definition_function
+    ;
+
+declaration_function: TYPE_RETURN=('int' | 'void') VAR '(' (parametres)? ')' ';';
+definition_function: TYPE_RETURN=('int' | 'void') VAR '(' (parametres)? ')' block ;
+
+
+parametres : parametre (',' parametre)*;
+parametre : TYPE=('int'|'char') VAR;
+
 
 block: '{' (statement)* '}' ;
 
 statement: var_stmt
     | if_else_stmt
     | while_stmt
-    | call_function
+    | call_function ';'
     | return_stmt
     | block
     ;
@@ -21,7 +33,7 @@ return_stmt: RETURN CONST ';' #returnConst
 
 
 var_stmt: affectation_var
-    | declaration_var
+    | declaration_var ';'
     | initialisation_var
     ;
 
@@ -35,7 +47,7 @@ affectation_var: VAR '=' VAR ('=' VAR)* ('=' CONST | '=' expr)? ';' #varToVar
     | VAR '=' CONST  ';' #varToConst
     | VAR '=' expr ';' #varToExpr
     ;
-declaration_var: 'int' VAR (',' VAR)* ';' ;
+declaration_var: 'int' VAR (',' VAR)* ;
 initialisation_var: 'int' VAR '=' VAR ( ',' VAR '=' VAR)* ';' #varInitVar
     | 'int' VAR '=' CONST ( ',' VAR '=' CONST)* ';' #varInitConst
     | 'int' VAR '=' expr (',' VAR '=' expr)* ';' #varInitExpr
@@ -59,15 +71,15 @@ expr: '(' expr ')' #par
     ;
 
 
-call_function : FUNCTION_NAME '(' expr? (',' expr)* ')' (';')? ;
+call_function : VAR  '(' (expr (',' expr)*)? ')' ;
 
 
 RETURN : 'return' ;
-FUNCTION_NAME :  'putchar'| 'getchar' ;
+//FUNCTION_NAME :  'putchar'| 'getchar' ;
 CONST : [0-9]+ | '\'' (.? | '\\'.) '\'';
 COMMENT : '/*' .*? '*/' -> skip ;
 DIRECTIVE : '#' .*? '\n' -> skip ;
 WS    : [ \t\r\n] -> channel(HIDDEN);
-KEYWORD : 'auto'|'break'|'case'|'char'|'const'|'continue'|'default'|'do'|'double'|'else'|'enum'|'extern'|'float'|'for'|'goto'|'if'|'int'|'long'|'register'|'return'|'short'|'signed'|'sizeof'|'static'|'struct'|'switch'|'typedef'|'union'|'unsigned'|'void'|'volatile'|'while' ;
+//KEYWORD : 'auto'|'break'|'case'|'char'|'const'|'continue'|'default'|'do'|'double'|'else'|'enum'|'extern'|'float'|'for'|'goto'|'if'|'int'|'long'|'register'|'return'|'short'|'signed'|'sizeof'|'static'|'struct'|'switch'|'typedef'|'union'|'unsigned'|'void'|'volatile'|'while' ;
 VAR : [a-zA-Z_][a-zA-Z0-9_]*;
 

@@ -23,8 +23,42 @@ int constToInt(std::string chaine)	{
 }
 
 
+
+antlrcpp::Any IRVisitor::visitDefinition_function(ifccParser::Definition_functionContext *ctx) {
+
+  cfg->setFunctionName(ctx->VAR()->getText());
+
+  this->visitChildren(ctx);
+  return 0;
+  
+}
+
+antlrcpp::Any IRVisitor::visitParametres(ifccParser::ParametresContext *ctx) {
+
+  std::string params[ctx->parametre().size()];
+
+  for (int i = 0; i < ctx->parametre().size(); i++) {
+    params[i] = (std::string)this->visit(ctx->parametre(i));
+      
+  }
+
+  cfg->current_bb->addIRInstr(IRInstr::Operation::getparams, Type::INT, params, ctx->parametre().size());
+
+
+  return 0;
+}
+
+antlrcpp::Any IRVisitor::visitParametre(ifccParser::ParametreContext *ctx) {
+  
+  return cfg->getRealVarname(ctx->VAR()->getText() + currentBlock);
+  
+}
+
+
 antlrcpp::Any IRVisitor::visitProg(ifccParser::ProgContext *ctx) 
 {
+
+  cfg->setFunctionName("main");
 
   this->visitChildren(ctx);
   cfg->current_bb = cfg->current_bb->exit_true;
@@ -58,8 +92,8 @@ antlrcpp::Any IRVisitor::visitReturnConst(ifccParser::ReturnConstContext *ctx)
   cfg->current_bb->addIRInstr(IRInstr::Operation::ldconst, Type::INT, params, 3);
 
 
-  params[0] = "output";
-  cfg->current_bb->addIRInstr(IRInstr::Operation::jmp, Type::INT, params);
+  //params[0] = "output";
+  //cfg->current_bb->addIRInstr(IRInstr::Operation::jmp, Type::INT, params);
 
 
   return 0;
@@ -74,8 +108,8 @@ antlrcpp::Any IRVisitor::visitReturnVar(ifccParser::ReturnVarContext *ctx) {
   
   cfg->current_bb->addIRInstr(IRInstr::Operation::copy, Type::INT, params, 3);
 
-  params[0] = "output";
-  cfg->current_bb->addIRInstr(IRInstr::Operation::jmp, Type::INT, params);
+  //params[0] = "output";
+  //cfg->current_bb->addIRInstr(IRInstr::Operation::jmp, Type::INT, params);
 
 
   return 0;
@@ -91,8 +125,8 @@ antlrcpp::Any IRVisitor::visitReturnExpr(ifccParser::ReturnExprContext *ctx) {
   
   cfg->current_bb->addIRInstr(IRInstr::Operation::copy, Type::INT, params, 3);
 
-  params[0] = "output";
-  cfg->current_bb->addIRInstr(IRInstr::Operation::jmp, Type::INT, params);
+  //params[0] = "output";
+  //cfg->current_bb->addIRInstr(IRInstr::Operation::jmp, Type::INT, params);
 
 
   
@@ -680,7 +714,7 @@ antlrcpp::Any IRVisitor::visitCall_function(ifccParser::Call_functionContext *ct
       
   }
 
-  params[0] = ctx->FUNCTION_NAME()->getText();
+  params[0] = ctx->VAR()->getText();
 
   cfg->current_bb->addIRInstr(IRInstr::Operation::call, Type::INT, params, ctx->expr().size()+1);
 

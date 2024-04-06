@@ -18,6 +18,46 @@
 
 
 
+antlrcpp::Any VarVisitor::visitDefinition_function(ifccParser::Definition_functionContext *ctx) {
+
+  std::string var (ctx->VAR()->getText() + currentBlock);
+
+  //verif var pas existante
+  if (table->contains(var)) {
+    std::cerr << "erreur : " << printPosSymbol(ctx->VAR()) << var << " already declared" << std::endl;
+    error = true;
+    
+  }
+
+  table->add(var);
+  used[var] = true;
+
+  this->visitChildren(ctx);
+  return (error ? 1 : 0);
+  
+}
+
+antlrcpp::Any VarVisitor::visitParametre(ifccParser::ParametreContext *ctx) {
+    
+  std::string var (ctx->VAR()->getText() + currentBlock);
+
+  //verif var pas existante
+  if (table->contains(var)) {
+    std::cerr << "erreur : " << printPosSymbol(ctx->VAR()) << var << " already declared" << std::endl;
+    error = true;
+    
+  }
+
+  table->giveIndex(var);
+  used[var] = false;
+
+
+
+  return (error ? 1 : 0);
+}
+
+
+
 
 antlrcpp::Any VarVisitor::visitVarToVar(ifccParser::VarToVarContext *ctx) {
 
