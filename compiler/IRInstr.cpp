@@ -700,12 +700,31 @@ void CallInstr::gen_x86_asm(std::ostream &o) const {
   const std::string regParams[] = {"%edi", "%esi", "%edx", "%ecx", "%r8d", "%r9d"};
 
   for (int i = nbParams-1; i >= 1; i--) {
-    
-    o << " \tmovl " << bb->getCFG()->symbol_to_asm(params[i]) << ", " << regParams[i-1] << "\n";
+
+    if (i > 6) {
+
+      if (bb->getCFG()->symbolIsConst(params[i])) {
+        o << " \tpushq " << bb->getCFG()->symbol_to_asm(params[i]) << "\n";
+      }
+      else {
+        o << " \tmovl " << bb->getCFG()->symbol_to_asm(params[i]) << ", %eax\n";
+        o << " \tpushq %rax\n";
+      }
+
+    }
+
+    else { 
+      o << " \tmovl " << bb->getCFG()->symbol_to_asm(params[i]) << ", " << regParams[i-1] << "\n";
+    }
 
   }
 
   o << " \tcall " << params[0] << "\n";
+
+  if (nbParams-1 > 6) {
+    o << " \tmovq %rbp, %rsp\n";
+  }
+  
 }
 
 void CallInstr::gen_arm(std::ostream &o) const {
@@ -740,9 +759,21 @@ void GetParamsInstr::gen_x86_asm(std::ostream &o) const {
 
   const std::string regParams[] = {"%edi", "%esi", "%edx", "%ecx", "%r8d", "%r9d"};
 
+  int indexStack = 16;
+  
   for (int i = 0; i < nbParams; i++) {
-    
-    o << " \tmovl " << regParams[i] << ", " <<  bb->getCFG()->symbol_to_asm(params[i]) << "\n";
+
+    if (i >= 6) {
+
+      o << " \tmovl " << indexStack << "(%rbp), %eax\n";
+      o << " \tmovl %eax, " << bb->getCFG()->symbol_to_asm(params[i]) << "\n";
+      indexStack += 8;
+
+    }
+
+    else {
+      o << " \tmovl " << regParams[i] << ", " <<  bb->getCFG()->symbol_to_asm(params[i]) << "\n";
+    }
 
   }
 
