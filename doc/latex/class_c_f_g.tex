@@ -1,0 +1,268 @@
+\hypertarget{class_c_f_g}{}\doxysection{CFG Class Reference}
+\label{class_c_f_g}\index{CFG@{CFG}}
+
+
+The class for the control flow graph.  
+
+
+
+
+{\ttfamily \#include $<$IR.\+h$>$}
+
+
+
+Collaboration diagram for CFG\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=220pt]{class_c_f_g__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_c_f_g_ac6b99e789f71dbfae210255385ed32a4}{CFG}} (\mbox{\hyperlink{_i_r_8h_ae73f84186af61040aefc0b23dcea1f74}{Def\+Function}} $\ast$ast, const std\+::string \&name\+Function, bool \mbox{\hyperlink{class_c_f_g_a46929989fdb83337854514cfbf7b5f00}{debug}}=false, bool \mbox{\hyperlink{class_c_f_g_a0c897f70fc199b66738d2310ee839f98}{symbol}}=false)
+\begin{DoxyCompactList}\small\item\em Constructeur. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_c_f_g_a7a9e0feb406099038faea4c67ef31786}{$\sim$\+CFG}} ()
+\item 
+\mbox{\hyperlink{class_basic_block}{Basic\+Block}} $\ast$ \mbox{\hyperlink{class_c_f_g_a47a8aab59db0d27f0f897a6eba25970f}{add\+Basic\+Block}} (const std\+::string \&name)
+\begin{DoxyCompactList}\small\item\em Créer et ajoute un \mbox{\hyperlink{class_basic_block}{Basic\+Block}} au \mbox{\hyperlink{class_c_f_g}{CFG}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_c_f_g_a5102a7824dbe3231f4f7cee5f717f216}{gen\+\_\+asm}} (std\+::ostream \&o) const
+\begin{DoxyCompactList}\small\item\em Genere le code asm x86 du \mbox{\hyperlink{class_c_f_g}{CFG}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_c_f_g_a340edfda55d7660f3fb8c6de246f8f5d}{gen\+\_\+asm\+\_\+prologue}} (std\+::ostream \&o) const
+\item 
+void \mbox{\hyperlink{class_c_f_g_a0379564252eb274e2e31ca514e31f32a}{gen\+\_\+asm\+\_\+epilogue}} (std\+::ostream \&o) const
+\item 
+std\+::string \mbox{\hyperlink{class_c_f_g_abb0bbd8a1ea6f1a4da0d367510dec74b}{symbol\+\_\+to\+\_\+asm}} (const std\+::string \&reg) const
+\begin{DoxyCompactList}\small\item\em Convertit un symbol de la table en asm x86. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{class_c_f_g_a6abf457b446a3ca7fe55ae91ffbaaeae}{create\+Temp\+Var}} ()
+\item 
+std\+::string \mbox{\hyperlink{class_c_f_g_af7b110ad4d3d98c9c02163c7da4e120d}{create\+Const\+Symbol}} (int v)
+\item 
+bool \mbox{\hyperlink{class_c_f_g_a7e2eb63d3a00f133c63bb388eb6f5cc1}{symbol\+Is\+Const}} (const std\+::string \&\mbox{\hyperlink{class_c_f_g_a0c897f70fc199b66738d2310ee839f98}{symbol}}, int $\ast$value=nullptr) const
+\begin{DoxyCompactList}\small\item\em Teste si un symbole est une constante. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{class_c_f_g_a25d2f7ac1619ae6f3947c71b52cf8b1b}{get\+Real\+Varname}} (const std\+::string \&\mbox{\hyperlink{class_c_f_g_a0c897f70fc199b66738d2310ee839f98}{symbol}})
+\begin{DoxyCompactList}\small\item\em Extrait le vrai nom d\textquotesingle{}un symbole (=sans les numéros de blocks) \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{class_c_f_g_a42bc1bad95cad32b69d069a7b08a31bc}{new\+BBName}} ()
+\item 
+const std\+::string \& \mbox{\hyperlink{class_c_f_g_a1d95db22ba15fee72f900a1fd0d3e415}{get\+Name\+Function}} () const
+\item 
+bool \mbox{\hyperlink{class_c_f_g_a46929989fdb83337854514cfbf7b5f00}{debug}} () const
+\item 
+bool \mbox{\hyperlink{class_c_f_g_a0c897f70fc199b66738d2310ee839f98}{symbol}} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_basic_block}{Basic\+Block}} $\ast$ \mbox{\hyperlink{class_c_f_g_a37b50f8c106bb96c1ba23bba6bddacb7}{current\+\_\+bb}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The class for the control flow graph. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_c_f_g_ac6b99e789f71dbfae210255385ed32a4}\label{class_c_f_g_ac6b99e789f71dbfae210255385ed32a4}} 
+\index{CFG@{CFG}!CFG@{CFG}}
+\index{CFG@{CFG}!CFG@{CFG}}
+\doxysubsubsection{\texorpdfstring{CFG()}{CFG()}}
+{\footnotesize\ttfamily CFG\+::\+CFG (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_i_r_8h_ae73f84186af61040aefc0b23dcea1f74}{Def\+Function}} $\ast$}]{ast,  }\item[{const std\+::string \&}]{name\+Function,  }\item[{bool}]{debug = {\ttfamily false},  }\item[{bool}]{symbol = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+Constructeur. 
+
+Analyse des symboles avec \mbox{\hyperlink{class_var_visitor}{Var\+Visitor}} de l\textquotesingle{}AST Construction de l\textquotesingle{}IR avec \mbox{\hyperlink{class_i_r_visitor}{IRVisitor}}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em ast} & l\textquotesingle{}AST d\textquotesingle{}une fonction \\
+\hline
+\mbox{\texttt{ in}}  & {\em name\+Function} & le nom de la fonction \\
+\hline
+\mbox{\texttt{ in}}  & {\em debug} & true si on souhaite afficher les instructions IR que contient ce \mbox{\hyperlink{class_c_f_g}{CFG}} \\
+\hline
+\mbox{\texttt{ in}}  & {\em symbol} & true si on souhaite afficher la table des symboles\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em int} & en cas d\textquotesingle{}erreur avec \mbox{\hyperlink{class_var_visitor}{Var\+Visitor}} =\texorpdfstring{$>$}{>} IR pas générable\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyPrecond}{Precondition}
+un AST correct syntaxiquement 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+un Control Flow Graph contenant les Basicblock contenant eux mêmes les instructions IR représentant l\textquotesingle{}AST 
+\end{DoxyPostcond}
+\mbox{\Hypertarget{class_c_f_g_a7a9e0feb406099038faea4c67ef31786}\label{class_c_f_g_a7a9e0feb406099038faea4c67ef31786}} 
+\index{CFG@{CFG}!````~CFG@{$\sim$CFG}}
+\index{````~CFG@{$\sim$CFG}!CFG@{CFG}}
+\doxysubsubsection{\texorpdfstring{$\sim$CFG()}{~CFG()}}
+{\footnotesize\ttfamily CFG\+::$\sim$\+CFG (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Destructeur, detruit les blocks 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_c_f_g_a47a8aab59db0d27f0f897a6eba25970f}\label{class_c_f_g_a47a8aab59db0d27f0f897a6eba25970f}} 
+\index{CFG@{CFG}!addBasicBlock@{addBasicBlock}}
+\index{addBasicBlock@{addBasicBlock}!CFG@{CFG}}
+\doxysubsubsection{\texorpdfstring{addBasicBlock()}{addBasicBlock()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_basic_block}{Basic\+Block}} $\ast$ CFG\+::add\+Basic\+Block (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name }\end{DoxyParamCaption})}
+
+
+
+Créer et ajoute un \mbox{\hyperlink{class_basic_block}{Basic\+Block}} au \mbox{\hyperlink{class_c_f_g}{CFG}}. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em name} & le nom du block\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Basic\+Block$\ast$ 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_c_f_g_af7b110ad4d3d98c9c02163c7da4e120d}\label{class_c_f_g_af7b110ad4d3d98c9c02163c7da4e120d}} 
+\index{CFG@{CFG}!createConstSymbol@{createConstSymbol}}
+\index{createConstSymbol@{createConstSymbol}!CFG@{CFG}}
+\doxysubsubsection{\texorpdfstring{createConstSymbol()}{createConstSymbol()}}
+{\footnotesize\ttfamily std\+::string CFG\+::create\+Const\+Symbol (\begin{DoxyParamCaption}\item[{int}]{v }\end{DoxyParamCaption})}
+
+Créer une constante de valeur v dans la table des symboles et renvoie son nom \mbox{\Hypertarget{class_c_f_g_a6abf457b446a3ca7fe55ae91ffbaaeae}\label{class_c_f_g_a6abf457b446a3ca7fe55ae91ffbaaeae}} 
+\index{CFG@{CFG}!createTempVar@{createTempVar}}
+\index{createTempVar@{createTempVar}!CFG@{CFG}}
+\doxysubsubsection{\texorpdfstring{createTempVar()}{createTempVar()}}
+{\footnotesize\ttfamily std\+::string CFG\+::create\+Temp\+Var (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Créer une variable temporaire dans la table des symboles et renvoie son nom \mbox{\Hypertarget{class_c_f_g_a46929989fdb83337854514cfbf7b5f00}\label{class_c_f_g_a46929989fdb83337854514cfbf7b5f00}} 
+\index{CFG@{CFG}!debug@{debug}}
+\index{debug@{debug}!CFG@{CFG}}
+\doxysubsubsection{\texorpdfstring{debug()}{debug()}}
+{\footnotesize\ttfamily bool CFG\+::debug (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_c_f_g_a5102a7824dbe3231f4f7cee5f717f216}\label{class_c_f_g_a5102a7824dbe3231f4f7cee5f717f216}} 
+\index{CFG@{CFG}!gen\_asm@{gen\_asm}}
+\index{gen\_asm@{gen\_asm}!CFG@{CFG}}
+\doxysubsubsection{\texorpdfstring{gen\_asm()}{gen\_asm()}}
+{\footnotesize\ttfamily void CFG\+::gen\+\_\+asm (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{o }\end{DoxyParamCaption}) const}
+
+
+
+Genere le code asm x86 du \mbox{\hyperlink{class_c_f_g}{CFG}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em o} & stream d\textquotesingle{}écriture du code \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_c_f_g_a0379564252eb274e2e31ca514e31f32a}\label{class_c_f_g_a0379564252eb274e2e31ca514e31f32a}} 
+\index{CFG@{CFG}!gen\_asm\_epilogue@{gen\_asm\_epilogue}}
+\index{gen\_asm\_epilogue@{gen\_asm\_epilogue}!CFG@{CFG}}
+\doxysubsubsection{\texorpdfstring{gen\_asm\_epilogue()}{gen\_asm\_epilogue()}}
+{\footnotesize\ttfamily void CFG\+::gen\+\_\+asm\+\_\+epilogue (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{o }\end{DoxyParamCaption}) const}
+
+Genere le code asm x86 de l\textquotesingle{}epilogue d\textquotesingle{}une fonction \mbox{\Hypertarget{class_c_f_g_a340edfda55d7660f3fb8c6de246f8f5d}\label{class_c_f_g_a340edfda55d7660f3fb8c6de246f8f5d}} 
+\index{CFG@{CFG}!gen\_asm\_prologue@{gen\_asm\_prologue}}
+\index{gen\_asm\_prologue@{gen\_asm\_prologue}!CFG@{CFG}}
+\doxysubsubsection{\texorpdfstring{gen\_asm\_prologue()}{gen\_asm\_prologue()}}
+{\footnotesize\ttfamily void CFG\+::gen\+\_\+asm\+\_\+prologue (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{o }\end{DoxyParamCaption}) const}
+
+Genere le code asm x86 du prologue d\textquotesingle{}une fonction \mbox{\Hypertarget{class_c_f_g_a1d95db22ba15fee72f900a1fd0d3e415}\label{class_c_f_g_a1d95db22ba15fee72f900a1fd0d3e415}} 
+\index{CFG@{CFG}!getNameFunction@{getNameFunction}}
+\index{getNameFunction@{getNameFunction}!CFG@{CFG}}
+\doxysubsubsection{\texorpdfstring{getNameFunction()}{getNameFunction()}}
+{\footnotesize\ttfamily const std\+::string \& CFG\+::get\+Name\+Function (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_c_f_g_a25d2f7ac1619ae6f3947c71b52cf8b1b}\label{class_c_f_g_a25d2f7ac1619ae6f3947c71b52cf8b1b}} 
+\index{CFG@{CFG}!getRealVarname@{getRealVarname}}
+\index{getRealVarname@{getRealVarname}!CFG@{CFG}}
+\doxysubsubsection{\texorpdfstring{getRealVarname()}{getRealVarname()}}
+{\footnotesize\ttfamily std\+::string CFG\+::get\+Real\+Varname (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{symbol }\end{DoxyParamCaption})}
+
+
+
+Extrait le vrai nom d\textquotesingle{}un symbole (=sans les numéros de blocks) 
+
+Pour gérer les portés de variables, un symbole est enregistré dans la table en ajoutant \textquotesingle{}\+:\textquotesingle{} suivi du numéro de block Ici, on enlève cet ajout
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em symbol} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em int} & en cas d\textquotesingle{}erreur\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyReturn}{Returns}
+le vrai nom d\textquotesingle{}un symbole 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_c_f_g_a42bc1bad95cad32b69d069a7b08a31bc}\label{class_c_f_g_a42bc1bad95cad32b69d069a7b08a31bc}} 
+\index{CFG@{CFG}!newBBName@{newBBName}}
+\index{newBBName@{newBBName}!CFG@{CFG}}
+\doxysubsubsection{\texorpdfstring{newBBName()}{newBBName()}}
+{\footnotesize\ttfamily std\+::string CFG\+::new\+BBName (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_c_f_g_a0c897f70fc199b66738d2310ee839f98}\label{class_c_f_g_a0c897f70fc199b66738d2310ee839f98}} 
+\index{CFG@{CFG}!symbol@{symbol}}
+\index{symbol@{symbol}!CFG@{CFG}}
+\doxysubsubsection{\texorpdfstring{symbol()}{symbol()}}
+{\footnotesize\ttfamily bool CFG\+::symbol (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_c_f_g_abb0bbd8a1ea6f1a4da0d367510dec74b}\label{class_c_f_g_abb0bbd8a1ea6f1a4da0d367510dec74b}} 
+\index{CFG@{CFG}!symbol\_to\_asm@{symbol\_to\_asm}}
+\index{symbol\_to\_asm@{symbol\_to\_asm}!CFG@{CFG}}
+\doxysubsubsection{\texorpdfstring{symbol\_to\_asm()}{symbol\_to\_asm()}}
+{\footnotesize\ttfamily std\+::string CFG\+::symbol\+\_\+to\+\_\+asm (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{reg }\end{DoxyParamCaption}) const}
+
+
+
+Convertit un symbol de la table en asm x86. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em reg} & le symbole de la table à convertir \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::string 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_c_f_g_a7e2eb63d3a00f133c63bb388eb6f5cc1}\label{class_c_f_g_a7e2eb63d3a00f133c63bb388eb6f5cc1}} 
+\index{CFG@{CFG}!symbolIsConst@{symbolIsConst}}
+\index{symbolIsConst@{symbolIsConst}!CFG@{CFG}}
+\doxysubsubsection{\texorpdfstring{symbolIsConst()}{symbolIsConst()}}
+{\footnotesize\ttfamily bool CFG\+::symbol\+Is\+Const (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{symbol,  }\item[{int $\ast$}]{value = {\ttfamily nullptr} }\end{DoxyParamCaption}) const}
+
+
+
+Teste si un symbole est une constante. 
+
+un symbole est une constante s\textquotesingle{}il commence par \#const
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em symbol} & le symbole à vérifier \\
+\hline
+\mbox{\texttt{ out}}  & {\em value} & la valeur de la constante si s\textquotesingle{}en est une\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true si le symbole est une constante 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_c_f_g_a37b50f8c106bb96c1ba23bba6bddacb7}\label{class_c_f_g_a37b50f8c106bb96c1ba23bba6bddacb7}} 
+\index{CFG@{CFG}!current\_bb@{current\_bb}}
+\index{current\_bb@{current\_bb}!CFG@{CFG}}
+\doxysubsubsection{\texorpdfstring{current\_bb}{current\_bb}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_basic_block}{Basic\+Block}}$\ast$ CFG\+::current\+\_\+bb}
+
+pointeur sur le block actuellement en cours de construction 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+compiler/\mbox{\hyperlink{_i_r_8h}{IR.\+h}}\item 
+compiler/\mbox{\hyperlink{_i_r_8cpp}{IR.\+cpp}}\end{DoxyCompactItemize}

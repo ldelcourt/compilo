@@ -1,0 +1,63 @@
+\hypertarget{class_get_ret_instr}{}\doxysection{Get\+Ret\+Instr Class Reference}
+\label{class_get_ret_instr}\index{GetRetInstr@{GetRetInstr}}
+
+
+{\ttfamily \#include $<$IRInstr.\+h$>$}
+
+
+
+Inheritance diagram for Get\+Ret\+Instr\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=152pt]{class_get_ret_instr__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Get\+Ret\+Instr\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=221pt]{class_get_ret_instr__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_get_ret_instr_a302541b301cdc42c2987cd6deece39f4}{Get\+Ret\+Instr}} (\mbox{\hyperlink{class_basic_block}{Basic\+Block}} $\ast$\mbox{\hyperlink{class_i_r_instr_a0bf0264847ab1c69e99495f1456e3adf}{bb}}, \mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}} \mbox{\hyperlink{class_i_r_instr_a449e6b5f75d186ce7975dbb72c416a6b}{t}}, const std\+::string \&dest)
+\item 
+virtual void \mbox{\hyperlink{class_get_ret_instr_a90d2983c8c9f9c9166a08f5e46ff89ab}{gen\+\_\+asm}} (std\+::ostream \&o) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\texorpdfstring{$<$}{<}Instruction de recupération d\textquotesingle{}une valeur renvoyé par une fonction 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_get_ret_instr_a302541b301cdc42c2987cd6deece39f4}\label{class_get_ret_instr_a302541b301cdc42c2987cd6deece39f4}} 
+\index{GetRetInstr@{GetRetInstr}!GetRetInstr@{GetRetInstr}}
+\index{GetRetInstr@{GetRetInstr}!GetRetInstr@{GetRetInstr}}
+\doxysubsubsection{\texorpdfstring{GetRetInstr()}{GetRetInstr()}}
+{\footnotesize\ttfamily Get\+Ret\+Instr\+::\+Get\+Ret\+Instr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_basic_block}{Basic\+Block}} $\ast$}]{bb,  }\item[{\mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}}}]{t,  }\item[{const std\+::string \&}]{dest }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_get_ret_instr_a90d2983c8c9f9c9166a08f5e46ff89ab}\label{class_get_ret_instr_a90d2983c8c9f9c9166a08f5e46ff89ab}} 
+\index{GetRetInstr@{GetRetInstr}!gen\_asm@{gen\_asm}}
+\index{gen\_asm@{gen\_asm}!GetRetInstr@{GetRetInstr}}
+\doxysubsubsection{\texorpdfstring{gen\_asm()}{gen\_asm()}}
+{\footnotesize\ttfamily void Get\+Ret\+Instr\+::gen\+\_\+asm (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{o }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+x86 assembly code generation for this IR instruction 
+
+Implements \mbox{\hyperlink{class_i_r_instr_a2033117dbd12955e9b290882bc721b9c}{IRInstr}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+compiler/\mbox{\hyperlink{_i_r_instr_8h}{IRInstr.\+h}}\item 
+compiler/\mbox{\hyperlink{_i_r_instr_8cpp}{IRInstr.\+cpp}}\end{DoxyCompactItemize}

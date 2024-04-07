@@ -1,0 +1,434 @@
+\hypertarget{_i_r_instr_8h_source}{}\doxysection{IRInstr.\+h}
+\label{_i_r_instr_8h_source}\index{compiler/IRInstr.h@{compiler/IRInstr.h}}
+\mbox{\hyperlink{_i_r_instr_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef IRINSTR\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define IRINSTR\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <initializer\_list>}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_symbol_table_8h}{SymbolTable.h}}"{}}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13 \textcolor{keyword}{class }\mbox{\hyperlink{class_basic_block}{BasicBlock}};}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 }
+\DoxyCodeLine{21 \textcolor{keyword}{class }\mbox{\hyperlink{class_i_r_instr}{IRInstr}} \{}
+\DoxyCodeLine{22  }
+\DoxyCodeLine{23 \textcolor{keyword}{public}:}
+\DoxyCodeLine{24   \textcolor{keyword}{typedef} \textcolor{keyword}{enum} \{}
+\DoxyCodeLine{25     \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15aca434b8ea2289b300adffe4d7177464b}{ldconst}},}
+\DoxyCodeLine{26     \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15ae1a39a175e0db60521741b775fcd77ec}{copy}},}
+\DoxyCodeLine{27     \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a5ea0d6cae2d2b73ce167042d2584aca8}{add}},}
+\DoxyCodeLine{28     \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15aa55951c56d52ea1ca49066e420be99c0}{sub}},}
+\DoxyCodeLine{29     \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a6636565bd433d10de6878d80f0b75546}{mul}},}
+\DoxyCodeLine{30     \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a57a9112e2a510637354fe62dc5364454}{div}},}
+\DoxyCodeLine{31     \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a789b6016c462f6c6e5b1671107cd7d08}{mod}},}
+\DoxyCodeLine{32     \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a6317d64127aa707de4e9c8258f4be689}{neg}},}
+\DoxyCodeLine{33     \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15ac3e2a22c8a914f16ae47351d0494e397}{logiNot}},}
+\DoxyCodeLine{34     \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a5ab1bfcb25f200319a570ae4d9967785}{call}},}
+\DoxyCodeLine{35     \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15acce36d79a13e3cd29a613b23e61e7313}{cmp\_eq}},}
+\DoxyCodeLine{36     \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15aba0535af5da9857ab13bd9017e5d24bc}{cmp\_neq}},}
+\DoxyCodeLine{37     \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15abec19d69dcb94e11691886175a6d1473}{cmp\_lt}},}
+\DoxyCodeLine{38     \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a3d7c9a9592555029b0c37d7763f4b0e8}{cmp\_gt}},}
+\DoxyCodeLine{39     \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a2298b4873e29665515f4dce2842e9989}{binary\_and}},}
+\DoxyCodeLine{40     \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a22980dc6fc428a0604e12b13404074cf}{binary\_xor}},}
+\DoxyCodeLine{41     \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a275bdf87ebb8fbc4ef96449ee4b451ed}{binary\_or}},}
+\DoxyCodeLine{42     \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a0d2f155d609088f14f29ed3e796af87a}{ifelse}},}
+\DoxyCodeLine{43     \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15af132e593b29126c119e4b7ec882172c5}{while\_}},}
+\DoxyCodeLine{44     \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a8c9661f7391293c23f9b8f314210ed75}{jmp}},}
+\DoxyCodeLine{45     \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a3bb0d627a9596a4311020717e48a52fc}{getparams}},}
+\DoxyCodeLine{46     \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a0164ea8315f2834f64794e426315679d}{ret}},}
+\DoxyCodeLine{47     \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a2e798df5ed9c4b69fb798013d8836f50}{getret}}}
+\DoxyCodeLine{48   \} \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15}{Operation}}; }
+\DoxyCodeLine{51   \mbox{\hyperlink{class_i_r_instr_a4b4b502c145be6a096989a7f24587841}{IRInstr}}(\mbox{\hyperlink{class_basic_block}{BasicBlock}}* bb\_, \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15}{Operation}} \mbox{\hyperlink{class_i_r_instr_aa245c38629c572258e4b1e86febb5da6}{op}}, \mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}} \mbox{\hyperlink{class_i_r_instr_a449e6b5f75d186ce7975dbb72c416a6b}{t}}); }
+\DoxyCodeLine{52   \textcolor{keyword}{virtual} \mbox{\hyperlink{class_i_r_instr_a606ebf26f5825e92c64c64c80495b9dd}{\string~IRInstr}}() \{\} }
+\DoxyCodeLine{55   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_i_r_instr_a2033117dbd12955e9b290882bc721b9c}{gen\_asm}}(std::ostream \&o) \textcolor{keyword}{const} = 0; }
+\DoxyCodeLine{58   \textcolor{keyword}{static} \mbox{\hyperlink{class_i_r_instr}{IRInstr}}* \mbox{\hyperlink{class_i_r_instr_af50ae0421c292d7bf5de79be02603911}{createInstr}}(\mbox{\hyperlink{class_basic_block}{BasicBlock}} *\mbox{\hyperlink{class_i_r_instr_a0bf0264847ab1c69e99495f1456e3adf}{bb}}, \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15}{Operation}} \mbox{\hyperlink{class_i_r_instr_aa245c38629c572258e4b1e86febb5da6}{op}}, \mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}} \mbox{\hyperlink{class_i_r_instr_a449e6b5f75d186ce7975dbb72c416a6b}{t}}, \textcolor{keyword}{const} std::string *params, \textcolor{keywordtype}{int} nb); }
+\DoxyCodeLine{61 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{62   }
+\DoxyCodeLine{63   \mbox{\hyperlink{class_basic_block}{BasicBlock}}* \mbox{\hyperlink{class_i_r_instr_a0bf0264847ab1c69e99495f1456e3adf}{bb}}; }
+\DoxyCodeLine{64   \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15}{Operation}} \mbox{\hyperlink{class_i_r_instr_aa245c38629c572258e4b1e86febb5da6}{op}};}
+\DoxyCodeLine{65   \mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}} \mbox{\hyperlink{class_i_r_instr_a449e6b5f75d186ce7975dbb72c416a6b}{t}}; }
+\DoxyCodeLine{69 \};}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73 \textcolor{keyword}{class }\mbox{\hyperlink{class_add_instr}{AddInstr}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_i_r_instr}{IRInstr}} }
+\DoxyCodeLine{74 \{}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{76 \textcolor{keyword}{public}:}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78   \mbox{\hyperlink{class_add_instr_a7daa64d40bb147204c43b58298654307}{AddInstr}} (\mbox{\hyperlink{class_basic_block}{BasicBlock}} *\mbox{\hyperlink{class_i_r_instr_a0bf0264847ab1c69e99495f1456e3adf}{bb}}, \mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}} \mbox{\hyperlink{class_i_r_instr_a449e6b5f75d186ce7975dbb72c416a6b}{t}}, \textcolor{keyword}{const} std::string \&dest, \textcolor{keyword}{const} std::string \&x, \textcolor{keyword}{const} std::string \&y);}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_add_instr_a9567dee930097977e39971b94952664d}{gen\_asm}}(std::ostream \&o) \textcolor{keyword}{const};}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83 \textcolor{keyword}{private}:}
+\DoxyCodeLine{84   std::string dest;}
+\DoxyCodeLine{85   std::string x;}
+\DoxyCodeLine{86   std::string y;}
+\DoxyCodeLine{87   }
+\DoxyCodeLine{88 \};}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90 \textcolor{keyword}{class }\mbox{\hyperlink{class_sub_instr}{SubInstr}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_i_r_instr}{IRInstr}} }
+\DoxyCodeLine{91 \{}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{93 \textcolor{keyword}{public}:}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{95   \mbox{\hyperlink{class_sub_instr_a84e8374f935a6e0dc8ed3a9d8919e3be}{SubInstr}} (\mbox{\hyperlink{class_basic_block}{BasicBlock}} *\mbox{\hyperlink{class_i_r_instr_a0bf0264847ab1c69e99495f1456e3adf}{bb}}, \mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}} \mbox{\hyperlink{class_i_r_instr_a449e6b5f75d186ce7975dbb72c416a6b}{t}}, \textcolor{keyword}{const} std::string \&dest, \textcolor{keyword}{const} std::string \&x, \textcolor{keyword}{const} std::string \&y);}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_sub_instr_acc1abd72373fbbc8052b9c3aa06b9da0}{gen\_asm}}(std::ostream \&o) \textcolor{keyword}{const};}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{99 }
+\DoxyCodeLine{100 \textcolor{keyword}{private}:}
+\DoxyCodeLine{101   std::string dest, x, y;}
+\DoxyCodeLine{102   }
+\DoxyCodeLine{103 \};}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105 }
+\DoxyCodeLine{106 \textcolor{keyword}{class }\mbox{\hyperlink{class_mul_instr}{MulInstr}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_i_r_instr}{IRInstr}} }
+\DoxyCodeLine{107 \{}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{109 \textcolor{keyword}{public}:}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{111   \mbox{\hyperlink{class_mul_instr_a96f103a4756e979871ef91f2d1c51918}{MulInstr}} (\mbox{\hyperlink{class_basic_block}{BasicBlock}} *\mbox{\hyperlink{class_i_r_instr_a0bf0264847ab1c69e99495f1456e3adf}{bb}}, \mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}} \mbox{\hyperlink{class_i_r_instr_a449e6b5f75d186ce7975dbb72c416a6b}{t}}, \textcolor{keyword}{const} std::string \&dest, \textcolor{keyword}{const} std::string \&x, \textcolor{keyword}{const} std::string \&y);}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{113   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_mul_instr_a1e6f5dba180432d55c86f3f8d76dc2b3}{gen\_asm}}(std::ostream \&o) \textcolor{keyword}{const};}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115 }
+\DoxyCodeLine{116 \textcolor{keyword}{private}:}
+\DoxyCodeLine{117   std::string dest, x, y;}
+\DoxyCodeLine{118   }
+\DoxyCodeLine{119 \};}
+\DoxyCodeLine{120 }
+\DoxyCodeLine{121 \textcolor{keyword}{class }\mbox{\hyperlink{class_div_instr}{DivInstr}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_i_r_instr}{IRInstr}} }
+\DoxyCodeLine{122 \{}
+\DoxyCodeLine{123 }
+\DoxyCodeLine{124 \textcolor{keyword}{public}:}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{126   \mbox{\hyperlink{class_div_instr_a5c8120ac44b04738f87e74cd0d5f6081}{DivInstr}} (\mbox{\hyperlink{class_basic_block}{BasicBlock}} *\mbox{\hyperlink{class_i_r_instr_a0bf0264847ab1c69e99495f1456e3adf}{bb}}, \mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}} \mbox{\hyperlink{class_i_r_instr_a449e6b5f75d186ce7975dbb72c416a6b}{t}}, \textcolor{keyword}{const} std::string \&dest, \textcolor{keyword}{const} std::string \&x, \textcolor{keyword}{const} std::string \&y);}
+\DoxyCodeLine{127 }
+\DoxyCodeLine{128   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_div_instr_ac96fac4a2a7bf5a8e46b8783f03dc014}{gen\_asm}}(std::ostream \&o) \textcolor{keyword}{const};}
+\DoxyCodeLine{129 }
+\DoxyCodeLine{130 }
+\DoxyCodeLine{131 \textcolor{keyword}{private}:}
+\DoxyCodeLine{132   std::string dest;}
+\DoxyCodeLine{133   std::string x;}
+\DoxyCodeLine{134   std::string y;}
+\DoxyCodeLine{135   }
+\DoxyCodeLine{136 \};}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{138 \textcolor{keyword}{class }\mbox{\hyperlink{class_mod_instr}{ModInstr}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_i_r_instr}{IRInstr}} }
+\DoxyCodeLine{139 \{}
+\DoxyCodeLine{140 }
+\DoxyCodeLine{141 \textcolor{keyword}{public}:}
+\DoxyCodeLine{142 }
+\DoxyCodeLine{143   \mbox{\hyperlink{class_mod_instr_a782347c4a6cdb2100f5b937d2a052aeb}{ModInstr}} (\mbox{\hyperlink{class_basic_block}{BasicBlock}} *\mbox{\hyperlink{class_i_r_instr_a0bf0264847ab1c69e99495f1456e3adf}{bb}}, \mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}} \mbox{\hyperlink{class_i_r_instr_a449e6b5f75d186ce7975dbb72c416a6b}{t}}, \textcolor{keyword}{const} std::string \&dest, \textcolor{keyword}{const} std::string \&x, \textcolor{keyword}{const} std::string \&y);}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{145   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_mod_instr_a69137a91e248b3ab7a210296bb7bc93c}{gen\_asm}}(std::ostream \&o) \textcolor{keyword}{const};}
+\DoxyCodeLine{146 }
+\DoxyCodeLine{147 }
+\DoxyCodeLine{148 \textcolor{keyword}{private}:}
+\DoxyCodeLine{149   std::string dest, x, y;}
+\DoxyCodeLine{150   }
+\DoxyCodeLine{151 \};}
+\DoxyCodeLine{152 }
+\DoxyCodeLine{153 }
+\DoxyCodeLine{154 }
+\DoxyCodeLine{155 }
+\DoxyCodeLine{156 \textcolor{keyword}{class }\mbox{\hyperlink{class_ldconst_instr}{LdconstInstr}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_i_r_instr}{IRInstr}} }
+\DoxyCodeLine{157 \{}
+\DoxyCodeLine{158 }
+\DoxyCodeLine{159 \textcolor{keyword}{public}:}
+\DoxyCodeLine{160 }
+\DoxyCodeLine{161   \mbox{\hyperlink{class_ldconst_instr_a317a9b1bd51eb76cebacc72ce0cda79d}{LdconstInstr}} (\mbox{\hyperlink{class_basic_block}{BasicBlock}} *\mbox{\hyperlink{class_i_r_instr_a0bf0264847ab1c69e99495f1456e3adf}{bb}}, \mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}} \mbox{\hyperlink{class_i_r_instr_a449e6b5f75d186ce7975dbb72c416a6b}{t}}, \textcolor{keyword}{const} std::string \&dest, \textcolor{keyword}{const} std::string \&val);}
+\DoxyCodeLine{162 }
+\DoxyCodeLine{163   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_ldconst_instr_a684c97cd522901a62c63f63f4863b47a}{gen\_asm}}(std::ostream \&o) \textcolor{keyword}{const};}
+\DoxyCodeLine{164 }
+\DoxyCodeLine{165   std::string \& \mbox{\hyperlink{class_ldconst_instr_a2727303e3e3800b8ae2d851afcdb87fb}{getVal}}() \{\textcolor{keywordflow}{return} val;\}}
+\DoxyCodeLine{166 }
+\DoxyCodeLine{167 \textcolor{keyword}{private}:}
+\DoxyCodeLine{168 }
+\DoxyCodeLine{169   std::string dest, val;}
+\DoxyCodeLine{170     }
+\DoxyCodeLine{171 \};}
+\DoxyCodeLine{172 }
+\DoxyCodeLine{173 }
+\DoxyCodeLine{174 \textcolor{keyword}{class }\mbox{\hyperlink{class_copy_instr}{CopyInstr}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_i_r_instr}{IRInstr}} }
+\DoxyCodeLine{175 \{}
+\DoxyCodeLine{176 }
+\DoxyCodeLine{177 \textcolor{keyword}{public}:}
+\DoxyCodeLine{178 }
+\DoxyCodeLine{179   \mbox{\hyperlink{class_copy_instr_a77f6183e185747ff2db113bb0611d506}{CopyInstr}} (\mbox{\hyperlink{class_basic_block}{BasicBlock}} *\mbox{\hyperlink{class_i_r_instr_a0bf0264847ab1c69e99495f1456e3adf}{bb}}, \mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}} \mbox{\hyperlink{class_i_r_instr_a449e6b5f75d186ce7975dbb72c416a6b}{t}}, \textcolor{keyword}{const} std::string \&dest, \textcolor{keyword}{const} std::string \&var);}
+\DoxyCodeLine{180 }
+\DoxyCodeLine{181   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_copy_instr_a59ff3b88718e6b037e35fc2bfa65f48c}{gen\_asm}}(std::ostream \&o) \textcolor{keyword}{const};}
+\DoxyCodeLine{182 }
+\DoxyCodeLine{183 \textcolor{keyword}{private}:}
+\DoxyCodeLine{184 }
+\DoxyCodeLine{185   std::string dest, var;}
+\DoxyCodeLine{186 }
+\DoxyCodeLine{187   }
+\DoxyCodeLine{188 \};}
+\DoxyCodeLine{189 }
+\DoxyCodeLine{190 }
+\DoxyCodeLine{191 \textcolor{keyword}{class }\mbox{\hyperlink{class_neg_instr}{NegInstr}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_i_r_instr}{IRInstr}} }
+\DoxyCodeLine{192 \{}
+\DoxyCodeLine{193 }
+\DoxyCodeLine{194 \textcolor{keyword}{public}:}
+\DoxyCodeLine{195 }
+\DoxyCodeLine{196   \mbox{\hyperlink{class_neg_instr_ac6817813ce9e999e88d5c898b4b955e0}{NegInstr}} (\mbox{\hyperlink{class_basic_block}{BasicBlock}} *\mbox{\hyperlink{class_i_r_instr_a0bf0264847ab1c69e99495f1456e3adf}{bb}}, \mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}} \mbox{\hyperlink{class_i_r_instr_a449e6b5f75d186ce7975dbb72c416a6b}{t}}, \textcolor{keyword}{const} std::string \&dest, \textcolor{keyword}{const} std::string \&var);}
+\DoxyCodeLine{197 }
+\DoxyCodeLine{198   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_neg_instr_a688becfa79c6ff537ebf107f46cc831b}{gen\_asm}}(std::ostream \&o) \textcolor{keyword}{const};}
+\DoxyCodeLine{199 }
+\DoxyCodeLine{200 \textcolor{keyword}{private}:}
+\DoxyCodeLine{201 }
+\DoxyCodeLine{202   std::string dest, var;}
+\DoxyCodeLine{203 }
+\DoxyCodeLine{204   }
+\DoxyCodeLine{205 \};}
+\DoxyCodeLine{206 }
+\DoxyCodeLine{207 \textcolor{keyword}{class }\mbox{\hyperlink{class_logi_not_instr}{LogiNotInstr}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_i_r_instr}{IRInstr}} }
+\DoxyCodeLine{208 \{}
+\DoxyCodeLine{209 }
+\DoxyCodeLine{210 \textcolor{keyword}{public}:}
+\DoxyCodeLine{211 }
+\DoxyCodeLine{212   \mbox{\hyperlink{class_logi_not_instr_ab1859ce8ccfdd00a46f7c4c99f9047de}{LogiNotInstr}} (\mbox{\hyperlink{class_basic_block}{BasicBlock}} *\mbox{\hyperlink{class_i_r_instr_a0bf0264847ab1c69e99495f1456e3adf}{bb}}, \mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}} \mbox{\hyperlink{class_i_r_instr_a449e6b5f75d186ce7975dbb72c416a6b}{t}}, \textcolor{keyword}{const} std::string \&dest, \textcolor{keyword}{const} std::string \&var);}
+\DoxyCodeLine{213 }
+\DoxyCodeLine{214   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_logi_not_instr_a56bb93fdce1355f761fd9d6faf133ee5}{gen\_asm}}(std::ostream \&o) \textcolor{keyword}{const};}
+\DoxyCodeLine{215 }
+\DoxyCodeLine{216 \textcolor{keyword}{private}:}
+\DoxyCodeLine{217 }
+\DoxyCodeLine{218   std::string dest, var;}
+\DoxyCodeLine{219 }
+\DoxyCodeLine{220   }
+\DoxyCodeLine{221 \};}
+\DoxyCodeLine{222 }
+\DoxyCodeLine{223 \textcolor{keyword}{class }\mbox{\hyperlink{class_call_instr}{CallInstr}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_i_r_instr}{IRInstr}} }
+\DoxyCodeLine{224 \{}
+\DoxyCodeLine{225 }
+\DoxyCodeLine{226 \textcolor{keyword}{public}:}
+\DoxyCodeLine{227 }
+\DoxyCodeLine{228   \mbox{\hyperlink{class_call_instr_a51ffbc2b0c1b431434acd171ff92038f}{CallInstr}} (\mbox{\hyperlink{class_basic_block}{BasicBlock}} *\mbox{\hyperlink{class_i_r_instr_a0bf0264847ab1c69e99495f1456e3adf}{bb}}, \mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}} \mbox{\hyperlink{class_i_r_instr_a449e6b5f75d186ce7975dbb72c416a6b}{t}}, \textcolor{keyword}{const} std::string *params, \textcolor{keywordtype}{int} nb);}
+\DoxyCodeLine{229   \textcolor{keyword}{virtual} \mbox{\hyperlink{class_call_instr_a14babc138d986e9c17ce6fc0de39e190}{\string~CallInstr}}() \{}
+\DoxyCodeLine{230     \textcolor{keyword}{delete} [] params;}
+\DoxyCodeLine{231   \}}
+\DoxyCodeLine{232 }
+\DoxyCodeLine{233   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_call_instr_ac999b0aa0e65ee137a2607bbca4f9f6a}{gen\_asm}}(std::ostream \&o) \textcolor{keyword}{const};}
+\DoxyCodeLine{234 }
+\DoxyCodeLine{235 \textcolor{keyword}{private}:}
+\DoxyCodeLine{236 }
+\DoxyCodeLine{237   std::string *params;}
+\DoxyCodeLine{238   \textcolor{keywordtype}{int} nbParams;}
+\DoxyCodeLine{239 }
+\DoxyCodeLine{240   }
+\DoxyCodeLine{241   \textcolor{keyword}{static} \textcolor{keyword}{const} std::string regParams[6];}
+\DoxyCodeLine{242 }
+\DoxyCodeLine{243 \};}
+\DoxyCodeLine{244 }
+\DoxyCodeLine{245 \textcolor{keyword}{class }\mbox{\hyperlink{class_cmp_eq_instr}{CmpEqInstr}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_i_r_instr}{IRInstr}} }
+\DoxyCodeLine{246 \{}
+\DoxyCodeLine{247 }
+\DoxyCodeLine{248 \textcolor{keyword}{public}:}
+\DoxyCodeLine{249 }
+\DoxyCodeLine{250   \mbox{\hyperlink{class_cmp_eq_instr_a237fc924ba74e82beeb50f6b4f93dd34}{CmpEqInstr}} (\mbox{\hyperlink{class_basic_block}{BasicBlock}} *\mbox{\hyperlink{class_i_r_instr_a0bf0264847ab1c69e99495f1456e3adf}{bb}}, \mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}} \mbox{\hyperlink{class_i_r_instr_a449e6b5f75d186ce7975dbb72c416a6b}{t}}, \textcolor{keyword}{const} std::string \&dest, \textcolor{keyword}{const} std::string \&x, \textcolor{keyword}{const} std::string \&y);}
+\DoxyCodeLine{251 }
+\DoxyCodeLine{252   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_cmp_eq_instr_acf767e39db35135b89e1cb7ab43bb826}{gen\_asm}}(std::ostream \&o) \textcolor{keyword}{const};}
+\DoxyCodeLine{253 }
+\DoxyCodeLine{254 }
+\DoxyCodeLine{255 \textcolor{keyword}{private}:}
+\DoxyCodeLine{256   std::string dest, x, y;}
+\DoxyCodeLine{257   }
+\DoxyCodeLine{258 \};}
+\DoxyCodeLine{259 }
+\DoxyCodeLine{260 \textcolor{keyword}{class }\mbox{\hyperlink{class_cmp_neq_instr}{CmpNeqInstr}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_i_r_instr}{IRInstr}} }
+\DoxyCodeLine{261 \{}
+\DoxyCodeLine{262 }
+\DoxyCodeLine{263 \textcolor{keyword}{public}:}
+\DoxyCodeLine{264 }
+\DoxyCodeLine{265   \mbox{\hyperlink{class_cmp_neq_instr_adc8246170ddf9a66c75308fcf417f716}{CmpNeqInstr}} (\mbox{\hyperlink{class_basic_block}{BasicBlock}} *\mbox{\hyperlink{class_i_r_instr_a0bf0264847ab1c69e99495f1456e3adf}{bb}}, \mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}} \mbox{\hyperlink{class_i_r_instr_a449e6b5f75d186ce7975dbb72c416a6b}{t}}, \textcolor{keyword}{const} std::string \&dest, \textcolor{keyword}{const} std::string \&x, \textcolor{keyword}{const} std::string \&y);}
+\DoxyCodeLine{266 }
+\DoxyCodeLine{267   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_cmp_neq_instr_a3083abb7ea580720f985aba66e171cf6}{gen\_asm}}(std::ostream \&o) \textcolor{keyword}{const};}
+\DoxyCodeLine{268 }
+\DoxyCodeLine{269 }
+\DoxyCodeLine{270 \textcolor{keyword}{private}:}
+\DoxyCodeLine{271   std::string dest, x, y;}
+\DoxyCodeLine{272   }
+\DoxyCodeLine{273 \};}
+\DoxyCodeLine{274 }
+\DoxyCodeLine{275 \textcolor{keyword}{class }\mbox{\hyperlink{class_cmp_lt_instr}{CmpLtInstr}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_i_r_instr}{IRInstr}} }
+\DoxyCodeLine{276 \{}
+\DoxyCodeLine{277 }
+\DoxyCodeLine{278 \textcolor{keyword}{public}:}
+\DoxyCodeLine{279 }
+\DoxyCodeLine{280   \mbox{\hyperlink{class_cmp_lt_instr_a858404ab52e4ac86a1cd0ee315d7bc07}{CmpLtInstr}} (\mbox{\hyperlink{class_basic_block}{BasicBlock}} *\mbox{\hyperlink{class_i_r_instr_a0bf0264847ab1c69e99495f1456e3adf}{bb}}, \mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}} \mbox{\hyperlink{class_i_r_instr_a449e6b5f75d186ce7975dbb72c416a6b}{t}}, \textcolor{keyword}{const} std::string \&dest, \textcolor{keyword}{const} std::string \&x, \textcolor{keyword}{const} std::string \&y);}
+\DoxyCodeLine{281 }
+\DoxyCodeLine{282   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_cmp_lt_instr_a7e4a1eaaa5905ec22dedcba48b6e2404}{gen\_asm}}(std::ostream \&o) \textcolor{keyword}{const};}
+\DoxyCodeLine{283 }
+\DoxyCodeLine{284 }
+\DoxyCodeLine{285 \textcolor{keyword}{private}:}
+\DoxyCodeLine{286   std::string dest, x, y;}
+\DoxyCodeLine{287   }
+\DoxyCodeLine{288 \};}
+\DoxyCodeLine{289 }
+\DoxyCodeLine{290 \textcolor{keyword}{class }\mbox{\hyperlink{class_cmp_gt_instr}{CmpGtInstr}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_i_r_instr}{IRInstr}} }
+\DoxyCodeLine{291 \{}
+\DoxyCodeLine{292 }
+\DoxyCodeLine{293 \textcolor{keyword}{public}:}
+\DoxyCodeLine{294 }
+\DoxyCodeLine{295   \mbox{\hyperlink{class_cmp_gt_instr_a09fb28a9847fa794626ee320c33b6a7c}{CmpGtInstr}} (\mbox{\hyperlink{class_basic_block}{BasicBlock}} *\mbox{\hyperlink{class_i_r_instr_a0bf0264847ab1c69e99495f1456e3adf}{bb}}, \mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}} \mbox{\hyperlink{class_i_r_instr_a449e6b5f75d186ce7975dbb72c416a6b}{t}}, \textcolor{keyword}{const} std::string \&dest, \textcolor{keyword}{const} std::string \&x, \textcolor{keyword}{const} std::string \&y);}
+\DoxyCodeLine{296 }
+\DoxyCodeLine{297   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_cmp_gt_instr_a0ba07d28db032490db570c128f9714fa}{gen\_asm}}(std::ostream \&o) \textcolor{keyword}{const};}
+\DoxyCodeLine{298 }
+\DoxyCodeLine{299 }
+\DoxyCodeLine{300 \textcolor{keyword}{private}:}
+\DoxyCodeLine{301   std::string dest, x, y;}
+\DoxyCodeLine{302   }
+\DoxyCodeLine{303 \};}
+\DoxyCodeLine{304 }
+\DoxyCodeLine{305 \textcolor{keyword}{class }\mbox{\hyperlink{class_binary_and_instr}{BinaryAndInstr}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_i_r_instr}{IRInstr}} }
+\DoxyCodeLine{306 \{}
+\DoxyCodeLine{307 }
+\DoxyCodeLine{308 \textcolor{keyword}{public}:}
+\DoxyCodeLine{309 }
+\DoxyCodeLine{310   \mbox{\hyperlink{class_binary_and_instr_a0ff09da60ee97f48b4f3bb795792cd71}{BinaryAndInstr}} (\mbox{\hyperlink{class_basic_block}{BasicBlock}} *\mbox{\hyperlink{class_i_r_instr_a0bf0264847ab1c69e99495f1456e3adf}{bb}}, \mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}} \mbox{\hyperlink{class_i_r_instr_a449e6b5f75d186ce7975dbb72c416a6b}{t}}, \textcolor{keyword}{const} std::string \&dest, \textcolor{keyword}{const} std::string \&x, \textcolor{keyword}{const} std::string \&y);}
+\DoxyCodeLine{311 }
+\DoxyCodeLine{312   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_binary_and_instr_ae11ebf82d129c8c90f6976094cbf2a0e}{gen\_asm}}(std::ostream \&o) \textcolor{keyword}{const};}
+\DoxyCodeLine{313 }
+\DoxyCodeLine{314 \textcolor{keyword}{private}:}
+\DoxyCodeLine{315 }
+\DoxyCodeLine{316   std::string dest, x, y;}
+\DoxyCodeLine{317 }
+\DoxyCodeLine{318   }
+\DoxyCodeLine{319 \};}
+\DoxyCodeLine{320 }
+\DoxyCodeLine{321 \textcolor{keyword}{class }\mbox{\hyperlink{class_binary_xor_instr}{BinaryXorInstr}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_i_r_instr}{IRInstr}} }
+\DoxyCodeLine{322 \{}
+\DoxyCodeLine{323 }
+\DoxyCodeLine{324 \textcolor{keyword}{public}:}
+\DoxyCodeLine{325 }
+\DoxyCodeLine{326   \mbox{\hyperlink{class_binary_xor_instr_ac1f53e52df89e392409ac16c05c00e5a}{BinaryXorInstr}} (\mbox{\hyperlink{class_basic_block}{BasicBlock}} *\mbox{\hyperlink{class_i_r_instr_a0bf0264847ab1c69e99495f1456e3adf}{bb}}, \mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}} \mbox{\hyperlink{class_i_r_instr_a449e6b5f75d186ce7975dbb72c416a6b}{t}}, \textcolor{keyword}{const} std::string \&dest, \textcolor{keyword}{const} std::string \&x, \textcolor{keyword}{const} std::string \&y);}
+\DoxyCodeLine{327 }
+\DoxyCodeLine{328   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_binary_xor_instr_a2a5c21fbbe63b80ca9687b265a5312b5}{gen\_asm}}(std::ostream \&o) \textcolor{keyword}{const};}
+\DoxyCodeLine{329 }
+\DoxyCodeLine{330 \textcolor{keyword}{private}:}
+\DoxyCodeLine{331 }
+\DoxyCodeLine{332   std::string dest, x, y;}
+\DoxyCodeLine{333 }
+\DoxyCodeLine{334   }
+\DoxyCodeLine{335 \};}
+\DoxyCodeLine{336 }
+\DoxyCodeLine{337 \textcolor{keyword}{class }\mbox{\hyperlink{class_binary_or_instr}{BinaryOrInstr}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_i_r_instr}{IRInstr}} }
+\DoxyCodeLine{338 \{}
+\DoxyCodeLine{339 }
+\DoxyCodeLine{340 \textcolor{keyword}{public}:}
+\DoxyCodeLine{341 }
+\DoxyCodeLine{342   \mbox{\hyperlink{class_binary_or_instr_abc297d89b54ab231953aff1eb39ed992}{BinaryOrInstr}} (\mbox{\hyperlink{class_basic_block}{BasicBlock}} *\mbox{\hyperlink{class_i_r_instr_a0bf0264847ab1c69e99495f1456e3adf}{bb}}, \mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}} \mbox{\hyperlink{class_i_r_instr_a449e6b5f75d186ce7975dbb72c416a6b}{t}}, \textcolor{keyword}{const} std::string \&dest, \textcolor{keyword}{const} std::string \&x, \textcolor{keyword}{const} std::string \&y);}
+\DoxyCodeLine{343 }
+\DoxyCodeLine{344   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_binary_or_instr_af61e90261cff5e9adceb52c98d7e33ca}{gen\_asm}}(std::ostream \&o) \textcolor{keyword}{const};}
+\DoxyCodeLine{345 }
+\DoxyCodeLine{346 \textcolor{keyword}{private}:}
+\DoxyCodeLine{347 }
+\DoxyCodeLine{348   std::string dest, x, y;}
+\DoxyCodeLine{349 }
+\DoxyCodeLine{350   }
+\DoxyCodeLine{351 \};}
+\DoxyCodeLine{352 }
+\DoxyCodeLine{353 \textcolor{keyword}{class }\mbox{\hyperlink{class_if_else_instr}{IfElseInstr}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_i_r_instr}{IRInstr}} }
+\DoxyCodeLine{354 \{}
+\DoxyCodeLine{355 }
+\DoxyCodeLine{356   public :}
+\DoxyCodeLine{357     \mbox{\hyperlink{class_if_else_instr_adf8721d658653aab18164efc6be50195}{IfElseInstr}} (\mbox{\hyperlink{class_basic_block}{BasicBlock}} *\mbox{\hyperlink{class_i_r_instr_a0bf0264847ab1c69e99495f1456e3adf}{bb}}, \mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}} \mbox{\hyperlink{class_i_r_instr_a449e6b5f75d186ce7975dbb72c416a6b}{t}}, \textcolor{keyword}{const} std::string \&cond);}
+\DoxyCodeLine{358 }
+\DoxyCodeLine{359     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_if_else_instr_a7a26dbed1dd2d140cced078e7142dea3}{gen\_asm}}(std::ostream \&o) \textcolor{keyword}{const};}
+\DoxyCodeLine{360 }
+\DoxyCodeLine{361   \textcolor{keyword}{private}: }
+\DoxyCodeLine{362     std::string cond;}
+\DoxyCodeLine{363 \};}
+\DoxyCodeLine{364 }
+\DoxyCodeLine{365 \textcolor{keyword}{class }\mbox{\hyperlink{class_while_instr}{WhileInstr}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_i_r_instr}{IRInstr}} }
+\DoxyCodeLine{366 \{}
+\DoxyCodeLine{367 }
+\DoxyCodeLine{368   public :}
+\DoxyCodeLine{369     \mbox{\hyperlink{class_while_instr_a09e115f5a6ff7e760bef66643f21bb40}{WhileInstr}} (\mbox{\hyperlink{class_basic_block}{BasicBlock}} *\mbox{\hyperlink{class_i_r_instr_a0bf0264847ab1c69e99495f1456e3adf}{bb}}, \mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}} \mbox{\hyperlink{class_i_r_instr_a449e6b5f75d186ce7975dbb72c416a6b}{t}}, \textcolor{keyword}{const} std::string \&cond);}
+\DoxyCodeLine{370 }
+\DoxyCodeLine{371     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_while_instr_a13878f7f34ae64e4daabde1f26dde58e}{gen\_asm}}(std::ostream \&o) \textcolor{keyword}{const};}
+\DoxyCodeLine{372 }
+\DoxyCodeLine{373   \textcolor{keyword}{private}: }
+\DoxyCodeLine{374     std::string cond;}
+\DoxyCodeLine{375 \};}
+\DoxyCodeLine{376 }
+\DoxyCodeLine{377 \textcolor{keyword}{class }\mbox{\hyperlink{class_jmp_instr}{JmpInstr}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_i_r_instr}{IRInstr}} }
+\DoxyCodeLine{378 \{}
+\DoxyCodeLine{379 }
+\DoxyCodeLine{380   public :}
+\DoxyCodeLine{381     \mbox{\hyperlink{class_jmp_instr_a767f41e1b4da3abed6823422b61d53d1}{JmpInstr}} (\mbox{\hyperlink{class_basic_block}{BasicBlock}} *\mbox{\hyperlink{class_i_r_instr_a0bf0264847ab1c69e99495f1456e3adf}{bb}}, \mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}} \mbox{\hyperlink{class_i_r_instr_a449e6b5f75d186ce7975dbb72c416a6b}{t}}, \textcolor{keyword}{const} std::string \&dest);}
+\DoxyCodeLine{382 }
+\DoxyCodeLine{383     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_jmp_instr_afb8b57e6559a8b8daea2e9f412332b20}{gen\_asm}}(std::ostream \&o) \textcolor{keyword}{const};}
+\DoxyCodeLine{384 }
+\DoxyCodeLine{385   \textcolor{keyword}{private}: }
+\DoxyCodeLine{386     std::string dest;}
+\DoxyCodeLine{387 \};}
+\DoxyCodeLine{388 }
+\DoxyCodeLine{389 }
+\DoxyCodeLine{390 \textcolor{keyword}{class }\mbox{\hyperlink{class_get_params_instr}{GetParamsInstr}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_i_r_instr}{IRInstr}} }
+\DoxyCodeLine{391 \{}
+\DoxyCodeLine{392 }
+\DoxyCodeLine{393 }
+\DoxyCodeLine{394 \textcolor{keyword}{public}:}
+\DoxyCodeLine{395 }
+\DoxyCodeLine{396   \mbox{\hyperlink{class_get_params_instr_a984e6882ff2a4724286f6221eed84ef4}{GetParamsInstr}} (\mbox{\hyperlink{class_basic_block}{BasicBlock}} *\mbox{\hyperlink{class_i_r_instr_a0bf0264847ab1c69e99495f1456e3adf}{bb}}, \mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}} \mbox{\hyperlink{class_i_r_instr_a449e6b5f75d186ce7975dbb72c416a6b}{t}}, \textcolor{keyword}{const} std::string *params, \textcolor{keywordtype}{int} nb);}
+\DoxyCodeLine{397   \textcolor{keyword}{virtual} \mbox{\hyperlink{class_get_params_instr_a464da380d90667f95da41d5f67a1c2e5}{\string~GetParamsInstr}}() \{}
+\DoxyCodeLine{398     \textcolor{keyword}{delete} [] params;}
+\DoxyCodeLine{399   \}}
+\DoxyCodeLine{400 }
+\DoxyCodeLine{401   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_get_params_instr_a44b1385bce1d56345d25776a975ac640}{gen\_asm}}(std::ostream \&o) \textcolor{keyword}{const};}
+\DoxyCodeLine{402 }
+\DoxyCodeLine{403 \textcolor{keyword}{private}:}
+\DoxyCodeLine{404 }
+\DoxyCodeLine{405   std::string *params;}
+\DoxyCodeLine{406   \textcolor{keywordtype}{int} nbParams;}
+\DoxyCodeLine{407 }
+\DoxyCodeLine{408   }
+\DoxyCodeLine{409   \textcolor{keyword}{static} \textcolor{keyword}{const} std::string regParams[6];}
+\DoxyCodeLine{410 }
+\DoxyCodeLine{411 \};}
+\DoxyCodeLine{412 }
+\DoxyCodeLine{413 }
+\DoxyCodeLine{414 \textcolor{keyword}{class }\mbox{\hyperlink{class_ret_instr}{RetInstr}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_i_r_instr}{IRInstr}} }
+\DoxyCodeLine{415 \{}
+\DoxyCodeLine{416 }
+\DoxyCodeLine{417   public :}
+\DoxyCodeLine{418     \mbox{\hyperlink{class_ret_instr_ace24fbfcc392bb214a66b305a6a16a3d}{RetInstr}} (\mbox{\hyperlink{class_basic_block}{BasicBlock}} *\mbox{\hyperlink{class_i_r_instr_a0bf0264847ab1c69e99495f1456e3adf}{bb}}, \mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}} \mbox{\hyperlink{class_i_r_instr_a449e6b5f75d186ce7975dbb72c416a6b}{t}}, \textcolor{keyword}{const} std::string \&var);}
+\DoxyCodeLine{419 }
+\DoxyCodeLine{420     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_ret_instr_af0fd843bc29e5ebc3ae1850fdf9d7048}{gen\_asm}}(std::ostream \&o) \textcolor{keyword}{const};}
+\DoxyCodeLine{421 }
+\DoxyCodeLine{422   \textcolor{keyword}{private}: }
+\DoxyCodeLine{423     std::string var;}
+\DoxyCodeLine{424 \};}
+\DoxyCodeLine{425 }
+\DoxyCodeLine{426 \textcolor{keyword}{class }\mbox{\hyperlink{class_get_ret_instr}{GetRetInstr}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_i_r_instr}{IRInstr}} }
+\DoxyCodeLine{427 \{}
+\DoxyCodeLine{428 }
+\DoxyCodeLine{429 \textcolor{keyword}{public}:}
+\DoxyCodeLine{430 }
+\DoxyCodeLine{431   \mbox{\hyperlink{class_get_ret_instr_a302541b301cdc42c2987cd6deece39f4}{GetRetInstr}} (\mbox{\hyperlink{class_basic_block}{BasicBlock}} *\mbox{\hyperlink{class_i_r_instr_a0bf0264847ab1c69e99495f1456e3adf}{bb}}, \mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}} \mbox{\hyperlink{class_i_r_instr_a449e6b5f75d186ce7975dbb72c416a6b}{t}}, \textcolor{keyword}{const} std::string \&dest);}
+\DoxyCodeLine{432 }
+\DoxyCodeLine{433   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_get_ret_instr_a90d2983c8c9f9c9166a08f5e46ff89ab}{gen\_asm}}(std::ostream \&o) \textcolor{keyword}{const};}
+\DoxyCodeLine{434 }
+\DoxyCodeLine{435 \textcolor{keyword}{private}:}
+\DoxyCodeLine{436 }
+\DoxyCodeLine{437   std::string dest;}
+\DoxyCodeLine{438     }
+\DoxyCodeLine{439 \};}
+\DoxyCodeLine{440 }
+\DoxyCodeLine{441 }
+\DoxyCodeLine{442 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

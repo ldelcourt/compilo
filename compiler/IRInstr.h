@@ -15,11 +15,12 @@ class BasicBlock;
 
 
 
-//! The class for one 3-address instruction
+/**
+ * @brief Classe mère des instructions IR
+ **/
 class IRInstr {
  
 public:
-  /** The instructions themselves -- feel free to subclass instead */
   typedef enum {
     ldconst,
     copy,
@@ -43,28 +44,25 @@ public:
     jmp,
     getparams,
     ret,
-    rmem, //Arret ici dans l'implementation
-    wmem,
-  } Operation;
+    getret
+  } Operation; /**<Les différentes instructions connus**/
 
 
-  /**  constructor */
-  IRInstr(BasicBlock* bb_, Operation op, Type t);
-  virtual ~IRInstr() {}
-	
-  /** Actual code generation */
-  virtual void gen_asm(std::ostream &o) const = 0; /**< x86 assembly code generation for this IR instruction */
+  IRInstr(BasicBlock* bb_, Operation op, Type t); /**<Constructeur**/
+  virtual ~IRInstr() {} /**<Destructeur**/
+
   
+  virtual void gen_asm(std::ostream &o) const = 0; /**< x86 assembly code generation for this IR instruction */
 
-  /** Create instance of good IRInstr subclass according to op **/
-  static IRInstr* createInstr(BasicBlock *bb, Operation op, Type t, const std::string *params, int nb);
+  
+  static IRInstr* createInstr(BasicBlock *bb, Operation op, Type t, const std::string *params, int nb); /**<Create instance of good IRInstr subclass according to op **/
 
   
 protected:
   
   BasicBlock* bb; /**< The BB this instruction belongs to, which provides a pointer to the CFG this instruction belong to */
   Operation op;
-  Type t;
+  Type t; /**<Type de données que manipule l'instruction**/
 
   
   
@@ -72,7 +70,8 @@ protected:
 
 
 
-class AddInstr : public IRInstr {
+class AddInstr : public IRInstr /**<Instruction d'addition (dest = x+y)**/
+{
 
 public:
 
@@ -88,7 +87,8 @@ private:
   
 };
 
-class SubInstr : public IRInstr {
+class SubInstr : public IRInstr /**<Instruction de soustraction (dest = x-y)**/
+{
 
 public:
 
@@ -103,7 +103,8 @@ private:
 };
 
 
-class MulInstr : public IRInstr {
+class MulInstr : public IRInstr /**<Instruction de multiplication (dest = x*y)**/
+{
 
 public:
 
@@ -117,7 +118,8 @@ private:
   
 };
 
-class DivInstr : public IRInstr {
+class DivInstr : public IRInstr /**<Instruction de division (dest = x/y)**/
+{
 
 public:
 
@@ -133,7 +135,8 @@ private:
   
 };
 
-class ModInstr : public IRInstr {
+class ModInstr : public IRInstr /**<Instruction de modulo (dest = x%y)**/
+{
 
 public:
 
@@ -150,7 +153,8 @@ private:
 
 
 
-class LdconstInstr : public IRInstr {
+class LdconstInstr : public IRInstr /**<Instruction de copie de constante (dest = val_constante)**/
+{
 
 public:
 
@@ -167,7 +171,8 @@ private:
 };
 
 
-class CopyInstr : public IRInstr {
+class CopyInstr : public IRInstr /**<Instruction de copie de variables (dest = variable)**/
+{
 
 public:
 
@@ -183,7 +188,8 @@ private:
 };
 
 
-class NegInstr : public IRInstr {
+class NegInstr : public IRInstr /**<Instruction de negation (dest = -var)**/
+{
 
 public:
 
@@ -198,7 +204,8 @@ private:
   
 };
 
-class LogiNotInstr : public IRInstr {
+class LogiNotInstr : public IRInstr /**<Instruction du non logique (dest = !var)**/
+{
 
 public:
 
@@ -213,8 +220,8 @@ private:
   
 };
 
-class CallInstr : public IRInstr {
-
+class CallInstr : public IRInstr /**<Instruction d'appel de fonction (fonction(a, b, ...))**/
+{
 
 public:
 
@@ -235,7 +242,8 @@ private:
 
 };
 
-class CmpEqInstr : public IRInstr {
+class CmpEqInstr : public IRInstr /**<Instruction de test d'egalité (dest = (x==y))**/
+{
 
 public:
 
@@ -249,7 +257,8 @@ private:
   
 };
 
-class CmpNeqInstr : public IRInstr {
+class CmpNeqInstr : public IRInstr /**<Instruction de test pas d'egalité (dest = (x != y))**/
+{
 
 public:
 
@@ -263,7 +272,8 @@ private:
   
 };
 
-class CmpLtInstr : public IRInstr {
+class CmpLtInstr : public IRInstr /**<Instruction de comparaison plus petit que (dest = (x < y))**/
+{
 
 public:
 
@@ -277,7 +287,8 @@ private:
   
 };
 
-class CmpGtInstr : public IRInstr {
+class CmpGtInstr : public IRInstr /**<Instruction de comparaison plus grand que (dest = (x > y))**/
+{
 
 public:
 
@@ -291,7 +302,8 @@ private:
   
 };
 
-class BinaryAndInstr : public IRInstr {
+class BinaryAndInstr : public IRInstr /**<Instruction du ET binaire (dest = (x & y))**/
+{
 
 public:
 
@@ -306,7 +318,8 @@ private:
   
 };
 
-class BinaryXorInstr : public IRInstr {
+class BinaryXorInstr : public IRInstr /**<Instruction du XOR binaire (dest = (x ^ y))**/
+{
 
 public:
 
@@ -321,7 +334,8 @@ private:
   
 };
 
-class BinaryOrInstr : public IRInstr {
+class BinaryOrInstr : public IRInstr /**<Instruction du OU binaire (dest = (x | y))**/
+{
 
 public:
 
@@ -336,7 +350,8 @@ private:
   
 };
 
-class IfElseInstr : public IRInstr {
+class IfElseInstr : public IRInstr /**<Instruction du if else**/
+{
 
   public :
     IfElseInstr (BasicBlock *bb, Type t, const std::string &cond);
@@ -347,7 +362,8 @@ class IfElseInstr : public IRInstr {
     std::string cond;
 };
 
-class WhileInstr : public IRInstr {
+class WhileInstr : public IRInstr /**<Instruction du while**/
+{
 
   public :
     WhileInstr (BasicBlock *bb, Type t, const std::string &cond);
@@ -358,7 +374,8 @@ class WhileInstr : public IRInstr {
     std::string cond;
 };
 
-class JmpInstr : public IRInstr {
+class JmpInstr : public IRInstr /**<Instruction du jump vers un autre block**/
+{
 
   public :
     JmpInstr (BasicBlock *bb, Type t, const std::string &dest);
@@ -370,7 +387,8 @@ class JmpInstr : public IRInstr {
 };
 
 
-class GetParamsInstr : public IRInstr {
+class GetParamsInstr : public IRInstr /**<Instruction de recupération des paramètres passés à une fonction**/
+{
 
 
 public:
@@ -393,7 +411,8 @@ private:
 };
 
 
-class RetInstr : public IRInstr {
+class RetInstr : public IRInstr /**<Instruction de passage d'une valeur en return d'une fonction**/
+{
 
   public :
     RetInstr (BasicBlock *bb, Type t, const std::string &var);
@@ -403,5 +422,21 @@ class RetInstr : public IRInstr {
   private: 
     std::string var;
 };
+
+class GetRetInstr : public IRInstr /**<Instruction de recupération d'une valeur renvoyé par une fonction**/
+{
+
+public:
+
+  GetRetInstr (BasicBlock *bb, Type t, const std::string &dest);
+
+  virtual void gen_asm(std::ostream &o) const;
+
+private:
+
+  std::string dest;
+    
+};
+
 
 #endif

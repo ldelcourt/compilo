@@ -7,10 +7,12 @@
 #include <vector>
 #include <string>
 
-#include "SymbolTable.h"
 #include "IR.h"
 
 
+/**
+ * @brief Structure rassemblant les informations contenus dans un prototype de fonction C
+ **/
 typedef struct {
   
   std::string name;
@@ -20,43 +22,25 @@ typedef struct {
 } Function;
 
 
+/**
+ * @brief Visiteur de fonction C
+ * @details
+ *  Parcourt l'AST de l'axiom de la grammaire.
+ *  Enregistre une table des fonctions
+ * 
+ **/
 class  FunctionVisitor : public ifccBaseVisitor {
 public:
 
 
-  FunctionVisitor(bool debug = false, bool symbol = false) : ifccBaseVisitor(), debug(debug), symbol(symbol), error(false) {
-
-    Function *f = new Function();
-    f->name = "putchar";
-    f->typeReturn = Type::VOID;
-    f->params.push_back(Type::INT);
-
-    functions.push_back(f);
-
-    f = new Function();
-    f->name = "getchar";
-    f->typeReturn = Type::INT;
-
-    functions.push_back(f);
-  }
-    
-  virtual ~FunctionVisitor() {
-
-    for (CFG* cfg : tab) {
-      delete cfg;
-    }
-    for (Function *f : functions) {
-      delete f;
-    }
-  }
+  FunctionVisitor(bool debug = false, bool symbol = false);  
+  virtual ~FunctionVisitor();
 
 
   virtual antlrcpp::Any visitProg(ifccParser::ProgContext *ctx) override;
 
   virtual antlrcpp::Any visitDeclaration_function(ifccParser::Declaration_functionContext *ctx) override;
-
   virtual antlrcpp::Any visitDefinition_function(ifccParser::Definition_functionContext *ctx) override;
-
 
   virtual antlrcpp::Any visitParametres(ifccParser::ParametresContext *ctx) override;
   virtual antlrcpp::Any visitParametre(ifccParser::ParametreContext *ctx) override;
@@ -70,16 +54,23 @@ public:
     return error;
   }
 
+  /**
+   * @brief appel gen_asm de chaque cfg présent
+   **/
   void gen_asm(std::ostream &o);
   
 private:
 
-  std::vector<CFG*> tab;
+  std::vector<CFG*> tab; /**<un CFG par fonction**/
   bool debug, symbol, error;
 
-  std::vector<Function*> functions;
+  std::vector<Function*> functions; /**<tableau des fonctions du contenu dans le fichier source**/
 
 
+  /**
+   * @brief renvoie l'indice dans functions si la fonction ayant name comme nom existe
+   * @param name nom potentiel d'une fonction
+   **/
   int function_exist(const std::string &name);
   
 };

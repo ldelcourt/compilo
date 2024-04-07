@@ -1,0 +1,5 @@
+<map id="BinaryAndInstr" name="BinaryAndInstr">
+<area shape="rect" id="node1" title=" " alt="" coords="5,173,124,200"/>
+<area shape="rect" id="node2" href="$class_i_r_instr.html" title="Classe mère des instructions IR." alt="" coords="33,97,97,124"/>
+<area shape="rect" id="node3" href="$class_basic_block.html" title="The class for a basic block." alt="" coords="18,7,111,33"/>
+</map>

@@ -1,0 +1,253 @@
+\hypertarget{class_i_r_instr}{}\doxysection{IRInstr Class Reference}
+\label{class_i_r_instr}\index{IRInstr@{IRInstr}}
+
+
+Classe mère des instructions IR.  
+
+
+
+
+{\ttfamily \#include $<$IRInstr.\+h$>$}
+
+
+
+Inheritance diagram for IRInstr\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_i_r_instr__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for IRInstr\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=220pt]{class_i_r_instr__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15}{Operation}} \{ \newline
+\mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15aca434b8ea2289b300adffe4d7177464b}{ldconst}}
+, \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15ae1a39a175e0db60521741b775fcd77ec}{copy}}
+, \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a5ea0d6cae2d2b73ce167042d2584aca8}{add}}
+, \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15aa55951c56d52ea1ca49066e420be99c0}{sub}}
+, \newline
+\mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a6636565bd433d10de6878d80f0b75546}{mul}}
+, \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a57a9112e2a510637354fe62dc5364454}{div}}
+, \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a789b6016c462f6c6e5b1671107cd7d08}{mod}}
+, \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a6317d64127aa707de4e9c8258f4be689}{neg}}
+, \newline
+\mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15ac3e2a22c8a914f16ae47351d0494e397}{logi\+Not}}
+, \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a5ab1bfcb25f200319a570ae4d9967785}{call}}
+, \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15acce36d79a13e3cd29a613b23e61e7313}{cmp\+\_\+eq}}
+, \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15aba0535af5da9857ab13bd9017e5d24bc}{cmp\+\_\+neq}}
+, \newline
+\mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15abec19d69dcb94e11691886175a6d1473}{cmp\+\_\+lt}}
+, \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a3d7c9a9592555029b0c37d7763f4b0e8}{cmp\+\_\+gt}}
+, \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a2298b4873e29665515f4dce2842e9989}{binary\+\_\+and}}
+, \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a22980dc6fc428a0604e12b13404074cf}{binary\+\_\+xor}}
+, \newline
+\mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a275bdf87ebb8fbc4ef96449ee4b451ed}{binary\+\_\+or}}
+, \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a0d2f155d609088f14f29ed3e796af87a}{ifelse}}
+, \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15af132e593b29126c119e4b7ec882172c5}{while\+\_\+}}
+, \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a8c9661f7391293c23f9b8f314210ed75}{jmp}}
+, \newline
+\mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a3bb0d627a9596a4311020717e48a52fc}{getparams}}
+, \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a0164ea8315f2834f64794e426315679d}{ret}}
+, \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a2e798df5ed9c4b69fb798013d8836f50}{getret}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_i_r_instr_a4b4b502c145be6a096989a7f24587841}{IRInstr}} (\mbox{\hyperlink{class_basic_block}{Basic\+Block}} $\ast$bb\+\_\+, \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15}{Operation}} \mbox{\hyperlink{class_i_r_instr_aa245c38629c572258e4b1e86febb5da6}{op}}, \mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}} \mbox{\hyperlink{class_i_r_instr_a449e6b5f75d186ce7975dbb72c416a6b}{t}})
+\item 
+virtual \mbox{\hyperlink{class_i_r_instr_a606ebf26f5825e92c64c64c80495b9dd}{$\sim$\+IRInstr}} ()
+\item 
+virtual void \mbox{\hyperlink{class_i_r_instr_a2033117dbd12955e9b290882bc721b9c}{gen\+\_\+asm}} (std\+::ostream \&o) const =0
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_i_r_instr}{IRInstr}} $\ast$ \mbox{\hyperlink{class_i_r_instr_af50ae0421c292d7bf5de79be02603911}{create\+Instr}} (\mbox{\hyperlink{class_basic_block}{Basic\+Block}} $\ast$\mbox{\hyperlink{class_i_r_instr_a0bf0264847ab1c69e99495f1456e3adf}{bb}}, \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15}{Operation}} \mbox{\hyperlink{class_i_r_instr_aa245c38629c572258e4b1e86febb5da6}{op}}, \mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}} \mbox{\hyperlink{class_i_r_instr_a449e6b5f75d186ce7975dbb72c416a6b}{t}}, const std\+::string $\ast$params, int nb)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_basic_block}{Basic\+Block}} $\ast$ \mbox{\hyperlink{class_i_r_instr_a0bf0264847ab1c69e99495f1456e3adf}{bb}}
+\item 
+\mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15}{Operation}} \mbox{\hyperlink{class_i_r_instr_aa245c38629c572258e4b1e86febb5da6}{op}}
+\item 
+\mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}} \mbox{\hyperlink{class_i_r_instr_a449e6b5f75d186ce7975dbb72c416a6b}{t}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Classe mère des instructions IR. 
+
+\doxysubsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15}\label{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15}} 
+\index{IRInstr@{IRInstr}!Operation@{Operation}}
+\index{Operation@{Operation}!IRInstr@{IRInstr}}
+\doxysubsubsection{\texorpdfstring{Operation}{Operation}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15}{IRInstr\+::\+Operation}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ldconst@{ldconst}!IRInstr@{IRInstr}}\index{IRInstr@{IRInstr}!ldconst@{ldconst}}}\mbox{\Hypertarget{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15aca434b8ea2289b300adffe4d7177464b}\label{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15aca434b8ea2289b300adffe4d7177464b}} 
+ldconst&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{copy@{copy}!IRInstr@{IRInstr}}\index{IRInstr@{IRInstr}!copy@{copy}}}\mbox{\Hypertarget{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15ae1a39a175e0db60521741b775fcd77ec}\label{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15ae1a39a175e0db60521741b775fcd77ec}} 
+copy&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{add@{add}!IRInstr@{IRInstr}}\index{IRInstr@{IRInstr}!add@{add}}}\mbox{\Hypertarget{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a5ea0d6cae2d2b73ce167042d2584aca8}\label{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a5ea0d6cae2d2b73ce167042d2584aca8}} 
+add&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{sub@{sub}!IRInstr@{IRInstr}}\index{IRInstr@{IRInstr}!sub@{sub}}}\mbox{\Hypertarget{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15aa55951c56d52ea1ca49066e420be99c0}\label{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15aa55951c56d52ea1ca49066e420be99c0}} 
+sub&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{mul@{mul}!IRInstr@{IRInstr}}\index{IRInstr@{IRInstr}!mul@{mul}}}\mbox{\Hypertarget{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a6636565bd433d10de6878d80f0b75546}\label{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a6636565bd433d10de6878d80f0b75546}} 
+mul&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{div@{div}!IRInstr@{IRInstr}}\index{IRInstr@{IRInstr}!div@{div}}}\mbox{\Hypertarget{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a57a9112e2a510637354fe62dc5364454}\label{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a57a9112e2a510637354fe62dc5364454}} 
+div&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{mod@{mod}!IRInstr@{IRInstr}}\index{IRInstr@{IRInstr}!mod@{mod}}}\mbox{\Hypertarget{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a789b6016c462f6c6e5b1671107cd7d08}\label{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a789b6016c462f6c6e5b1671107cd7d08}} 
+mod&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{neg@{neg}!IRInstr@{IRInstr}}\index{IRInstr@{IRInstr}!neg@{neg}}}\mbox{\Hypertarget{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a6317d64127aa707de4e9c8258f4be689}\label{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a6317d64127aa707de4e9c8258f4be689}} 
+neg&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{logiNot@{logiNot}!IRInstr@{IRInstr}}\index{IRInstr@{IRInstr}!logiNot@{logiNot}}}\mbox{\Hypertarget{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15ac3e2a22c8a914f16ae47351d0494e397}\label{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15ac3e2a22c8a914f16ae47351d0494e397}} 
+logi\+Not&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{call@{call}!IRInstr@{IRInstr}}\index{IRInstr@{IRInstr}!call@{call}}}\mbox{\Hypertarget{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a5ab1bfcb25f200319a570ae4d9967785}\label{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a5ab1bfcb25f200319a570ae4d9967785}} 
+call&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{cmp\_eq@{cmp\_eq}!IRInstr@{IRInstr}}\index{IRInstr@{IRInstr}!cmp\_eq@{cmp\_eq}}}\mbox{\Hypertarget{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15acce36d79a13e3cd29a613b23e61e7313}\label{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15acce36d79a13e3cd29a613b23e61e7313}} 
+cmp\+\_\+eq&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{cmp\_neq@{cmp\_neq}!IRInstr@{IRInstr}}\index{IRInstr@{IRInstr}!cmp\_neq@{cmp\_neq}}}\mbox{\Hypertarget{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15aba0535af5da9857ab13bd9017e5d24bc}\label{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15aba0535af5da9857ab13bd9017e5d24bc}} 
+cmp\+\_\+neq&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{cmp\_lt@{cmp\_lt}!IRInstr@{IRInstr}}\index{IRInstr@{IRInstr}!cmp\_lt@{cmp\_lt}}}\mbox{\Hypertarget{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15abec19d69dcb94e11691886175a6d1473}\label{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15abec19d69dcb94e11691886175a6d1473}} 
+cmp\+\_\+lt&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{cmp\_gt@{cmp\_gt}!IRInstr@{IRInstr}}\index{IRInstr@{IRInstr}!cmp\_gt@{cmp\_gt}}}\mbox{\Hypertarget{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a3d7c9a9592555029b0c37d7763f4b0e8}\label{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a3d7c9a9592555029b0c37d7763f4b0e8}} 
+cmp\+\_\+gt&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{binary\_and@{binary\_and}!IRInstr@{IRInstr}}\index{IRInstr@{IRInstr}!binary\_and@{binary\_and}}}\mbox{\Hypertarget{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a2298b4873e29665515f4dce2842e9989}\label{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a2298b4873e29665515f4dce2842e9989}} 
+binary\+\_\+and&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{binary\_xor@{binary\_xor}!IRInstr@{IRInstr}}\index{IRInstr@{IRInstr}!binary\_xor@{binary\_xor}}}\mbox{\Hypertarget{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a22980dc6fc428a0604e12b13404074cf}\label{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a22980dc6fc428a0604e12b13404074cf}} 
+binary\+\_\+xor&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{binary\_or@{binary\_or}!IRInstr@{IRInstr}}\index{IRInstr@{IRInstr}!binary\_or@{binary\_or}}}\mbox{\Hypertarget{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a275bdf87ebb8fbc4ef96449ee4b451ed}\label{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a275bdf87ebb8fbc4ef96449ee4b451ed}} 
+binary\+\_\+or&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ifelse@{ifelse}!IRInstr@{IRInstr}}\index{IRInstr@{IRInstr}!ifelse@{ifelse}}}\mbox{\Hypertarget{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a0d2f155d609088f14f29ed3e796af87a}\label{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a0d2f155d609088f14f29ed3e796af87a}} 
+ifelse&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{while\_@{while\_}!IRInstr@{IRInstr}}\index{IRInstr@{IRInstr}!while\_@{while\_}}}\mbox{\Hypertarget{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15af132e593b29126c119e4b7ec882172c5}\label{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15af132e593b29126c119e4b7ec882172c5}} 
+while\+\_\+&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{jmp@{jmp}!IRInstr@{IRInstr}}\index{IRInstr@{IRInstr}!jmp@{jmp}}}\mbox{\Hypertarget{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a8c9661f7391293c23f9b8f314210ed75}\label{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a8c9661f7391293c23f9b8f314210ed75}} 
+jmp&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{getparams@{getparams}!IRInstr@{IRInstr}}\index{IRInstr@{IRInstr}!getparams@{getparams}}}\mbox{\Hypertarget{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a3bb0d627a9596a4311020717e48a52fc}\label{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a3bb0d627a9596a4311020717e48a52fc}} 
+getparams&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ret@{ret}!IRInstr@{IRInstr}}\index{IRInstr@{IRInstr}!ret@{ret}}}\mbox{\Hypertarget{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a0164ea8315f2834f64794e426315679d}\label{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a0164ea8315f2834f64794e426315679d}} 
+ret&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{getret@{getret}!IRInstr@{IRInstr}}\index{IRInstr@{IRInstr}!getret@{getret}}}\mbox{\Hypertarget{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a2e798df5ed9c4b69fb798013d8836f50}\label{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15a2e798df5ed9c4b69fb798013d8836f50}} 
+getret&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_i_r_instr_a4b4b502c145be6a096989a7f24587841}\label{class_i_r_instr_a4b4b502c145be6a096989a7f24587841}} 
+\index{IRInstr@{IRInstr}!IRInstr@{IRInstr}}
+\index{IRInstr@{IRInstr}!IRInstr@{IRInstr}}
+\doxysubsubsection{\texorpdfstring{IRInstr()}{IRInstr()}}
+{\footnotesize\ttfamily IRInstr\+::\+IRInstr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_basic_block}{Basic\+Block}} $\ast$}]{bb\+\_\+,  }\item[{\mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15}{Operation}}}]{op,  }\item[{\mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}}}]{t }\end{DoxyParamCaption})}
+
+Constructeur \mbox{\Hypertarget{class_i_r_instr_a606ebf26f5825e92c64c64c80495b9dd}\label{class_i_r_instr_a606ebf26f5825e92c64c64c80495b9dd}} 
+\index{IRInstr@{IRInstr}!````~IRInstr@{$\sim$IRInstr}}
+\index{````~IRInstr@{$\sim$IRInstr}!IRInstr@{IRInstr}}
+\doxysubsubsection{\texorpdfstring{$\sim$IRInstr()}{~IRInstr()}}
+{\footnotesize\ttfamily virtual IRInstr\+::$\sim$\+IRInstr (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Destructeur 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_i_r_instr_af50ae0421c292d7bf5de79be02603911}\label{class_i_r_instr_af50ae0421c292d7bf5de79be02603911}} 
+\index{IRInstr@{IRInstr}!createInstr@{createInstr}}
+\index{createInstr@{createInstr}!IRInstr@{IRInstr}}
+\doxysubsubsection{\texorpdfstring{createInstr()}{createInstr()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_i_r_instr}{IRInstr}} $\ast$ IRInstr\+::create\+Instr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_basic_block}{Basic\+Block}} $\ast$}]{bb,  }\item[{\mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15}{Operation}}}]{op,  }\item[{\mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}}}]{t,  }\item[{const std\+::string $\ast$}]{params,  }\item[{int}]{nb }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Create instance of good \mbox{\hyperlink{class_i_r_instr}{IRInstr}} subclass according to op \mbox{\Hypertarget{class_i_r_instr_a2033117dbd12955e9b290882bc721b9c}\label{class_i_r_instr_a2033117dbd12955e9b290882bc721b9c}} 
+\index{IRInstr@{IRInstr}!gen\_asm@{gen\_asm}}
+\index{gen\_asm@{gen\_asm}!IRInstr@{IRInstr}}
+\doxysubsubsection{\texorpdfstring{gen\_asm()}{gen\_asm()}}
+{\footnotesize\ttfamily virtual void IRInstr\+::gen\+\_\+asm (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{o }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+x86 assembly code generation for this IR instruction 
+
+Implemented in \mbox{\hyperlink{class_add_instr_a9567dee930097977e39971b94952664d}{Add\+Instr}}, \mbox{\hyperlink{class_sub_instr_acc1abd72373fbbc8052b9c3aa06b9da0}{Sub\+Instr}}, \mbox{\hyperlink{class_mul_instr_a1e6f5dba180432d55c86f3f8d76dc2b3}{Mul\+Instr}}, \mbox{\hyperlink{class_div_instr_ac96fac4a2a7bf5a8e46b8783f03dc014}{Div\+Instr}}, \mbox{\hyperlink{class_mod_instr_a69137a91e248b3ab7a210296bb7bc93c}{Mod\+Instr}}, \mbox{\hyperlink{class_ldconst_instr_a684c97cd522901a62c63f63f4863b47a}{Ldconst\+Instr}}, \mbox{\hyperlink{class_copy_instr_a59ff3b88718e6b037e35fc2bfa65f48c}{Copy\+Instr}}, \mbox{\hyperlink{class_neg_instr_a688becfa79c6ff537ebf107f46cc831b}{Neg\+Instr}}, \mbox{\hyperlink{class_logi_not_instr_a56bb93fdce1355f761fd9d6faf133ee5}{Logi\+Not\+Instr}}, \mbox{\hyperlink{class_call_instr_ac999b0aa0e65ee137a2607bbca4f9f6a}{Call\+Instr}}, \mbox{\hyperlink{class_cmp_eq_instr_acf767e39db35135b89e1cb7ab43bb826}{Cmp\+Eq\+Instr}}, \mbox{\hyperlink{class_cmp_neq_instr_a3083abb7ea580720f985aba66e171cf6}{Cmp\+Neq\+Instr}}, \mbox{\hyperlink{class_cmp_lt_instr_a7e4a1eaaa5905ec22dedcba48b6e2404}{Cmp\+Lt\+Instr}}, \mbox{\hyperlink{class_cmp_gt_instr_a0ba07d28db032490db570c128f9714fa}{Cmp\+Gt\+Instr}}, \mbox{\hyperlink{class_binary_and_instr_ae11ebf82d129c8c90f6976094cbf2a0e}{Binary\+And\+Instr}}, \mbox{\hyperlink{class_binary_xor_instr_a2a5c21fbbe63b80ca9687b265a5312b5}{Binary\+Xor\+Instr}}, \mbox{\hyperlink{class_binary_or_instr_af61e90261cff5e9adceb52c98d7e33ca}{Binary\+Or\+Instr}}, \mbox{\hyperlink{class_if_else_instr_a7a26dbed1dd2d140cced078e7142dea3}{If\+Else\+Instr}}, \mbox{\hyperlink{class_while_instr_a13878f7f34ae64e4daabde1f26dde58e}{While\+Instr}}, \mbox{\hyperlink{class_jmp_instr_afb8b57e6559a8b8daea2e9f412332b20}{Jmp\+Instr}}, \mbox{\hyperlink{class_get_params_instr_a44b1385bce1d56345d25776a975ac640}{Get\+Params\+Instr}}, \mbox{\hyperlink{class_ret_instr_af0fd843bc29e5ebc3ae1850fdf9d7048}{Ret\+Instr}}, and \mbox{\hyperlink{class_get_ret_instr_a90d2983c8c9f9c9166a08f5e46ff89ab}{Get\+Ret\+Instr}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_i_r_instr_a0bf0264847ab1c69e99495f1456e3adf}\label{class_i_r_instr_a0bf0264847ab1c69e99495f1456e3adf}} 
+\index{IRInstr@{IRInstr}!bb@{bb}}
+\index{bb@{bb}!IRInstr@{IRInstr}}
+\doxysubsubsection{\texorpdfstring{bb}{bb}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_basic_block}{Basic\+Block}}$\ast$ IRInstr\+::bb\hspace{0.3cm}{\ttfamily [protected]}}
+
+The BB this instruction belongs to, which provides a pointer to the \mbox{\hyperlink{class_c_f_g}{CFG}} this instruction belong to \mbox{\Hypertarget{class_i_r_instr_aa245c38629c572258e4b1e86febb5da6}\label{class_i_r_instr_aa245c38629c572258e4b1e86febb5da6}} 
+\index{IRInstr@{IRInstr}!op@{op}}
+\index{op@{op}!IRInstr@{IRInstr}}
+\doxysubsubsection{\texorpdfstring{op}{op}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15}{Operation}} IRInstr\+::op\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_i_r_instr_a449e6b5f75d186ce7975dbb72c416a6b}\label{class_i_r_instr_a449e6b5f75d186ce7975dbb72c416a6b}} 
+\index{IRInstr@{IRInstr}!t@{t}}
+\index{t@{t}!IRInstr@{IRInstr}}
+\doxysubsubsection{\texorpdfstring{t}{t}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}} IRInstr\+::t\hspace{0.3cm}{\ttfamily [protected]}}
+
+Type de données que manipule l\textquotesingle{}instruction 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+compiler/\mbox{\hyperlink{_i_r_instr_8h}{IRInstr.\+h}}\item 
+compiler/\mbox{\hyperlink{_i_r_instr_8cpp}{IRInstr.\+cpp}}\end{DoxyCompactItemize}

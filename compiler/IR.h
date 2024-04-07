@@ -2,24 +2,24 @@
 #define IR_H
 
 #include <vector>
-#include <stack>
 #include <string>
 #include <iostream>
-#include <initializer_list>
 
-// Declarations from the parser -- replace with your own
 #include "antlr4-runtime.h"
 #include "SymbolTable.h"
 
 #include "IRInstr.h"
 
 
+//AST
 typedef antlr4::tree::ParseTree DefFunction;
+
+
 
 class CFG;
 
 
-/**  The class for a basic block */
+
 
 /* A few important comments.
    IRInstr has no jump instructions.
@@ -45,33 +45,65 @@ class CFG;
    followed by a conditional jump to the exit_false branch
 */
 
+/**
+ * @brief  The class for a basic block
+ **/
 class BasicBlock {
 public:
-  BasicBlock(CFG* cfg, std::string entry_label);
-  ~BasicBlock();
-  
-  
-  void gen_asm(std::ostream &o) const; /**< x86 assembly code generation for this basic block (very simple) */
 
+  /**
+   * @brief Constructeur
+   * @param cfg parent du block
+   * @param entry_label nom du block
+   **/
+  BasicBlock(CFG* cfg, std::string entry_label);
+
+  ~BasicBlock(); /**<Destructeur, supprime les instructions du block**/
+  
+
+  /**
+   * @brief Genere le code asm x86 du block
+   *
+   * @param o stream d'écriture du code
+   **/
+  void gen_asm(std::ostream &o) const;
+
+
+  /**
+   * @brief Ajoute un instruction au block
+   *
+   * @param[in] op type d'instruction
+   * @param[in] type type des paramètres
+   * @param[in] nb nombre de paramètres
+   * @param params paramètres de l'instruction
+   *
+   * @post vector instrs contient une nouvelle instruction (size +1)
+   **/
   void addIRInstr(IRInstr::Operation op, Type t, const std::string *params, int nb = 0);
 
 
-  // No encapsulation whatsoever here. Feel free to do better.
   BasicBlock* exit_true = nullptr;  /**< pointer to the next basic block, true branch. If nullptr, return from procedure */ 
   BasicBlock* exit_false = nullptr; /**< pointer to the next basic block, false branch. If null_ptr, the basic block ends with an unconditional jump */
   
-  std::string label; /**< label of the BB, also will be the label in the generated code */
-  
-  std::string test_var_name;  /** < when generating IR code for an if(expr) or while(expr) etc,
-		     store here the name of the variable that holds the value of expr */
+ 
+  CFG* getCFG() const /**<Getter de l'attribut cfg**/
+  {
+    return cfg;
+  }
 
+  const std::string& getLabel() const /**<Getter de l'attribut label**/
+  {
+    return label;
+  }
 
-  CFG* cfg; /** < the CFG where this block belongs */
   
 private:
   
   std::vector<IRInstr*> instrs; /** < the instructions themselves. */
-  
+
+  std::string label; /**< label of the BB, also will be the label in the generated code */
+
+  CFG* cfg; /** < the CFG where this block belongs */
 
  
 };
@@ -79,7 +111,7 @@ private:
 
 
 
-/** The class for the control flow graph, also includes the symbol table */
+
 
 /* A few important comments:
    The entry block is the one with the same label as the AST function name.
@@ -88,55 +120,132 @@ private:
    (again it could be identified in a more explicit way)
 
 */
+
+/**
+ * @brief The class for the control flow graph
+ **/
 class CFG {
 public:
-  
-  CFG(DefFunction *ast, bool debug = false, bool symbol = false);
-  ~CFG();
-	
+
+  /**
+   * @brief Constructeur
+   * @details
+   *  Analyse des symboles avec VarVisitor de l'AST
+   *  Construction de l'IR avec IRVisitor
+   *
+   * @param[in] ast l'AST d'une fonction
+   * @param[in] nameFunction le nom de la fonction
+   * @param[in] debug true si on souhaite afficher les instructions IR que contient ce CFG
+   * @param[in] symbol true si on souhaite afficher la table des symboles
+   *
+   * @throw int en cas d'erreur avec VarVisitor => IR pas générable
+   *
+   * @pre un AST correct syntaxiquement
+   * @post un Control Flow Graph contenant les Basicblock contenant eux mêmes les instructions IR représentant l'AST
+   * 
+   **/
+  CFG(DefFunction *ast, const std::string &nameFunction, bool debug = false, bool symbol = false);
+  ~CFG(); /**<Destructeur, detruit les blocks**/
+
+  /**
+   * @brief Créer et ajoute un BasicBlock au CFG
+   *
+   * @param[in] name le nom du block
+   *
+   * @return BasicBlock*
+   **/
   BasicBlock* addBasicBlock(const std::string &name);
 
-  // x86 code generation: could be encapsulated in a processor class in a retargetable compiler
-  void gen_asm(std::ostream& o) const;
-  
-  std::string symbol_to_asm(const std::string &reg); /**< helper method: inputs a IR reg or input variable, returns e.g. "-24(%rbp)" for the proper value of 24 */
 
-  void gen_asm_prologue(std::ostream& o) const;
-  void gen_asm_epilogue(std::ostream& o) const;
+  /**
+   * @brief Genere le code asm x86 du CFG
+   * @param o stream d'écriture du code
+   **/
+  void gen_asm(std::ostream& o) const;
+
+  void gen_asm_prologue(std::ostream& o) const; /**<Genere le code asm x86 du prologue d'une fonction**/
+  void gen_asm_epilogue(std::ostream& o) const; /**<Genere le code asm x86 de l'epilogue d'une fonction**/
+
+
+  /**
+   * @brief Convertit un symbol de la table en asm x86
+   *
+   * @param[in] reg le symbole de la table à convertir
+   * @return std::string
+   **/
+  std::string symbol_to_asm(const std::string &reg) const;
+
+  
 
   
 
   //symbol table management
-  std::string createTempVar();
-  std::string createConstSymbol(int v);
+  std::string createTempVar(); /**<Créer une variable temporaire dans la table des symboles et renvoie son nom**/
+  std::string createConstSymbol(int v);/**<Créer une constante de valeur v dans la table des symboles et renvoie son nom**/
+
+  /**
+   * @brief Teste si un symbole est une constante
+   * @details
+   *  un symbole est une constante s'il commence par #const
+   *
+   * @param[in] symbol le symbole à vérifier
+   * @param[out] value la valeur de la constante si s'en est une
+   *
+   * @return true si le symbole est une constante
+   **/
   bool symbolIsConst(const std::string &symbol, int *value = nullptr) const;
+
+  /**
+   * @brief Extrait le vrai nom d'un symbole (=sans les numéros de blocks)
+   * @details
+   *  Pour gérer les portés de variables, un symbole est enregistré dans la table en ajoutant ':' suivi du numéro de block
+   *  Ici, on enlève cet ajout
+   *
+   * @param[in] symbol
+   *
+   * @throw int en cas d'erreur
+   *
+   * @return le vrai nom d'un symbole
+   **/
   std::string getRealVarname(const std::string &symbol);
   
 
 
   // basic block management
-  std::string newBBName();
-  BasicBlock* current_bb;
-  bool debug;
-  bool symbol;
+  std::string newBBName() /**<Retourne un nom possible pour un nouveau block**/
+  {
+    return nameFunction + "_bb" + std::to_string(nextBBnumber++);
+  }
+  
+  BasicBlock* current_bb; /**<pointeur sur le block actuellement en cours de construction**/
 
 
-  //Function name
-  std::string nameFunction;
-  void setFunctionName(const std::string &name) {
-    nameFunction = name;
+
+  //GETTERS
+  const std::string& getNameFunction() const {
+    return nameFunction;
+  }
+  bool debug() const {
+    return _debug;
+  }
+  bool symbol() const {
+    return _symbol;
   }
   
 private:
   
-  int nextBBnumber; /**< just for naming */
+  int nextBBnumber; /**< just for naming basicblock */
 	
   std::vector <BasicBlock*> bbs; /**< all the basic blocks of this CFG*/
   
-  DefFunction *ast;
+  DefFunction *ast; /**< AST correct**/
 
-  SymbolTable table;
+  SymbolTable table; /**<Table des symboles**/
 
+  std::string nameFunction; /**<Nom de la fonction représenté par ce CFG**/
+
+  bool _debug; /**<boolean définissant l'affichage des instructions IR**/
+  bool _symbol; /**<boolean définissant l'affichage de la table des symboles**/
   
 
 };

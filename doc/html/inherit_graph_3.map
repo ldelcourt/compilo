@@ -1,0 +1,7 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" title=" " alt="" coords="5,81,124,108"/>
+<area shape="rect" id="node2" href="$class_code_gen_visitor.html" title=" " alt="" coords="172,5,295,32"/>
+<area shape="rect" id="node3" href="$class_function_visitor.html" title="Visiteur de fonction C." alt="" coords="174,56,293,83"/>
+<area shape="rect" id="node4" href="$class_i_r_visitor.html" title="Visite l&#39;AST d&#39;une fonction et créer les instructions IR au fur et à mesure." alt="" coords="195,107,272,133"/>
+<area shape="rect" id="node5" href="$class_var_visitor.html" title="Visite l&#39;AST d&#39;une fonction et complète la table des symboles." alt="" coords="190,157,277,184"/>
+</map>

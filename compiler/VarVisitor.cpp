@@ -99,7 +99,7 @@ antlrcpp::Any VarVisitor::visitVarToConst(ifccParser::VarToConstContext *ctx) {
 
   //Verif variables déclarés
   if (! res1.first) {
-    std::cerr << "error in visitVarToConst : " << printPosSymbol(ctx->VAR()) << var1 + currentBlock << " was never declared" << std::endl;
+    std::cerr << "error : " << printPosSymbol(ctx->VAR()) << var1 + currentBlock << " was never declared" << std::endl;
     error = true;
     
   }
@@ -153,7 +153,7 @@ antlrcpp::Any VarVisitor::visitDeclaration_var(ifccParser::Declaration_varContex
 
     //verif var pas existante
     if (table->contains(var)) {
-      std::cerr << "erreur : " << printPosSymbol(nodeVar) << var << " already declared" << std::endl;
+      std::cerr << "error : " << printPosSymbol(nodeVar) << var << " already declared" << std::endl;
       error = true;
     
     }

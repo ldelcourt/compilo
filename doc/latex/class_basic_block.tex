@@ -1,0 +1,146 @@
+\hypertarget{class_basic_block}{}\doxysection{Basic\+Block Class Reference}
+\label{class_basic_block}\index{BasicBlock@{BasicBlock}}
+
+
+The class for a basic block.  
+
+
+
+
+{\ttfamily \#include $<$IR.\+h$>$}
+
+
+
+Collaboration diagram for Basic\+Block\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=220pt]{class_basic_block__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_basic_block_aa62fbd3b7277203a67740bb2b597581b}{Basic\+Block}} (\mbox{\hyperlink{class_c_f_g}{CFG}} $\ast$cfg, std\+::string entry\+\_\+label)
+\begin{DoxyCompactList}\small\item\em Constructeur. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_basic_block_a98a03933e831cb54c02b5068ebc30478}{$\sim$\+Basic\+Block}} ()
+\item 
+void \mbox{\hyperlink{class_basic_block_aaffef50ee5bc44de079f7e910176e57d}{gen\+\_\+asm}} (std\+::ostream \&o) const
+\begin{DoxyCompactList}\small\item\em Genere le code asm x86 du block. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_basic_block_a9229bcc3cf1302fcc77b1c17e91875cf}{add\+IRInstr}} (\mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15}{IRInstr\+::\+Operation}} op, \mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}} t, const std\+::string $\ast$params, int nb=0)
+\begin{DoxyCompactList}\small\item\em Ajoute un instruction au block. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_c_f_g}{CFG}} $\ast$ \mbox{\hyperlink{class_basic_block_a9e9a6e9f781ab51061938cfe017e778f}{get\+CFG}} () const
+\item 
+const std\+::string \& \mbox{\hyperlink{class_basic_block_a0b72a2e3acd5c6d934ea7a7e5422858e}{get\+Label}} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_basic_block}{Basic\+Block}} $\ast$ \mbox{\hyperlink{class_basic_block_ad7dfb0ec10a03ab548f308461e8701e7}{exit\+\_\+true}} = nullptr
+\item 
+\mbox{\hyperlink{class_basic_block}{Basic\+Block}} $\ast$ \mbox{\hyperlink{class_basic_block_a8fa2b8fbdf5275fb15a7eac08e0ed0ea}{exit\+\_\+false}} = nullptr
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The class for a basic block. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_basic_block_aa62fbd3b7277203a67740bb2b597581b}\label{class_basic_block_aa62fbd3b7277203a67740bb2b597581b}} 
+\index{BasicBlock@{BasicBlock}!BasicBlock@{BasicBlock}}
+\index{BasicBlock@{BasicBlock}!BasicBlock@{BasicBlock}}
+\doxysubsubsection{\texorpdfstring{BasicBlock()}{BasicBlock()}}
+{\footnotesize\ttfamily Basic\+Block\+::\+Basic\+Block (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_c_f_g}{CFG}} $\ast$}]{cfg,  }\item[{std\+::string}]{entry\+\_\+label }\end{DoxyParamCaption})}
+
+
+
+Constructeur. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cfg} & parent du block \\
+\hline
+{\em entry\+\_\+label} & nom du block \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_basic_block_a98a03933e831cb54c02b5068ebc30478}\label{class_basic_block_a98a03933e831cb54c02b5068ebc30478}} 
+\index{BasicBlock@{BasicBlock}!````~BasicBlock@{$\sim$BasicBlock}}
+\index{````~BasicBlock@{$\sim$BasicBlock}!BasicBlock@{BasicBlock}}
+\doxysubsubsection{\texorpdfstring{$\sim$BasicBlock()}{~BasicBlock()}}
+{\footnotesize\ttfamily Basic\+Block\+::$\sim$\+Basic\+Block (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Destructeur, supprime les instructions du block 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_basic_block_a9229bcc3cf1302fcc77b1c17e91875cf}\label{class_basic_block_a9229bcc3cf1302fcc77b1c17e91875cf}} 
+\index{BasicBlock@{BasicBlock}!addIRInstr@{addIRInstr}}
+\index{addIRInstr@{addIRInstr}!BasicBlock@{BasicBlock}}
+\doxysubsubsection{\texorpdfstring{addIRInstr()}{addIRInstr()}}
+{\footnotesize\ttfamily void Basic\+Block\+::add\+IRInstr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15}{IRInstr\+::\+Operation}}}]{op,  }\item[{\mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}}}]{t,  }\item[{const std\+::string $\ast$}]{params,  }\item[{int}]{nb = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Ajoute un instruction au block. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em op} & type d\textquotesingle{}instruction \\
+\hline
+\mbox{\texttt{ in}}  & {\em type} & type des paramètres \\
+\hline
+\mbox{\texttt{ in}}  & {\em nb} & nombre de paramètres \\
+\hline
+ & {\em params} & paramètres de l\textquotesingle{}instruction\\
+\hline
+\end{DoxyParams}
+\begin{DoxyPostcond}{Postcondition}
+vector instrs contient une nouvelle instruction (size +1) 
+\end{DoxyPostcond}
+\mbox{\Hypertarget{class_basic_block_aaffef50ee5bc44de079f7e910176e57d}\label{class_basic_block_aaffef50ee5bc44de079f7e910176e57d}} 
+\index{BasicBlock@{BasicBlock}!gen\_asm@{gen\_asm}}
+\index{gen\_asm@{gen\_asm}!BasicBlock@{BasicBlock}}
+\doxysubsubsection{\texorpdfstring{gen\_asm()}{gen\_asm()}}
+{\footnotesize\ttfamily void Basic\+Block\+::gen\+\_\+asm (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{o }\end{DoxyParamCaption}) const}
+
+
+
+Genere le code asm x86 du block. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em o} & stream d\textquotesingle{}écriture du code \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_basic_block_a9e9a6e9f781ab51061938cfe017e778f}\label{class_basic_block_a9e9a6e9f781ab51061938cfe017e778f}} 
+\index{BasicBlock@{BasicBlock}!getCFG@{getCFG}}
+\index{getCFG@{getCFG}!BasicBlock@{BasicBlock}}
+\doxysubsubsection{\texorpdfstring{getCFG()}{getCFG()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_c_f_g}{CFG}} $\ast$ Basic\+Block\+::get\+CFG (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\texorpdfstring{$<$}{<}Getter de l\textquotesingle{}attribut cfg \mbox{\Hypertarget{class_basic_block_a0b72a2e3acd5c6d934ea7a7e5422858e}\label{class_basic_block_a0b72a2e3acd5c6d934ea7a7e5422858e}} 
+\index{BasicBlock@{BasicBlock}!getLabel@{getLabel}}
+\index{getLabel@{getLabel}!BasicBlock@{BasicBlock}}
+\doxysubsubsection{\texorpdfstring{getLabel()}{getLabel()}}
+{\footnotesize\ttfamily const std\+::string \& Basic\+Block\+::get\+Label (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\texorpdfstring{$<$}{<}Getter de l\textquotesingle{}attribut label 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_basic_block_a8fa2b8fbdf5275fb15a7eac08e0ed0ea}\label{class_basic_block_a8fa2b8fbdf5275fb15a7eac08e0ed0ea}} 
+\index{BasicBlock@{BasicBlock}!exit\_false@{exit\_false}}
+\index{exit\_false@{exit\_false}!BasicBlock@{BasicBlock}}
+\doxysubsubsection{\texorpdfstring{exit\_false}{exit\_false}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_basic_block}{Basic\+Block}}$\ast$ Basic\+Block\+::exit\+\_\+false = nullptr}
+
+pointer to the next basic block, false branch. If null\+\_\+ptr, the basic block ends with an unconditional jump \mbox{\Hypertarget{class_basic_block_ad7dfb0ec10a03ab548f308461e8701e7}\label{class_basic_block_ad7dfb0ec10a03ab548f308461e8701e7}} 
+\index{BasicBlock@{BasicBlock}!exit\_true@{exit\_true}}
+\index{exit\_true@{exit\_true}!BasicBlock@{BasicBlock}}
+\doxysubsubsection{\texorpdfstring{exit\_true}{exit\_true}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_basic_block}{Basic\+Block}}$\ast$ Basic\+Block\+::exit\+\_\+true = nullptr}
+
+pointer to the next basic block, true branch. If nullptr, return from procedure 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+compiler/\mbox{\hyperlink{_i_r_8h}{IR.\+h}}\item 
+compiler/\mbox{\hyperlink{_i_r_8cpp}{IR.\+cpp}}\end{DoxyCompactItemize}

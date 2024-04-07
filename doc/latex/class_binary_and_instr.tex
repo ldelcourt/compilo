@@ -1,0 +1,63 @@
+\hypertarget{class_binary_and_instr}{}\doxysection{Binary\+And\+Instr Class Reference}
+\label{class_binary_and_instr}\index{BinaryAndInstr@{BinaryAndInstr}}
+
+
+{\ttfamily \#include $<$IRInstr.\+h$>$}
+
+
+
+Inheritance diagram for Binary\+And\+Instr\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=169pt]{class_binary_and_instr__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Binary\+And\+Instr\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=230pt]{class_binary_and_instr__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_binary_and_instr_a0ff09da60ee97f48b4f3bb795792cd71}{Binary\+And\+Instr}} (\mbox{\hyperlink{class_basic_block}{Basic\+Block}} $\ast$\mbox{\hyperlink{class_i_r_instr_a0bf0264847ab1c69e99495f1456e3adf}{bb}}, \mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}} \mbox{\hyperlink{class_i_r_instr_a449e6b5f75d186ce7975dbb72c416a6b}{t}}, const std\+::string \&dest, const std\+::string \&x, const std\+::string \&y)
+\item 
+virtual void \mbox{\hyperlink{class_binary_and_instr_ae11ebf82d129c8c90f6976094cbf2a0e}{gen\+\_\+asm}} (std\+::ostream \&o) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\texorpdfstring{$<$}{<}Instruction du ET binaire (dest = (x \& y)) 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_binary_and_instr_a0ff09da60ee97f48b4f3bb795792cd71}\label{class_binary_and_instr_a0ff09da60ee97f48b4f3bb795792cd71}} 
+\index{BinaryAndInstr@{BinaryAndInstr}!BinaryAndInstr@{BinaryAndInstr}}
+\index{BinaryAndInstr@{BinaryAndInstr}!BinaryAndInstr@{BinaryAndInstr}}
+\doxysubsubsection{\texorpdfstring{BinaryAndInstr()}{BinaryAndInstr()}}
+{\footnotesize\ttfamily Binary\+And\+Instr\+::\+Binary\+And\+Instr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_basic_block}{Basic\+Block}} $\ast$}]{bb,  }\item[{\mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}}}]{t,  }\item[{const std\+::string \&}]{dest,  }\item[{const std\+::string \&}]{x,  }\item[{const std\+::string \&}]{y }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_binary_and_instr_ae11ebf82d129c8c90f6976094cbf2a0e}\label{class_binary_and_instr_ae11ebf82d129c8c90f6976094cbf2a0e}} 
+\index{BinaryAndInstr@{BinaryAndInstr}!gen\_asm@{gen\_asm}}
+\index{gen\_asm@{gen\_asm}!BinaryAndInstr@{BinaryAndInstr}}
+\doxysubsubsection{\texorpdfstring{gen\_asm()}{gen\_asm()}}
+{\footnotesize\ttfamily void Binary\+And\+Instr\+::gen\+\_\+asm (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{o }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+x86 assembly code generation for this IR instruction 
+
+Implements \mbox{\hyperlink{class_i_r_instr_a2033117dbd12955e9b290882bc721b9c}{IRInstr}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+compiler/\mbox{\hyperlink{_i_r_instr_8h}{IRInstr.\+h}}\item 
+compiler/\mbox{\hyperlink{_i_r_instr_8cpp}{IRInstr.\+cpp}}\end{DoxyCompactItemize}

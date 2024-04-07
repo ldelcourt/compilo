@@ -1,0 +1,71 @@
+\hypertarget{class_call_instr}{}\doxysection{Call\+Instr Class Reference}
+\label{class_call_instr}\index{CallInstr@{CallInstr}}
+
+
+{\ttfamily \#include $<$IRInstr.\+h$>$}
+
+
+
+Inheritance diagram for Call\+Instr\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=137pt]{class_call_instr__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Call\+Instr\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=220pt]{class_call_instr__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_call_instr_a51ffbc2b0c1b431434acd171ff92038f}{Call\+Instr}} (\mbox{\hyperlink{class_basic_block}{Basic\+Block}} $\ast$\mbox{\hyperlink{class_i_r_instr_a0bf0264847ab1c69e99495f1456e3adf}{bb}}, \mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}} \mbox{\hyperlink{class_i_r_instr_a449e6b5f75d186ce7975dbb72c416a6b}{t}}, const std\+::string $\ast$params, int nb)
+\item 
+virtual \mbox{\hyperlink{class_call_instr_a14babc138d986e9c17ce6fc0de39e190}{$\sim$\+Call\+Instr}} ()
+\item 
+virtual void \mbox{\hyperlink{class_call_instr_ac999b0aa0e65ee137a2607bbca4f9f6a}{gen\+\_\+asm}} (std\+::ostream \&o) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\texorpdfstring{$<$}{<}Instruction d\textquotesingle{}appel de fonction (fonction(a, b, ...)) 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_call_instr_a51ffbc2b0c1b431434acd171ff92038f}\label{class_call_instr_a51ffbc2b0c1b431434acd171ff92038f}} 
+\index{CallInstr@{CallInstr}!CallInstr@{CallInstr}}
+\index{CallInstr@{CallInstr}!CallInstr@{CallInstr}}
+\doxysubsubsection{\texorpdfstring{CallInstr()}{CallInstr()}}
+{\footnotesize\ttfamily Call\+Instr\+::\+Call\+Instr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_basic_block}{Basic\+Block}} $\ast$}]{bb,  }\item[{\mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}}}]{t,  }\item[{const std\+::string $\ast$}]{params,  }\item[{int}]{nb }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_call_instr_a14babc138d986e9c17ce6fc0de39e190}\label{class_call_instr_a14babc138d986e9c17ce6fc0de39e190}} 
+\index{CallInstr@{CallInstr}!````~CallInstr@{$\sim$CallInstr}}
+\index{````~CallInstr@{$\sim$CallInstr}!CallInstr@{CallInstr}}
+\doxysubsubsection{\texorpdfstring{$\sim$CallInstr()}{~CallInstr()}}
+{\footnotesize\ttfamily virtual Call\+Instr\+::$\sim$\+Call\+Instr (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_call_instr_ac999b0aa0e65ee137a2607bbca4f9f6a}\label{class_call_instr_ac999b0aa0e65ee137a2607bbca4f9f6a}} 
+\index{CallInstr@{CallInstr}!gen\_asm@{gen\_asm}}
+\index{gen\_asm@{gen\_asm}!CallInstr@{CallInstr}}
+\doxysubsubsection{\texorpdfstring{gen\_asm()}{gen\_asm()}}
+{\footnotesize\ttfamily void Call\+Instr\+::gen\+\_\+asm (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{o }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+x86 assembly code generation for this IR instruction 
+
+Implements \mbox{\hyperlink{class_i_r_instr_a2033117dbd12955e9b290882bc721b9c}{IRInstr}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+compiler/\mbox{\hyperlink{_i_r_instr_8h}{IRInstr.\+h}}\item 
+compiler/\mbox{\hyperlink{_i_r_instr_8cpp}{IRInstr.\+cpp}}\end{DoxyCompactItemize}

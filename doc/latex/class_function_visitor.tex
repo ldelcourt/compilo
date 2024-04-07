@@ -1,0 +1,149 @@
+\hypertarget{class_function_visitor}{}\doxysection{Function\+Visitor Class Reference}
+\label{class_function_visitor}\index{FunctionVisitor@{FunctionVisitor}}
+
+
+Visiteur de fonction C.  
+
+
+
+
+{\ttfamily \#include $<$Function\+Visitor.\+h$>$}
+
+
+
+Inheritance diagram for Function\+Visitor\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=169pt]{class_function_visitor__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Function\+Visitor\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=169pt]{class_function_visitor__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_function_visitor_a54ebcba44169beeb5165838a7d2a00e1}{Function\+Visitor}} (bool debug=false, bool symbol=false)
+\item 
+virtual \mbox{\hyperlink{class_function_visitor_aa228fdbf6002092824d1730e463cb5b7}{$\sim$\+Function\+Visitor}} ()
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_function_visitor_ae227df02469b158e1a690513c808c2c8}{visit\+Prog}} (ifcc\+Parser\+::\+Prog\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_function_visitor_a9af1a04ea40e89c357b5bc1799444ddf}{visit\+Declaration\+\_\+function}} (ifcc\+Parser\+::\+Declaration\+\_\+function\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_function_visitor_ab2281c5caff71747df19586f6f378fd0}{visit\+Definition\+\_\+function}} (ifcc\+Parser\+::\+Definition\+\_\+function\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_function_visitor_a653441fe00091e79e935906d7404a583}{visit\+Parametres}} (ifcc\+Parser\+::\+Parametres\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_function_visitor_acf04d82ee11428fd6320297ccc43ddca}{visit\+Parametre}} (ifcc\+Parser\+::\+Parametre\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_function_visitor_a183b0faab3d7534ed7c173e23f3c8240}{visit\+Function}} (ifcc\+Parser\+::\+Function\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_function_visitor_ac0be42f3c250eb257048917506bae449}{visit\+Statement}} (ifcc\+Parser\+::\+Statement\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_function_visitor_a0a4e69cd129d4312d6246ab050d89a94}{visit\+Call\+\_\+function}} (ifcc\+Parser\+::\+Call\+\_\+function\+Context $\ast$ctx) override
+\item 
+bool \mbox{\hyperlink{class_function_visitor_ab9e4deff690fb88a096831f24946fd49}{has\+Error}} ()
+\item 
+void \mbox{\hyperlink{class_function_visitor_a126891c26a121e108f23874f6bf9cdb3}{gen\+\_\+asm}} (std\+::ostream \&o)
+\begin{DoxyCompactList}\small\item\em appel gen\+\_\+asm de chaque cfg présent \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Visiteur de fonction C. 
+
+Parcourt l\textquotesingle{}AST de l\textquotesingle{}axiom de la grammaire. Enregistre une table des fonctions 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_function_visitor_a54ebcba44169beeb5165838a7d2a00e1}\label{class_function_visitor_a54ebcba44169beeb5165838a7d2a00e1}} 
+\index{FunctionVisitor@{FunctionVisitor}!FunctionVisitor@{FunctionVisitor}}
+\index{FunctionVisitor@{FunctionVisitor}!FunctionVisitor@{FunctionVisitor}}
+\doxysubsubsection{\texorpdfstring{FunctionVisitor()}{FunctionVisitor()}}
+{\footnotesize\ttfamily Function\+Visitor\+::\+Function\+Visitor (\begin{DoxyParamCaption}\item[{bool}]{debug = {\ttfamily false},  }\item[{bool}]{symbol = {\ttfamily false} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_function_visitor_aa228fdbf6002092824d1730e463cb5b7}\label{class_function_visitor_aa228fdbf6002092824d1730e463cb5b7}} 
+\index{FunctionVisitor@{FunctionVisitor}!````~FunctionVisitor@{$\sim$FunctionVisitor}}
+\index{````~FunctionVisitor@{$\sim$FunctionVisitor}!FunctionVisitor@{FunctionVisitor}}
+\doxysubsubsection{\texorpdfstring{$\sim$FunctionVisitor()}{~FunctionVisitor()}}
+{\footnotesize\ttfamily Function\+Visitor\+::$\sim$\+Function\+Visitor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_function_visitor_a126891c26a121e108f23874f6bf9cdb3}\label{class_function_visitor_a126891c26a121e108f23874f6bf9cdb3}} 
+\index{FunctionVisitor@{FunctionVisitor}!gen\_asm@{gen\_asm}}
+\index{gen\_asm@{gen\_asm}!FunctionVisitor@{FunctionVisitor}}
+\doxysubsubsection{\texorpdfstring{gen\_asm()}{gen\_asm()}}
+{\footnotesize\ttfamily void Function\+Visitor\+::gen\+\_\+asm (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{o }\end{DoxyParamCaption})}
+
+
+
+appel gen\+\_\+asm de chaque cfg présent 
+
+\mbox{\Hypertarget{class_function_visitor_ab9e4deff690fb88a096831f24946fd49}\label{class_function_visitor_ab9e4deff690fb88a096831f24946fd49}} 
+\index{FunctionVisitor@{FunctionVisitor}!hasError@{hasError}}
+\index{hasError@{hasError}!FunctionVisitor@{FunctionVisitor}}
+\doxysubsubsection{\texorpdfstring{hasError()}{hasError()}}
+{\footnotesize\ttfamily bool Function\+Visitor\+::has\+Error (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_function_visitor_a0a4e69cd129d4312d6246ab050d89a94}\label{class_function_visitor_a0a4e69cd129d4312d6246ab050d89a94}} 
+\index{FunctionVisitor@{FunctionVisitor}!visitCall\_function@{visitCall\_function}}
+\index{visitCall\_function@{visitCall\_function}!FunctionVisitor@{FunctionVisitor}}
+\doxysubsubsection{\texorpdfstring{visitCall\_function()}{visitCall\_function()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any Function\+Visitor\+::visit\+Call\+\_\+function (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Call\+\_\+function\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{class_function_visitor_a9af1a04ea40e89c357b5bc1799444ddf}\label{class_function_visitor_a9af1a04ea40e89c357b5bc1799444ddf}} 
+\index{FunctionVisitor@{FunctionVisitor}!visitDeclaration\_function@{visitDeclaration\_function}}
+\index{visitDeclaration\_function@{visitDeclaration\_function}!FunctionVisitor@{FunctionVisitor}}
+\doxysubsubsection{\texorpdfstring{visitDeclaration\_function()}{visitDeclaration\_function()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any Function\+Visitor\+::visit\+Declaration\+\_\+function (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Declaration\+\_\+function\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{class_function_visitor_ab2281c5caff71747df19586f6f378fd0}\label{class_function_visitor_ab2281c5caff71747df19586f6f378fd0}} 
+\index{FunctionVisitor@{FunctionVisitor}!visitDefinition\_function@{visitDefinition\_function}}
+\index{visitDefinition\_function@{visitDefinition\_function}!FunctionVisitor@{FunctionVisitor}}
+\doxysubsubsection{\texorpdfstring{visitDefinition\_function()}{visitDefinition\_function()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any Function\+Visitor\+::visit\+Definition\+\_\+function (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Definition\+\_\+function\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{class_function_visitor_a183b0faab3d7534ed7c173e23f3c8240}\label{class_function_visitor_a183b0faab3d7534ed7c173e23f3c8240}} 
+\index{FunctionVisitor@{FunctionVisitor}!visitFunction@{visitFunction}}
+\index{visitFunction@{visitFunction}!FunctionVisitor@{FunctionVisitor}}
+\doxysubsubsection{\texorpdfstring{visitFunction()}{visitFunction()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any Function\+Visitor\+::visit\+Function (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Function\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{class_function_visitor_acf04d82ee11428fd6320297ccc43ddca}\label{class_function_visitor_acf04d82ee11428fd6320297ccc43ddca}} 
+\index{FunctionVisitor@{FunctionVisitor}!visitParametre@{visitParametre}}
+\index{visitParametre@{visitParametre}!FunctionVisitor@{FunctionVisitor}}
+\doxysubsubsection{\texorpdfstring{visitParametre()}{visitParametre()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any Function\+Visitor\+::visit\+Parametre (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Parametre\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{class_function_visitor_a653441fe00091e79e935906d7404a583}\label{class_function_visitor_a653441fe00091e79e935906d7404a583}} 
+\index{FunctionVisitor@{FunctionVisitor}!visitParametres@{visitParametres}}
+\index{visitParametres@{visitParametres}!FunctionVisitor@{FunctionVisitor}}
+\doxysubsubsection{\texorpdfstring{visitParametres()}{visitParametres()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any Function\+Visitor\+::visit\+Parametres (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Parametres\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{class_function_visitor_ae227df02469b158e1a690513c808c2c8}\label{class_function_visitor_ae227df02469b158e1a690513c808c2c8}} 
+\index{FunctionVisitor@{FunctionVisitor}!visitProg@{visitProg}}
+\index{visitProg@{visitProg}!FunctionVisitor@{FunctionVisitor}}
+\doxysubsubsection{\texorpdfstring{visitProg()}{visitProg()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any Function\+Visitor\+::visit\+Prog (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Prog\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{class_function_visitor_ac0be42f3c250eb257048917506bae449}\label{class_function_visitor_ac0be42f3c250eb257048917506bae449}} 
+\index{FunctionVisitor@{FunctionVisitor}!visitStatement@{visitStatement}}
+\index{visitStatement@{visitStatement}!FunctionVisitor@{FunctionVisitor}}
+\doxysubsubsection{\texorpdfstring{visitStatement()}{visitStatement()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any Function\+Visitor\+::visit\+Statement (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Statement\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+compiler/\mbox{\hyperlink{_function_visitor_8h}{Function\+Visitor.\+h}}\item 
+compiler/\mbox{\hyperlink{_function_visitor_8cpp}{Function\+Visitor.\+cpp}}\end{DoxyCompactItemize}

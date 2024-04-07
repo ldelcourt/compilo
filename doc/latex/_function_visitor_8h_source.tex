@@ -1,0 +1,79 @@
+\hypertarget{_function_visitor_8h_source}{}\doxysection{Function\+Visitor.\+h}
+\label{_function_visitor_8h_source}\index{compiler/FunctionVisitor.h@{compiler/FunctionVisitor.h}}
+\mbox{\hyperlink{_function_visitor_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}antlr4-\/runtime.h"{}}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include "{}generated/ifccBaseVisitor.h"{}}}
+\DoxyCodeLine{6 }
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_i_r_8h}{IR.h}}"{}}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 }
+\DoxyCodeLine{16 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\{}
+\DoxyCodeLine{17   }
+\DoxyCodeLine{18   std::string \mbox{\hyperlink{struct_function_a161d1ceb4f67f3222caf429fea7b71f1}{name}};}
+\DoxyCodeLine{19   \mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}} \mbox{\hyperlink{struct_function_aa6a04c5875e53944a8f8a81ae6534624}{typeReturn}};}
+\DoxyCodeLine{20   std::vector<Type> \mbox{\hyperlink{struct_function_a1e58216ba2aefdb052b4beca9db66fda}{params}};}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22 \} \mbox{\hyperlink{struct_function}{Function}};}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24 }
+\DoxyCodeLine{32 \textcolor{keyword}{class  }\mbox{\hyperlink{class_function_visitor}{FunctionVisitor}} : \textcolor{keyword}{public} ifccBaseVisitor \{}
+\DoxyCodeLine{33 \textcolor{keyword}{public}:}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36   \mbox{\hyperlink{class_function_visitor_a54ebcba44169beeb5165838a7d2a00e1}{FunctionVisitor}}(\textcolor{keywordtype}{bool} debug = \textcolor{keyword}{false}, \textcolor{keywordtype}{bool} symbol = \textcolor{keyword}{false});  }
+\DoxyCodeLine{37   \textcolor{keyword}{virtual} \mbox{\hyperlink{class_function_visitor_aa228fdbf6002092824d1730e463cb5b7}{\string~FunctionVisitor}}();}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40   \textcolor{keyword}{virtual} antlrcpp::Any \mbox{\hyperlink{class_function_visitor_ae227df02469b158e1a690513c808c2c8}{visitProg}}(ifccParser::ProgContext *ctx) \textcolor{keyword}{override};}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42   \textcolor{keyword}{virtual} antlrcpp::Any \mbox{\hyperlink{class_function_visitor_a9af1a04ea40e89c357b5bc1799444ddf}{visitDeclaration\_function}}(ifccParser::Declaration\_functionContext *ctx) \textcolor{keyword}{override};}
+\DoxyCodeLine{43   \textcolor{keyword}{virtual} antlrcpp::Any \mbox{\hyperlink{class_function_visitor_ab2281c5caff71747df19586f6f378fd0}{visitDefinition\_function}}(ifccParser::Definition\_functionContext *ctx) \textcolor{keyword}{override};}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45   \textcolor{keyword}{virtual} antlrcpp::Any \mbox{\hyperlink{class_function_visitor_a653441fe00091e79e935906d7404a583}{visitParametres}}(ifccParser::ParametresContext *ctx) \textcolor{keyword}{override};}
+\DoxyCodeLine{46   \textcolor{keyword}{virtual} antlrcpp::Any \mbox{\hyperlink{class_function_visitor_acf04d82ee11428fd6320297ccc43ddca}{visitParametre}}(ifccParser::ParametreContext *ctx) \textcolor{keyword}{override};}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48   \textcolor{keyword}{virtual} antlrcpp::Any \mbox{\hyperlink{class_function_visitor_a183b0faab3d7534ed7c173e23f3c8240}{visitFunction}}(ifccParser::FunctionContext *ctx) \textcolor{keyword}{override};}
+\DoxyCodeLine{49   \textcolor{keyword}{virtual} antlrcpp::Any \mbox{\hyperlink{class_function_visitor_ac0be42f3c250eb257048917506bae449}{visitStatement}}(ifccParser::StatementContext *ctx) \textcolor{keyword}{override};}
+\DoxyCodeLine{50   \textcolor{keyword}{virtual} antlrcpp::Any \mbox{\hyperlink{class_function_visitor_a0a4e69cd129d4312d6246ab050d89a94}{visitCall\_function}}(ifccParser::Call\_functionContext *ctx) \textcolor{keyword}{override};}
+\DoxyCodeLine{51   }
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53   \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_function_visitor_ab9e4deff690fb88a096831f24946fd49}{hasError}}() \{}
+\DoxyCodeLine{54     \textcolor{keywordflow}{return} error;}
+\DoxyCodeLine{55   \}}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{60   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_function_visitor_a126891c26a121e108f23874f6bf9cdb3}{gen\_asm}}(std::ostream \&o);}
+\DoxyCodeLine{61   }
+\DoxyCodeLine{62 \textcolor{keyword}{private}:}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64   std::vector<CFG*> tab; }
+\DoxyCodeLine{65   \textcolor{keywordtype}{bool} debug, symbol, error;}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67   std::vector<Function*> functions; }
+\DoxyCodeLine{74   \textcolor{keywordtype}{int} function\_exist(\textcolor{keyword}{const} std::string \&name);}
+\DoxyCodeLine{75   }
+\DoxyCodeLine{76 \};}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78 }
+\DoxyCodeLine{79 \textcolor{keyword}{inline} \textcolor{keywordtype}{int} FunctionVisitor::function\_exist(\textcolor{keyword}{const} std::string \&name) \{}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < functions.size(); i++) \{}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83     \textcolor{keywordflow}{if} (functions[i]-\/>name == name) \{}
+\DoxyCodeLine{84       \textcolor{keywordflow}{return} i;}
+\DoxyCodeLine{85     \}}
+\DoxyCodeLine{86     }
+\DoxyCodeLine{87   \}}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{89   \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{91 \}}
+\DoxyCodeLine{92 }
+
+\end{DoxyCode}

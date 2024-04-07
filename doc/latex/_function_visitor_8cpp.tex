@@ -1,0 +1,42 @@
+\hypertarget{_function_visitor_8cpp}{}\doxysection{compiler/\+Function\+Visitor.cpp File Reference}
+\label{_function_visitor_8cpp}\index{compiler/FunctionVisitor.cpp@{compiler/FunctionVisitor.cpp}}
+{\ttfamily \#include \char`\"{}Function\+Visitor.\+h\char`\"{}}\newline
+Include dependency graph for Function\+Visitor.\+cpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_function_visitor_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_function_visitor_8cpp_ab591fb07114f9a3658a4ac78d8f56359}{get\+Type}}(var\+Test,  type)
+\item 
+\#define \mbox{\hyperlink{_function_visitor_8cpp_a45af050184ce1095bdd49a3d94f5c54d}{print\+Pos\+Symbol}}(symbol)~  symbol-\/$>$get\+Symbol()-\/$>$get\+Line() $<$$<$ \char`\"{}\+:\char`\"{} $<$$<$ symbol-\/$>$get\+Symbol()-\/$>$get\+Char\+Position\+In\+Line() $<$$<$ \char`\"{} \char`\"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{_function_visitor_8cpp_ab591fb07114f9a3658a4ac78d8f56359}\label{_function_visitor_8cpp_ab591fb07114f9a3658a4ac78d8f56359}} 
+\index{FunctionVisitor.cpp@{FunctionVisitor.cpp}!getType@{getType}}
+\index{getType@{getType}!FunctionVisitor.cpp@{FunctionVisitor.cpp}}
+\doxysubsubsection{\texorpdfstring{getType}{getType}}
+{\footnotesize\ttfamily \#define get\+Type(\begin{DoxyParamCaption}\item[{}]{var\+Test,  }\item[{}]{type }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{  \textcolor{keywordflow}{if} (varTest == \textcolor{stringliteral}{"{}int"{}}) \{       \(\backslash\)}
+\DoxyCodeLine{    type = \mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7afd5a5f51ce25953f3db2c7e93eb7864a}{Type::INT}};          \(\backslash\)}
+\DoxyCodeLine{  \}             \(\backslash\)}
+\DoxyCodeLine{  else \textcolor{keywordflow}{if} (varTest == \textcolor{stringliteral}{"{}void"{}}) \{     \(\backslash\)}
+\DoxyCodeLine{    type = \mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7adb31f5ef7acca5e1131fcc0fbfa6911d}{Type::VOID}};            \(\backslash\)}
+\DoxyCodeLine{  \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{_function_visitor_8cpp_a45af050184ce1095bdd49a3d94f5c54d}\label{_function_visitor_8cpp_a45af050184ce1095bdd49a3d94f5c54d}} 
+\index{FunctionVisitor.cpp@{FunctionVisitor.cpp}!printPosSymbol@{printPosSymbol}}
+\index{printPosSymbol@{printPosSymbol}!FunctionVisitor.cpp@{FunctionVisitor.cpp}}
+\doxysubsubsection{\texorpdfstring{printPosSymbol}{printPosSymbol}}
+{\footnotesize\ttfamily \#define print\+Pos\+Symbol(\begin{DoxyParamCaption}\item[{}]{symbol }\end{DoxyParamCaption})~  symbol-\/$>$get\+Symbol()-\/$>$get\+Line() $<$$<$ \char`\"{}\+:\char`\"{} $<$$<$ symbol-\/$>$get\+Symbol()-\/$>$get\+Char\+Position\+In\+Line() $<$$<$ \char`\"{} \char`\"{}}
+

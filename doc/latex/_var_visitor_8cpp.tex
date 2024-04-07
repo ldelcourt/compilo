@@ -1,0 +1,46 @@
+\hypertarget{_var_visitor_8cpp}{}\doxysection{compiler/\+Var\+Visitor.cpp File Reference}
+\label{_var_visitor_8cpp}\index{compiler/VarVisitor.cpp@{compiler/VarVisitor.cpp}}
+{\ttfamily \#include \char`\"{}Var\+Visitor.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+Include dependency graph for Var\+Visitor.\+cpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_var_visitor_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_var_visitor_8cpp_a45af050184ce1095bdd49a3d94f5c54d}{print\+Pos\+Symbol}}(symbol)~  symbol-\/$>$get\+Symbol()-\/$>$get\+Line() $<$$<$ \char`\"{}\+:\char`\"{} $<$$<$ symbol-\/$>$get\+Symbol()-\/$>$get\+Char\+Position\+In\+Line() $<$$<$ \char`\"{} \char`\"{}
+\item 
+\#define \mbox{\hyperlink{_var_visitor_8cpp_a430672814781f2d6b1f21b4eb2b2a7aa}{check\+Expr}}(element)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{_var_visitor_8cpp_a430672814781f2d6b1f21b4eb2b2a7aa}\label{_var_visitor_8cpp_a430672814781f2d6b1f21b4eb2b2a7aa}} 
+\index{VarVisitor.cpp@{VarVisitor.cpp}!checkExpr@{checkExpr}}
+\index{checkExpr@{checkExpr}!VarVisitor.cpp@{VarVisitor.cpp}}
+\doxysubsubsection{\texorpdfstring{checkExpr}{checkExpr}}
+{\footnotesize\ttfamily \#define check\+Expr(\begin{DoxyParamCaption}\item[{}]{element }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{  \textcolor{keywordtype}{bool} copieError = error;      \(\backslash\)}
+\DoxyCodeLine{  error = \textcolor{keyword}{false};            \(\backslash\)}
+\DoxyCodeLine{  visit(element);           \(\backslash\)}
+\DoxyCodeLine{  if (error) \{          \(\backslash\)}
+\DoxyCodeLine{    return 1;           \(\backslash\)}
+\DoxyCodeLine{  \}             \(\backslash\)}
+\DoxyCodeLine{  else \{                \(\backslash\)}
+\DoxyCodeLine{    error = copieError;         \(\backslash\)}
+\DoxyCodeLine{  \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{_var_visitor_8cpp_a45af050184ce1095bdd49a3d94f5c54d}\label{_var_visitor_8cpp_a45af050184ce1095bdd49a3d94f5c54d}} 
+\index{VarVisitor.cpp@{VarVisitor.cpp}!printPosSymbol@{printPosSymbol}}
+\index{printPosSymbol@{printPosSymbol}!VarVisitor.cpp@{VarVisitor.cpp}}
+\doxysubsubsection{\texorpdfstring{printPosSymbol}{printPosSymbol}}
+{\footnotesize\ttfamily \#define print\+Pos\+Symbol(\begin{DoxyParamCaption}\item[{}]{symbol }\end{DoxyParamCaption})~  symbol-\/$>$get\+Symbol()-\/$>$get\+Line() $<$$<$ \char`\"{}\+:\char`\"{} $<$$<$ symbol-\/$>$get\+Symbol()-\/$>$get\+Char\+Position\+In\+Line() $<$$<$ \char`\"{} \char`\"{}}
+

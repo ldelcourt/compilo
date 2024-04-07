@@ -1,0 +1,5 @@
+<map id="RetInstr" name="RetInstr">
+<area shape="rect" id="node1" title=" " alt="" coords="15,173,89,200"/>
+<area shape="rect" id="node2" href="$class_i_r_instr.html" title="Classe mère des instructions IR." alt="" coords="20,97,84,124"/>
+<area shape="rect" id="node3" href="$class_basic_block.html" title="The class for a basic block." alt="" coords="5,7,99,33"/>
+</map>

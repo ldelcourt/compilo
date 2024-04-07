@@ -25,25 +25,25 @@ void BasicBlock::gen_asm(std::ostream &o) const {
 
   o << label << ":\n";
 
+  //generation de l'asm des instructions
   for (auto it = instrs.cbegin(); it != instrs.cend(); it++) {
 
     (*it)->gen_asm(o);
 
   }
 
+  //si c'est le dernier block du cfg, on met l'epilogue
   if (exit_true == nullptr) {
 
     cfg->gen_asm_epilogue(o);
 
   }
 
+  //sinon on jump vers le bloc suivant
   else if (exit_false == nullptr) {
     o << " \tjmp " << exit_true->label << "\n";
   }
-  else {
-
-    //a faire
-  }
+  
 
 }
 
@@ -57,7 +57,7 @@ void BasicBlock::addIRInstr(IRInstr::Operation o, Type t, const std::string *par
       
 
 
-CFG::CFG(DefFunction *ast, bool debug, bool symbol) : ast(ast),  nextBBnumber(0), debug(debug), symbol(symbol)
+CFG::CFG(DefFunction *ast, const std::string &nameFunction, bool debug, bool symbol) : ast(ast),  nameFunction(nameFunction), nextBBnumber(0), _debug(debug), _symbol(symbol)
 {
 
 
@@ -75,22 +75,17 @@ CFG::CFG(DefFunction *ast, bool debug, bool symbol) : ast(ast),  nextBBnumber(0)
   
 
   //creation du squelette de block
-  current_bb  = addBasicBlock("principal");
+  current_bb  = addBasicBlock(nameFunction + "_principal");
 
   current_bb->exit_true = addBasicBlock(newBBName());
   current_bb = current_bb->exit_true;
 
-  current_bb->exit_true = addBasicBlock("output");
+  current_bb->exit_true = addBasicBlock(nameFunction + "_output");
   current_bb->exit_true->exit_true = nullptr;
 
   //buildIR()
   IRVisitor visitor(this);
   visitor.visit(ast);
-
-  //change label
-  for (BasicBlock *bb : bbs) {
-    bb->label = nameFunction + "_" + bb->label;
-  }
   
 }
 
@@ -115,12 +110,15 @@ BasicBlock* CFG::addBasicBlock(const std::string &name) {
 
 void CFG::gen_asm(std::ostream &o) const {
 
+  //En-tête de la fonction
   o << ".globl " << nameFunction << "\n" ;
   o << ".type " << nameFunction << ", @function\n";
   o << nameFunction << ": \n" ;
 
+  //prologue
   gen_asm_prologue(o);
-  
+
+  //gen_asm de chaque block
   for (auto it = bbs.cbegin(); it != bbs.cend(); it++) {
 
     (*it)->gen_asm(o);
@@ -129,30 +127,6 @@ void CFG::gen_asm(std::ostream &o) const {
 
 }
 
-std::string CFG::symbol_to_asm(const std::string &reg) {
-
-  try {
-
-    if (reg.find("#const") != std::string::npos) {
-      return "$" + std::to_string(table.getValue(reg));
-    }
-    else {
-      return std::to_string(table.getValue(reg)) + "(%rbp)";
-    }
-
-  } catch (std::exception &e) {}
-
-  if (reg == "#reg_ret") {
-    return "%eax";
-  }
-
-  else {
-    return "";
-  }
-
-}
-
-  
 
 void CFG::gen_asm_prologue(std::ostream &o) const {
 
@@ -169,6 +143,26 @@ void CFG::gen_asm_epilogue(std::ostream& o) const {
   
 }
 
+std::string CFG::symbol_to_asm(const std::string &reg) const {
+
+  try {
+
+    if (reg.find("#const") != std::string::npos) {
+      return "$" + std::to_string(table.getValue(reg));
+    }
+    else {
+      return std::to_string(table.getValue(reg)) + "(%rbp)";
+    }
+
+  } catch (std::exception &e) {
+    std::cerr << e.what() << std::endl;
+    return "";
+  }
+
+
+}
+
+  
 
 
 std::string CFG::createTempVar() {
@@ -208,12 +202,6 @@ std::string CFG::getRealVarname(const std::string &symbol) {
     varname = varname.substr(0, pos);
   }
 
-  return "err";
-
-}
-
-std::string CFG::newBBName() {
-
-  return "bb" + std::to_string(nextBBnumber++);
+  throw 1;
 
 }

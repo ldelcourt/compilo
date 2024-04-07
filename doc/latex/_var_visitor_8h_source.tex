@@ -1,0 +1,55 @@
+\hypertarget{_var_visitor_8h_source}{}\doxysection{Var\+Visitor.\+h}
+\label{_var_visitor_8h_source}\index{compiler/VarVisitor.h@{compiler/VarVisitor.h}}
+\mbox{\hyperlink{_var_visitor_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}antlr4-\/runtime.h"{}}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include "{}generated/ifccBaseVisitor.h"{}}}
+\DoxyCodeLine{6 }
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <unordered\_map>}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_symbol_table_8h}{SymbolTable.h}}"{}}}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13 }
+\DoxyCodeLine{17 \textcolor{keyword}{class  }\mbox{\hyperlink{class_var_visitor}{VarVisitor}} : \textcolor{keyword}{public} ifccBaseVisitor \{}
+\DoxyCodeLine{18 \textcolor{keyword}{public}:}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20   \mbox{\hyperlink{class_var_visitor_a7485e497ca174bb689d7cf786cbd8fdf}{VarVisitor}}(\mbox{\hyperlink{class_symbol_table}{SymbolTable}} *table) : ifccBaseVisitor(), table(table), error(false) \{\} }
+\DoxyCodeLine{21   \mbox{\hyperlink{class_var_visitor_ad9d369c1219f88bd789d999e3efe6493}{\string~VarVisitor}}() \{\} }
+\DoxyCodeLine{24   \textcolor{keyword}{virtual} antlrcpp::Any \mbox{\hyperlink{class_var_visitor_a70670ace02292dfe60d80b8331611f60}{visitDefinition\_function}}(ifccParser::Definition\_functionContext *ctx) \textcolor{keyword}{override}; }
+\DoxyCodeLine{26   \textcolor{keyword}{virtual} antlrcpp::Any \mbox{\hyperlink{class_var_visitor_a549a9c825184149a947686cd27096726}{visitParametre}}(ifccParser::ParametreContext *ctx) \textcolor{keyword}{override}; }
+\DoxyCodeLine{28   \textcolor{keyword}{virtual} antlrcpp::Any \mbox{\hyperlink{class_var_visitor_a9cfaad7f91dfd75cc0f2dd68a9aa8402}{visitVarToVar}}(ifccParser::VarToVarContext *ctx) \textcolor{keyword}{override}; }
+\DoxyCodeLine{29   \textcolor{keyword}{virtual} antlrcpp::Any \mbox{\hyperlink{class_var_visitor_af18897a92ec8644edbc4dd995f595170}{visitVarToConst}}(ifccParser::VarToConstContext *ctx) \textcolor{keyword}{override}; }
+\DoxyCodeLine{30   \textcolor{keyword}{virtual} antlrcpp::Any \mbox{\hyperlink{class_var_visitor_a05c427984131a844410c1c1c4276d86f}{visitVarToExpr}}(ifccParser::VarToExprContext *ctx) \textcolor{keyword}{override}; }
+\DoxyCodeLine{32   \textcolor{keyword}{virtual} antlrcpp::Any \mbox{\hyperlink{class_var_visitor_a97a0a16e876efd686508aab9b7edff7c}{visitDeclaration\_var}}(ifccParser::Declaration\_varContext *ctx) \textcolor{keyword}{override}; }
+\DoxyCodeLine{34   \textcolor{keyword}{virtual} antlrcpp::Any \mbox{\hyperlink{class_var_visitor_a0f5f1beaa7fb6c0dbccd03188f07769b}{visitReturnVar}}(ifccParser::ReturnVarContext *ctx) \textcolor{keyword}{override}; }
+\DoxyCodeLine{35   \textcolor{keyword}{virtual} antlrcpp::Any \mbox{\hyperlink{class_var_visitor_a3f05d41ac7f1ba65521d8d065a82b7ec}{visitReturnExpr}}(ifccParser::ReturnExprContext *ctx) \textcolor{keyword}{override}; }
+\DoxyCodeLine{37   \textcolor{keyword}{virtual} antlrcpp::Any \mbox{\hyperlink{class_var_visitor_ab2b363798b2db6b750a9370f0e108c03}{visitVarInitVar}}(ifccParser::VarInitVarContext *ctx) \textcolor{keyword}{override}; }
+\DoxyCodeLine{38   \textcolor{keyword}{virtual} antlrcpp::Any \mbox{\hyperlink{class_var_visitor_a8f70181b05f2437c378e5ae827f4d18b}{visitVarInitConst}}(ifccParser::VarInitConstContext *ctx) \textcolor{keyword}{override}; }
+\DoxyCodeLine{39   \textcolor{keyword}{virtual} antlrcpp::Any \mbox{\hyperlink{class_var_visitor_a44bbeeba140d6ccde330af0fecb8c3b4}{visitVarInitExpr}}(ifccParser::VarInitExprContext *ctx) \textcolor{keyword}{override}; }
+\DoxyCodeLine{40   \textcolor{keyword}{virtual} antlrcpp::Any \mbox{\hyperlink{class_var_visitor_affb4dcad69ad964e2f6526f7fe62270f}{visitVarInitAffect}}(ifccParser::VarInitAffectContext *ctx) \textcolor{keyword}{override}; }
+\DoxyCodeLine{42   \textcolor{keyword}{virtual} antlrcpp::Any \mbox{\hyperlink{class_var_visitor_a7003969bbca3b68ce317fbc850110bed}{visitVar}}(ifccParser::VarContext *ctx) \textcolor{keyword}{override}; }
+\DoxyCodeLine{43   \textcolor{keyword}{virtual} antlrcpp::Any \mbox{\hyperlink{class_var_visitor_a10bedc89b710ed6051b2e3366b1a7cf1}{visitBlock}}(ifccParser::BlockContext *ctx) \textcolor{keyword}{override}; }
+\DoxyCodeLine{45   \textcolor{keyword}{virtual} antlrcpp::Any \mbox{\hyperlink{class_var_visitor_ab11eed875bdc213f57feadb366a7b7c1}{visitCall\_function}}(ifccParser::Call\_functionContext *ctx) \textcolor{keyword}{override}; }
+\DoxyCodeLine{48   \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_var_visitor_ac9e18d7a5b566d4b005c2db8396d8b84}{hasError}}() \textcolor{keyword}{const}; }
+\DoxyCodeLine{50   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_var_visitor_a15d1108bb0fcff849f2077d26a31dc19}{checkUnusedDecla}}();}
+\DoxyCodeLine{53   std::pair<bool, std::string> \mbox{\hyperlink{class_var_visitor_aac105a20c99c011c7fbc7ef0f7190806}{checkVarInAllBlocks}}(std::string name); }
+\DoxyCodeLine{56 \textcolor{keyword}{private}:}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58   \mbox{\hyperlink{class_symbol_table}{SymbolTable}} *table; }
+\DoxyCodeLine{59   std::unordered\_map<std::string, bool> used; }
+\DoxyCodeLine{60   \textcolor{keywordtype}{bool} error; }
+\DoxyCodeLine{61   std::string currentBlock; }
+\DoxyCodeLine{62   \textcolor{keywordtype}{int} blockCount = 0; }
+\DoxyCodeLine{64 \};}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_var_visitor_ac9e18d7a5b566d4b005c2db8396d8b84}{VarVisitor::hasError}}()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{68   \textcolor{keywordflow}{return} error;}
+\DoxyCodeLine{69 \}}
+
+\end{DoxyCode}

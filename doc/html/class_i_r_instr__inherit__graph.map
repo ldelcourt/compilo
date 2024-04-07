@@ -1,0 +1,26 @@
+<map id="IRInstr" name="IRInstr">
+<area shape="rect" id="node1" title="Classe mère des instructions IR." alt="" coords="5,563,69,589"/>
+<area shape="rect" id="node2" href="$class_add_instr.html" title=" " alt="" coords="141,5,217,32"/>
+<area shape="rect" id="node3" href="$class_binary_and_instr.html" title=" " alt="" coords="119,56,238,83"/>
+<area shape="rect" id="node4" href="$class_binary_or_instr.html" title=" " alt="" coords="125,107,233,133"/>
+<area shape="rect" id="node5" href="$class_binary_xor_instr.html" title=" " alt="" coords="121,157,236,184"/>
+<area shape="rect" id="node6" href="$class_call_instr.html" title=" " alt="" coords="141,208,217,235"/>
+<area shape="rect" id="node7" href="$class_cmp_eq_instr.html" title=" " alt="" coords="130,259,227,285"/>
+<area shape="rect" id="node8" href="$class_cmp_gt_instr.html" title=" " alt="" coords="131,309,227,336"/>
+<area shape="rect" id="node9" href="$class_cmp_lt_instr.html" title=" " alt="" coords="132,360,225,387"/>
+<area shape="rect" id="node10" href="$class_cmp_neq_instr.html" title=" " alt="" coords="125,411,232,437"/>
+<area shape="rect" id="node11" href="$class_copy_instr.html" title=" " alt="" coords="137,461,221,488"/>
+<area shape="rect" id="node12" href="$class_div_instr.html" title=" " alt="" coords="142,512,215,539"/>
+<area shape="rect" id="node13" href="$class_get_params_instr.html" title=" " alt="" coords="117,563,240,589"/>
+<area shape="rect" id="node14" href="$class_get_ret_instr.html" title=" " alt="" coords="131,613,227,640"/>
+<area shape="rect" id="node15" href="$class_if_else_instr.html" title=" " alt="" coords="135,664,222,691"/>
+<area shape="rect" id="node16" href="$class_jmp_instr.html" title=" " alt="" coords="141,715,217,741"/>
+<area shape="rect" id="node17" href="$class_ldconst_instr.html" title=" " alt="" coords="128,765,229,792"/>
+<area shape="rect" id="node18" href="$class_logi_not_instr.html" title=" " alt="" coords="128,816,229,843"/>
+<area shape="rect" id="node19" href="$class_mod_instr.html" title=" " alt="" coords="139,867,218,893"/>
+<area shape="rect" id="node20" href="$class_mul_instr.html" title=" " alt="" coords="141,917,216,944"/>
+<area shape="rect" id="node21" href="$class_neg_instr.html" title=" " alt="" coords="140,968,217,995"/>
+<area shape="rect" id="node22" href="$class_ret_instr.html" title=" " alt="" coords="142,1019,215,1045"/>
+<area shape="rect" id="node23" href="$class_sub_instr.html" title=" " alt="" coords="141,1069,216,1096"/>
+<area shape="rect" id="node24" href="$class_while_instr.html" title=" " alt="" coords="135,1120,223,1147"/>
+</map>

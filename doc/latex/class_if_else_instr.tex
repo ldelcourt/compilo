@@ -1,0 +1,63 @@
+\hypertarget{class_if_else_instr}{}\doxysection{If\+Else\+Instr Class Reference}
+\label{class_if_else_instr}\index{IfElseInstr@{IfElseInstr}}
+
+
+{\ttfamily \#include $<$IRInstr.\+h$>$}
+
+
+
+Inheritance diagram for If\+Else\+Instr\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=145pt]{class_if_else_instr__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for If\+Else\+Instr\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=220pt]{class_if_else_instr__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_if_else_instr_adf8721d658653aab18164efc6be50195}{If\+Else\+Instr}} (\mbox{\hyperlink{class_basic_block}{Basic\+Block}} $\ast$\mbox{\hyperlink{class_i_r_instr_a0bf0264847ab1c69e99495f1456e3adf}{bb}}, \mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}} \mbox{\hyperlink{class_i_r_instr_a449e6b5f75d186ce7975dbb72c416a6b}{t}}, const std\+::string \&cond)
+\item 
+virtual void \mbox{\hyperlink{class_if_else_instr_a7a26dbed1dd2d140cced078e7142dea3}{gen\+\_\+asm}} (std\+::ostream \&o) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\texorpdfstring{$<$}{<}Instruction du if else 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_if_else_instr_adf8721d658653aab18164efc6be50195}\label{class_if_else_instr_adf8721d658653aab18164efc6be50195}} 
+\index{IfElseInstr@{IfElseInstr}!IfElseInstr@{IfElseInstr}}
+\index{IfElseInstr@{IfElseInstr}!IfElseInstr@{IfElseInstr}}
+\doxysubsubsection{\texorpdfstring{IfElseInstr()}{IfElseInstr()}}
+{\footnotesize\ttfamily If\+Else\+Instr\+::\+If\+Else\+Instr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_basic_block}{Basic\+Block}} $\ast$}]{bb,  }\item[{\mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}}}]{t,  }\item[{const std\+::string \&}]{cond }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_if_else_instr_a7a26dbed1dd2d140cced078e7142dea3}\label{class_if_else_instr_a7a26dbed1dd2d140cced078e7142dea3}} 
+\index{IfElseInstr@{IfElseInstr}!gen\_asm@{gen\_asm}}
+\index{gen\_asm@{gen\_asm}!IfElseInstr@{IfElseInstr}}
+\doxysubsubsection{\texorpdfstring{gen\_asm()}{gen\_asm()}}
+{\footnotesize\ttfamily void If\+Else\+Instr\+::gen\+\_\+asm (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{o }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+x86 assembly code generation for this IR instruction 
+
+Implements \mbox{\hyperlink{class_i_r_instr_a2033117dbd12955e9b290882bc721b9c}{IRInstr}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+compiler/\mbox{\hyperlink{_i_r_instr_8h}{IRInstr.\+h}}\item 
+compiler/\mbox{\hyperlink{_i_r_instr_8cpp}{IRInstr.\+cpp}}\end{DoxyCompactItemize}

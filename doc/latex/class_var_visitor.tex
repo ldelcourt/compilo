@@ -1,0 +1,207 @@
+\hypertarget{class_var_visitor}{}\doxysection{Var\+Visitor Class Reference}
+\label{class_var_visitor}\index{VarVisitor@{VarVisitor}}
+
+
+Visite l\textquotesingle{}AST d\textquotesingle{}une fonction et complète la table des symboles.  
+
+
+
+
+{\ttfamily \#include $<$Var\+Visitor.\+h$>$}
+
+
+
+Inheritance diagram for Var\+Visitor\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=169pt]{class_var_visitor__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Var\+Visitor\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=169pt]{class_var_visitor__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_var_visitor_a7485e497ca174bb689d7cf786cbd8fdf}{Var\+Visitor}} (\mbox{\hyperlink{class_symbol_table}{Symbol\+Table}} $\ast$table)
+\item 
+\mbox{\hyperlink{class_var_visitor_ad9d369c1219f88bd789d999e3efe6493}{$\sim$\+Var\+Visitor}} ()
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_var_visitor_a70670ace02292dfe60d80b8331611f60}{visit\+Definition\+\_\+function}} (ifcc\+Parser\+::\+Definition\+\_\+function\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_var_visitor_a549a9c825184149a947686cd27096726}{visit\+Parametre}} (ifcc\+Parser\+::\+Parametre\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_var_visitor_a9cfaad7f91dfd75cc0f2dd68a9aa8402}{visit\+Var\+To\+Var}} (ifcc\+Parser\+::\+Var\+To\+Var\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_var_visitor_af18897a92ec8644edbc4dd995f595170}{visit\+Var\+To\+Const}} (ifcc\+Parser\+::\+Var\+To\+Const\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_var_visitor_a05c427984131a844410c1c1c4276d86f}{visit\+Var\+To\+Expr}} (ifcc\+Parser\+::\+Var\+To\+Expr\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_var_visitor_a97a0a16e876efd686508aab9b7edff7c}{visit\+Declaration\+\_\+var}} (ifcc\+Parser\+::\+Declaration\+\_\+var\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_var_visitor_a0f5f1beaa7fb6c0dbccd03188f07769b}{visit\+Return\+Var}} (ifcc\+Parser\+::\+Return\+Var\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_var_visitor_a3f05d41ac7f1ba65521d8d065a82b7ec}{visit\+Return\+Expr}} (ifcc\+Parser\+::\+Return\+Expr\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_var_visitor_ab2b363798b2db6b750a9370f0e108c03}{visit\+Var\+Init\+Var}} (ifcc\+Parser\+::\+Var\+Init\+Var\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_var_visitor_a8f70181b05f2437c378e5ae827f4d18b}{visit\+Var\+Init\+Const}} (ifcc\+Parser\+::\+Var\+Init\+Const\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_var_visitor_a44bbeeba140d6ccde330af0fecb8c3b4}{visit\+Var\+Init\+Expr}} (ifcc\+Parser\+::\+Var\+Init\+Expr\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_var_visitor_affb4dcad69ad964e2f6526f7fe62270f}{visit\+Var\+Init\+Affect}} (ifcc\+Parser\+::\+Var\+Init\+Affect\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_var_visitor_a7003969bbca3b68ce317fbc850110bed}{visit\+Var}} (ifcc\+Parser\+::\+Var\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_var_visitor_a10bedc89b710ed6051b2e3366b1a7cf1}{visit\+Block}} (ifcc\+Parser\+::\+Block\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_var_visitor_ab11eed875bdc213f57feadb366a7b7c1}{visit\+Call\+\_\+function}} (ifcc\+Parser\+::\+Call\+\_\+function\+Context $\ast$ctx) override
+\item 
+bool \mbox{\hyperlink{class_var_visitor_ac9e18d7a5b566d4b005c2db8396d8b84}{has\+Error}} () const
+\item 
+void \mbox{\hyperlink{class_var_visitor_a15d1108bb0fcff849f2077d26a31dc19}{check\+Unused\+Decla}} ()
+\item 
+std\+::pair$<$ bool, std\+::string $>$ \mbox{\hyperlink{class_var_visitor_aac105a20c99c011c7fbc7ef0f7190806}{check\+Var\+In\+All\+Blocks}} (std\+::string name)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Visite l\textquotesingle{}AST d\textquotesingle{}une fonction et complète la table des symboles. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_var_visitor_a7485e497ca174bb689d7cf786cbd8fdf}\label{class_var_visitor_a7485e497ca174bb689d7cf786cbd8fdf}} 
+\index{VarVisitor@{VarVisitor}!VarVisitor@{VarVisitor}}
+\index{VarVisitor@{VarVisitor}!VarVisitor@{VarVisitor}}
+\doxysubsubsection{\texorpdfstring{VarVisitor()}{VarVisitor()}}
+{\footnotesize\ttfamily Var\+Visitor\+::\+Var\+Visitor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_symbol_table}{Symbol\+Table}} $\ast$}]{table }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructeur \mbox{\Hypertarget{class_var_visitor_ad9d369c1219f88bd789d999e3efe6493}\label{class_var_visitor_ad9d369c1219f88bd789d999e3efe6493}} 
+\index{VarVisitor@{VarVisitor}!````~VarVisitor@{$\sim$VarVisitor}}
+\index{````~VarVisitor@{$\sim$VarVisitor}!VarVisitor@{VarVisitor}}
+\doxysubsubsection{\texorpdfstring{$\sim$VarVisitor()}{~VarVisitor()}}
+{\footnotesize\ttfamily Var\+Visitor\+::$\sim$\+Var\+Visitor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Destructeur 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_var_visitor_a15d1108bb0fcff849f2077d26a31dc19}\label{class_var_visitor_a15d1108bb0fcff849f2077d26a31dc19}} 
+\index{VarVisitor@{VarVisitor}!checkUnusedDecla@{checkUnusedDecla}}
+\index{checkUnusedDecla@{checkUnusedDecla}!VarVisitor@{VarVisitor}}
+\doxysubsubsection{\texorpdfstring{checkUnusedDecla()}{checkUnusedDecla()}}
+{\footnotesize\ttfamily void Var\+Visitor\+::check\+Unused\+Decla (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+verifie les symboles dans la map used qui ne sont pas utilisés =\texorpdfstring{$>$}{>} set error en fonction \mbox{\Hypertarget{class_var_visitor_aac105a20c99c011c7fbc7ef0f7190806}\label{class_var_visitor_aac105a20c99c011c7fbc7ef0f7190806}} 
+\index{VarVisitor@{VarVisitor}!checkVarInAllBlocks@{checkVarInAllBlocks}}
+\index{checkVarInAllBlocks@{checkVarInAllBlocks}!VarVisitor@{VarVisitor}}
+\doxysubsubsection{\texorpdfstring{checkVarInAllBlocks()}{checkVarInAllBlocks()}}
+{\footnotesize\ttfamily std\+::pair$<$ bool, std\+::string $>$ Var\+Visitor\+::check\+Var\+In\+All\+Blocks (\begin{DoxyParamCaption}\item[{std\+::string}]{name }\end{DoxyParamCaption})}
+
+Check for the variable name in all blocks (from the innermost to the outermost block) \mbox{\Hypertarget{class_var_visitor_ac9e18d7a5b566d4b005c2db8396d8b84}\label{class_var_visitor_ac9e18d7a5b566d4b005c2db8396d8b84}} 
+\index{VarVisitor@{VarVisitor}!hasError@{hasError}}
+\index{hasError@{hasError}!VarVisitor@{VarVisitor}}
+\doxysubsubsection{\texorpdfstring{hasError()}{hasError()}}
+{\footnotesize\ttfamily bool Var\+Visitor\+::has\+Error (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+getter sur l\textquotesingle{}attribut error \mbox{\Hypertarget{class_var_visitor_a10bedc89b710ed6051b2e3366b1a7cf1}\label{class_var_visitor_a10bedc89b710ed6051b2e3366b1a7cf1}} 
+\index{VarVisitor@{VarVisitor}!visitBlock@{visitBlock}}
+\index{visitBlock@{visitBlock}!VarVisitor@{VarVisitor}}
+\doxysubsubsection{\texorpdfstring{visitBlock()}{visitBlock()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any Var\+Visitor\+::visit\+Block (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Block\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\{ statements \} \mbox{\Hypertarget{class_var_visitor_ab11eed875bdc213f57feadb366a7b7c1}\label{class_var_visitor_ab11eed875bdc213f57feadb366a7b7c1}} 
+\index{VarVisitor@{VarVisitor}!visitCall\_function@{visitCall\_function}}
+\index{visitCall\_function@{visitCall\_function}!VarVisitor@{VarVisitor}}
+\doxysubsubsection{\texorpdfstring{visitCall\_function()}{visitCall\_function()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any Var\+Visitor\+::visit\+Call\+\_\+function (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Call\+\_\+function\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+function() \mbox{\Hypertarget{class_var_visitor_a97a0a16e876efd686508aab9b7edff7c}\label{class_var_visitor_a97a0a16e876efd686508aab9b7edff7c}} 
+\index{VarVisitor@{VarVisitor}!visitDeclaration\_var@{visitDeclaration\_var}}
+\index{visitDeclaration\_var@{visitDeclaration\_var}!VarVisitor@{VarVisitor}}
+\doxysubsubsection{\texorpdfstring{visitDeclaration\_var()}{visitDeclaration\_var()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any Var\+Visitor\+::visit\+Declaration\+\_\+var (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Declaration\+\_\+var\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+int a, b, c; \mbox{\Hypertarget{class_var_visitor_a70670ace02292dfe60d80b8331611f60}\label{class_var_visitor_a70670ace02292dfe60d80b8331611f60}} 
+\index{VarVisitor@{VarVisitor}!visitDefinition\_function@{visitDefinition\_function}}
+\index{visitDefinition\_function@{visitDefinition\_function}!VarVisitor@{VarVisitor}}
+\doxysubsubsection{\texorpdfstring{visitDefinition\_function()}{visitDefinition\_function()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any Var\+Visitor\+::visit\+Definition\+\_\+function (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Definition\+\_\+function\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+int function() \{\} \mbox{\Hypertarget{class_var_visitor_a549a9c825184149a947686cd27096726}\label{class_var_visitor_a549a9c825184149a947686cd27096726}} 
+\index{VarVisitor@{VarVisitor}!visitParametre@{visitParametre}}
+\index{visitParametre@{visitParametre}!VarVisitor@{VarVisitor}}
+\doxysubsubsection{\texorpdfstring{visitParametre()}{visitParametre()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any Var\+Visitor\+::visit\+Parametre (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Parametre\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+int a \mbox{\Hypertarget{class_var_visitor_a3f05d41ac7f1ba65521d8d065a82b7ec}\label{class_var_visitor_a3f05d41ac7f1ba65521d8d065a82b7ec}} 
+\index{VarVisitor@{VarVisitor}!visitReturnExpr@{visitReturnExpr}}
+\index{visitReturnExpr@{visitReturnExpr}!VarVisitor@{VarVisitor}}
+\doxysubsubsection{\texorpdfstring{visitReturnExpr()}{visitReturnExpr()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any Var\+Visitor\+::visit\+Return\+Expr (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Return\+Expr\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+return a + 42; \mbox{\Hypertarget{class_var_visitor_a0f5f1beaa7fb6c0dbccd03188f07769b}\label{class_var_visitor_a0f5f1beaa7fb6c0dbccd03188f07769b}} 
+\index{VarVisitor@{VarVisitor}!visitReturnVar@{visitReturnVar}}
+\index{visitReturnVar@{visitReturnVar}!VarVisitor@{VarVisitor}}
+\doxysubsubsection{\texorpdfstring{visitReturnVar()}{visitReturnVar()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any Var\+Visitor\+::visit\+Return\+Var (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Return\+Var\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+return a; \mbox{\Hypertarget{class_var_visitor_a7003969bbca3b68ce317fbc850110bed}\label{class_var_visitor_a7003969bbca3b68ce317fbc850110bed}} 
+\index{VarVisitor@{VarVisitor}!visitVar@{visitVar}}
+\index{visitVar@{visitVar}!VarVisitor@{VarVisitor}}
+\doxysubsubsection{\texorpdfstring{visitVar()}{visitVar()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any Var\+Visitor\+::visit\+Var (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Var\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+a \mbox{\Hypertarget{class_var_visitor_affb4dcad69ad964e2f6526f7fe62270f}\label{class_var_visitor_affb4dcad69ad964e2f6526f7fe62270f}} 
+\index{VarVisitor@{VarVisitor}!visitVarInitAffect@{visitVarInitAffect}}
+\index{visitVarInitAffect@{visitVarInitAffect}!VarVisitor@{VarVisitor}}
+\doxysubsubsection{\texorpdfstring{visitVarInitAffect()}{visitVarInitAffect()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any Var\+Visitor\+::visit\+Var\+Init\+Affect (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Var\+Init\+Affect\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+int a = b = 42 + d; \mbox{\Hypertarget{class_var_visitor_a8f70181b05f2437c378e5ae827f4d18b}\label{class_var_visitor_a8f70181b05f2437c378e5ae827f4d18b}} 
+\index{VarVisitor@{VarVisitor}!visitVarInitConst@{visitVarInitConst}}
+\index{visitVarInitConst@{visitVarInitConst}!VarVisitor@{VarVisitor}}
+\doxysubsubsection{\texorpdfstring{visitVarInitConst()}{visitVarInitConst()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any Var\+Visitor\+::visit\+Var\+Init\+Const (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Var\+Init\+Const\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+int a = 42, b = 43; \mbox{\Hypertarget{class_var_visitor_a44bbeeba140d6ccde330af0fecb8c3b4}\label{class_var_visitor_a44bbeeba140d6ccde330af0fecb8c3b4}} 
+\index{VarVisitor@{VarVisitor}!visitVarInitExpr@{visitVarInitExpr}}
+\index{visitVarInitExpr@{visitVarInitExpr}!VarVisitor@{VarVisitor}}
+\doxysubsubsection{\texorpdfstring{visitVarInitExpr()}{visitVarInitExpr()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any Var\+Visitor\+::visit\+Var\+Init\+Expr (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Var\+Init\+Expr\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+int a = b + 42, c = d + 43; \mbox{\Hypertarget{class_var_visitor_ab2b363798b2db6b750a9370f0e108c03}\label{class_var_visitor_ab2b363798b2db6b750a9370f0e108c03}} 
+\index{VarVisitor@{VarVisitor}!visitVarInitVar@{visitVarInitVar}}
+\index{visitVarInitVar@{visitVarInitVar}!VarVisitor@{VarVisitor}}
+\doxysubsubsection{\texorpdfstring{visitVarInitVar()}{visitVarInitVar()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any Var\+Visitor\+::visit\+Var\+Init\+Var (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Var\+Init\+Var\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+int a = b, c = d; \mbox{\Hypertarget{class_var_visitor_af18897a92ec8644edbc4dd995f595170}\label{class_var_visitor_af18897a92ec8644edbc4dd995f595170}} 
+\index{VarVisitor@{VarVisitor}!visitVarToConst@{visitVarToConst}}
+\index{visitVarToConst@{visitVarToConst}!VarVisitor@{VarVisitor}}
+\doxysubsubsection{\texorpdfstring{visitVarToConst()}{visitVarToConst()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any Var\+Visitor\+::visit\+Var\+To\+Const (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Var\+To\+Const\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+a = 42; \mbox{\Hypertarget{class_var_visitor_a05c427984131a844410c1c1c4276d86f}\label{class_var_visitor_a05c427984131a844410c1c1c4276d86f}} 
+\index{VarVisitor@{VarVisitor}!visitVarToExpr@{visitVarToExpr}}
+\index{visitVarToExpr@{visitVarToExpr}!VarVisitor@{VarVisitor}}
+\doxysubsubsection{\texorpdfstring{visitVarToExpr()}{visitVarToExpr()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any Var\+Visitor\+::visit\+Var\+To\+Expr (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Var\+To\+Expr\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+a = b + 42; \mbox{\Hypertarget{class_var_visitor_a9cfaad7f91dfd75cc0f2dd68a9aa8402}\label{class_var_visitor_a9cfaad7f91dfd75cc0f2dd68a9aa8402}} 
+\index{VarVisitor@{VarVisitor}!visitVarToVar@{visitVarToVar}}
+\index{visitVarToVar@{visitVarToVar}!VarVisitor@{VarVisitor}}
+\doxysubsubsection{\texorpdfstring{visitVarToVar()}{visitVarToVar()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any Var\+Visitor\+::visit\+Var\+To\+Var (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Var\+To\+Var\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+a = b; ou a = b = c = 42 + d; 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+compiler/\mbox{\hyperlink{_var_visitor_8h}{Var\+Visitor.\+h}}\item 
+compiler/\mbox{\hyperlink{_var_visitor_8cpp}{Var\+Visitor.\+cpp}}\end{DoxyCompactItemize}

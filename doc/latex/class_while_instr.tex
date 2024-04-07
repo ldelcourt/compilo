@@ -1,0 +1,63 @@
+\hypertarget{class_while_instr}{}\doxysection{While\+Instr Class Reference}
+\label{class_while_instr}\index{WhileInstr@{WhileInstr}}
+
+
+{\ttfamily \#include $<$IRInstr.\+h$>$}
+
+
+
+Inheritance diagram for While\+Instr\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=146pt]{class_while_instr__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for While\+Instr\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=220pt]{class_while_instr__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_while_instr_a09e115f5a6ff7e760bef66643f21bb40}{While\+Instr}} (\mbox{\hyperlink{class_basic_block}{Basic\+Block}} $\ast$\mbox{\hyperlink{class_i_r_instr_a0bf0264847ab1c69e99495f1456e3adf}{bb}}, \mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}} \mbox{\hyperlink{class_i_r_instr_a449e6b5f75d186ce7975dbb72c416a6b}{t}}, const std\+::string \&cond)
+\item 
+virtual void \mbox{\hyperlink{class_while_instr_a13878f7f34ae64e4daabde1f26dde58e}{gen\+\_\+asm}} (std\+::ostream \&o) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\texorpdfstring{$<$}{<}Instruction du while 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_while_instr_a09e115f5a6ff7e760bef66643f21bb40}\label{class_while_instr_a09e115f5a6ff7e760bef66643f21bb40}} 
+\index{WhileInstr@{WhileInstr}!WhileInstr@{WhileInstr}}
+\index{WhileInstr@{WhileInstr}!WhileInstr@{WhileInstr}}
+\doxysubsubsection{\texorpdfstring{WhileInstr()}{WhileInstr()}}
+{\footnotesize\ttfamily While\+Instr\+::\+While\+Instr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_basic_block}{Basic\+Block}} $\ast$}]{bb,  }\item[{\mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}}}]{t,  }\item[{const std\+::string \&}]{cond }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_while_instr_a13878f7f34ae64e4daabde1f26dde58e}\label{class_while_instr_a13878f7f34ae64e4daabde1f26dde58e}} 
+\index{WhileInstr@{WhileInstr}!gen\_asm@{gen\_asm}}
+\index{gen\_asm@{gen\_asm}!WhileInstr@{WhileInstr}}
+\doxysubsubsection{\texorpdfstring{gen\_asm()}{gen\_asm()}}
+{\footnotesize\ttfamily void While\+Instr\+::gen\+\_\+asm (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{o }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+x86 assembly code generation for this IR instruction 
+
+Implements \mbox{\hyperlink{class_i_r_instr_a2033117dbd12955e9b290882bc721b9c}{IRInstr}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+compiler/\mbox{\hyperlink{_i_r_instr_8h}{IRInstr.\+h}}\item 
+compiler/\mbox{\hyperlink{_i_r_instr_8cpp}{IRInstr.\+cpp}}\end{DoxyCompactItemize}

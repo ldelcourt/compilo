@@ -1,0 +1,175 @@
+\hypertarget{class_code_gen_visitor}{}\doxysection{Code\+Gen\+Visitor Class Reference}
+\label{class_code_gen_visitor}\index{CodeGenVisitor@{CodeGenVisitor}}
+
+
+{\ttfamily \#include $<$Code\+Gen\+Visitor.\+h$>$}
+
+
+
+Inheritance diagram for Code\+Gen\+Visitor\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=172pt]{class_code_gen_visitor__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Code\+Gen\+Visitor\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=172pt]{class_code_gen_visitor__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_code_gen_visitor_a1a744248e44fe2f3bfe53a195fb39201}{Code\+Gen\+Visitor}} (\mbox{\hyperlink{class_symbol_table}{Symbol\+Table}} $\ast$table)
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_code_gen_visitor_a79e751e8d4921afd9f0cdb7a46a633ef}{visit\+Prog}} (ifcc\+Parser\+::\+Prog\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_code_gen_visitor_a51d138d59cfeb5c76b4859ec5fcf7f81}{visit\+Return\+Const}} (ifcc\+Parser\+::\+Return\+Const\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_code_gen_visitor_af527c60a022f25bb352bf6051c6e0656}{visit\+Return\+Var}} (ifcc\+Parser\+::\+Return\+Var\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_code_gen_visitor_af2fd73cab4daf6a3f397c6e7f2994889}{visit\+Return\+Expr}} (ifcc\+Parser\+::\+Return\+Expr\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_code_gen_visitor_a58a682ab42ad618e5b2074e5d7547892}{visit\+Var\+To\+Var}} (ifcc\+Parser\+::\+Var\+To\+Var\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_code_gen_visitor_ab659d176d4f7110ac0228070e675fe1b}{visit\+Var\+To\+Const}} (ifcc\+Parser\+::\+Var\+To\+Const\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_code_gen_visitor_a4a8a76e713e9eee9ea9d72bee832f128}{visit\+Var\+To\+Expr}} (ifcc\+Parser\+::\+Var\+To\+Expr\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_code_gen_visitor_aac8fe579bb0ce23df72c57a984938331}{visit\+Var\+Init\+Var}} (ifcc\+Parser\+::\+Var\+Init\+Var\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_code_gen_visitor_af98022b136e972967dcfb5096ccc5750}{visit\+Var\+Init\+Const}} (ifcc\+Parser\+::\+Var\+Init\+Const\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_code_gen_visitor_ac830e099d5f1b6f9483d4be025678768}{visit\+Var\+Init\+Expr}} (ifcc\+Parser\+::\+Var\+Init\+Expr\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_code_gen_visitor_a185cb3ce7f991b8e2a6621e2c982858b}{visit\+Par}} (ifcc\+Parser\+::\+Par\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_code_gen_visitor_abacc32319fee072b87f08776bfe6cfc4}{visit\+Multdivmod}} (ifcc\+Parser\+::\+Multdivmod\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_code_gen_visitor_a6c8c2ac11427505ba8aef046831be04f}{visit\+Unaire}} (ifcc\+Parser\+::\+Unaire\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_code_gen_visitor_abf82cf9413c8538fea14692f1370d5d8}{visit\+Plusmoins}} (ifcc\+Parser\+::\+Plusmoins\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_code_gen_visitor_adafc13af63aa220972d299d18017ca16}{visit\+Const}} (ifcc\+Parser\+::\+Const\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_code_gen_visitor_a59844a80f46037112be8677a1d1b3c2b}{visit\+Var}} (ifcc\+Parser\+::\+Var\+Context $\ast$ctx) override
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_code_gen_visitor_a1a744248e44fe2f3bfe53a195fb39201}\label{class_code_gen_visitor_a1a744248e44fe2f3bfe53a195fb39201}} 
+\index{CodeGenVisitor@{CodeGenVisitor}!CodeGenVisitor@{CodeGenVisitor}}
+\index{CodeGenVisitor@{CodeGenVisitor}!CodeGenVisitor@{CodeGenVisitor}}
+\doxysubsubsection{\texorpdfstring{CodeGenVisitor()}{CodeGenVisitor()}}
+{\footnotesize\ttfamily Code\+Gen\+Visitor\+::\+Code\+Gen\+Visitor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_symbol_table}{Symbol\+Table}} $\ast$}]{table }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_code_gen_visitor_adafc13af63aa220972d299d18017ca16}\label{class_code_gen_visitor_adafc13af63aa220972d299d18017ca16}} 
+\index{CodeGenVisitor@{CodeGenVisitor}!visitConst@{visitConst}}
+\index{visitConst@{visitConst}!CodeGenVisitor@{CodeGenVisitor}}
+\doxysubsubsection{\texorpdfstring{visitConst()}{visitConst()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any Code\+Gen\+Visitor\+::visit\+Const (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Const\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{class_code_gen_visitor_abacc32319fee072b87f08776bfe6cfc4}\label{class_code_gen_visitor_abacc32319fee072b87f08776bfe6cfc4}} 
+\index{CodeGenVisitor@{CodeGenVisitor}!visitMultdivmod@{visitMultdivmod}}
+\index{visitMultdivmod@{visitMultdivmod}!CodeGenVisitor@{CodeGenVisitor}}
+\doxysubsubsection{\texorpdfstring{visitMultdivmod()}{visitMultdivmod()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any Code\+Gen\+Visitor\+::visit\+Multdivmod (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Multdivmod\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{class_code_gen_visitor_a185cb3ce7f991b8e2a6621e2c982858b}\label{class_code_gen_visitor_a185cb3ce7f991b8e2a6621e2c982858b}} 
+\index{CodeGenVisitor@{CodeGenVisitor}!visitPar@{visitPar}}
+\index{visitPar@{visitPar}!CodeGenVisitor@{CodeGenVisitor}}
+\doxysubsubsection{\texorpdfstring{visitPar()}{visitPar()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any Code\+Gen\+Visitor\+::visit\+Par (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Par\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{class_code_gen_visitor_abf82cf9413c8538fea14692f1370d5d8}\label{class_code_gen_visitor_abf82cf9413c8538fea14692f1370d5d8}} 
+\index{CodeGenVisitor@{CodeGenVisitor}!visitPlusmoins@{visitPlusmoins}}
+\index{visitPlusmoins@{visitPlusmoins}!CodeGenVisitor@{CodeGenVisitor}}
+\doxysubsubsection{\texorpdfstring{visitPlusmoins()}{visitPlusmoins()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any Code\+Gen\+Visitor\+::visit\+Plusmoins (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Plusmoins\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{class_code_gen_visitor_a79e751e8d4921afd9f0cdb7a46a633ef}\label{class_code_gen_visitor_a79e751e8d4921afd9f0cdb7a46a633ef}} 
+\index{CodeGenVisitor@{CodeGenVisitor}!visitProg@{visitProg}}
+\index{visitProg@{visitProg}!CodeGenVisitor@{CodeGenVisitor}}
+\doxysubsubsection{\texorpdfstring{visitProg()}{visitProg()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any Code\+Gen\+Visitor\+::visit\+Prog (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Prog\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{class_code_gen_visitor_a51d138d59cfeb5c76b4859ec5fcf7f81}\label{class_code_gen_visitor_a51d138d59cfeb5c76b4859ec5fcf7f81}} 
+\index{CodeGenVisitor@{CodeGenVisitor}!visitReturnConst@{visitReturnConst}}
+\index{visitReturnConst@{visitReturnConst}!CodeGenVisitor@{CodeGenVisitor}}
+\doxysubsubsection{\texorpdfstring{visitReturnConst()}{visitReturnConst()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any Code\+Gen\+Visitor\+::visit\+Return\+Const (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Return\+Const\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{class_code_gen_visitor_af2fd73cab4daf6a3f397c6e7f2994889}\label{class_code_gen_visitor_af2fd73cab4daf6a3f397c6e7f2994889}} 
+\index{CodeGenVisitor@{CodeGenVisitor}!visitReturnExpr@{visitReturnExpr}}
+\index{visitReturnExpr@{visitReturnExpr}!CodeGenVisitor@{CodeGenVisitor}}
+\doxysubsubsection{\texorpdfstring{visitReturnExpr()}{visitReturnExpr()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any Code\+Gen\+Visitor\+::visit\+Return\+Expr (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Return\+Expr\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{class_code_gen_visitor_af527c60a022f25bb352bf6051c6e0656}\label{class_code_gen_visitor_af527c60a022f25bb352bf6051c6e0656}} 
+\index{CodeGenVisitor@{CodeGenVisitor}!visitReturnVar@{visitReturnVar}}
+\index{visitReturnVar@{visitReturnVar}!CodeGenVisitor@{CodeGenVisitor}}
+\doxysubsubsection{\texorpdfstring{visitReturnVar()}{visitReturnVar()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any Code\+Gen\+Visitor\+::visit\+Return\+Var (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Return\+Var\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{class_code_gen_visitor_a6c8c2ac11427505ba8aef046831be04f}\label{class_code_gen_visitor_a6c8c2ac11427505ba8aef046831be04f}} 
+\index{CodeGenVisitor@{CodeGenVisitor}!visitUnaire@{visitUnaire}}
+\index{visitUnaire@{visitUnaire}!CodeGenVisitor@{CodeGenVisitor}}
+\doxysubsubsection{\texorpdfstring{visitUnaire()}{visitUnaire()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any Code\+Gen\+Visitor\+::visit\+Unaire (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Unaire\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{class_code_gen_visitor_a59844a80f46037112be8677a1d1b3c2b}\label{class_code_gen_visitor_a59844a80f46037112be8677a1d1b3c2b}} 
+\index{CodeGenVisitor@{CodeGenVisitor}!visitVar@{visitVar}}
+\index{visitVar@{visitVar}!CodeGenVisitor@{CodeGenVisitor}}
+\doxysubsubsection{\texorpdfstring{visitVar()}{visitVar()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any Code\+Gen\+Visitor\+::visit\+Var (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Var\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{class_code_gen_visitor_af98022b136e972967dcfb5096ccc5750}\label{class_code_gen_visitor_af98022b136e972967dcfb5096ccc5750}} 
+\index{CodeGenVisitor@{CodeGenVisitor}!visitVarInitConst@{visitVarInitConst}}
+\index{visitVarInitConst@{visitVarInitConst}!CodeGenVisitor@{CodeGenVisitor}}
+\doxysubsubsection{\texorpdfstring{visitVarInitConst()}{visitVarInitConst()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any Code\+Gen\+Visitor\+::visit\+Var\+Init\+Const (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Var\+Init\+Const\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{class_code_gen_visitor_ac830e099d5f1b6f9483d4be025678768}\label{class_code_gen_visitor_ac830e099d5f1b6f9483d4be025678768}} 
+\index{CodeGenVisitor@{CodeGenVisitor}!visitVarInitExpr@{visitVarInitExpr}}
+\index{visitVarInitExpr@{visitVarInitExpr}!CodeGenVisitor@{CodeGenVisitor}}
+\doxysubsubsection{\texorpdfstring{visitVarInitExpr()}{visitVarInitExpr()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any Code\+Gen\+Visitor\+::visit\+Var\+Init\+Expr (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Var\+Init\+Expr\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{class_code_gen_visitor_aac8fe579bb0ce23df72c57a984938331}\label{class_code_gen_visitor_aac8fe579bb0ce23df72c57a984938331}} 
+\index{CodeGenVisitor@{CodeGenVisitor}!visitVarInitVar@{visitVarInitVar}}
+\index{visitVarInitVar@{visitVarInitVar}!CodeGenVisitor@{CodeGenVisitor}}
+\doxysubsubsection{\texorpdfstring{visitVarInitVar()}{visitVarInitVar()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any Code\+Gen\+Visitor\+::visit\+Var\+Init\+Var (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Var\+Init\+Var\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{class_code_gen_visitor_ab659d176d4f7110ac0228070e675fe1b}\label{class_code_gen_visitor_ab659d176d4f7110ac0228070e675fe1b}} 
+\index{CodeGenVisitor@{CodeGenVisitor}!visitVarToConst@{visitVarToConst}}
+\index{visitVarToConst@{visitVarToConst}!CodeGenVisitor@{CodeGenVisitor}}
+\doxysubsubsection{\texorpdfstring{visitVarToConst()}{visitVarToConst()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any Code\+Gen\+Visitor\+::visit\+Var\+To\+Const (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Var\+To\+Const\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{class_code_gen_visitor_a4a8a76e713e9eee9ea9d72bee832f128}\label{class_code_gen_visitor_a4a8a76e713e9eee9ea9d72bee832f128}} 
+\index{CodeGenVisitor@{CodeGenVisitor}!visitVarToExpr@{visitVarToExpr}}
+\index{visitVarToExpr@{visitVarToExpr}!CodeGenVisitor@{CodeGenVisitor}}
+\doxysubsubsection{\texorpdfstring{visitVarToExpr()}{visitVarToExpr()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any Code\+Gen\+Visitor\+::visit\+Var\+To\+Expr (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Var\+To\+Expr\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{class_code_gen_visitor_a58a682ab42ad618e5b2074e5d7547892}\label{class_code_gen_visitor_a58a682ab42ad618e5b2074e5d7547892}} 
+\index{CodeGenVisitor@{CodeGenVisitor}!visitVarToVar@{visitVarToVar}}
+\index{visitVarToVar@{visitVarToVar}!CodeGenVisitor@{CodeGenVisitor}}
+\doxysubsubsection{\texorpdfstring{visitVarToVar()}{visitVarToVar()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any Code\+Gen\+Visitor\+::visit\+Var\+To\+Var (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Var\+To\+Var\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+compiler/\mbox{\hyperlink{_code_gen_visitor_8h}{Code\+Gen\+Visitor.\+h}}\item 
+compiler/\mbox{\hyperlink{_code_gen_visitor_8cpp}{Code\+Gen\+Visitor.\+cpp}}\end{DoxyCompactItemize}

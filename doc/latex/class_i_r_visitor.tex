@@ -1,0 +1,306 @@
+\hypertarget{class_i_r_visitor}{}\doxysection{IRVisitor Class Reference}
+\label{class_i_r_visitor}\index{IRVisitor@{IRVisitor}}
+
+
+Visite l\textquotesingle{}AST d\textquotesingle{}une fonction et créer les instructions IR au fur et à mesure.  
+
+
+
+
+{\ttfamily \#include $<$IRVisitor.\+h$>$}
+
+
+
+Inheritance diagram for IRVisitor\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=169pt]{class_i_r_visitor__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for IRVisitor\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=169pt]{class_i_r_visitor__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_i_r_visitor_a6d8b0db9f3e2f89c749839addd834d36}{IRVisitor}} (\mbox{\hyperlink{class_c_f_g}{CFG}} $\ast$cfg)
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_i_r_visitor_a4bea38b57d43a520997997e179f22050}{visit\+Parametre}} (ifcc\+Parser\+::\+Parametre\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_i_r_visitor_a803574a4dbd2796ee5e7e69ad193fbe4}{visit\+Parametres}} (ifcc\+Parser\+::\+Parametres\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_i_r_visitor_a88a5abda442b050364290ba49bda0c6d}{visit\+Prog}} (ifcc\+Parser\+::\+Prog\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_i_r_visitor_a7aa71bc08826e839ec3e8b00a7fe340a}{visit\+Block}} (ifcc\+Parser\+::\+Block\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_i_r_visitor_a9dc63bd63b1c3024415a8545cf033a6f}{visit\+Return\+Const}} (ifcc\+Parser\+::\+Return\+Const\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_i_r_visitor_a3ea46c7f3c73d548548cab432148de68}{visit\+Return\+Var}} (ifcc\+Parser\+::\+Return\+Var\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_i_r_visitor_aa8f15d863ff5b81e970ca49464a395d2}{visit\+Return\+Expr}} (ifcc\+Parser\+::\+Return\+Expr\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_i_r_visitor_a470796ccecebfd4e139c643eaa437214}{visit\+Var\+To\+Var}} (ifcc\+Parser\+::\+Var\+To\+Var\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_i_r_visitor_ad2e26287f6af4590d5c200a28f65c5d1}{visit\+Var\+To\+Const}} (ifcc\+Parser\+::\+Var\+To\+Const\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_i_r_visitor_a253b7a17df0d6ce192b3f8a39d232c97}{visit\+Var\+To\+Expr}} (ifcc\+Parser\+::\+Var\+To\+Expr\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_i_r_visitor_a85d88f914a75c3f9081a63cead39fcf0}{visit\+Var\+Init\+Var}} (ifcc\+Parser\+::\+Var\+Init\+Var\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_i_r_visitor_a467f706cd7a26fb44583112dafb1df57}{visit\+Var\+Init\+Const}} (ifcc\+Parser\+::\+Var\+Init\+Const\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_i_r_visitor_a0c1486f0e1d3f4380f134e2a256f36a2}{visit\+Var\+Init\+Expr}} (ifcc\+Parser\+::\+Var\+Init\+Expr\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_i_r_visitor_a55f3093e09ec008e9876393e38e51227}{visit\+Var\+Init\+Affect}} (ifcc\+Parser\+::\+Var\+Init\+Affect\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_i_r_visitor_a83af28bc513466ba3d3f6eb39fe52251}{visit\+Par}} (ifcc\+Parser\+::\+Par\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_i_r_visitor_a7135ac2a0a220837c553c781611f1dcd}{visit\+Multdivmod}} (ifcc\+Parser\+::\+Multdivmod\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_i_r_visitor_aa34660d2e4ca3a6f33d0e51d195cf2ba}{visit\+Unaire}} (ifcc\+Parser\+::\+Unaire\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_i_r_visitor_ae557360f519c35e32e8aad5cb661b0bf}{visit\+Logi\+Not}} (ifcc\+Parser\+::\+Logi\+Not\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_i_r_visitor_aa8b2e0d220ebee4a43a0aa96b90441ca}{visit\+Plusmoins}} (ifcc\+Parser\+::\+Plusmoins\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_i_r_visitor_a2c73e638fe8405ab6e7f3811162826fc}{visit\+Lessgreater}} (ifcc\+Parser\+::\+Lessgreater\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_i_r_visitor_ab37f2b3c6e1d5a8093887f5c32176766}{visit\+Equalnotequal}} (ifcc\+Parser\+::\+Equalnotequal\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_i_r_visitor_ab82aa3fe716fb594a804ca26948b6401}{visit\+Binary\+AND}} (ifcc\+Parser\+::\+Binary\+ANDContext $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_i_r_visitor_a53673a690463e70f523cef5ada03f50b}{visit\+Binary\+XOR}} (ifcc\+Parser\+::\+Binary\+XORContext $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_i_r_visitor_abe2f7e7a9f1cbe55ea0ac7cac260c6f4}{visit\+Binary\+OR}} (ifcc\+Parser\+::\+Binary\+ORContext $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_i_r_visitor_ac444c05ce8d47499eaea50eb79a1ad42}{visit\+Const}} (ifcc\+Parser\+::\+Const\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_i_r_visitor_a95638efb06c7a69b5d376a9486a519cb}{visit\+Var}} (ifcc\+Parser\+::\+Var\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_i_r_visitor_ad9854b696e556f0b3e206c1d9e6d593f}{visit\+Function}} (ifcc\+Parser\+::\+Function\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_i_r_visitor_a532f8be0f222e9eaabba724a7a877918}{visit\+Call\+\_\+function}} (ifcc\+Parser\+::\+Call\+\_\+function\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_i_r_visitor_a0cf06583e6de952d996c76ca4f6b910f}{visit\+If\+\_\+else\+\_\+stmt}} (ifcc\+Parser\+::\+If\+\_\+else\+\_\+stmt\+Context $\ast$ctx) override
+\item 
+virtual antlrcpp\+::\+Any \mbox{\hyperlink{class_i_r_visitor_a99c4be7bba9816d701ea0fd0c66bc5b6}{visit\+While\+\_\+stmt}} (ifcc\+Parser\+::\+While\+\_\+stmt\+Context $\ast$ctx) override
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Visite l\textquotesingle{}AST d\textquotesingle{}une fonction et créer les instructions IR au fur et à mesure. 
+
+\begin{DoxyNote}{Note}
+Implémente la propagation de constantes version simple 
+\end{DoxyNote}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_i_r_visitor_a6d8b0db9f3e2f89c749839addd834d36}\label{class_i_r_visitor_a6d8b0db9f3e2f89c749839addd834d36}} 
+\index{IRVisitor@{IRVisitor}!IRVisitor@{IRVisitor}}
+\index{IRVisitor@{IRVisitor}!IRVisitor@{IRVisitor}}
+\doxysubsubsection{\texorpdfstring{IRVisitor()}{IRVisitor()}}
+{\footnotesize\ttfamily IRVisitor\+::\+IRVisitor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_c_f_g}{CFG}} $\ast$}]{cfg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_i_r_visitor_ab82aa3fe716fb594a804ca26948b6401}\label{class_i_r_visitor_ab82aa3fe716fb594a804ca26948b6401}} 
+\index{IRVisitor@{IRVisitor}!visitBinaryAND@{visitBinaryAND}}
+\index{visitBinaryAND@{visitBinaryAND}!IRVisitor@{IRVisitor}}
+\doxysubsubsection{\texorpdfstring{visitBinaryAND()}{visitBinaryAND()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any IRVisitor\+::visit\+Binary\+AND (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Binary\+ANDContext $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\& \mbox{\Hypertarget{class_i_r_visitor_abe2f7e7a9f1cbe55ea0ac7cac260c6f4}\label{class_i_r_visitor_abe2f7e7a9f1cbe55ea0ac7cac260c6f4}} 
+\index{IRVisitor@{IRVisitor}!visitBinaryOR@{visitBinaryOR}}
+\index{visitBinaryOR@{visitBinaryOR}!IRVisitor@{IRVisitor}}
+\doxysubsubsection{\texorpdfstring{visitBinaryOR()}{visitBinaryOR()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any IRVisitor\+::visit\+Binary\+OR (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Binary\+ORContext $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+$\vert$ \mbox{\Hypertarget{class_i_r_visitor_a53673a690463e70f523cef5ada03f50b}\label{class_i_r_visitor_a53673a690463e70f523cef5ada03f50b}} 
+\index{IRVisitor@{IRVisitor}!visitBinaryXOR@{visitBinaryXOR}}
+\index{visitBinaryXOR@{visitBinaryXOR}!IRVisitor@{IRVisitor}}
+\doxysubsubsection{\texorpdfstring{visitBinaryXOR()}{visitBinaryXOR()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any IRVisitor\+::visit\+Binary\+XOR (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Binary\+XORContext $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+$^\wedge$ \mbox{\Hypertarget{class_i_r_visitor_a7aa71bc08826e839ec3e8b00a7fe340a}\label{class_i_r_visitor_a7aa71bc08826e839ec3e8b00a7fe340a}} 
+\index{IRVisitor@{IRVisitor}!visitBlock@{visitBlock}}
+\index{visitBlock@{visitBlock}!IRVisitor@{IRVisitor}}
+\doxysubsubsection{\texorpdfstring{visitBlock()}{visitBlock()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any IRVisitor\+::visit\+Block (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Block\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\{...\} \mbox{\Hypertarget{class_i_r_visitor_a532f8be0f222e9eaabba724a7a877918}\label{class_i_r_visitor_a532f8be0f222e9eaabba724a7a877918}} 
+\index{IRVisitor@{IRVisitor}!visitCall\_function@{visitCall\_function}}
+\index{visitCall\_function@{visitCall\_function}!IRVisitor@{IRVisitor}}
+\doxysubsubsection{\texorpdfstring{visitCall\_function()}{visitCall\_function()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any IRVisitor\+::visit\+Call\+\_\+function (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Call\+\_\+function\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+function() \mbox{\Hypertarget{class_i_r_visitor_ac444c05ce8d47499eaea50eb79a1ad42}\label{class_i_r_visitor_ac444c05ce8d47499eaea50eb79a1ad42}} 
+\index{IRVisitor@{IRVisitor}!visitConst@{visitConst}}
+\index{visitConst@{visitConst}!IRVisitor@{IRVisitor}}
+\doxysubsubsection{\texorpdfstring{visitConst()}{visitConst()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any IRVisitor\+::visit\+Const (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Const\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+42 \mbox{\Hypertarget{class_i_r_visitor_ab37f2b3c6e1d5a8093887f5c32176766}\label{class_i_r_visitor_ab37f2b3c6e1d5a8093887f5c32176766}} 
+\index{IRVisitor@{IRVisitor}!visitEqualnotequal@{visitEqualnotequal}}
+\index{visitEqualnotequal@{visitEqualnotequal}!IRVisitor@{IRVisitor}}
+\doxysubsubsection{\texorpdfstring{visitEqualnotequal()}{visitEqualnotequal()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any IRVisitor\+::visit\+Equalnotequal (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Equalnotequal\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+== != \mbox{\Hypertarget{class_i_r_visitor_ad9854b696e556f0b3e206c1d9e6d593f}\label{class_i_r_visitor_ad9854b696e556f0b3e206c1d9e6d593f}} 
+\index{IRVisitor@{IRVisitor}!visitFunction@{visitFunction}}
+\index{visitFunction@{visitFunction}!IRVisitor@{IRVisitor}}
+\doxysubsubsection{\texorpdfstring{visitFunction()}{visitFunction()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any IRVisitor\+::visit\+Function (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Function\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+function() \mbox{\Hypertarget{class_i_r_visitor_a0cf06583e6de952d996c76ca4f6b910f}\label{class_i_r_visitor_a0cf06583e6de952d996c76ca4f6b910f}} 
+\index{IRVisitor@{IRVisitor}!visitIf\_else\_stmt@{visitIf\_else\_stmt}}
+\index{visitIf\_else\_stmt@{visitIf\_else\_stmt}!IRVisitor@{IRVisitor}}
+\doxysubsubsection{\texorpdfstring{visitIf\_else\_stmt()}{visitIf\_else\_stmt()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any IRVisitor\+::visit\+If\+\_\+else\+\_\+stmt (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+If\+\_\+else\+\_\+stmt\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+if (..) \{\} else \{\} \mbox{\Hypertarget{class_i_r_visitor_a2c73e638fe8405ab6e7f3811162826fc}\label{class_i_r_visitor_a2c73e638fe8405ab6e7f3811162826fc}} 
+\index{IRVisitor@{IRVisitor}!visitLessgreater@{visitLessgreater}}
+\index{visitLessgreater@{visitLessgreater}!IRVisitor@{IRVisitor}}
+\doxysubsubsection{\texorpdfstring{visitLessgreater()}{visitLessgreater()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any IRVisitor\+::visit\+Lessgreater (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Lessgreater\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\texorpdfstring{$<$}{<} \texorpdfstring{$>$}{>} \mbox{\Hypertarget{class_i_r_visitor_ae557360f519c35e32e8aad5cb661b0bf}\label{class_i_r_visitor_ae557360f519c35e32e8aad5cb661b0bf}} 
+\index{IRVisitor@{IRVisitor}!visitLogiNot@{visitLogiNot}}
+\index{visitLogiNot@{visitLogiNot}!IRVisitor@{IRVisitor}}
+\doxysubsubsection{\texorpdfstring{visitLogiNot()}{visitLogiNot()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any IRVisitor\+::visit\+Logi\+Not (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Logi\+Not\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+!expr \mbox{\Hypertarget{class_i_r_visitor_a7135ac2a0a220837c553c781611f1dcd}\label{class_i_r_visitor_a7135ac2a0a220837c553c781611f1dcd}} 
+\index{IRVisitor@{IRVisitor}!visitMultdivmod@{visitMultdivmod}}
+\index{visitMultdivmod@{visitMultdivmod}!IRVisitor@{IRVisitor}}
+\doxysubsubsection{\texorpdfstring{visitMultdivmod()}{visitMultdivmod()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any IRVisitor\+::visit\+Multdivmod (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Multdivmod\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+\begin{DoxyItemize}
+\item / \% 
+\end{DoxyItemize}\mbox{\Hypertarget{class_i_r_visitor_a83af28bc513466ba3d3f6eb39fe52251}\label{class_i_r_visitor_a83af28bc513466ba3d3f6eb39fe52251}} 
+\index{IRVisitor@{IRVisitor}!visitPar@{visitPar}}
+\index{visitPar@{visitPar}!IRVisitor@{IRVisitor}}
+\doxysubsubsection{\texorpdfstring{visitPar()}{visitPar()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any IRVisitor\+::visit\+Par (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Par\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+(expr) \mbox{\Hypertarget{class_i_r_visitor_a4bea38b57d43a520997997e179f22050}\label{class_i_r_visitor_a4bea38b57d43a520997997e179f22050}} 
+\index{IRVisitor@{IRVisitor}!visitParametre@{visitParametre}}
+\index{visitParametre@{visitParametre}!IRVisitor@{IRVisitor}}
+\doxysubsubsection{\texorpdfstring{visitParametre()}{visitParametre()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any IRVisitor\+::visit\+Parametre (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Parametre\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+int a \mbox{\Hypertarget{class_i_r_visitor_a803574a4dbd2796ee5e7e69ad193fbe4}\label{class_i_r_visitor_a803574a4dbd2796ee5e7e69ad193fbe4}} 
+\index{IRVisitor@{IRVisitor}!visitParametres@{visitParametres}}
+\index{visitParametres@{visitParametres}!IRVisitor@{IRVisitor}}
+\doxysubsubsection{\texorpdfstring{visitParametres()}{visitParametres()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any IRVisitor\+::visit\+Parametres (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Parametres\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+int a, int b, int c \mbox{\Hypertarget{class_i_r_visitor_aa8b2e0d220ebee4a43a0aa96b90441ca}\label{class_i_r_visitor_aa8b2e0d220ebee4a43a0aa96b90441ca}} 
+\index{IRVisitor@{IRVisitor}!visitPlusmoins@{visitPlusmoins}}
+\index{visitPlusmoins@{visitPlusmoins}!IRVisitor@{IRVisitor}}
+\doxysubsubsection{\texorpdfstring{visitPlusmoins()}{visitPlusmoins()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any IRVisitor\+::visit\+Plusmoins (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Plusmoins\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+\begin{DoxyItemize}
+\item -\/ 
+\end{DoxyItemize}\mbox{\Hypertarget{class_i_r_visitor_a88a5abda442b050364290ba49bda0c6d}\label{class_i_r_visitor_a88a5abda442b050364290ba49bda0c6d}} 
+\index{IRVisitor@{IRVisitor}!visitProg@{visitProg}}
+\index{visitProg@{visitProg}!IRVisitor@{IRVisitor}}
+\doxysubsubsection{\texorpdfstring{visitProg()}{visitProg()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any IRVisitor\+::visit\+Prog (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Prog\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+int \mbox{\hyperlink{main_8cpp_a8b3937110c04eb1e952d79abbfe1eb16}{main()}} \mbox{\Hypertarget{class_i_r_visitor_a9dc63bd63b1c3024415a8545cf033a6f}\label{class_i_r_visitor_a9dc63bd63b1c3024415a8545cf033a6f}} 
+\index{IRVisitor@{IRVisitor}!visitReturnConst@{visitReturnConst}}
+\index{visitReturnConst@{visitReturnConst}!IRVisitor@{IRVisitor}}
+\doxysubsubsection{\texorpdfstring{visitReturnConst()}{visitReturnConst()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any IRVisitor\+::visit\+Return\+Const (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Return\+Const\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+return 42; \mbox{\Hypertarget{class_i_r_visitor_aa8f15d863ff5b81e970ca49464a395d2}\label{class_i_r_visitor_aa8f15d863ff5b81e970ca49464a395d2}} 
+\index{IRVisitor@{IRVisitor}!visitReturnExpr@{visitReturnExpr}}
+\index{visitReturnExpr@{visitReturnExpr}!IRVisitor@{IRVisitor}}
+\doxysubsubsection{\texorpdfstring{visitReturnExpr()}{visitReturnExpr()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any IRVisitor\+::visit\+Return\+Expr (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Return\+Expr\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+return a + 42; \mbox{\Hypertarget{class_i_r_visitor_a3ea46c7f3c73d548548cab432148de68}\label{class_i_r_visitor_a3ea46c7f3c73d548548cab432148de68}} 
+\index{IRVisitor@{IRVisitor}!visitReturnVar@{visitReturnVar}}
+\index{visitReturnVar@{visitReturnVar}!IRVisitor@{IRVisitor}}
+\doxysubsubsection{\texorpdfstring{visitReturnVar()}{visitReturnVar()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any IRVisitor\+::visit\+Return\+Var (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Return\+Var\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+return a; \mbox{\Hypertarget{class_i_r_visitor_aa34660d2e4ca3a6f33d0e51d195cf2ba}\label{class_i_r_visitor_aa34660d2e4ca3a6f33d0e51d195cf2ba}} 
+\index{IRVisitor@{IRVisitor}!visitUnaire@{visitUnaire}}
+\index{visitUnaire@{visitUnaire}!IRVisitor@{IRVisitor}}
+\doxysubsubsection{\texorpdfstring{visitUnaire()}{visitUnaire()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any IRVisitor\+::visit\+Unaire (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Unaire\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+-\/expr \mbox{\Hypertarget{class_i_r_visitor_a95638efb06c7a69b5d376a9486a519cb}\label{class_i_r_visitor_a95638efb06c7a69b5d376a9486a519cb}} 
+\index{IRVisitor@{IRVisitor}!visitVar@{visitVar}}
+\index{visitVar@{visitVar}!IRVisitor@{IRVisitor}}
+\doxysubsubsection{\texorpdfstring{visitVar()}{visitVar()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any IRVisitor\+::visit\+Var (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Var\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+a \mbox{\Hypertarget{class_i_r_visitor_a55f3093e09ec008e9876393e38e51227}\label{class_i_r_visitor_a55f3093e09ec008e9876393e38e51227}} 
+\index{IRVisitor@{IRVisitor}!visitVarInitAffect@{visitVarInitAffect}}
+\index{visitVarInitAffect@{visitVarInitAffect}!IRVisitor@{IRVisitor}}
+\doxysubsubsection{\texorpdfstring{visitVarInitAffect()}{visitVarInitAffect()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any IRVisitor\+::visit\+Var\+Init\+Affect (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Var\+Init\+Affect\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+int a = b = 42 + d; \mbox{\Hypertarget{class_i_r_visitor_a467f706cd7a26fb44583112dafb1df57}\label{class_i_r_visitor_a467f706cd7a26fb44583112dafb1df57}} 
+\index{IRVisitor@{IRVisitor}!visitVarInitConst@{visitVarInitConst}}
+\index{visitVarInitConst@{visitVarInitConst}!IRVisitor@{IRVisitor}}
+\doxysubsubsection{\texorpdfstring{visitVarInitConst()}{visitVarInitConst()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any IRVisitor\+::visit\+Var\+Init\+Const (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Var\+Init\+Const\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+int a = 42, b = 43; \mbox{\Hypertarget{class_i_r_visitor_a0c1486f0e1d3f4380f134e2a256f36a2}\label{class_i_r_visitor_a0c1486f0e1d3f4380f134e2a256f36a2}} 
+\index{IRVisitor@{IRVisitor}!visitVarInitExpr@{visitVarInitExpr}}
+\index{visitVarInitExpr@{visitVarInitExpr}!IRVisitor@{IRVisitor}}
+\doxysubsubsection{\texorpdfstring{visitVarInitExpr()}{visitVarInitExpr()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any IRVisitor\+::visit\+Var\+Init\+Expr (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Var\+Init\+Expr\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+int a = b + 42, c = d + 43; \mbox{\Hypertarget{class_i_r_visitor_a85d88f914a75c3f9081a63cead39fcf0}\label{class_i_r_visitor_a85d88f914a75c3f9081a63cead39fcf0}} 
+\index{IRVisitor@{IRVisitor}!visitVarInitVar@{visitVarInitVar}}
+\index{visitVarInitVar@{visitVarInitVar}!IRVisitor@{IRVisitor}}
+\doxysubsubsection{\texorpdfstring{visitVarInitVar()}{visitVarInitVar()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any IRVisitor\+::visit\+Var\+Init\+Var (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Var\+Init\+Var\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+int a = b, c = d; \mbox{\Hypertarget{class_i_r_visitor_ad2e26287f6af4590d5c200a28f65c5d1}\label{class_i_r_visitor_ad2e26287f6af4590d5c200a28f65c5d1}} 
+\index{IRVisitor@{IRVisitor}!visitVarToConst@{visitVarToConst}}
+\index{visitVarToConst@{visitVarToConst}!IRVisitor@{IRVisitor}}
+\doxysubsubsection{\texorpdfstring{visitVarToConst()}{visitVarToConst()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any IRVisitor\+::visit\+Var\+To\+Const (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Var\+To\+Const\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+a = 42; \mbox{\Hypertarget{class_i_r_visitor_a253b7a17df0d6ce192b3f8a39d232c97}\label{class_i_r_visitor_a253b7a17df0d6ce192b3f8a39d232c97}} 
+\index{IRVisitor@{IRVisitor}!visitVarToExpr@{visitVarToExpr}}
+\index{visitVarToExpr@{visitVarToExpr}!IRVisitor@{IRVisitor}}
+\doxysubsubsection{\texorpdfstring{visitVarToExpr()}{visitVarToExpr()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any IRVisitor\+::visit\+Var\+To\+Expr (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Var\+To\+Expr\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+a = b + 42; \mbox{\Hypertarget{class_i_r_visitor_a470796ccecebfd4e139c643eaa437214}\label{class_i_r_visitor_a470796ccecebfd4e139c643eaa437214}} 
+\index{IRVisitor@{IRVisitor}!visitVarToVar@{visitVarToVar}}
+\index{visitVarToVar@{visitVarToVar}!IRVisitor@{IRVisitor}}
+\doxysubsubsection{\texorpdfstring{visitVarToVar()}{visitVarToVar()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any IRVisitor\+::visit\+Var\+To\+Var (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+Var\+To\+Var\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+a = b; ou a = b = c = 42 + d; \mbox{\Hypertarget{class_i_r_visitor_a99c4be7bba9816d701ea0fd0c66bc5b6}\label{class_i_r_visitor_a99c4be7bba9816d701ea0fd0c66bc5b6}} 
+\index{IRVisitor@{IRVisitor}!visitWhile\_stmt@{visitWhile\_stmt}}
+\index{visitWhile\_stmt@{visitWhile\_stmt}!IRVisitor@{IRVisitor}}
+\doxysubsubsection{\texorpdfstring{visitWhile\_stmt()}{visitWhile\_stmt()}}
+{\footnotesize\ttfamily antlrcpp\+::\+Any IRVisitor\+::visit\+While\+\_\+stmt (\begin{DoxyParamCaption}\item[{ifcc\+Parser\+::\+While\+\_\+stmt\+Context $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+while(..) \{\} 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+compiler/\mbox{\hyperlink{_i_r_visitor_8h}{IRVisitor.\+h}}\item 
+compiler/\mbox{\hyperlink{_i_r_visitor_8cpp}{IRVisitor.\+cpp}}\end{DoxyCompactItemize}

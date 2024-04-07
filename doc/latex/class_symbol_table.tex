@@ -1,0 +1,166 @@
+\hypertarget{class_symbol_table}{}\doxysection{Symbol\+Table Class Reference}
+\label{class_symbol_table}\index{SymbolTable@{SymbolTable}}
+
+
+Table de symboles.  
+
+
+
+
+{\ttfamily \#include $<$Symbol\+Table.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_symbol_table_a1fbe6cec5594463b766db0ac58c9aa1d}{Symbol\+Table}} ()
+\item 
+\mbox{\hyperlink{class_symbol_table_a5d5ae9b5b22d87691cec9ec17cfff650}{$\sim$\+Symbol\+Table}} ()
+\item 
+void \mbox{\hyperlink{class_symbol_table_a8f448e775aac0106fb3180eb3e616ed5}{add}} (const std\+::string \&symbol)
+\begin{DoxyCompactList}\small\item\em Ajoute un symbole dans la table sans lui affecter une zone mémoire sur la pile. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_symbol_table_a13c78cbe6fabe14903a4d79f5d890186}{give\+Index}} (const std\+::string \&symbol)
+\begin{DoxyCompactList}\small\item\em Ajoute et donne un index (=affecte une zone mémoire) à un symbole si ce n\textquotesingle{}est pas encore le cas. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_symbol_table_a297d7b56c55fd3e75fcba27ee6b393e8}{contains}} (const std\+::string \&symbol) const
+\item 
+int \mbox{\hyperlink{class_symbol_table_acefbcf8619b6c3ace300f89a62f0fa12}{get\+Value}} (const std\+::string \&symbol) const
+\begin{DoxyCompactList}\small\item\em Renvoie la valeur associé au symbol. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_symbol_table_a0c1fd38438748bb47683673afdb329d5}{print\+Table}} () const
+\item 
+std\+::string \mbox{\hyperlink{class_symbol_table_a9abc3312c8843f46926b8e0d5b980714}{create\+Temp}} ()
+\begin{DoxyCompactList}\small\item\em Créer une variable temporaire de la forme \#tmp + un nombre et lui affecte un index de zone mémoire. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{class_symbol_table_a6a59232b47fe03d3f1f17bbcc26cc93d}{create\+Const}} (int value)
+\begin{DoxyCompactList}\small\item\em Créer une constante de la forme \#const + un nombre et lui affecte une valeur. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_symbol_table_a16ae3c294ef63773c91c0144c4c53db0}{get\+Size\+Memory}} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Table de symboles. 
+
+Un symbole represente un espace sur la pile Ce peut-\/être soit une variable soit une variable temporaire (pour stocker des résultats intermédiaires de calcul par exemple soit une constante (exception\+: pas stocker sur la pile) 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_symbol_table_a1fbe6cec5594463b766db0ac58c9aa1d}\label{class_symbol_table_a1fbe6cec5594463b766db0ac58c9aa1d}} 
+\index{SymbolTable@{SymbolTable}!SymbolTable@{SymbolTable}}
+\index{SymbolTable@{SymbolTable}!SymbolTable@{SymbolTable}}
+\doxysubsubsection{\texorpdfstring{SymbolTable()}{SymbolTable()}}
+{\footnotesize\ttfamily Symbol\+Table\+::\+Symbol\+Table (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructeur \mbox{\Hypertarget{class_symbol_table_a5d5ae9b5b22d87691cec9ec17cfff650}\label{class_symbol_table_a5d5ae9b5b22d87691cec9ec17cfff650}} 
+\index{SymbolTable@{SymbolTable}!````~SymbolTable@{$\sim$SymbolTable}}
+\index{````~SymbolTable@{$\sim$SymbolTable}!SymbolTable@{SymbolTable}}
+\doxysubsubsection{\texorpdfstring{$\sim$SymbolTable()}{~SymbolTable()}}
+{\footnotesize\ttfamily Symbol\+Table\+::$\sim$\+Symbol\+Table (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Destructeur 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_symbol_table_a8f448e775aac0106fb3180eb3e616ed5}\label{class_symbol_table_a8f448e775aac0106fb3180eb3e616ed5}} 
+\index{SymbolTable@{SymbolTable}!add@{add}}
+\index{add@{add}!SymbolTable@{SymbolTable}}
+\doxysubsubsection{\texorpdfstring{add()}{add()}}
+{\footnotesize\ttfamily void Symbol\+Table\+::add (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{symbol }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Ajoute un symbole dans la table sans lui affecter une zone mémoire sur la pile. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em symbol} & nom du symbole à ajouter \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_symbol_table_a297d7b56c55fd3e75fcba27ee6b393e8}\label{class_symbol_table_a297d7b56c55fd3e75fcba27ee6b393e8}} 
+\index{SymbolTable@{SymbolTable}!contains@{contains}}
+\index{contains@{contains}!SymbolTable@{SymbolTable}}
+\doxysubsubsection{\texorpdfstring{contains()}{contains()}}
+{\footnotesize\ttfamily bool Symbol\+Table\+::contains (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{symbol }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+true si la table contient le symbol \mbox{\Hypertarget{class_symbol_table_a6a59232b47fe03d3f1f17bbcc26cc93d}\label{class_symbol_table_a6a59232b47fe03d3f1f17bbcc26cc93d}} 
+\index{SymbolTable@{SymbolTable}!createConst@{createConst}}
+\index{createConst@{createConst}!SymbolTable@{SymbolTable}}
+\doxysubsubsection{\texorpdfstring{createConst()}{createConst()}}
+{\footnotesize\ttfamily std\+::string Symbol\+Table\+::create\+Const (\begin{DoxyParamCaption}\item[{int}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Créer une constante de la forme \#const + un nombre et lui affecte une valeur. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em value} & la valeur de la constante \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+le nom de cette nouvelle variable 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_symbol_table_a9abc3312c8843f46926b8e0d5b980714}\label{class_symbol_table_a9abc3312c8843f46926b8e0d5b980714}} 
+\index{SymbolTable@{SymbolTable}!createTemp@{createTemp}}
+\index{createTemp@{createTemp}!SymbolTable@{SymbolTable}}
+\doxysubsubsection{\texorpdfstring{createTemp()}{createTemp()}}
+{\footnotesize\ttfamily std\+::string Symbol\+Table\+::create\+Temp (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Créer une variable temporaire de la forme \#tmp + un nombre et lui affecte un index de zone mémoire. 
+
+\begin{DoxyReturn}{Returns}
+le nom de cette nouvelle variable 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_symbol_table_a16ae3c294ef63773c91c0144c4c53db0}\label{class_symbol_table_a16ae3c294ef63773c91c0144c4c53db0}} 
+\index{SymbolTable@{SymbolTable}!getSizeMemory@{getSizeMemory}}
+\index{getSizeMemory@{getSizeMemory}!SymbolTable@{SymbolTable}}
+\doxysubsubsection{\texorpdfstring{getSizeMemory()}{getSizeMemory()}}
+{\footnotesize\ttfamily int Symbol\+Table\+::get\+Size\+Memory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Retourne un multiple de 16 correspondant à la taille occupé en mémoire par l\textquotesingle{}ensemble des symboles \mbox{\Hypertarget{class_symbol_table_acefbcf8619b6c3ace300f89a62f0fa12}\label{class_symbol_table_acefbcf8619b6c3ace300f89a62f0fa12}} 
+\index{SymbolTable@{SymbolTable}!getValue@{getValue}}
+\index{getValue@{getValue}!SymbolTable@{SymbolTable}}
+\doxysubsubsection{\texorpdfstring{getValue()}{getValue()}}
+{\footnotesize\ttfamily int Symbol\+Table\+::get\+Value (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{symbol }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Renvoie la valeur associé au symbol. 
+
+Cette valeur peut être un index de pile ou la valeur d\textquotesingle{}une constante
+
+
+\begin{DoxyParams}{Parameters}
+{\em symbol} & le nom du symbol dont on veut la valeur\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em une} & exception si le symbole ne fait pas partie de la table\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_symbol_table_a13c78cbe6fabe14903a4d79f5d890186}\label{class_symbol_table_a13c78cbe6fabe14903a4d79f5d890186}} 
+\index{SymbolTable@{SymbolTable}!giveIndex@{giveIndex}}
+\index{giveIndex@{giveIndex}!SymbolTable@{SymbolTable}}
+\doxysubsubsection{\texorpdfstring{giveIndex()}{giveIndex()}}
+{\footnotesize\ttfamily void Symbol\+Table\+::give\+Index (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{symbol }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Ajoute et donne un index (=affecte une zone mémoire) à un symbole si ce n\textquotesingle{}est pas encore le cas. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em symbol} & le nom du symbol à affecter \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_symbol_table_a0c1fd38438748bb47683673afdb329d5}\label{class_symbol_table_a0c1fd38438748bb47683673afdb329d5}} 
+\index{SymbolTable@{SymbolTable}!printTable@{printTable}}
+\index{printTable@{printTable}!SymbolTable@{SymbolTable}}
+\doxysubsubsection{\texorpdfstring{printTable()}{printTable()}}
+{\footnotesize\ttfamily void Symbol\+Table\+::print\+Table (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Affiche tous les éléments de la table 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+compiler/\mbox{\hyperlink{_symbol_table_8h}{Symbol\+Table.\+h}}\end{DoxyCompactItemize}

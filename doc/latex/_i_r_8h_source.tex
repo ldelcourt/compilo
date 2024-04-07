@@ -1,0 +1,156 @@
+\hypertarget{_i_r_8h_source}{}\doxysection{IR.\+h}
+\label{_i_r_8h_source}\index{compiler/IR.h@{compiler/IR.h}}
+\mbox{\hyperlink{_i_r_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef IR\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define IR\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include "{}antlr4-\/runtime.h"{}}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_symbol_table_8h}{SymbolTable.h}}"{}}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_i_r_instr_8h}{IRInstr.h}}"{}}}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{comment}{//AST}}
+\DoxyCodeLine{15 \textcolor{keyword}{typedef} antlr4::tree::ParseTree \mbox{\hyperlink{_i_r_8h_ae73f84186af61040aefc0b23dcea1f74}{DefFunction}};}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 \textcolor{keyword}{class }\mbox{\hyperlink{class_c_f_g}{CFG}};}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24 \textcolor{comment}{/* A few important comments.}}
+\DoxyCodeLine{25 \textcolor{comment}{   IRInstr has no jump instructions.}}
+\DoxyCodeLine{26 \textcolor{comment}{   cmp\_* instructions behaves as an arithmetic two-\/operand instruction (add or mult),}}
+\DoxyCodeLine{27 \textcolor{comment}{   returning a boolean value (as an int)}}
+\DoxyCodeLine{28 \textcolor{comment}{}}
+\DoxyCodeLine{29 \textcolor{comment}{   Assembly jumps are generated as follows:}}
+\DoxyCodeLine{30 \textcolor{comment}{   BasicBlock::gen\_asm() first calls IRInstr::gen\_asm() on all its instructions, and then }}
+\DoxyCodeLine{31 \textcolor{comment}{   if  exit\_true  is a  nullptr, }}
+\DoxyCodeLine{32 \textcolor{comment}{   the epilogue is generated}}
+\DoxyCodeLine{33 \textcolor{comment}{   else if exit\_false is a nullptr, }}
+\DoxyCodeLine{34 \textcolor{comment}{   an unconditional jmp to the exit\_true branch is generated}}
+\DoxyCodeLine{35 \textcolor{comment}{   else (we have two successors, hence a branch)}}
+\DoxyCodeLine{36 \textcolor{comment}{   an instruction comparing the value of test\_var\_name to true is generated,}}
+\DoxyCodeLine{37 \textcolor{comment}{   followed by a conditional branch to the exit\_false branch,}}
+\DoxyCodeLine{38 \textcolor{comment}{   followed by an unconditional branch to the exit\_true branch}}
+\DoxyCodeLine{39 \textcolor{comment}{   The attribute test\_var\_name itself is defined when converting }}
+\DoxyCodeLine{40 \textcolor{comment}{   the if, while, etc of the AST  to IR.}}
+\DoxyCodeLine{41 \textcolor{comment}{}}
+\DoxyCodeLine{42 \textcolor{comment}{   Possible optimization:}}
+\DoxyCodeLine{43 \textcolor{comment}{   a cmp\_* comparison instructions, if it is the last instruction of its block, }}
+\DoxyCodeLine{44 \textcolor{comment}{   generates an actual assembly comparison }}
+\DoxyCodeLine{45 \textcolor{comment}{   followed by a conditional jump to the exit\_false branch}}
+\DoxyCodeLine{46 \textcolor{comment}{*/}}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{51 \textcolor{keyword}{class }\mbox{\hyperlink{class_basic_block}{BasicBlock}} \{}
+\DoxyCodeLine{52 \textcolor{keyword}{public}:}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{59   \mbox{\hyperlink{class_basic_block_aa62fbd3b7277203a67740bb2b597581b}{BasicBlock}}(\mbox{\hyperlink{class_c_f_g}{CFG}}* cfg, std::string entry\_label);}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61   \mbox{\hyperlink{class_basic_block_a98a03933e831cb54c02b5068ebc30478}{\string~BasicBlock}}(); }
+\DoxyCodeLine{69   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_basic_block_aaffef50ee5bc44de079f7e910176e57d}{gen\_asm}}(std::ostream \&o) \textcolor{keyword}{const};}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{71 }
+\DoxyCodeLine{82   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_basic_block_a9229bcc3cf1302fcc77b1c17e91875cf}{addIRInstr}}(\mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15}{IRInstr::Operation}} op, \mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}} t, \textcolor{keyword}{const} std::string *params, \textcolor{keywordtype}{int} nb = 0);}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85   \mbox{\hyperlink{class_basic_block}{BasicBlock}}* \mbox{\hyperlink{class_basic_block_ad7dfb0ec10a03ab548f308461e8701e7}{exit\_true}} = \textcolor{keyword}{nullptr};  }
+\DoxyCodeLine{86   \mbox{\hyperlink{class_basic_block}{BasicBlock}}* \mbox{\hyperlink{class_basic_block_a8fa2b8fbdf5275fb15a7eac08e0ed0ea}{exit\_false}} = \textcolor{keyword}{nullptr}; }
+\DoxyCodeLine{89   \mbox{\hyperlink{class_c_f_g}{CFG}}* \mbox{\hyperlink{class_basic_block_a9e9a6e9f781ab51061938cfe017e778f}{getCFG}}() const }
+\DoxyCodeLine{90   \{}
+\DoxyCodeLine{91     \textcolor{keywordflow}{return} cfg;}
+\DoxyCodeLine{92   \}}
+\DoxyCodeLine{93 }
+\DoxyCodeLine{94   \textcolor{keyword}{const} std::string\& \mbox{\hyperlink{class_basic_block_a0b72a2e3acd5c6d934ea7a7e5422858e}{getLabel}}() const }
+\DoxyCodeLine{95   \{}
+\DoxyCodeLine{96     \textcolor{keywordflow}{return} label;}
+\DoxyCodeLine{97   \}}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{99   }
+\DoxyCodeLine{100 \textcolor{keyword}{private}:}
+\DoxyCodeLine{101   }
+\DoxyCodeLine{102   std::vector<IRInstr*> instrs; }
+\DoxyCodeLine{104   std::string label; }
+\DoxyCodeLine{106   \mbox{\hyperlink{class_c_f_g}{CFG}}* cfg; }
+\DoxyCodeLine{109 \};}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{111 }
+\DoxyCodeLine{112 }
+\DoxyCodeLine{113 }
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115 }
+\DoxyCodeLine{116 \textcolor{comment}{/* A few important comments:}}
+\DoxyCodeLine{117 \textcolor{comment}{   The entry block is the one with the same label as the AST function name.}}
+\DoxyCodeLine{118 \textcolor{comment}{   (it could be the first of bbs, or it could be defined by an attribute value)}}
+\DoxyCodeLine{119 \textcolor{comment}{   The exit block is the one with both exit pointers equal to nullptr.}}
+\DoxyCodeLine{120 \textcolor{comment}{   (again it could be identified in a more explicit way)}}
+\DoxyCodeLine{121 \textcolor{comment}{}}
+\DoxyCodeLine{122 \textcolor{comment}{*/}}
+\DoxyCodeLine{123 }
+\DoxyCodeLine{127 \textcolor{keyword}{class }\mbox{\hyperlink{class_c_f_g}{CFG}} \{}
+\DoxyCodeLine{128 \textcolor{keyword}{public}:}
+\DoxyCodeLine{129 }
+\DoxyCodeLine{147   \mbox{\hyperlink{class_c_f_g_ac6b99e789f71dbfae210255385ed32a4}{CFG}}(\mbox{\hyperlink{_i_r_8h_ae73f84186af61040aefc0b23dcea1f74}{DefFunction}} *ast, \textcolor{keyword}{const} std::string \&nameFunction, \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_f_g_a46929989fdb83337854514cfbf7b5f00}{debug}} = \textcolor{keyword}{false}, \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_f_g_a0c897f70fc199b66738d2310ee839f98}{symbol}} = \textcolor{keyword}{false});}
+\DoxyCodeLine{148   \mbox{\hyperlink{class_c_f_g_a7a9e0feb406099038faea4c67ef31786}{\string~CFG}}(); }
+\DoxyCodeLine{157   \mbox{\hyperlink{class_basic_block}{BasicBlock}}* \mbox{\hyperlink{class_c_f_g_a47a8aab59db0d27f0f897a6eba25970f}{addBasicBlock}}(\textcolor{keyword}{const} std::string \&name);}
+\DoxyCodeLine{158 }
+\DoxyCodeLine{159 }
+\DoxyCodeLine{164   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_f_g_a5102a7824dbe3231f4f7cee5f717f216}{gen\_asm}}(std::ostream\& o) \textcolor{keyword}{const};}
+\DoxyCodeLine{165 }
+\DoxyCodeLine{166   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_f_g_a340edfda55d7660f3fb8c6de246f8f5d}{gen\_asm\_prologue}}(std::ostream\& o) \textcolor{keyword}{const}; }
+\DoxyCodeLine{167   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_f_g_a0379564252eb274e2e31ca514e31f32a}{gen\_asm\_epilogue}}(std::ostream\& o) \textcolor{keyword}{const}; }
+\DoxyCodeLine{176   std::string \mbox{\hyperlink{class_c_f_g_abb0bbd8a1ea6f1a4da0d367510dec74b}{symbol\_to\_asm}}(\textcolor{keyword}{const} std::string \&reg) \textcolor{keyword}{const};}
+\DoxyCodeLine{177 }
+\DoxyCodeLine{178   }
+\DoxyCodeLine{179 }
+\DoxyCodeLine{180   }
+\DoxyCodeLine{181 }
+\DoxyCodeLine{182   \textcolor{comment}{//symbol table management}}
+\DoxyCodeLine{183   std::string \mbox{\hyperlink{class_c_f_g_a6abf457b446a3ca7fe55ae91ffbaaeae}{createTempVar}}(); }
+\DoxyCodeLine{184   std::string \mbox{\hyperlink{class_c_f_g_af7b110ad4d3d98c9c02163c7da4e120d}{createConstSymbol}}(\textcolor{keywordtype}{int} v);}
+\DoxyCodeLine{196   \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_f_g_a7e2eb63d3a00f133c63bb388eb6f5cc1}{symbolIsConst}}(\textcolor{keyword}{const} std::string \&\mbox{\hyperlink{class_c_f_g_a0c897f70fc199b66738d2310ee839f98}{symbol}}, \textcolor{keywordtype}{int} *value = \textcolor{keyword}{nullptr}) \textcolor{keyword}{const};}
+\DoxyCodeLine{197 }
+\DoxyCodeLine{210   std::string \mbox{\hyperlink{class_c_f_g_a25d2f7ac1619ae6f3947c71b52cf8b1b}{getRealVarname}}(\textcolor{keyword}{const} std::string \&\mbox{\hyperlink{class_c_f_g_a0c897f70fc199b66738d2310ee839f98}{symbol}});}
+\DoxyCodeLine{211   }
+\DoxyCodeLine{212 }
+\DoxyCodeLine{213 }
+\DoxyCodeLine{214   \textcolor{comment}{// basic block management}}
+\DoxyCodeLine{215   std::string \mbox{\hyperlink{class_c_f_g_a42bc1bad95cad32b69d069a7b08a31bc}{newBBName}}() }
+\DoxyCodeLine{216   \{}
+\DoxyCodeLine{217     \textcolor{keywordflow}{return} nameFunction + \textcolor{stringliteral}{"{}\_bb"{}} + std::to\_string(nextBBnumber++);}
+\DoxyCodeLine{218   \}}
+\DoxyCodeLine{219   }
+\DoxyCodeLine{220   \mbox{\hyperlink{class_basic_block}{BasicBlock}}* \mbox{\hyperlink{class_c_f_g_a37b50f8c106bb96c1ba23bba6bddacb7}{current\_bb}}; }
+\DoxyCodeLine{224   \textcolor{comment}{//GETTERS}}
+\DoxyCodeLine{225   \textcolor{keyword}{const} std::string\& \mbox{\hyperlink{class_c_f_g_a1d95db22ba15fee72f900a1fd0d3e415}{getNameFunction}}()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{226     \textcolor{keywordflow}{return} nameFunction;}
+\DoxyCodeLine{227   \}}
+\DoxyCodeLine{228   \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_f_g_a46929989fdb83337854514cfbf7b5f00}{debug}}()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{229     \textcolor{keywordflow}{return} \_debug;}
+\DoxyCodeLine{230   \}}
+\DoxyCodeLine{231   \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_f_g_a0c897f70fc199b66738d2310ee839f98}{symbol}}()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{232     \textcolor{keywordflow}{return} \_symbol;}
+\DoxyCodeLine{233   \}}
+\DoxyCodeLine{234   }
+\DoxyCodeLine{235 \textcolor{keyword}{private}:}
+\DoxyCodeLine{236   }
+\DoxyCodeLine{237   \textcolor{keywordtype}{int} nextBBnumber; }
+\DoxyCodeLine{239   std::vector <BasicBlock*> bbs; }
+\DoxyCodeLine{241   \mbox{\hyperlink{_i_r_8h_ae73f84186af61040aefc0b23dcea1f74}{DefFunction}} *ast; }
+\DoxyCodeLine{243   \mbox{\hyperlink{class_symbol_table}{SymbolTable}} table; }
+\DoxyCodeLine{245   std::string nameFunction; }
+\DoxyCodeLine{247   \textcolor{keywordtype}{bool} \_debug; }
+\DoxyCodeLine{248   \textcolor{keywordtype}{bool} \_symbol; }
+\DoxyCodeLine{251 \};}
+\DoxyCodeLine{252 }
+\DoxyCodeLine{253 }
+\DoxyCodeLine{254 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}
