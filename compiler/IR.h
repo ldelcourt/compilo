@@ -203,7 +203,6 @@ public:
    **/
   bool symbolIsConst(const std::string &symbol, int *value = nullptr) const;
 
-  bool symbolIsRegRet(const std::string &symbol) const; //a voir
 
   /**
    * @brief Extrait le vrai nom d'un symbole (=sans les numéros de blocks)

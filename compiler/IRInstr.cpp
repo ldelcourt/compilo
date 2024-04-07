@@ -284,14 +284,9 @@ void LdconstInstr::gen_x86_asm(std::ostream &o) const {
 }
 
 void LdconstInstr::gen_arm(std::ostream &o) const {
-  if (bb->getCFG()->symbolIsRegRet(dest)) {
-    std::string instr = bb->getCFG()->symbolIsConst(val) ? "mov" : "ldr";
-    o << " \t" << instr << " " << bb->getCFG()->symbol_to_asm(dest) << ", "
-      << bb->getCFG()->symbol_to_asm(val) << "\n";
-  } else {
-    o << " \tmov w8, " << bb->getCFG()->symbol_to_asm(val) << "\n";
-    o << " \tstr w8, " << bb->getCFG()->symbol_to_asm(dest) << "\n";
-  }
+  o << " \tmov w8, " << bb->getCFG()->symbol_to_asm(val) << "\n";
+  o << " \tstr w8, " << bb->getCFG()->symbol_to_asm(dest) << "\n";
+  
 }
 
 CopyInstr::CopyInstr(BasicBlock *bb, Type t, const std::string &dest, const std::string &var)
@@ -314,16 +309,12 @@ void CopyInstr::gen_x86_asm(std::ostream &o) const {
 
 void CopyInstr::gen_arm(std::ostream &o) const {
 
-  if (bb->getCFG()->symbolIsRegRet(dest)) {
-    o << " \tldr " << bb->getCFG()->symbol_to_asm(dest) << ", " << bb->getCFG()->symbol_to_asm(var) << "\n";
+  if (bb->getCFG()->symbolIsConst(var)) {
+    o << " \tmov w8, " << bb->getCFG()->symbol_to_asm(var) << "\n";
   } else {
-    if (bb->getCFG()->symbolIsConst(var)) {
-      o << " \tmov w8, " << bb->getCFG()->symbol_to_asm(var) << "\n";
-    } else {
-      o << " \tldr w8, " << bb->getCFG()->symbol_to_asm(var) << "\n";
-    }
-    o << " \tstr w8, " << bb->getCFG()->symbol_to_asm(dest) << "\n";
+    o << " \tldr w8, " << bb->getCFG()->symbol_to_asm(var) << "\n";
   }
+  o << " \tstr w8, " << bb->getCFG()->symbol_to_asm(dest) << "\n";
 }
 
 NegInstr::NegInstr(BasicBlock *bb, Type t, const std::string &dest, const std::string &var)
@@ -774,6 +765,15 @@ void RetInstr::gen_x86_asm(std::ostream &o) const {
   o << " \tmovl " << bb->getCFG()->symbol_to_asm(var) << ", %eax\n";
 
   o << " \tjmp " << bb->getCFG()->getNameFunction() << "_output\n";
+
+}
+
+void RetInstr::gen_arm(std::ostream &o) const {
+
+  std::string instr = bb->getCFG()->symbolIsConst(var) ? "mov" : "ldr";
+  o << " \t" << instr << " w0, " << bb->getCFG()->symbol_to_asm(var) << "\n";
+
+  o << " \tb " <<  bb->getCFG()->getNameFunction() << "_output\n";
 
 }
 

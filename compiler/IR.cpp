@@ -171,6 +171,7 @@ void CFG::gen_arm_epilogue(std::ostream &o) const {
   o << "\tret\n";
 }
 
+/*
 std::string CFG::symbol_to_asm(const std::string &reg) const {
 
   try {
@@ -189,10 +190,11 @@ std::string CFG::symbol_to_asm(const std::string &reg) const {
 
 
 }
+*/
 
 
-/*
-std::string CFG::symbol_to_asm(const std::string &reg) {
+
+std::string CFG::symbol_to_asm(const std::string &reg) const {
 
   try {
     if (assemblyLangage == ARM) {
@@ -209,25 +211,17 @@ std::string CFG::symbol_to_asm(const std::string &reg) {
         return std::to_string(table.getValue(reg)) + "(%rbp)";
       }
     }
-  } catch (std::exception &e) {
-  }
 
-  if (reg == "#reg_ret") {
-    switch (assemblyLangage) {
-    case x86:
-      return "%eax";
-      break;
-    case ARM:
-      return "w0";
-      break;
+    else {
+      return "";
     }
-  }
-
-  else {
+  } catch (std::exception &e) {
+    std::cerr << e.what() << std::endl;
     return "";
   }
+
 }
-*/
+
 
 
 
@@ -247,12 +241,7 @@ bool CFG::symbolIsConst(const std::string &symbol, int *value) const {
   }
 }
 
-bool CFG::symbolIsRegRet(const std::string &symbol) const {
-  if (symbol.find("#reg_ret") != std::string::npos) {
-    return true;
-  }
-  return false;
-}
+
 
 std::string CFG::getRealVarname(const std::string &symbol) {
 

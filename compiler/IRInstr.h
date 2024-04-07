@@ -397,7 +397,7 @@ public :
   RetInstr (BasicBlock *bb, Type t, const std::string &var);
 
   virtual void gen_x86_asm(std::ostream &o) const;
-  virtual void gen_arm(std::ostream &o) const {} 
+  virtual void gen_arm(std::ostream &o) const;
 
 private: 
   std::string var;
