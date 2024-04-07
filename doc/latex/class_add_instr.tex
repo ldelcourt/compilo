@@ -27,7 +27,9 @@ Collaboration diagram for Add\+Instr\+:\nopagebreak
 \item 
 \mbox{\hyperlink{class_add_instr_a7daa64d40bb147204c43b58298654307}{Add\+Instr}} (\mbox{\hyperlink{class_basic_block}{Basic\+Block}} $\ast$\mbox{\hyperlink{class_i_r_instr_a0bf0264847ab1c69e99495f1456e3adf}{bb}}, \mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}} \mbox{\hyperlink{class_i_r_instr_a449e6b5f75d186ce7975dbb72c416a6b}{t}}, const std\+::string \&dest, const std\+::string \&x, const std\+::string \&y)
 \item 
-virtual void \mbox{\hyperlink{class_add_instr_a9567dee930097977e39971b94952664d}{gen\+\_\+asm}} (std\+::ostream \&o) const
+virtual void \mbox{\hyperlink{class_add_instr_a6c995644b3bd7c0bd0fa7ea0931dc6b8}{gen\+\_\+x86\+\_\+asm}} (std\+::ostream \&o) const
+\item 
+virtual void \mbox{\hyperlink{class_add_instr_a50511ed10fc3cd5c38ea4fd4f9ada74a}{gen\+\_\+arm}} (std\+::ostream \&o) const
 \end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -45,15 +47,25 @@ virtual void \mbox{\hyperlink{class_add_instr_a9567dee930097977e39971b94952664d}
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{class_add_instr_a9567dee930097977e39971b94952664d}\label{class_add_instr_a9567dee930097977e39971b94952664d}} 
-\index{AddInstr@{AddInstr}!gen\_asm@{gen\_asm}}
-\index{gen\_asm@{gen\_asm}!AddInstr@{AddInstr}}
-\doxysubsubsection{\texorpdfstring{gen\_asm()}{gen\_asm()}}
-{\footnotesize\ttfamily void Add\+Instr\+::gen\+\_\+asm (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{o }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+\mbox{\Hypertarget{class_add_instr_a50511ed10fc3cd5c38ea4fd4f9ada74a}\label{class_add_instr_a50511ed10fc3cd5c38ea4fd4f9ada74a}} 
+\index{AddInstr@{AddInstr}!gen\_arm@{gen\_arm}}
+\index{gen\_arm@{gen\_arm}!AddInstr@{AddInstr}}
+\doxysubsubsection{\texorpdfstring{gen\_arm()}{gen\_arm()}}
+{\footnotesize\ttfamily void Add\+Instr\+::gen\+\_\+arm (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{o }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+ARM assembly code generation for this IR instruction 
+
+Implements \mbox{\hyperlink{class_i_r_instr_aba34f99c70ee23932cead0d8cf9bb42e}{IRInstr}}.
+
+\mbox{\Hypertarget{class_add_instr_a6c995644b3bd7c0bd0fa7ea0931dc6b8}\label{class_add_instr_a6c995644b3bd7c0bd0fa7ea0931dc6b8}} 
+\index{AddInstr@{AddInstr}!gen\_x86\_asm@{gen\_x86\_asm}}
+\index{gen\_x86\_asm@{gen\_x86\_asm}!AddInstr@{AddInstr}}
+\doxysubsubsection{\texorpdfstring{gen\_x86\_asm()}{gen\_x86\_asm()}}
+{\footnotesize\ttfamily void Add\+Instr\+::gen\+\_\+x86\+\_\+asm (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{o }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 x86 assembly code generation for this IR instruction 
 
-Implements \mbox{\hyperlink{class_i_r_instr_a2033117dbd12955e9b290882bc721b9c}{IRInstr}}.
+Implements \mbox{\hyperlink{class_i_r_instr_a1237443170a3ae43ffa7633b555c159c}{IRInstr}}.
 
 
 

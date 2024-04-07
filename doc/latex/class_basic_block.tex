@@ -26,7 +26,11 @@ Collaboration diagram for Basic\+Block\+:\nopagebreak
 \mbox{\hyperlink{class_basic_block_a98a03933e831cb54c02b5068ebc30478}{$\sim$\+Basic\+Block}} ()
 \item 
 void \mbox{\hyperlink{class_basic_block_aaffef50ee5bc44de079f7e910176e57d}{gen\+\_\+asm}} (std\+::ostream \&o) const
-\begin{DoxyCompactList}\small\item\em Genere le code asm x86 du block. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Genere le code asm du block. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_basic_block_af18e3c8e776306e312601d2f1003cc45}{gen\+\_\+x86}} (std\+::ostream \&o) const
+\item 
+void \mbox{\hyperlink{class_basic_block_a80125e74c072c64b3a046db108b0cc53}{gen\+\_\+arm}} (std\+::ostream \&o) const
+\item 
 void \mbox{\hyperlink{class_basic_block_a9229bcc3cf1302fcc77b1c17e91875cf}{add\+IRInstr}} (\mbox{\hyperlink{class_i_r_instr_a4e228546957ed6096a45f48d7cfc7f15}{IRInstr\+::\+Operation}} op, \mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}} t, const std\+::string $\ast$params, int nb=0)
 \begin{DoxyCompactList}\small\item\em Ajoute un instruction au block. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{class_c_f_g}{CFG}} $\ast$ \mbox{\hyperlink{class_basic_block_a9e9a6e9f781ab51061938cfe017e778f}{get\+CFG}} () const
@@ -96,7 +100,13 @@ Ajoute un instruction au block.
 \begin{DoxyPostcond}{Postcondition}
 vector instrs contient une nouvelle instruction (size +1) 
 \end{DoxyPostcond}
-\mbox{\Hypertarget{class_basic_block_aaffef50ee5bc44de079f7e910176e57d}\label{class_basic_block_aaffef50ee5bc44de079f7e910176e57d}} 
+\mbox{\Hypertarget{class_basic_block_a80125e74c072c64b3a046db108b0cc53}\label{class_basic_block_a80125e74c072c64b3a046db108b0cc53}} 
+\index{BasicBlock@{BasicBlock}!gen\_arm@{gen\_arm}}
+\index{gen\_arm@{gen\_arm}!BasicBlock@{BasicBlock}}
+\doxysubsubsection{\texorpdfstring{gen\_arm()}{gen\_arm()}}
+{\footnotesize\ttfamily void Basic\+Block\+::gen\+\_\+arm (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{o }\end{DoxyParamCaption}) const}
+
+ARM assembly code generation for this basic block (very simple) \mbox{\Hypertarget{class_basic_block_aaffef50ee5bc44de079f7e910176e57d}\label{class_basic_block_aaffef50ee5bc44de079f7e910176e57d}} 
 \index{BasicBlock@{BasicBlock}!gen\_asm@{gen\_asm}}
 \index{gen\_asm@{gen\_asm}!BasicBlock@{BasicBlock}}
 \doxysubsubsection{\texorpdfstring{gen\_asm()}{gen\_asm()}}
@@ -104,14 +114,20 @@ vector instrs contient une nouvelle instruction (size +1)
 
 
 
-Genere le code asm x86 du block. 
+Genere le code asm du block. 
 
 
 \begin{DoxyParams}{Parameters}
 {\em o} & stream d\textquotesingle{}écriture du code \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{class_basic_block_a9e9a6e9f781ab51061938cfe017e778f}\label{class_basic_block_a9e9a6e9f781ab51061938cfe017e778f}} 
+\mbox{\Hypertarget{class_basic_block_af18e3c8e776306e312601d2f1003cc45}\label{class_basic_block_af18e3c8e776306e312601d2f1003cc45}} 
+\index{BasicBlock@{BasicBlock}!gen\_x86@{gen\_x86}}
+\index{gen\_x86@{gen\_x86}!BasicBlock@{BasicBlock}}
+\doxysubsubsection{\texorpdfstring{gen\_x86()}{gen\_x86()}}
+{\footnotesize\ttfamily void Basic\+Block\+::gen\+\_\+x86 (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{o }\end{DoxyParamCaption}) const}
+
+x86 assembly code generation for this basic block (very simple) \mbox{\Hypertarget{class_basic_block_a9e9a6e9f781ab51061938cfe017e778f}\label{class_basic_block_a9e9a6e9f781ab51061938cfe017e778f}} 
 \index{BasicBlock@{BasicBlock}!getCFG@{getCFG}}
 \index{getCFG@{getCFG}!BasicBlock@{BasicBlock}}
 \doxysubsubsection{\texorpdfstring{getCFG()}{getCFG()}}

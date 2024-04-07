@@ -29,7 +29,9 @@ Collaboration diagram for Get\+Params\+Instr\+:\nopagebreak
 \item 
 virtual \mbox{\hyperlink{class_get_params_instr_a464da380d90667f95da41d5f67a1c2e5}{$\sim$\+Get\+Params\+Instr}} ()
 \item 
-virtual void \mbox{\hyperlink{class_get_params_instr_a44b1385bce1d56345d25776a975ac640}{gen\+\_\+asm}} (std\+::ostream \&o) const
+virtual void \mbox{\hyperlink{class_get_params_instr_a284852a43dbfc304db0cb39b0c69016d}{gen\+\_\+x86\+\_\+asm}} (std\+::ostream \&o) const
+\item 
+virtual void \mbox{\hyperlink{class_get_params_instr_a561b490c84c858e3fe2fdf84fea6a6ee}{gen\+\_\+arm}} (std\+::ostream \&o) const
 \end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -53,15 +55,25 @@ virtual void \mbox{\hyperlink{class_get_params_instr_a44b1385bce1d56345d25776a97
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{class_get_params_instr_a44b1385bce1d56345d25776a975ac640}\label{class_get_params_instr_a44b1385bce1d56345d25776a975ac640}} 
-\index{GetParamsInstr@{GetParamsInstr}!gen\_asm@{gen\_asm}}
-\index{gen\_asm@{gen\_asm}!GetParamsInstr@{GetParamsInstr}}
-\doxysubsubsection{\texorpdfstring{gen\_asm()}{gen\_asm()}}
-{\footnotesize\ttfamily void Get\+Params\+Instr\+::gen\+\_\+asm (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{o }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+\mbox{\Hypertarget{class_get_params_instr_a561b490c84c858e3fe2fdf84fea6a6ee}\label{class_get_params_instr_a561b490c84c858e3fe2fdf84fea6a6ee}} 
+\index{GetParamsInstr@{GetParamsInstr}!gen\_arm@{gen\_arm}}
+\index{gen\_arm@{gen\_arm}!GetParamsInstr@{GetParamsInstr}}
+\doxysubsubsection{\texorpdfstring{gen\_arm()}{gen\_arm()}}
+{\footnotesize\ttfamily virtual void Get\+Params\+Instr\+::gen\+\_\+arm (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{o }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+ARM assembly code generation for this IR instruction 
+
+Implements \mbox{\hyperlink{class_i_r_instr_aba34f99c70ee23932cead0d8cf9bb42e}{IRInstr}}.
+
+\mbox{\Hypertarget{class_get_params_instr_a284852a43dbfc304db0cb39b0c69016d}\label{class_get_params_instr_a284852a43dbfc304db0cb39b0c69016d}} 
+\index{GetParamsInstr@{GetParamsInstr}!gen\_x86\_asm@{gen\_x86\_asm}}
+\index{gen\_x86\_asm@{gen\_x86\_asm}!GetParamsInstr@{GetParamsInstr}}
+\doxysubsubsection{\texorpdfstring{gen\_x86\_asm()}{gen\_x86\_asm()}}
+{\footnotesize\ttfamily void Get\+Params\+Instr\+::gen\+\_\+x86\+\_\+asm (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{o }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 x86 assembly code generation for this IR instruction 
 
-Implements \mbox{\hyperlink{class_i_r_instr_a2033117dbd12955e9b290882bc721b9c}{IRInstr}}.
+Implements \mbox{\hyperlink{class_i_r_instr_a1237443170a3ae43ffa7633b555c159c}{IRInstr}}.
 
 
 

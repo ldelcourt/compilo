@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['type_0',['Type',['../_symbol_table_8h.html#a1d1cfd8ffb84e947f82999c682b666a7',1,'SymbolTable.h']]]
+  ['operation_0',['Operation',['../class_i_r_instr.html#a4e228546957ed6096a45f48d7cfc7f15',1,'IRInstr']]]
 ];

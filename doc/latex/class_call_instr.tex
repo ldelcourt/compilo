@@ -29,7 +29,9 @@ Collaboration diagram for Call\+Instr\+:\nopagebreak
 \item 
 virtual \mbox{\hyperlink{class_call_instr_a14babc138d986e9c17ce6fc0de39e190}{$\sim$\+Call\+Instr}} ()
 \item 
-virtual void \mbox{\hyperlink{class_call_instr_ac999b0aa0e65ee137a2607bbca4f9f6a}{gen\+\_\+asm}} (std\+::ostream \&o) const
+virtual void \mbox{\hyperlink{class_call_instr_a75f7a85f6dff3fc6a50a22fd95f926c5}{gen\+\_\+x86\+\_\+asm}} (std\+::ostream \&o) const
+\item 
+virtual void \mbox{\hyperlink{class_call_instr_a047e3aa7fe7ebde7a2cd76790eea7dcb}{gen\+\_\+arm}} (std\+::ostream \&o) const
 \end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -53,15 +55,25 @@ virtual void \mbox{\hyperlink{class_call_instr_ac999b0aa0e65ee137a2607bbca4f9f6a
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{class_call_instr_ac999b0aa0e65ee137a2607bbca4f9f6a}\label{class_call_instr_ac999b0aa0e65ee137a2607bbca4f9f6a}} 
-\index{CallInstr@{CallInstr}!gen\_asm@{gen\_asm}}
-\index{gen\_asm@{gen\_asm}!CallInstr@{CallInstr}}
-\doxysubsubsection{\texorpdfstring{gen\_asm()}{gen\_asm()}}
-{\footnotesize\ttfamily void Call\+Instr\+::gen\+\_\+asm (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{o }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+\mbox{\Hypertarget{class_call_instr_a047e3aa7fe7ebde7a2cd76790eea7dcb}\label{class_call_instr_a047e3aa7fe7ebde7a2cd76790eea7dcb}} 
+\index{CallInstr@{CallInstr}!gen\_arm@{gen\_arm}}
+\index{gen\_arm@{gen\_arm}!CallInstr@{CallInstr}}
+\doxysubsubsection{\texorpdfstring{gen\_arm()}{gen\_arm()}}
+{\footnotesize\ttfamily void Call\+Instr\+::gen\+\_\+arm (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{o }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+ARM assembly code generation for this IR instruction 
+
+Implements \mbox{\hyperlink{class_i_r_instr_aba34f99c70ee23932cead0d8cf9bb42e}{IRInstr}}.
+
+\mbox{\Hypertarget{class_call_instr_a75f7a85f6dff3fc6a50a22fd95f926c5}\label{class_call_instr_a75f7a85f6dff3fc6a50a22fd95f926c5}} 
+\index{CallInstr@{CallInstr}!gen\_x86\_asm@{gen\_x86\_asm}}
+\index{gen\_x86\_asm@{gen\_x86\_asm}!CallInstr@{CallInstr}}
+\doxysubsubsection{\texorpdfstring{gen\_x86\_asm()}{gen\_x86\_asm()}}
+{\footnotesize\ttfamily void Call\+Instr\+::gen\+\_\+x86\+\_\+asm (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{o }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 x86 assembly code generation for this IR instruction 
 
-Implements \mbox{\hyperlink{class_i_r_instr_a2033117dbd12955e9b290882bc721b9c}{IRInstr}}.
+Implements \mbox{\hyperlink{class_i_r_instr_a1237443170a3ae43ffa7633b555c159c}{IRInstr}}.
 
 
 

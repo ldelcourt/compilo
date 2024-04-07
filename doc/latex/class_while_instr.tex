@@ -27,7 +27,9 @@ Collaboration diagram for While\+Instr\+:\nopagebreak
 \item 
 \mbox{\hyperlink{class_while_instr_a09e115f5a6ff7e760bef66643f21bb40}{While\+Instr}} (\mbox{\hyperlink{class_basic_block}{Basic\+Block}} $\ast$\mbox{\hyperlink{class_i_r_instr_a0bf0264847ab1c69e99495f1456e3adf}{bb}}, \mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}} \mbox{\hyperlink{class_i_r_instr_a449e6b5f75d186ce7975dbb72c416a6b}{t}}, const std\+::string \&cond)
 \item 
-virtual void \mbox{\hyperlink{class_while_instr_a13878f7f34ae64e4daabde1f26dde58e}{gen\+\_\+asm}} (std\+::ostream \&o) const
+virtual void \mbox{\hyperlink{class_while_instr_a42cebe3f740af446cf1981ad6d11f876}{gen\+\_\+x86\+\_\+asm}} (std\+::ostream \&o) const
+\item 
+virtual void \mbox{\hyperlink{class_while_instr_a1ab2e31c488b4616cdf24c67a78b627a}{gen\+\_\+arm}} (std\+::ostream \&o) const
 \end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -45,15 +47,25 @@ virtual void \mbox{\hyperlink{class_while_instr_a13878f7f34ae64e4daabde1f26dde58
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{class_while_instr_a13878f7f34ae64e4daabde1f26dde58e}\label{class_while_instr_a13878f7f34ae64e4daabde1f26dde58e}} 
-\index{WhileInstr@{WhileInstr}!gen\_asm@{gen\_asm}}
-\index{gen\_asm@{gen\_asm}!WhileInstr@{WhileInstr}}
-\doxysubsubsection{\texorpdfstring{gen\_asm()}{gen\_asm()}}
-{\footnotesize\ttfamily void While\+Instr\+::gen\+\_\+asm (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{o }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+\mbox{\Hypertarget{class_while_instr_a1ab2e31c488b4616cdf24c67a78b627a}\label{class_while_instr_a1ab2e31c488b4616cdf24c67a78b627a}} 
+\index{WhileInstr@{WhileInstr}!gen\_arm@{gen\_arm}}
+\index{gen\_arm@{gen\_arm}!WhileInstr@{WhileInstr}}
+\doxysubsubsection{\texorpdfstring{gen\_arm()}{gen\_arm()}}
+{\footnotesize\ttfamily void While\+Instr\+::gen\+\_\+arm (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{o }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+ARM assembly code generation for this IR instruction 
+
+Implements \mbox{\hyperlink{class_i_r_instr_aba34f99c70ee23932cead0d8cf9bb42e}{IRInstr}}.
+
+\mbox{\Hypertarget{class_while_instr_a42cebe3f740af446cf1981ad6d11f876}\label{class_while_instr_a42cebe3f740af446cf1981ad6d11f876}} 
+\index{WhileInstr@{WhileInstr}!gen\_x86\_asm@{gen\_x86\_asm}}
+\index{gen\_x86\_asm@{gen\_x86\_asm}!WhileInstr@{WhileInstr}}
+\doxysubsubsection{\texorpdfstring{gen\_x86\_asm()}{gen\_x86\_asm()}}
+{\footnotesize\ttfamily void While\+Instr\+::gen\+\_\+x86\+\_\+asm (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{o }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 x86 assembly code generation for this IR instruction 
 
-Implements \mbox{\hyperlink{class_i_r_instr_a2033117dbd12955e9b290882bc721b9c}{IRInstr}}.
+Implements \mbox{\hyperlink{class_i_r_instr_a1237443170a3ae43ffa7633b555c159c}{IRInstr}}.
 
 
 

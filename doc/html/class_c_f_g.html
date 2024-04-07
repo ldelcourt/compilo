@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">ifcc compiler<span id="projectnumber">&#160;1.2</span>
+   <div id="projectname">ifcc compiler<span id="projectnumber">&#160;1.3</span>
    </div>
    <div id="projectbrief">C compiler</div>
   </td>
@@ -87,9 +87,9 @@ Collaboration diagram for CFG:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ac6b99e789f71dbfae210255385ed32a4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_f_g.html#ac6b99e789f71dbfae210255385ed32a4">CFG</a> (<a class="el" href="_i_r_8h.html#ae73f84186af61040aefc0b23dcea1f74">DefFunction</a> *ast, const std::string &amp;nameFunction, bool <a class="el" href="class_c_f_g.html#a46929989fdb83337854514cfbf7b5f00">debug</a>=false, bool <a class="el" href="class_c_f_g.html#a0c897f70fc199b66738d2310ee839f98">symbol</a>=false)</td></tr>
-<tr class="memdesc:ac6b99e789f71dbfae210255385ed32a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructeur.  <a href="class_c_f_g.html#ac6b99e789f71dbfae210255385ed32a4">More...</a><br /></td></tr>
-<tr class="separator:ac6b99e789f71dbfae210255385ed32a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacb0fd91034a93c74c79b90b5fc3032e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_f_g.html#aacb0fd91034a93c74c79b90b5fc3032e">CFG</a> (<a class="el" href="_i_r_8h.html#ae73f84186af61040aefc0b23dcea1f74">DefFunction</a> *ast, const std::string &amp;nameFunction, <a class="el" href="_i_r_8h.html#a242864100ea46b0a514cbeca1a43a9ad">AssemblyLangage</a> assemblyLangage=<a class="el" href="_i_r_8h.html#a242864100ea46b0a514cbeca1a43a9ada89dc77cd0bb26f687e5d9deb08687cda">x86</a>, bool <a class="el" href="class_c_f_g.html#a46929989fdb83337854514cfbf7b5f00">debug</a>=false, bool <a class="el" href="class_c_f_g.html#a0c897f70fc199b66738d2310ee839f98">symbol</a>=false)</td></tr>
+<tr class="memdesc:aacb0fd91034a93c74c79b90b5fc3032e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructeur.  <a href="class_c_f_g.html#aacb0fd91034a93c74c79b90b5fc3032e">More...</a><br /></td></tr>
+<tr class="separator:aacb0fd91034a93c74c79b90b5fc3032e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7a9e0feb406099038faea4c67ef31786"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_f_g.html#a7a9e0feb406099038faea4c67ef31786">~CFG</a> ()</td></tr>
 <tr class="separator:a7a9e0feb406099038faea4c67ef31786"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47a8aab59db0d27f0f897a6eba25970f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_basic_block.html">BasicBlock</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_f_g.html#a47a8aab59db0d27f0f897a6eba25970f">addBasicBlock</a> (const std::string &amp;name)</td></tr>
@@ -102,6 +102,14 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a340edfda55d7660f3fb8c6de246f8f5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0379564252eb274e2e31ca514e31f32a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_f_g.html#a0379564252eb274e2e31ca514e31f32a">gen_asm_epilogue</a> (std::ostream &amp;o) const</td></tr>
 <tr class="separator:a0379564252eb274e2e31ca514e31f32a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a023f887626bed69426b3228167ca63af"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_f_g.html#a023f887626bed69426b3228167ca63af">gen_x86_prologue</a> (std::ostream &amp;o) const</td></tr>
+<tr class="separator:a023f887626bed69426b3228167ca63af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad61bfc6b2ad4cd1ed735b8af179f9a07"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_f_g.html#ad61bfc6b2ad4cd1ed735b8af179f9a07">gen_x86_epilogue</a> (std::ostream &amp;o) const</td></tr>
+<tr class="separator:ad61bfc6b2ad4cd1ed735b8af179f9a07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a027308e475c1e6a96852007efe636bdc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_f_g.html#a027308e475c1e6a96852007efe636bdc">gen_arm_prologue</a> (std::ostream &amp;o) const</td></tr>
+<tr class="separator:a027308e475c1e6a96852007efe636bdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad633287a74193a983ded56faf345c0d3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_f_g.html#ad633287a74193a983ded56faf345c0d3">gen_arm_epilogue</a> (std::ostream &amp;o) const</td></tr>
+<tr class="separator:ad633287a74193a983ded56faf345c0d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb0bbd8a1ea6f1a4da0d367510dec74b"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_f_g.html#abb0bbd8a1ea6f1a4da0d367510dec74b">symbol_to_asm</a> (const std::string &amp;reg) const</td></tr>
 <tr class="memdesc:abb0bbd8a1ea6f1a4da0d367510dec74b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convertit un symbol de la table en asm x86.  <a href="class_c_f_g.html#abb0bbd8a1ea6f1a4da0d367510dec74b">More...</a><br /></td></tr>
 <tr class="separator:abb0bbd8a1ea6f1a4da0d367510dec74b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -112,6 +120,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a7e2eb63d3a00f133c63bb388eb6f5cc1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_f_g.html#a7e2eb63d3a00f133c63bb388eb6f5cc1">symbolIsConst</a> (const std::string &amp;<a class="el" href="class_c_f_g.html#a0c897f70fc199b66738d2310ee839f98">symbol</a>, int *value=nullptr) const</td></tr>
 <tr class="memdesc:a7e2eb63d3a00f133c63bb388eb6f5cc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Teste si un symbole est une constante.  <a href="class_c_f_g.html#a7e2eb63d3a00f133c63bb388eb6f5cc1">More...</a><br /></td></tr>
 <tr class="separator:a7e2eb63d3a00f133c63bb388eb6f5cc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a081b042ec7d6d8bed20beb26975c77dd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_f_g.html#a081b042ec7d6d8bed20beb26975c77dd">symbolIsRegRet</a> (const std::string &amp;<a class="el" href="class_c_f_g.html#a0c897f70fc199b66738d2310ee839f98">symbol</a>) const</td></tr>
+<tr class="separator:a081b042ec7d6d8bed20beb26975c77dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a25d2f7ac1619ae6f3947c71b52cf8b1b"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_f_g.html#a25d2f7ac1619ae6f3947c71b52cf8b1b">getRealVarname</a> (const std::string &amp;<a class="el" href="class_c_f_g.html#a0c897f70fc199b66738d2310ee839f98">symbol</a>)</td></tr>
 <tr class="memdesc:a25d2f7ac1619ae6f3947c71b52cf8b1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extrait le vrai nom d'un symbole (=sans les numéros de blocks)  <a href="class_c_f_g.html#a25d2f7ac1619ae6f3947c71b52cf8b1b">More...</a><br /></td></tr>
 <tr class="separator:a25d2f7ac1619ae6f3947c71b52cf8b1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -123,6 +133,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a46929989fdb83337854514cfbf7b5f00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0c897f70fc199b66738d2310ee839f98"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_f_g.html#a0c897f70fc199b66738d2310ee839f98">symbol</a> () const</td></tr>
 <tr class="separator:a0c897f70fc199b66738d2310ee839f98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb81588ce8ea5fd4e7fd8db9f1e0cee4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_i_r_8h.html#a242864100ea46b0a514cbeca1a43a9ad">AssemblyLangage</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_f_g.html#aeb81588ce8ea5fd4e7fd8db9f1e0cee4">getAssemblyLangage</a> () const</td></tr>
+<tr class="separator:aeb81588ce8ea5fd4e7fd8db9f1e0cee4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -132,8 +144,8 @@ Public Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >The class for the control flow graph. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ac6b99e789f71dbfae210255385ed32a4" name="ac6b99e789f71dbfae210255385ed32a4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac6b99e789f71dbfae210255385ed32a4">&#9670;&nbsp;</a></span>CFG()</h2>
+<a id="aacb0fd91034a93c74c79b90b5fc3032e" name="aacb0fd91034a93c74c79b90b5fc3032e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aacb0fd91034a93c74c79b90b5fc3032e">&#9670;&nbsp;</a></span>CFG()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -149,6 +161,12 @@ Public Attributes</h2></td></tr>
           <td></td>
           <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>nameFunction</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="_i_r_8h.html#a242864100ea46b0a514cbeca1a43a9ad">AssemblyLangage</a>&#160;</td>
+          <td class="paramname"><em>assemblyLangage</em> = <code><a class="el" href="_i_r_8h.html#a242864100ea46b0a514cbeca1a43a9ada89dc77cd0bb26f687e5d9deb08687cda">x86</a></code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -176,6 +194,7 @@ Public Attributes</h2></td></tr>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">ast</td><td>l'AST d'une fonction </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">nameFunction</td><td>le nom de la fonction </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">assemblyLangage</td><td>asm dans lequel sera généré le code </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">debug</td><td>true si on souhaite afficher les instructions IR que contient ce <a class="el" href="class_c_f_g.html" title="The class for the control flow graph.">CFG</a> </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">symbol</td><td>true si on souhaite afficher la table des symboles</td></tr>
   </table>
@@ -300,6 +319,42 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="ad633287a74193a983ded56faf345c0d3" name="ad633287a74193a983ded56faf345c0d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad633287a74193a983ded56faf345c0d3">&#9670;&nbsp;</a></span>gen_arm_epilogue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CFG::gen_arm_epilogue </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>o</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a027308e475c1e6a96852007efe636bdc" name="a027308e475c1e6a96852007efe636bdc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a027308e475c1e6a96852007efe636bdc">&#9670;&nbsp;</a></span>gen_arm_prologue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CFG::gen_arm_prologue </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>o</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a5102a7824dbe3231f4f7cee5f717f216" name="a5102a7824dbe3231f4f7cee5f717f216"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5102a7824dbe3231f4f7cee5f717f216">&#9670;&nbsp;</a></span>gen_asm()</h2>
 
@@ -341,7 +396,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Genere le code asm x86 de l'epilogue d'une fonction </p>
+<p >Genere le code asm de l'epilogue d'une fonction </p>
 
 </div>
 </div>
@@ -360,7 +415,68 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Genere le code asm x86 du prologue d'une fonction </p>
+<p >Genere le code asm du prologue d'une fonction </p>
+
+</div>
+</div>
+<a id="ad61bfc6b2ad4cd1ed735b8af179f9a07" name="ad61bfc6b2ad4cd1ed735b8af179f9a07"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad61bfc6b2ad4cd1ed735b8af179f9a07">&#9670;&nbsp;</a></span>gen_x86_epilogue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CFG::gen_x86_epilogue </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>o</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a023f887626bed69426b3228167ca63af" name="a023f887626bed69426b3228167ca63af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a023f887626bed69426b3228167ca63af">&#9670;&nbsp;</a></span>gen_x86_prologue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CFG::gen_x86_prologue </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>o</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aeb81588ce8ea5fd4e7fd8db9f1e0cee4" name="aeb81588ce8ea5fd4e7fd8db9f1e0cee4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb81588ce8ea5fd4e7fd8db9f1e0cee4">&#9670;&nbsp;</a></span>getAssemblyLangage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="_i_r_8h.html#a242864100ea46b0a514cbeca1a43a9ad">AssemblyLangage</a> CFG::getAssemblyLangage </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -536,6 +652,24 @@ Public Attributes</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true si le symbole est une constante </dd></dl>
+
+</div>
+</div>
+<a id="a081b042ec7d6d8bed20beb26975c77dd" name="a081b042ec7d6d8bed20beb26975c77dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a081b042ec7d6d8bed20beb26975c77dd">&#9670;&nbsp;</a></span>symbolIsRegRet()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool CFG::symbolIsRegRet </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>symbol</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>

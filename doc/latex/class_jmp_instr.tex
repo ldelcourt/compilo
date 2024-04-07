@@ -27,7 +27,9 @@ Collaboration diagram for Jmp\+Instr\+:\nopagebreak
 \item 
 \mbox{\hyperlink{class_jmp_instr_a767f41e1b4da3abed6823422b61d53d1}{Jmp\+Instr}} (\mbox{\hyperlink{class_basic_block}{Basic\+Block}} $\ast$\mbox{\hyperlink{class_i_r_instr_a0bf0264847ab1c69e99495f1456e3adf}{bb}}, \mbox{\hyperlink{_symbol_table_8h_a1d1cfd8ffb84e947f82999c682b666a7}{Type}} \mbox{\hyperlink{class_i_r_instr_a449e6b5f75d186ce7975dbb72c416a6b}{t}}, const std\+::string \&dest)
 \item 
-virtual void \mbox{\hyperlink{class_jmp_instr_afb8b57e6559a8b8daea2e9f412332b20}{gen\+\_\+asm}} (std\+::ostream \&o) const
+virtual void \mbox{\hyperlink{class_jmp_instr_af31b9b972f01658d239239402c11ffb6}{gen\+\_\+x86\+\_\+asm}} (std\+::ostream \&o) const
+\item 
+virtual void \mbox{\hyperlink{class_jmp_instr_accd43bf0fc69384a10c6980c0399c0a7}{gen\+\_\+arm}} (std\+::ostream \&o) const
 \end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -45,15 +47,25 @@ virtual void \mbox{\hyperlink{class_jmp_instr_afb8b57e6559a8b8daea2e9f412332b20}
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{class_jmp_instr_afb8b57e6559a8b8daea2e9f412332b20}\label{class_jmp_instr_afb8b57e6559a8b8daea2e9f412332b20}} 
-\index{JmpInstr@{JmpInstr}!gen\_asm@{gen\_asm}}
-\index{gen\_asm@{gen\_asm}!JmpInstr@{JmpInstr}}
-\doxysubsubsection{\texorpdfstring{gen\_asm()}{gen\_asm()}}
-{\footnotesize\ttfamily void Jmp\+Instr\+::gen\+\_\+asm (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{o }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+\mbox{\Hypertarget{class_jmp_instr_accd43bf0fc69384a10c6980c0399c0a7}\label{class_jmp_instr_accd43bf0fc69384a10c6980c0399c0a7}} 
+\index{JmpInstr@{JmpInstr}!gen\_arm@{gen\_arm}}
+\index{gen\_arm@{gen\_arm}!JmpInstr@{JmpInstr}}
+\doxysubsubsection{\texorpdfstring{gen\_arm()}{gen\_arm()}}
+{\footnotesize\ttfamily void Jmp\+Instr\+::gen\+\_\+arm (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{o }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+ARM assembly code generation for this IR instruction 
+
+Implements \mbox{\hyperlink{class_i_r_instr_aba34f99c70ee23932cead0d8cf9bb42e}{IRInstr}}.
+
+\mbox{\Hypertarget{class_jmp_instr_af31b9b972f01658d239239402c11ffb6}\label{class_jmp_instr_af31b9b972f01658d239239402c11ffb6}} 
+\index{JmpInstr@{JmpInstr}!gen\_x86\_asm@{gen\_x86\_asm}}
+\index{gen\_x86\_asm@{gen\_x86\_asm}!JmpInstr@{JmpInstr}}
+\doxysubsubsection{\texorpdfstring{gen\_x86\_asm()}{gen\_x86\_asm()}}
+{\footnotesize\ttfamily void Jmp\+Instr\+::gen\+\_\+x86\+\_\+asm (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{o }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 x86 assembly code generation for this IR instruction 
 
-Implements \mbox{\hyperlink{class_i_r_instr_a2033117dbd12955e9b290882bc721b9c}{IRInstr}}.
+Implements \mbox{\hyperlink{class_i_r_instr_a1237443170a3ae43ffa7633b555c159c}{IRInstr}}.
 
 
 

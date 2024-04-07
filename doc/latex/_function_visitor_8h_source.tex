@@ -27,7 +27,7 @@
 \DoxyCodeLine{33 \textcolor{keyword}{public}:}
 \DoxyCodeLine{34 }
 \DoxyCodeLine{35 }
-\DoxyCodeLine{36   \mbox{\hyperlink{class_function_visitor_a54ebcba44169beeb5165838a7d2a00e1}{FunctionVisitor}}(\textcolor{keywordtype}{bool} debug = \textcolor{keyword}{false}, \textcolor{keywordtype}{bool} symbol = \textcolor{keyword}{false});  }
+\DoxyCodeLine{36   \mbox{\hyperlink{class_function_visitor_a2954ab106eecf5a526eae54bdd68e59e}{FunctionVisitor}}(\mbox{\hyperlink{_i_r_8h_a242864100ea46b0a514cbeca1a43a9ad}{AssemblyLangage}} assemblyLangage = \mbox{\hyperlink{_i_r_8h_a242864100ea46b0a514cbeca1a43a9ada89dc77cd0bb26f687e5d9deb08687cda}{x86}}, \textcolor{keywordtype}{bool} debug = \textcolor{keyword}{false}, \textcolor{keywordtype}{bool} symbol = \textcolor{keyword}{false});  }
 \DoxyCodeLine{37   \textcolor{keyword}{virtual} \mbox{\hyperlink{class_function_visitor_aa228fdbf6002092824d1730e463cb5b7}{\string~FunctionVisitor}}();}
 \DoxyCodeLine{38 }
 \DoxyCodeLine{39 }
@@ -54,26 +54,27 @@
 \DoxyCodeLine{63 }
 \DoxyCodeLine{64   std::vector<CFG*> tab; }
 \DoxyCodeLine{65   \textcolor{keywordtype}{bool} debug, symbol, error;}
-\DoxyCodeLine{66 }
-\DoxyCodeLine{67   std::vector<Function*> functions; }
-\DoxyCodeLine{74   \textcolor{keywordtype}{int} function\_exist(\textcolor{keyword}{const} std::string \&name);}
-\DoxyCodeLine{75   }
-\DoxyCodeLine{76 \};}
-\DoxyCodeLine{77 }
+\DoxyCodeLine{66   \mbox{\hyperlink{_i_r_8h_a242864100ea46b0a514cbeca1a43a9ad}{AssemblyLangage}} assemblyLangage;}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68   std::vector<Function*> functions; }
+\DoxyCodeLine{75   \textcolor{keywordtype}{int} function\_exist(\textcolor{keyword}{const} std::string \&name);}
+\DoxyCodeLine{76   }
+\DoxyCodeLine{77 \};}
 \DoxyCodeLine{78 }
-\DoxyCodeLine{79 \textcolor{keyword}{inline} \textcolor{keywordtype}{int} FunctionVisitor::function\_exist(\textcolor{keyword}{const} std::string \&name) \{}
-\DoxyCodeLine{80 }
-\DoxyCodeLine{81   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < functions.size(); i++) \{}
-\DoxyCodeLine{82 }
-\DoxyCodeLine{83     \textcolor{keywordflow}{if} (functions[i]-\/>name == name) \{}
-\DoxyCodeLine{84       \textcolor{keywordflow}{return} i;}
-\DoxyCodeLine{85     \}}
-\DoxyCodeLine{86     }
-\DoxyCodeLine{87   \}}
-\DoxyCodeLine{88 }
-\DoxyCodeLine{89   \textcolor{keywordflow}{return} -\/1;}
-\DoxyCodeLine{90 }
-\DoxyCodeLine{91 \}}
-\DoxyCodeLine{92 }
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80 \textcolor{keyword}{inline} \textcolor{keywordtype}{int} FunctionVisitor::function\_exist(\textcolor{keyword}{const} std::string \&name) \{}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < functions.size(); i++) \{}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84     \textcolor{keywordflow}{if} (functions[i]-\/>name == name) \{}
+\DoxyCodeLine{85       \textcolor{keywordflow}{return} i;}
+\DoxyCodeLine{86     \}}
+\DoxyCodeLine{87     }
+\DoxyCodeLine{88   \}}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90   \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{92 \}}
+\DoxyCodeLine{93 }
 
 \end{DoxyCode}
