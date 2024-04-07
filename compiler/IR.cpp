@@ -25,20 +25,20 @@ void BasicBlock::gen_x86(std::ostream &o) const {
 
   o << label << ":\n";
 
-  //generation de l'asm des instructions
+  // generation de l'asm des instructions
   for (auto it = instrs.cbegin(); it != instrs.cend(); it++) {
 
     (*it)->gen_asm(o);
   }
 
-  //si c'est le dernier block du cfg, on met l'epilogue
+  // si c'est le dernier block du cfg, on met l'epilogue
   if (exit_true == nullptr) {
 
     cfg->gen_x86_epilogue(o);
 
   }
 
-  //sinon on jump vers le bloc suivant
+  // sinon on jump vers le bloc suivant
   else if (exit_false == nullptr) {
     o << " \tjmp " << exit_true->label << "\n";
   }
@@ -70,12 +70,12 @@ void BasicBlock::addIRInstr(IRInstr::Operation o, Type t,
   instrs.push_back(IRInstr::createInstr(this, o, t, params, nb));
 }
 
+CFG::CFG(DefFunction *ast, const std::string &nameFunction,
+         AssemblyLangage assemblyLangage, bool debug, bool symbol)
+    : ast(ast), nameFunction(nameFunction), nextBBnumber(0), _debug(debug),
+      _symbol(symbol), assemblyLangage(assemblyLangage) {
 
-CFG::CFG(DefFunction *ast, const std::string &nameFunction, AssemblyLangage assemblyLangage, bool debug, bool symbol) : ast(ast),  nameFunction(nameFunction), nextBBnumber(0), _debug(debug), _symbol(symbol),  assemblyLangage(assemblyLangage)
-{
-
-
-  //Mise en place de la table des symboles
+  // Mise en place de la table des symboles
   VarVisitor varVisitor(&table);
   varVisitor.visit(ast);
   varVisitor.checkUnusedDecla();
@@ -87,8 +87,8 @@ CFG::CFG(DefFunction *ast, const std::string &nameFunction, AssemblyLangage asse
     throw 1;
   }
 
-  //creation du squelette de block
-  current_bb  = addBasicBlock(nameFunction + "_principal");
+  // creation du squelette de block
+  current_bb = addBasicBlock(nameFunction + "_principal");
 
   current_bb->exit_true = addBasicBlock(newBBName());
   current_bb = current_bb->exit_true;
@@ -108,7 +108,6 @@ CFG::~CFG() {
   }
 }
 
-
 BasicBlock *CFG::addBasicBlock(const std::string &name) {
 
   BasicBlock *b = new BasicBlock(this, name);
@@ -119,21 +118,27 @@ BasicBlock *CFG::addBasicBlock(const std::string &name) {
 
 void CFG::gen_asm(std::ostream &o) const {
 
-  //En-tête de la fonction
-  o << ".globl " << nameFunction << "\n" ;
-  o << ".type " << nameFunction << ", @function\n";
-  o << nameFunction << ": \n" ;
-
-  //prologue
+  // En-tête de la fonction
+  switch (assemblyLangage) {
+  case x86:
+    o << ".globl " << nameFunction << "\n";
+    o << ".type " << nameFunction << ", @function\n";
+    o << nameFunction << ": \n";
+    break;
+  case ARM:
+    o << ".globl _" << nameFunction << "\n";
+    o << "_" << nameFunction << ": \n";
+    break;
+  }
+  // prologue
   gen_asm_prologue(o);
 
-  //gen_asm de chaque block
+  // gen_asm de chaque block
   for (auto it = bbs.cbegin(); it != bbs.cend(); it++) {
 
     (*it)->gen_asm(o);
   }
 }
-
 
 void CFG::gen_asm_prologue(std::ostream &o) const {
   switch (assemblyLangage) {
@@ -162,12 +167,14 @@ void CFG::gen_x86_epilogue(std::ostream &o) const {
 }
 
 void CFG::gen_arm_prologue(std::ostream &o) const {
-  o << "\tsub sp, sp, #" << table.getSizeMemory() << "\n";
+  o << "\tsub sp, sp, #" << table.getSizeMemory() + 16 << "\n";
+  o << "\tstp	x29, x30, [sp, #" << table.getSizeMemory() << "]\n";
+  o << "\tadd	x29, sp, #" << table.getSizeMemory() << "\n";
 }
 
-
 void CFG::gen_arm_epilogue(std::ostream &o) const {
-  o << "\tadd sp, sp, #" << table.getSizeMemory() << "\n";
+  o << "\tldp	x29, x30, [sp, #" << table.getSizeMemory() << "]\n";
+  o << "\tadd sp, sp, #" << table.getSizeMemory() + 16 << "\n";
   o << "\tret\n";
 }
 
@@ -191,8 +198,6 @@ std::string CFG::symbol_to_asm(const std::string &reg) const {
 
 }
 */
-
-
 
 std::string CFG::symbol_to_asm(const std::string &reg) const {
 
@@ -219,11 +224,7 @@ std::string CFG::symbol_to_asm(const std::string &reg) const {
     std::cerr << e.what() << std::endl;
     return "";
   }
-
 }
-
-
-
 
 std::string CFG::createTempVar() { return table.createTemp(); }
 
@@ -241,8 +242,6 @@ bool CFG::symbolIsConst(const std::string &symbol, int *value) const {
   }
 }
 
-
-
 std::string CFG::getRealVarname(const std::string &symbol) {
 
   std::string varname = symbol;
@@ -256,6 +255,4 @@ std::string CFG::getRealVarname(const std::string &symbol) {
   }
 
   throw 1;
-
 }
-

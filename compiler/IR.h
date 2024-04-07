@@ -1,26 +1,19 @@
 #ifndef IR_H
 #define IR_H
 
-#include <vector>
-#include <string>
 #include <iostream>
+#include <string>
+#include <vector>
 
-#include "antlr4-runtime.h"
 #include "SymbolTable.h"
 #include "antlr4-runtime.h"
 
 #include "IRInstr.h"
 
-
-//AST
+// AST
 typedef antlr4::tree::ParseTree DefFunction;
 
-
-
 class CFG;
-
-
-
 
 /* A few important comments.
    IRInstr has no jump instructions.
@@ -48,16 +41,14 @@ class CFG;
  **/
 class BasicBlock {
 public:
-
   /**
    * @brief Constructeur
    * @param cfg parent du block
    * @param entry_label nom du block
    **/
-  BasicBlock(CFG* cfg, std::string entry_label);
+  BasicBlock(CFG *cfg, std::string entry_label);
 
   ~BasicBlock(); /**<Destructeur, supprime les instructions du block**/
-  
 
   /**
    * @brief Genere le code asm du block
@@ -71,7 +62,6 @@ public:
   void gen_arm(std::ostream &o) const; /**< ARM assembly code generation for
                                           this basic block (very simple) */
 
-
   /**
    * @brief Ajoute un instruction au block
    *
@@ -82,39 +72,34 @@ public:
    *
    * @post vector instrs contient une nouvelle instruction (size +1)
    **/
-  void addIRInstr(IRInstr::Operation op, Type t, const std::string *params, int nb = 0);
+  void addIRInstr(IRInstr::Operation op, Type t, const std::string *params,
+                  int nb = 0);
 
+  BasicBlock *exit_true =
+      nullptr; /**< pointer to the next basic block, true branch. If nullptr,
+                  return from procedure */
+  BasicBlock *exit_false =
+      nullptr; /**< pointer to the next basic block, false branch. If null_ptr,
+                  the basic block ends with an unconditional jump */
 
-  BasicBlock* exit_true = nullptr;  /**< pointer to the next basic block, true branch. If nullptr, return from procedure */ 
-  BasicBlock* exit_false = nullptr; /**< pointer to the next basic block, false branch. If null_ptr, the basic block ends with an unconditional jump */
-  
- 
-  CFG* getCFG() const /**<Getter de l'attribut cfg**/
+  CFG *getCFG() const /**<Getter de l'attribut cfg**/
   {
     return cfg;
   }
 
-  const std::string& getLabel() const /**<Getter de l'attribut label**/
+  const std::string &getLabel() const /**<Getter de l'attribut label**/
   {
     return label;
   }
 
-  
 private:
-  
-  std::vector<IRInstr*> instrs; /** < the instructions themselves. */
+  std::vector<IRInstr *> instrs; /** < the instructions themselves. */
 
-  std::string label; /**< label of the BB, also will be the label in the generated code */
+  std::string label; /**< label of the BB, also will be the label in the
+                        generated code */
 
-  CFG* cfg; /** < the CFG where this block belongs */
-
- 
+  CFG *cfg; /** < the CFG where this block belongs */
 };
-
-
-
-
-
 
 /* A few important comments:
    The entry block is the one with the same label as the AST function name.
@@ -124,7 +109,6 @@ private:
 
 */
 
-
 enum AssemblyLangage { x86, ARM };
 
 /**
@@ -132,7 +116,6 @@ enum AssemblyLangage { x86, ARM };
  **/
 class CFG {
 public:
-
   /**
    * @brief Constructeur
    * @details
@@ -142,16 +125,20 @@ public:
    * @param[in] ast l'AST d'une fonction
    * @param[in] nameFunction le nom de la fonction
    * @param[in] assemblyLangage asm dans lequel sera généré le code
-   * @param[in] debug true si on souhaite afficher les instructions IR que contient ce CFG
+   * @param[in] debug true si on souhaite afficher les instructions IR que
+   *contient ce CFG
    * @param[in] symbol true si on souhaite afficher la table des symboles
    *
    * @throw int en cas d'erreur avec VarVisitor => IR pas générable
    *
    * @pre un AST correct syntaxiquement
-   * @post un Control Flow Graph contenant les Basicblock contenant eux mêmes les instructions IR représentant l'AST
-   * 
+   * @post un Control Flow Graph contenant les Basicblock contenant eux mêmes
+   *les instructions IR représentant l'AST
+   *
    **/
-  CFG(DefFunction *ast, const std::string &nameFunction, AssemblyLangage assemblyLangage = x86, bool debug = false, bool symbol = false);
+  CFG(DefFunction *ast, const std::string &nameFunction,
+      AssemblyLangage assemblyLangage = x86, bool debug = false,
+      bool symbol = false);
   ~CFG(); /**<Destructeur, detruit les blocks**/
 
   /**
@@ -161,22 +148,22 @@ public:
    *
    * @return BasicBlock*
    **/
-  BasicBlock* addBasicBlock(const std::string &name);
-
+  BasicBlock *addBasicBlock(const std::string &name);
 
   /**
    * @brief Genere le code asm x86 du CFG
    * @param o stream d'écriture du code
    **/
-  void gen_asm(std::ostream& o) const;
+  void gen_asm(std::ostream &o) const;
 
-  void gen_asm_prologue(std::ostream& o) const; /**<Genere le code asm du prologue d'une fonction**/
-  void gen_asm_epilogue(std::ostream& o) const; /**<Genere le code asm de l'epilogue d'une fonction**/
+  void gen_asm_prologue(std::ostream &o)
+      const; /**<Genere le code asm du prologue d'une fonction**/
+  void gen_asm_epilogue(std::ostream &o)
+      const; /**<Genere le code asm de l'epilogue d'une fonction**/
   void gen_x86_prologue(std::ostream &o) const;
   void gen_x86_epilogue(std::ostream &o) const;
   void gen_arm_prologue(std::ostream &o) const;
   void gen_arm_epilogue(std::ostream &o) const;
-
 
   /**
    * @brief Convertit un symbol de la table en asm x86
@@ -186,10 +173,12 @@ public:
    **/
   std::string symbol_to_asm(const std::string &reg) const;
 
-
-  //symbol table management
-  std::string createTempVar(); /**<Créer une variable temporaire dans la table des symboles et renvoie son nom**/
-  std::string createConstSymbol(int v);/**<Créer une constante de valeur v dans la table des symboles et renvoie son nom**/
+  // symbol table management
+  std::string createTempVar(); /**<Créer une variable temporaire dans la table
+                                  des symboles et renvoie son nom**/
+  std::string
+  createConstSymbol(int v); /**<Créer une constante de valeur v dans la table
+                               des symboles et renvoie son nom**/
 
   /**
    * @brief Teste si un symbole est une constante
@@ -203,12 +192,11 @@ public:
    **/
   bool symbolIsConst(const std::string &symbol, int *value = nullptr) const;
 
-
   /**
    * @brief Extrait le vrai nom d'un symbole (=sans les numéros de blocks)
    * @details
-   *  Pour gérer les portés de variables, un symbole est enregistré dans la table en ajoutant ':' suivi du numéro de block
-   *  Ici, on enlève cet ajout
+   *  Pour gérer les portés de variables, un symbole est enregistré dans la
+   *table en ajoutant ':' suivi du numéro de block Ici, on enlève cet ajout
    *
    * @param[in] symbol
    *
@@ -223,44 +211,33 @@ public:
   {
     return nameFunction + "_bb" + std::to_string(nextBBnumber++);
   }
-  
-  BasicBlock* current_bb; /**<pointeur sur le block actuellement en cours de construction**/
 
+  BasicBlock *current_bb; /**<pointeur sur le block actuellement en cours de
+                             construction**/
 
+  // GETTERS
+  const std::string &getNameFunction() const { return nameFunction; }
+  bool debug() const { return _debug; }
+  bool symbol() const { return _symbol; }
 
-  //GETTERS
-  const std::string& getNameFunction() const {
-    return nameFunction;
-  }
-  bool debug() const {
-    return _debug;
-  }
-  bool symbol() const {
-    return _symbol;
-  }
+  AssemblyLangage getAssemblyLangage() const { return assemblyLangage; }
+  SymbolTable getSymbolTable() const { return table; }
 
-  AssemblyLangage getAssemblyLangage() const {
-    return assemblyLangage;
-  }
-  
 private:
-  
   int nextBBnumber; /**< just for naming basicblock */
-	
-  std::vector <BasicBlock*> bbs; /**< all the basic blocks of this CFG*/
-  
+
+  std::vector<BasicBlock *> bbs; /**< all the basic blocks of this CFG*/
+
   DefFunction *ast; /**< AST correct**/
 
   SymbolTable table; /**<Table des symboles**/
 
   std::string nameFunction; /**<Nom de la fonction représenté par ce CFG**/
 
-  bool _debug; /**<boolean définissant l'affichage des instructions IR**/
+  bool _debug;  /**<boolean définissant l'affichage des instructions IR**/
   bool _symbol; /**<boolean définissant l'affichage de la table des symboles**/
 
   AssemblyLangage assemblyLangage; /**<language d'asm à utiliser**/
-  
-
 };
 
 #endif
