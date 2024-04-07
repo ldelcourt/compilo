@@ -1,14 +1,12 @@
 #ifndef IRINSTR_H
 #define IRINSTR_H
 
-
-#include <vector>
-#include <string>
-#include <iostream>
 #include <initializer_list>
+#include <iostream>
+#include <string>
+#include <vector>
 
 #include "SymbolTable.h"
-
 
 class BasicBlock;
 
@@ -19,7 +17,7 @@ class BasicBlock;
  * @brief Classe mère des instructions IR
  **/
 class IRInstr {
- 
+
 public:
   typedef enum {
     ldconst,
@@ -52,15 +50,16 @@ public:
   virtual ~IRInstr() {} /**<Destructeur**/
 
   
-  virtual void gen_asm(std::ostream &o) const = 0; /**< x86 assembly code generation for this IR instruction */
+  void gen_asm(std::ostream &o) const; /**<Gets to the right assembly langage */
+  virtual void gen_x86_asm(std::ostream &o) const = 0; /**< x86 assembly code generation for this IR instruction */
+  virtual void gen_arm(std::ostream &o) const = 0; /**< ARM assembly code generation for this IR instruction */
 
   
   static IRInstr* createInstr(BasicBlock *bb, Operation op, Type t, const std::string *params, int nb); /**<Create instance of good IRInstr subclass according to op **/
 
-  
 protected:
-  
-  BasicBlock* bb; /**< The BB this instruction belongs to, which provides a pointer to the CFG this instruction belong to */
+  BasicBlock *bb; /**< The BB this instruction belongs to, which provides a
+                     pointer to the CFG this instruction belong to */
   Operation op;
   Type t; /**<Type de données que manipule l'instruction**/
 
@@ -74,32 +73,30 @@ class AddInstr : public IRInstr /**<Instruction d'addition (dest = x+y)**/
 {
 
 public:
+  AddInstr(BasicBlock *bb, Type t, const std::string &dest,
+           const std::string &x, const std::string &y);
 
-  AddInstr (BasicBlock *bb, Type t, const std::string &dest, const std::string &x, const std::string &y);
-
-  virtual void gen_asm(std::ostream &o) const;
-
+  virtual void gen_x86_asm(std::ostream &o) const;
+  virtual void gen_arm(std::ostream &o) const;
 
 private:
   std::string dest;
   std::string x;
   std::string y;
-  
 };
 
 class SubInstr : public IRInstr /**<Instruction de soustraction (dest = x-y)**/
 {
 
 public:
+  SubInstr(BasicBlock *bb, Type t, const std::string &dest,
+           const std::string &x, const std::string &y);
 
-  SubInstr (BasicBlock *bb, Type t, const std::string &dest, const std::string &x, const std::string &y);
-
-  virtual void gen_asm(std::ostream &o) const;
-
+  virtual void gen_x86_asm(std::ostream &o) const;
+  virtual void gen_arm(std::ostream &o) const;
 
 private:
   std::string dest, x, y;
-  
 };
 
 
@@ -107,47 +104,44 @@ class MulInstr : public IRInstr /**<Instruction de multiplication (dest = x*y)**
 {
 
 public:
+  MulInstr(BasicBlock *bb, Type t, const std::string &dest,
+           const std::string &x, const std::string &y);
 
-  MulInstr (BasicBlock *bb, Type t, const std::string &dest, const std::string &x, const std::string &y);
-
-  virtual void gen_asm(std::ostream &o) const;
-
+  virtual void gen_x86_asm(std::ostream &o) const;
+  virtual void gen_arm(std::ostream &o) const;
 
 private:
   std::string dest, x, y;
-  
 };
 
 class DivInstr : public IRInstr /**<Instruction de division (dest = x/y)**/
 {
 
 public:
+  DivInstr(BasicBlock *bb, Type t, const std::string &dest,
+           const std::string &x, const std::string &y);
 
-  DivInstr (BasicBlock *bb, Type t, const std::string &dest, const std::string &x, const std::string &y);
-
-  virtual void gen_asm(std::ostream &o) const;
-
+  virtual void gen_x86_asm(std::ostream &o) const;
+  virtual void gen_arm(std::ostream &o) const;
 
 private:
   std::string dest;
   std::string x;
   std::string y;
-  
 };
 
 class ModInstr : public IRInstr /**<Instruction de modulo (dest = x%y)**/
 {
 
 public:
+  ModInstr(BasicBlock *bb, Type t, const std::string &dest,
+           const std::string &x, const std::string &y);
 
-  ModInstr (BasicBlock *bb, Type t, const std::string &dest, const std::string &x, const std::string &y);
-
-  virtual void gen_asm(std::ostream &o) const;
-
+  virtual void gen_x86_asm(std::ostream &o) const;
+  virtual void gen_arm(std::ostream &o) const;
 
 private:
   std::string dest, x, y;
-  
 };
 
 
@@ -157,17 +151,16 @@ class LdconstInstr : public IRInstr /**<Instruction de copie de constante (dest 
 {
 
 public:
+  LdconstInstr(BasicBlock *bb, Type t, const std::string &dest,
+               const std::string &val);
 
-  LdconstInstr (BasicBlock *bb, Type t, const std::string &dest, const std::string &val);
+  virtual void gen_x86_asm(std::ostream &o) const;
+  virtual void gen_arm(std::ostream &o) const;
 
-  virtual void gen_asm(std::ostream &o) const;
-
-  std::string & getVal() {return val;}
+  std::string &getVal() { return val; }
 
 private:
-
   std::string dest, val;
-    
 };
 
 
@@ -175,16 +168,14 @@ class CopyInstr : public IRInstr /**<Instruction de copie de variables (dest = v
 {
 
 public:
+  CopyInstr(BasicBlock *bb, Type t, const std::string &dest,
+            const std::string &var);
 
-  CopyInstr (BasicBlock *bb, Type t, const std::string &dest, const std::string &var);
-
-  virtual void gen_asm(std::ostream &o) const;
+  virtual void gen_x86_asm(std::ostream &o) const;
+  virtual void gen_arm(std::ostream &o) const;
 
 private:
-
   std::string dest, var;
-
-  
 };
 
 
@@ -192,199 +183,185 @@ class NegInstr : public IRInstr /**<Instruction de negation (dest = -var)**/
 {
 
 public:
+  NegInstr(BasicBlock *bb, Type t, const std::string &dest,
+           const std::string &var);
 
-  NegInstr (BasicBlock *bb, Type t, const std::string &dest, const std::string &var);
-
-  virtual void gen_asm(std::ostream &o) const;
+  virtual void gen_x86_asm(std::ostream &o) const;
+  virtual void gen_arm(std::ostream &o) const;
 
 private:
-
   std::string dest, var;
-
-  
 };
 
 class LogiNotInstr : public IRInstr /**<Instruction du non logique (dest = !var)**/
 {
 
 public:
+  LogiNotInstr(BasicBlock *bb, Type t, const std::string &dest,
+               const std::string &var);
 
-  LogiNotInstr (BasicBlock *bb, Type t, const std::string &dest, const std::string &var);
-
-  virtual void gen_asm(std::ostream &o) const;
+  virtual void gen_x86_asm(std::ostream &o) const;
+  virtual void gen_arm(std::ostream &o) const;
 
 private:
-
   std::string dest, var;
-
-  
 };
 
 class CallInstr : public IRInstr /**<Instruction d'appel de fonction (fonction(a, b, ...))**/
 {
 
 public:
+  CallInstr(BasicBlock *bb, Type t, const std::string *params, int nb);
+  virtual ~CallInstr() { delete[] params; }
 
-  CallInstr (BasicBlock *bb, Type t, const std::string *params, int nb);
-  virtual ~CallInstr() {
-    delete [] params;
-  }
-
-  virtual void gen_asm(std::ostream &o) const;
+  virtual void gen_x86_asm(std::ostream &o) const;
+  virtual void gen_arm(std::ostream &o) const;
 
 private:
-
   std::string *params;
   int nbParams;
 
-  
   static const std::string regParams[6];
-
 };
 
 class CmpEqInstr : public IRInstr /**<Instruction de test d'egalité (dest = (x==y))**/
 {
 
 public:
+  CmpEqInstr(BasicBlock *bb, Type t, const std::string &dest,
+             const std::string &x, const std::string &y);
 
-  CmpEqInstr (BasicBlock *bb, Type t, const std::string &dest, const std::string &x, const std::string &y);
-
-  virtual void gen_asm(std::ostream &o) const;
-
+  virtual void gen_x86_asm(std::ostream &o) const;
+  virtual void gen_arm(std::ostream &o) const;
 
 private:
   std::string dest, x, y;
-  
 };
 
 class CmpNeqInstr : public IRInstr /**<Instruction de test pas d'egalité (dest = (x != y))**/
 {
 
 public:
+  CmpNeqInstr(BasicBlock *bb, Type t, const std::string &dest,
+              const std::string &x, const std::string &y);
 
-  CmpNeqInstr (BasicBlock *bb, Type t, const std::string &dest, const std::string &x, const std::string &y);
-
-  virtual void gen_asm(std::ostream &o) const;
-
+  virtual void gen_x86_asm(std::ostream &o) const;
+  virtual void gen_arm(std::ostream &o) const;
 
 private:
   std::string dest, x, y;
-  
 };
 
 class CmpLtInstr : public IRInstr /**<Instruction de comparaison plus petit que (dest = (x < y))**/
 {
 
 public:
+  CmpLtInstr(BasicBlock *bb, Type t, const std::string &dest,
+             const std::string &x, const std::string &y);
 
-  CmpLtInstr (BasicBlock *bb, Type t, const std::string &dest, const std::string &x, const std::string &y);
-
-  virtual void gen_asm(std::ostream &o) const;
-
+  virtual void gen_x86_asm(std::ostream &o) const;
+  virtual void gen_arm(std::ostream &o) const;
 
 private:
   std::string dest, x, y;
-  
 };
 
 class CmpGtInstr : public IRInstr /**<Instruction de comparaison plus grand que (dest = (x > y))**/
 {
 
 public:
+  CmpGtInstr(BasicBlock *bb, Type t, const std::string &dest,
+             const std::string &x, const std::string &y);
 
-  CmpGtInstr (BasicBlock *bb, Type t, const std::string &dest, const std::string &x, const std::string &y);
-
-  virtual void gen_asm(std::ostream &o) const;
-
+  virtual void gen_x86_asm(std::ostream &o) const;
+  virtual void gen_arm(std::ostream &o) const;
 
 private:
   std::string dest, x, y;
-  
 };
 
 class BinaryAndInstr : public IRInstr /**<Instruction du ET binaire (dest = (x & y))**/
 {
 
 public:
+  BinaryAndInstr(BasicBlock *bb, Type t, const std::string &dest,
+                 const std::string &x, const std::string &y);
 
-  BinaryAndInstr (BasicBlock *bb, Type t, const std::string &dest, const std::string &x, const std::string &y);
-
-  virtual void gen_asm(std::ostream &o) const;
+  virtual void gen_x86_asm(std::ostream &o) const;
+  virtual void gen_arm(std::ostream &o) const;
 
 private:
-
   std::string dest, x, y;
-
-  
 };
 
 class BinaryXorInstr : public IRInstr /**<Instruction du XOR binaire (dest = (x ^ y))**/
 {
 
 public:
+  BinaryXorInstr(BasicBlock *bb, Type t, const std::string &dest,
+                 const std::string &x, const std::string &y);
 
-  BinaryXorInstr (BasicBlock *bb, Type t, const std::string &dest, const std::string &x, const std::string &y);
-
-  virtual void gen_asm(std::ostream &o) const;
+  virtual void gen_x86_asm(std::ostream &o) const;
+  virtual void gen_arm(std::ostream &o) const;
 
 private:
-
   std::string dest, x, y;
-
-  
 };
 
 class BinaryOrInstr : public IRInstr /**<Instruction du OU binaire (dest = (x | y))**/
 {
 
 public:
+  BinaryOrInstr(BasicBlock *bb, Type t, const std::string &dest,
+                const std::string &x, const std::string &y);
 
-  BinaryOrInstr (BasicBlock *bb, Type t, const std::string &dest, const std::string &x, const std::string &y);
-
-  virtual void gen_asm(std::ostream &o) const;
+  virtual void gen_x86_asm(std::ostream &o) const;
+  virtual void gen_arm(std::ostream &o) const;
 
 private:
-
   std::string dest, x, y;
-
-  
 };
 
 class IfElseInstr : public IRInstr /**<Instruction du if else**/
 {
 
-  public :
-    IfElseInstr (BasicBlock *bb, Type t, const std::string &cond);
+public:
+  IfElseInstr(BasicBlock *bb, Type t, const std::string &cond);
 
-    virtual void gen_asm(std::ostream &o) const;
+  virtual void gen_x86_asm(std::ostream &o) const;
+  virtual void gen_arm(std::ostream &o) const;
 
-  private: 
-    std::string cond;
+private:
+  std::string cond;
 };
 
 class WhileInstr : public IRInstr /**<Instruction du while**/
 {
 
-  public :
-    WhileInstr (BasicBlock *bb, Type t, const std::string &cond);
+public:
+  WhileInstr(BasicBlock *bb, Type t, const std::string &cond);
 
-    virtual void gen_asm(std::ostream &o) const;
+  virtual void gen_x86_asm(std::ostream &o) const;
+  virtual void gen_arm(std::ostream &o) const;
 
-  private: 
-    std::string cond;
+private:
+  std::string cond;
 };
 
 class JmpInstr : public IRInstr /**<Instruction du jump vers un autre block**/
 {
 
-  public :
-    JmpInstr (BasicBlock *bb, Type t, const std::string &dest);
+public:
+  JmpInstr(BasicBlock *bb, Type t, const std::string &dest);
 
-    virtual void gen_asm(std::ostream &o) const;
+  virtual void gen_x86_asm(std::ostream &o) const;
+  virtual void gen_arm(std::ostream &o) const;
 
-  private: 
-    std::string dest;
+private:
+  std::string dest;
 };
+
+// A partir d'ici voir pour le code ARM
 
 
 class GetParamsInstr : public IRInstr /**<Instruction de recupération des paramètres passés à une fonction**/
@@ -398,7 +375,9 @@ public:
     delete [] params;
   }
 
-  virtual void gen_asm(std::ostream &o) const;
+
+  virtual void gen_x86_asm(std::ostream &o) const;
+  virtual void gen_arm(std::ostream &o) const {}
 
 private:
 
@@ -414,13 +393,14 @@ private:
 class RetInstr : public IRInstr /**<Instruction de passage d'une valeur en return d'une fonction**/
 {
 
-  public :
-    RetInstr (BasicBlock *bb, Type t, const std::string &var);
+public :
+  RetInstr (BasicBlock *bb, Type t, const std::string &var);
 
-    virtual void gen_asm(std::ostream &o) const;
+  virtual void gen_x86_asm(std::ostream &o) const;
+  virtual void gen_arm(std::ostream &o) const {} 
 
-  private: 
-    std::string var;
+private: 
+  std::string var;
 };
 
 class GetRetInstr : public IRInstr /**<Instruction de recupération d'une valeur renvoyé par une fonction**/
@@ -430,7 +410,8 @@ public:
 
   GetRetInstr (BasicBlock *bb, Type t, const std::string &dest);
 
-  virtual void gen_asm(std::ostream &o) const;
+  virtual void gen_x86_asm(std::ostream &o) const;
+  virtual void gen_arm(std::ostream &o) const {}
 
 private:
 

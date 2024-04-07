@@ -15,7 +15,7 @@
 
 
 
-FunctionVisitor::FunctionVisitor(bool debug, bool symbol) : ifccBaseVisitor(), debug(debug), symbol(symbol), error(false) {
+FunctionVisitor::FunctionVisitor(AssemblyLangage aL, bool debug, bool symbol) : ifccBaseVisitor(), debug(debug), symbol(symbol), error(false), assemblyLangage(aL) {
 
   //Ajout de getchar et putchar comme fonction connu
   Function *f = new Function();
@@ -59,7 +59,7 @@ antlrcpp::Any FunctionVisitor::visitProg(ifccParser::ProgContext *ctx) {
   }
 
   try {
-    tab.push_back(new CFG(ctx, f->name, debug, symbol));
+    tab.push_back(new CFG(ctx, f->name, assemblyLangage, debug, symbol));
   } catch (int e) {
 
     error = true;
@@ -128,7 +128,7 @@ antlrcpp::Any FunctionVisitor::visitDefinition_function(ifccParser::Definition_f
   functions.push_back(f);
 
   try {
-    tab.push_back(new CFG(ctx, f->name, debug, symbol));
+    tab.push_back(new CFG(ctx, f->name, assemblyLangage, debug, symbol));
   } catch (int e) {
     error = true;
     return e;

@@ -33,7 +33,7 @@ class  FunctionVisitor : public ifccBaseVisitor {
 public:
 
 
-  FunctionVisitor(bool debug = false, bool symbol = false);  
+  FunctionVisitor(AssemblyLangage assemblyLangage = x86, bool debug = false, bool symbol = false);  
   virtual ~FunctionVisitor();
 
 
@@ -63,6 +63,7 @@ private:
 
   std::vector<CFG*> tab; /**<un CFG par fonction**/
   bool debug, symbol, error;
+  AssemblyLangage assemblyLangage;
 
   std::vector<Function*> functions; /**<tableau des fonctions du contenu dans le fichier source**/
 
