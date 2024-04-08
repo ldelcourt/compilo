@@ -30,10 +30,12 @@ This compiler translates C code to x86 Assembly code and then needs gcc to compi
 
 ### Build and use the project
 - To build the project, just run the command `make` in your terminal while in the compiler directory
+- Before running the program, you need to specify the assembly langage of your OS:
+  - For macOS or Linux: `export CONFIG_ASSEMBLY=ARM`
 - This creates a ifcc target used as follow `./ifcc path/to/file [--debug | --symbol]`
   - The `--debug` option shows the IR before the assembly code
   - The `--symbol` allows you to view the whole symbol table
-
+  - The `--x86` or `--ARM` option allows to choose the assembly language to generate the code, it overwrittes the CONFIG_ASSEMBLY env variable
 ---
 ## Test part
 ### Test explanation

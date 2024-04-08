@@ -7,7 +7,6 @@
 #include "generated/ifccLexer.h"
 #include "generated/ifccParser.h"
 
-
 #include "FunctionVisitor.h"
 
 using namespace antlr4;
@@ -18,32 +17,8 @@ static bool symbol = false;
 static AssemblyLangage assemblyLanguage = x86;
 
 int main(int argn, const char **argv) {
-  
-  stringstream in;
-  if (argn >= 2) {
-    ifstream lecture(argv[1]);
-    if (!lecture.good()) {
-      cerr << "error: cannot read file: " << argv[1] << endl;
-      exit(1);
-    }
-    in << lecture.rdbuf();
-    if (argv[2] && string(argv[2]) == "--debug") {
-      debug = true;
-    }
-    if (argv[2] && string(argv[2]) == "--symbol") {
-      symbol = true;
-    }
-    if (argv[2] && string(argv[2]) == "--x86") {
-      assemblyLanguage = x86;
-    }
-    if (argv[2] && string(argv[2]) == "--ARM") {
-      assemblyLanguage = ARM;
-    }
 
-  } else {
-    cerr << "usage: ifcc path/to/file.c [--debug] [--symbol] [--x86] [--ARM]" << endl;
-    exit(1);
-  }
+  stringstream in;
 
   const char *configAssembly = getenv("CONFIG_ASSEMBLY");
   string config = configAssembly != nullptr ? configAssembly : "";
@@ -66,38 +41,61 @@ int main(int argn, const char **argv) {
     return 1;
   }
 
+  if (argn >= 2) {
+    ifstream lecture(argv[1]);
+    if (!lecture.good()) {
+      cerr << "error: cannot read file: " << argv[1] << endl;
+      exit(1);
+    }
+    in << lecture.rdbuf();
+    for (int i = 2; i < argn; i++) {
+      if (string(argv[i]) == "--debug") {
+        debug = true;
+      }
+      if (string(argv[i]) == "--symbol") {
+        symbol = true;
+      }
+      if (string(argv[i]) == "--x86") {
+        assemblyLanguage = x86;
+      }
+      if (string(argv[i]) == "--ARM") {
+        assemblyLanguage = ARM;
+      }
+    }
+
+  } else {
+    cerr << "usage: ifcc path/to/file.c [--debug] [--symbol] [--x86|--ARM]"
+         << endl;
+    exit(1);
+  }
 
   ANTLRInputStream input(in.str());
 
-  //lexer+parser
+  // lexer+parser
   ifccLexer lexer(&input);
   CommonTokenStream tokens(&lexer);
 
   tokens.fill();
 
   ifccParser parser(&tokens);
-  //Arbre AST
-  tree::ParseTree* tree = parser.axiom();
-  
-  if(parser.getNumberOfSyntaxErrors() != 0)
-    {
-      cerr << "error: syntax error during parsing" << endl;
-      exit(1);
-    }
-  
+  // Arbre AST
+  tree::ParseTree *tree = parser.axiom();
 
-  //Visiteur des fonctions et création des CFG
-  FunctionVisitor fv (assemblyLanguage, debug, symbol);
+  if (parser.getNumberOfSyntaxErrors() != 0) {
+    cerr << "error: syntax error during parsing" << endl;
+    exit(1);
+  }
+
+  // Visiteur des fonctions et création des CFG
+  FunctionVisitor fv(assemblyLanguage, debug, symbol);
   fv.visit(tree);
 
   if (fv.hasError()) {
     return 1;
   }
 
-  //Generation asm x86
+  // Generation asm x86
   fv.gen_asm(cout);
-  
-  
 
   return 0;
 }
